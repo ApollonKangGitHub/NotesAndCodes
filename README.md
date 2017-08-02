@@ -1,5 +1,4 @@
 # NotesAndCodes
-## Qt
 ## InformationSafety
 ### EncryptDecrypt
 #### SHA
