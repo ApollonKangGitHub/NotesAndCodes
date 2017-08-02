@@ -1,2 +1,10 @@
 # NotesAndCodes
 ## Qt
+## InformationSafety
+### EncryptDecrypt
+#### SHA
+#### DES
+#### MD5
+#### RC4
+#### RSA
+#### TEA
