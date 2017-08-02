@@ -1,0 +1,148 @@
+
+armtest:     file format elf32-littlearm
+
+Disassembly of section .init:
+
+00008278 <_init>:
+    8278:	e92d4010 	push	{r4, lr}
+    827c:	eb00001f 	bl	8300 <call_gmon_start>
+    8280:	e8bd8010 	pop	{r4, pc}
+Disassembly of section .plt:
+
+00008284 <.plt>:
+    8284:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+    8288:	e59fe004 	ldr	lr, [pc, #4]	; 8294 <_init+0x1c>
+    828c:	e08fe00e 	add	lr, pc, lr
+    8290:	e5bef008 	ldr	pc, [lr, #8]!
+    8294:	000082dc 	.word	0x000082dc
+    8298:	e28fc600 	add	ip, pc, #0	; 0x0
+    829c:	e28cca08 	add	ip, ip, #32768	; 0x8000
+    82a0:	e5bcf2dc 	ldr	pc, [ip, #732]!
+    82a4:	e28fc600 	add	ip, pc, #0	; 0x0
+    82a8:	e28cca08 	add	ip, ip, #32768	; 0x8000
+    82ac:	e5bcf2d4 	ldr	pc, [ip, #724]!
+    82b0:	e28fc600 	add	ip, pc, #0	; 0x0
+    82b4:	e28cca08 	add	ip, ip, #32768	; 0x8000
+    82b8:	e5bcf2cc 	ldr	pc, [ip, #716]!
+    82bc:	e28fc600 	add	ip, pc, #0	; 0x0
+    82c0:	e28cca08 	add	ip, ip, #32768	; 0x8000
+    82c4:	e5bcf2c4 	ldr	pc, [ip, #708]!
+Disassembly of section .text:
+
+000082c8 <_start>:
+    82c8:	e59fc024 	ldr	ip, [pc, #36]	; 82f4 <_start+0x2c>
+    82cc:	e3a0b000 	mov	fp, #0	; 0x0
+    82d0:	e49d1004 	pop	{r1}		; (ldr r1, [sp], #4)
+    82d4:	e1a0200d 	mov	r2, sp
+    82d8:	e52d2004 	push	{r2}		; (str r2, [sp, #-4]!)
+    82dc:	e52d0004 	push	{r0}		; (str r0, [sp, #-4]!)
+    82e0:	e59f0010 	ldr	r0, [pc, #16]	; 82f8 <_start+0x30>
+    82e4:	e59f3010 	ldr	r3, [pc, #16]	; 82fc <_start+0x34>
+    82e8:	e52dc004 	push	{ip}		; (str ip, [sp, #-4]!)
+    82ec:	ebffffec 	bl	82a4 <_init+0x2c>
+    82f0:	ebffffe8 	bl	8298 <_init+0x20>
+    82f4:	000083e4 	.word	0x000083e4
+    82f8:	00008370 	.word	0x00008370
+    82fc:	000083e8 	.word	0x000083e8
+
+00008300 <call_gmon_start>:
+    8300:	e59f3014 	ldr	r3, [pc, #20]	; 831c <call_gmon_start+0x1c>
+    8304:	e59f2014 	ldr	r2, [pc, #20]	; 8320 <call_gmon_start+0x20>
+    8308:	e08f3003 	add	r3, pc, r3
+    830c:	e7931002 	ldr	r1, [r3, r2]
+    8310:	e3510000 	cmp	r1, #0	; 0x0
+    8314:	012fff1e 	bxeq	lr
+    8318:	eaffffe4 	b	82b0 <_init+0x38>
+    831c:	00008260 	.word	0x00008260
+    8320:	0000001c 	.word	0x0000001c
+
+00008324 <__do_global_dtors_aux>:
+    8324:	e59f2010 	ldr	r2, [pc, #16]	; 833c <__do_global_dtors_aux+0x18>
+    8328:	e5d23000 	ldrb	r3, [r2]
+    832c:	e3530000 	cmp	r3, #0	; 0x0
+    8330:	02833001 	addeq	r3, r3, #1	; 0x1
+    8334:	05c23000 	strbeq	r3, [r2]
+    8338:	e12fff1e 	bx	lr
+    833c:	00010598 	.word	0x00010598
+
+00008340 <frame_dummy>:
+    8340:	e59f0020 	ldr	r0, [pc, #32]	; 8368 <frame_dummy+0x28>
+    8344:	e92d4010 	push	{r4, lr}
+    8348:	e5903000 	ldr	r3, [r0]
+    834c:	e3530000 	cmp	r3, #0	; 0x0
+    8350:	08bd8010 	popeq	{r4, pc}
+    8354:	e59f3010 	ldr	r3, [pc, #16]	; 836c <frame_dummy+0x2c>
+    8358:	e3530000 	cmp	r3, #0	; 0x0
+    835c:	08bd8010 	popeq	{r4, pc}
+    8360:	e12fff33 	blx	r3
+    8364:	e8bd8010 	pop	{r4, pc}
+    8368:	00010484 	.word	0x00010484
+    836c:	00000000 	.word	0x00000000
+
+00008370 <main>:
+    8370:	e92d4800 	push	{fp, lr}
+    8374:	e28db004 	add	fp, sp, #4	; 0x4
+    8378:	e24dd028 	sub	sp, sp, #40	; 0x28
+    837c:	e3a03000 	mov	r3, #0	; 0x0
+    8380:	e3833014 	orr	r3, r3, #20	; 0x14
+    8384:	e14b32b6 	strh	r3, [fp, #-38]
+    8388:	e3a03000 	mov	r3, #0	; 0x0
+    838c:	e14b32b4 	strh	r3, [fp, #-36]
+    8390:	e59f1044 	ldr	r1, [pc, #68]	; 83dc <main+0x6c>
+    8394:	e1a03801 	lsl	r3, r1, #16
+    8398:	e1a03823 	lsr	r3, r3, #16
+    839c:	e3a02000 	mov	r2, #0	; 0x0
+    83a0:	e1823003 	orr	r3, r2, r3
+    83a4:	e14b32b2 	strh	r3, [fp, #-34]
+    83a8:	e1a01821 	lsr	r1, r1, #16
+    83ac:	e3a03000 	mov	r3, #0	; 0x0
+    83b0:	e1a02003 	mov	r2, r3
+    83b4:	e1a03001 	mov	r3, r1
+    83b8:	e1823003 	orr	r3, r2, r3
+    83bc:	e14b32b0 	strh	r3, [fp, #-32]
+    83c0:	e59f0018 	ldr	r0, [pc, #24]	; 83e0 <main+0x70>
+    83c4:	e3a01022 	mov	r1, #34	; 0x22
+    83c8:	ebffffbb 	bl	82bc <_init+0x44>
+    83cc:	e3a03000 	mov	r3, #0	; 0x0
+    83d0:	e1a00003 	mov	r0, r3
+    83d4:	e24bd004 	sub	sp, fp, #4	; 0x4
+    83d8:	e8bd8800 	pop	{fp, pc}
+    83dc:	00008460 	.word	0x00008460
+    83e0:	00008464 	.word	0x00008464
+
+000083e4 <__libc_csu_fini>:
+    83e4:	e12fff1e 	bx	lr
+
+000083e8 <__libc_csu_init>:
+    83e8:	e92d47f0 	push	{r4, r5, r6, r7, r8, r9, sl, lr}
+    83ec:	e1a08001 	mov	r8, r1
+    83f0:	e1a07002 	mov	r7, r2
+    83f4:	e1a0a000 	mov	sl, r0
+    83f8:	ebffff9e 	bl	8278 <_init>
+    83fc:	e59f1044 	ldr	r1, [pc, #68]	; 8448 <__libc_csu_init+0x60>
+    8400:	e59f3044 	ldr	r3, [pc, #68]	; 844c <__libc_csu_init+0x64>
+    8404:	e59f2044 	ldr	r2, [pc, #68]	; 8450 <__libc_csu_init+0x68>
+    8408:	e0613003 	rsb	r3, r1, r3
+    840c:	e08f2002 	add	r2, pc, r2
+    8410:	e1b05143 	asrs	r5, r3, #2
+    8414:	e0822001 	add	r2, r2, r1
+    8418:	08bd87f0 	popeq	{r4, r5, r6, r7, r8, r9, sl, pc}
+    841c:	e1a06002 	mov	r6, r2
+    8420:	e3a04000 	mov	r4, #0	; 0x0
+    8424:	e1a0000a 	mov	r0, sl
+    8428:	e1a01008 	mov	r1, r8
+    842c:	e1a02007 	mov	r2, r7
+    8430:	e1a0e00f 	mov	lr, pc
+    8434:	e796f104 	ldr	pc, [r6, r4, lsl #2]
+    8438:	e2844001 	add	r4, r4, #1	; 0x1
+    843c:	e1540005 	cmp	r4, r5
+    8440:	3afffff7 	bcc	8424 <__libc_csu_init+0x3c>
+    8444:	e8bd87f0 	pop	{r4, r5, r6, r7, r8, r9, sl, pc}
+    8448:	ffffff0c 	.word	0xffffff0c
+    844c:	ffffff10 	.word	0xffffff10
+    8450:	0000815c 	.word	0x0000815c
+Disassembly of section .fini:
+
+00008454 <_fini>:
+    8454:	e92d4010 	push	{r4, lr}
+    8458:	e8bd8010 	pop	{r4, pc}

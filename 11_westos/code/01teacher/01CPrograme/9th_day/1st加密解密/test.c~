@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int decrypt(FILE* fb, FILE* fc)
+{
+	char ch;
+	while( (ch = fgetc(fb)) != EOF){
+		ch = ~ch;
+		ch = ch - 1;
+		fputc(ch, fc);
+	}
+}
+
+int encrypt(FILE* fa, FILE* fb)
+{
+	char ch;
+	while( (ch = fgetc(fa)) != EOF){
+		ch = ch + 1;
+		ch = ~ch;
+		fputc(ch, fb);
+	}
+}
+
+int main()
+{
+	FILE *fa = fopen("a.txt", "r");	
+	if(fa == NULL){
+		perror("fopen err. \n");
+		exit(EXIT_FAILURE);
+	}
+	FILE *fb = fopen("b.txt", "w");	
+	if(fb == NULL){
+		perror("fopen err. \n");
+		exit(EXIT_FAILURE);
+	}
+	encrypt(fa, fb);	
+	
+	fclose(fa);	
+	fclose(fb);	
+
+	
+	fb = fopen("b.txt", "r");	
+	if(fb == NULL){
+		perror("fopen err. \n");
+		exit(EXIT_FAILURE);
+	}
+	FILE *fc = fopen("c.txt", "w");	
+	if(fc == NULL){
+		perror("fopen err. \n");
+		exit(EXIT_FAILURE);
+	}
+
+	decrypt(fb, fc);
+
+	fclose(fb);
+	fclose(fc);
+
+	return 0;
+}
+
+
+
+
+

@@ -1,0 +1,35 @@
+hello,my custom!
+welcome to encrypt_file!
+	message:
+	List of Functions
+       Function      Description
+       -------------------------------------------------------------------
+       clearerr      check and reset stream status
+       fclose        close a stream
+       fdopen        stream open functions
+       feof          check and reset stream status
+       ferror        check and reset stream status
+       fflush        flush a stream
+       fgetc         get next character or word from input stream
+       fgetpos       reposition a stream
+       fgets         get a line from a stream
+       fileno        return the integer descriptor of the argument stream
+       fopen         stream open functions
+       fprintf       formatted output conversion
+       fpurge        flush a stream
+       fputc         output a character or word to a stream
+       fputs         output a line to a stream
+       fread         binary stream input/output
+       freopen       stream open functions
+       fscanf        input format conversion
+       fseek         reposition a stream
+       fsetpos       reposition a stream
+       ftell         reposition a stream
+       fwrite        binary stream input/output
+       getc          get next character or word from input stream
+       getchar       get next character or word from input stream
+       gets          get a line from a stream
+       getw          get next character or word from input stream
+       mktemp        make temporary filename (unique)
+       perror        system error messages
+       printf        formatted output conversion
