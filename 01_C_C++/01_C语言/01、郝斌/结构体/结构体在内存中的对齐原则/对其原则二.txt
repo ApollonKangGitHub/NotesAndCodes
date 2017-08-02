@@ -1,0 +1,25 @@
+原则二：在经过第一原则分析后，检查计算出的存储单元是否为所有元素中最宽的元素的长度的整数倍，是，则结束；若不是，则补齐为它的整数倍。
+
+如：
+struct C
+{
+	double z;
+	char a;
+	char b;
+	char c;
+	char d;
+};
+
+和
+struct D
+{
+	double z;
+	char a;
+	char b;
+	char c;
+	char d;
+	char e;
+	char f;
+	char g;	
+};
+所占内存一样多。只要整个结构体所占内存不是sizeof（double）的整数倍，则必须补足整数倍。

@@ -1,0 +1,76 @@
+
+
+错误提示：pure specifier can only be specified for functions
+
+问题原因：不能在类里边赋static数据成员的初值
+
+错误提示：'static' should not be used on member functions defined at file scope
+
+问题原因：static 不能在文件区域内定义！也就是说不能在类里面定义，必须先在类里面声明然后在类外定义！
+
+ 
+
+总结（转载如下）
+
+1.         静态数据成员static data member 是 类的，而不是仅属于某个对象的，该类的所有对象都可以调用它，类也可以调用。对象可调用它,但不是独占。生存期：编译时就分配，程序结束才释放空间。他只能在类体外初始化。作用域：与定义它的类的作用域相同，即与类同在。他的存在是为了对象间的共同交流。
+
+2.         静态成员函数Static member function 是为了调用static data member 而存在。Compile 不为他分配this 指针，所以他不能调用对象 的非static data member。当你非要调用 非Static data member 时，只要 指明对象就行了（因为没有compile 没有为类的static member function 指定 this 指针，所以引用 非静态成员变量时分不清是哪个对象的，当你指明对象来调用不就行了。）
+
+ 
+
+加了static 限制符的data member or member function 只是限制了调用的权利，并没有限制 被调用的权利。非static 的对象和非static的member function 都可以调用他们。
+
+ 
+
+#include <iostream>
+using namespace std;
+
+class Student
+{
+public :
+Student(int n=3, int a=20,float s=100):num(n),age(a),score(s){};//define the constructervoid total();//这个构造函数可以代替 构造函数的重载（三个参数，两个参数，一个参数都可以调用它。但0个参数不可以，以为 C++ 为了兼容C 的语法，Student std() 是定义了一个返回Student 类的函数。可以用 Stduent std 来代替。即去掉括号）。
+static float average();// define static member function
+private :// 变量尽量设置为 private ，用成员函数 intialize and get, set
+int num;
+int age;
+float score;
+static float sum;
+static int count;
+
+};// this semicolon must be added.
+void Student::total()
+{
+sum+=score;// clculate the sun of secores// 普通函数可以调用 static 定义的sum ,count
+count++; // count the number of students
+}
+float Student::average()// 如果你在函数前加static 会出错：
+
+//'static' should not be used on member functions defined at file scope
+{ return (sum/count);
+
+   // num = 0;// 非静态函数不可被static members function 调用
+
+}
+float Student::sum = 0;// static data member defined must be outside the class
+int   Student::count = 0;//
+
+
+int main()
+{
+Student std[3]={Student(1001,18,70),Student(1002,19,80),Student(1003,20,90)};
+int n;
+cout<< "input the number of student";
+cin>>n;
+
+for(int i= 0;i<n;i++)
+{
+   std[i].total();
+}
+cout<< "the average score of "<<n<<"student is "<< Student::average()<<endl;//invoke static member function
+   cout<< "the average score of "<<n<<"student is "<< Student::average()<<endl;//invoke static member function
+
+cout<<" "<<std[0].average()<<endl;// 类的对象可以调用 类的static data member
+
+std[1].outputAverage();// 类的对象可以调用普通函数who invoke static member function
+return 0;
+}

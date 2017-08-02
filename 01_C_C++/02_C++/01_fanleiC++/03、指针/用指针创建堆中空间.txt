@@ -1,0 +1,14 @@
+在C++中，使用关键字new创建一个堆并且分配内存，在new后面跟一个要分配的对象类型，编译器即可根据这个类型来分配内存。
+
+eg：
+int * p = new int
+double * q = new double;
+int * r = (int *)new double;
+
+用来接收的指针类型必须分配的内存单元类型匹配，若不匹配需要强制类型类型转换（类似于malloc）（但是malloc返回类型为void *，而new返回类型为new后数据类型的对应指针类型；概念不同，二者不可同日而语）
+
+malloc和free配套使用
+new和delete配套使用
+
+new和free不能一起使用，虽然delete可以和malloc一起用但是为了美观不这样用。
+

@@ -1,0 +1,4 @@
+Qt的使用注意：
+文件名字/路径中不能存在中文字符，否则编译出错.txt
+如果用fstream、ifstream、ofstream等写文件读文件创建文件操作，
+需要将侧栏中项目选项的Shadow build的对勾去掉。

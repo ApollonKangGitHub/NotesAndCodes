@@ -1,0 +1,22 @@
+1、C++的输入输出遵循了流的概念。由于这种操作类似于数据在流动，故称为输入输出流。凡是跟输入输出流有关系的类都叫做流类，凡是实现流类功能的成员函数全部封装在一个库中，该库叫做流类库。
+
+2、C++的输出是将一个对象的状态换成一个字符序列，输出到指定地方。
+C++的输入是将一个字符序列转换成对象的数据成员格式，输入到指定地方。
+输入输出流有两部分：
+第一部分cout、cin
+第二部分<<或者>>
+
+3、eg：cout<<"hello world";
+双引号中的hello world是要输出的对象，C++的重载按位左移运算符<<将该对象转换成一个向左移动的字符序列，cout则表示将其输出在计算机外部设备中，如显示器的屏幕上。
+C++的重载按位右移运算符>>表示从指定地方按照向右移动的顺序接受字符序列，然后将其转换为对象的数据成员格式，cin则表示将对象写入计算机内部设备中：磁盘或者内存。
+
+4、iostream就是标准输入输出流类库。该头文件包括iostream类、istream类、ostream类等，istream输入流类和ostream输出流类都继承虚基类ios。ios用来提供对流进行格式化数据的输入和输出操作和操作处理的成员函数。
+>>ios公有派生了istream和ostream，两个派生类分别继承了输入和输出成员函数。
+>>而iostream则由istream和ostream共同派生而来，且iostream仅仅继承了istream和ostream的所有输入输出函数，没有增加新的成员函数。
+>>ios基类还直接派生了fstreambase（文件流基类：对文件流操作）和strstreambase（字符串流基类：操作字符串流）。
+>>而输入文件流类ifstream则同时继承了istream和fstreambase；输出文件流类iofstream则同时继承了ostream和fstreambase。
+>>同理输入字符串流类istrstream则同时继承了istream和strstreambase；输出字符串流类ostrstream则同时继承了ostream和strstreambase；
+>>输入输出文件流类fstream同时继承了iostream和fstreambase
+>>输入输出字符串流类strstream同时继承了iostream和strstreambase
+
+ios图解 /F:/计算机编程语言/00 、学习笔记、博客与程序代码/01、C&C++数据结构/03、C++/01、范磊C++/13、字符串(重载)/06、流，输入输与重载/输入输出流继承层次图.PNG

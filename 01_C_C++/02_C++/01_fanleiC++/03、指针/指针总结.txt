@@ -1,0 +1,16 @@
+1、每新建一个指针或者释放一个指针的指向内存，都要令指针为0或者指向空:
+（int * p = 0;或者int * p = NULL;）
+(delete p;p = 0;或者delete p;p = NULL)
+否则可能产生野指针，埋下安全隐患。
+2、const用来修饰变量可以达到无法修改变量值得目的，但是用const修饰的变量必须初始化。
+
+eg：
+（1）、int a = 5;
+const int * p = &a;//const修饰int，所以a的值不可以改变
+int const * p = &a;//与上面一行相同修饰a（const修饰*p,*p就是a），所以a不能改变
+（2）、int a = 5;
+int * const p = &a;//const修饰指针平，所说指针p的指向不能改变
+（3）、int a = 5;
+const int * const p = &a;//第一个const修饰int，第二个const修饰p；所以a和p的值都不能改变
+
+3、const不仅可以修饰普通的指针变量，也可以修饰自定义的指针类型。如struct指针变量、class指针变量等等任何变量。修饰之后这些量就成为常量。

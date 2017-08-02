@@ -1,0 +1,25 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: ц╟ещеепР - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\Users\user\AppData\Local\Temp\RSPA54E.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"Debug/ц╟ещеепР.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"F:\╪фкЦ╩З╠ЮЁлсОят\╠ЮЁл╩Ы╢║©нЁл\ЁлпР╢ЗбК\01 CсОят\я╖о╟бК\ц╟ещеепР\ц╟ещеепР.cpp"
+]
+Creating command line "cl.exe @C:\Users\user\AppData\Local\Temp\RSPA54E.tmp" 
+<h3>Output Window</h3>
+Compiling...
+ц╟ещеепР.cpp
+
+
+
+<h3>Results</h3>
+ц╟ещеепР.obj - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

@@ -1,0 +1,10 @@
+声明不分配内存空间
+定义需要分配内存空间
+
+如typedef struct student{
+	int data;
+	struct student * pNext;
+}PNODE,* PNODE;是变量声明
+
+而PNODE node;为变量定义。
+

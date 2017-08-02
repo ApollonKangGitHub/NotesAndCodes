@@ -1,0 +1,14 @@
+﻿生成启动时间为 2017/4/1 18:41:23。
+     1>项目“F:\Computer\Notes_code\01_C_C++\03_C++\03_template\vector\vector\vector.vcxproj”在节点 2 上(Build 个目标)。
+     1>ClCompile:
+         D:\Program Files (×64)\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt VectorTest.cpp
+         VectorTest.cpp
+     1>f:\computer\notes_code\01_c_c++\03_c++\03_template\vector\vector\vectortest.cpp(239): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
+       Link:
+         D:\Program Files (×64)\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\Computer\Notes_code\01_C_C++\03_C++\03_template\vector\Debug\vector.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\Computer\Notes_code\01_C_C++\03_C++\03_template\vector\Debug\vector.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\Computer\Notes_code\01_C_C++\03_C++\03_template\vector\Debug\vector.lib" /MACHINE:X86 Debug\VectorTest.obj
+         vector.vcxproj -> F:\Computer\Notes_code\01_C_C++\03_C++\03_template\vector\Debug\vector.exe
+     1>已完成生成项目“F:\Computer\Notes_code\01_C_C++\03_C++\03_template\vector\vector\vector.vcxproj”(Build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:00.75

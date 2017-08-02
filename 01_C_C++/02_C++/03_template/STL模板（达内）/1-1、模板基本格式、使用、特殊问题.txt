@@ -1,0 +1,104 @@
+模板template(自定义模板+标准模板库STL)、模板有函数模板和类(结构)模板。泛型编程(通用类型编程，脱离类型只关心方法)
+
+简单函数自定义模板格式：
+template <typename T>//模板头，T为模板参数，声明T为函数参数类型。
+type func(T val, ...){}//T为可变类型
+
+编译器在编译时会确定模板形参具体是那种类型，这个过程称作为模板的实例化。注意：typename也可以用class替换，但是两个作用是完全一样的，在C++早期无typename类型使用class。自从typename类型产生以后，class就不再使用，但是为了兼容以前则仍然支持。类模板必须人为实例化，实例化的类模板是模板类，类的对象为模板类对象。
+-----------------------------------------------------------------------
+另外一种写法：template <typename T, int N>//N是非类型形参，一般都是整型常量(其它类型暂时不支持)
+一般是指定数组长度比如(注意两种写法的好坏优劣)：
+
+①栈空间分配法:
+template <typename T, int N>
+class Stack{
+	T _arr[N];
+	int _top;
+public:
+	Stack():top(){}
+	...//其它函数 
+};//实例化时：Stack<double,20> S1;Stack<string,5> S2;等
+
+②堆空间分配法:
+template <typename T>
+class Stack{
+	T * _arr;
+	int _top;
+	int _size; 
+public:
+	Stack(int N = 32):_size(N),top(){
+		_arr  = static_cast<T*>(new T[N]);
+	}
+	...//其它函数 
+};//实例化时：Stack<double> S1(20);Stack<string> S2(5);
+-------------------------------------------------------------------------
+总结：
+一个模板需要一个模板头，不同模板不能公用一个模板头，template <typename T, ...>
+①函数模板在实例化时，是由编译器把模板形参用具体的类型或数据替换之后产生一个函数，不同的实例化得到的是不同的函数(属于重载关系)，函数模板可以编译器自动实例化。②类模板在实例化时，是由编译器把模板形参用具体的类型或数据替换之后产生一个类，不同的实例的到的是不同的类(这些实例化的类不存在任何关系)，类模板必须人为实例化。③注意：在sort()的模板实现时，对于C的字符串，其比较的是每个字符串的地址，但是在定义时，字符串数组每个元素分配的内存本就是从小到大的(arr[1]低地址，a[n]在高地址)所以不会发生排序。对于C的字符串要做特殊化处理，编译器在编译时优先匹配特殊化的函数(非模板的)，匹配不到特殊的才会去将模板实例化。如下：
+
+#include<iostream>
+#include<string>
+#include<cstring>
+using namespace std;
+
+
+template <typename V>
+bool lessthan(const V& la, const V& ra){
+	return la<ra;
+}
+#if 1
+template<>//该写法是为了与上面的模板形式匹配，但是函数写法更为复杂
+//<const char *>可以省略，编译器可以推断出
+bool lessthan<const char*>(const char*const&la, const char*const&ra){
+	//cout<<"lessthan <const char *>"<<endl;
+	return (strcmp(la, ra) < 0);
+}
+#endif
+#if 1
+bool lessthan(const char *  la, const char * ra){
+//不是模板，可认为该函数与上面的模板属于重载关系,但是编译器在存在模板与特殊函数时优先调用特殊函数,可打开两个cout注释测试
+	//cout<<"lessthan"<<endl;
+	return (strcmp(la, ra) < 0);
+}
+#endif
+template <typename T>//告诉编译器T为类型名
+void sort(T *a, int n)
+{
+	for(int i = 0; i<n; i++)
+		for(int j = 0; j<i; j++)
+			if(lessthan(a[i], a[j]))
+				swap(a[i], a[j]);
+}
+template<typename T>
+void traversal(T *a, int n)
+{
+	for(int i = 0; i<n; i++)
+		cout<<a[i]<<'\t';
+	cout<<endl;
+}
+int main(void)
+{
+	char ac[5] = {'d', 'x', 's', 'a', 'm'};
+	double ad[5] = {5.5,1.3,2.4,-1.5,7.2};
+	string as[4] = {"Good", "morning", "My", "friend"};
+	const char * asc[4] = {"Good", "morning", "My", "friend"};//需要特殊处理
+	
+	sort(ac,5);traversal(ac,5);  
+	sort(ad,5);traversal(ad,5);  
+	sort(as,4);traversal(as,4);  
+	sort(asc,4);traversal(asc,4);
+	
+	return 0;
+}
+------------------------------------------------------------------------------------
+模板的特殊化：
+	编译器会优先选择最匹配的特殊化版本来使用，在没有更匹配的特殊化版本时才会使用一般化的模板来实例化。
+特殊化有几种层次：
+(1)、偏特化：带有某种偏向的特殊化(如：偏向指针的、偏向数组的)
+(2)、全特化：针对一种类型，此时template<>,不指定T，因为T是固定的(比如C风格的字符串)，类似于普通的函数/类，
+但区别在于如果没用到(未实例化)就不会产生目标代码。
+(3)、部分特化：模板的部分参数确定下来。
+
+成员(友元)函数模板与类模板不要用同样的形参名，以免混淆
+类模板的形参可以有默认值，有默认值的参数靠参数列表右边
+小练习：写一个函数模板，从一个数组里查找第一个等于指定值的元素，返回它的地址。main里第多种类型的数组(int、double、char、CStr、CppStr、struct)，分别用这个末班来测试。

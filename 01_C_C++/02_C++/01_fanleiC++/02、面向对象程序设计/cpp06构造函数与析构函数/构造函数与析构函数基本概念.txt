@@ -1,0 +1,108 @@
+析构函数简介
+
+以C++语言为例：[1]  析构函数名也应与类名相同，只是在函数名前面加一个位取反符~，例如~stud( )，以区别于构造函数。它不能带任何参数，也没有返回值（包括void类型）。只能有一个析构函数，不能重载。如果用户没有编写析构函数，编译系统会自动生成一个缺省的析构函数（即使自定义了析构函数，编译器也总是会为我们合成一个析构函数，并且如果自定义了析构函数，编译器在执行时会先调用自定义的析构函数再调用合成的析构函数），它也不进行任何操作。所以许多简单的类中没有用显示的析构函数。
+C++语言析构函数格式
+
+C++当中的析构函数格式如下：
+	
+class <类名>
+{
+     public:
+       ~<类名>();
+};
+<类名>::~<类名>()
+{
+    //函数体
+};
+如以下定义是合法的：	
+class T
+{
+   public:
+    ~T()；
+};
+    T::~T()
+{
+    //函数体
+};
+当程序中没有析构函数时，系统会自动生成以下析构函数：
+<类名>::~<类名>(){}，即不执行任何操作。
+下面通过一个例子来说明一下析构函数的作用：
+	
+#include<iostream>
+using namespace std;
+class T
+{
+    public:
+     ~T(){cout<<"析构函数被调用。";} //为了简洁，函数体可以直接写在定义的后面，此时函数为内联函数
+};
+int main()
+{
+     T *t=new T();//建立一个T类的指针对象t
+     delete t;
+     cin.get();
+};
+最后输出：
+析构函数被调用。
+cin.get() 表示从键盘读入一个字符，为了让我们能够看得清楚结果。当然，析构函数也可以显示的调用，如 （*t）.~T(); 也是合法的。
+c++语言析构语言实例
+c++
+包含构造函数和析构函数的C++程序。
+
+	
+#include <string.h>
+#include <iostream>
+ 
+using namespace std;
+ 
+class stud//声明一个类
+{
+    private://私有部分
+        int num;
+        char name[10];
+        char sex;
+    public://公用部分
+        stud(int n,const char nam[],char s)//构造函数
+        {
+            num = n;
+            strcpy(name, nam);
+            sex = s;
+        }
+         
+        ~stud() //析构函数
+        {
+            cout<<"stud has been destructed!"<<endl;//通过输出提示告诉我们析构函数确实被调用了
+        }
+ 
+    void display()//成员函数，输出对象的数据
+    {
+        cout<<"num:"<<num<<endl;
+        cout<<"name:"<<name<<endl;
+        cout<<"sex:"<<sex<<endl;
+    }
+};
+int main()
+{
+    stud stud1(10010, "Wang-li", 'f'), stud2(10011, "Zhang-fun", 'm');//建立两个对象
+    stud1.display();//输出学生1的数据
+    stud2.display();//输出学生2的数据
+    return 0;
+}//主函数结束的同时，对象stud1，stud2均应被“清理”，而清理就是通过调用了析构函数实现的。
+ 
+/**********************
+输出结果：
+num:10010
+name:Wang-li
+sex:f
+num:10011
+name:Zhang-fun
+sex:m
+stud has been destructed!
+stud has been destructed!
+***********************/
+现在把类的声明放在main函数之前，它的作用域是全局的。这样做可以使main函数更简练一些。在main函数中定义了两个对象并且给出了初值，然后输出两个学生的数据。当主函数结束时调用析构函数，输出stud has been destructe!。值得注意的是，真正实用的析构函数一般是不含有输出信息的。
+在本程序中，成员函数是在类中定义的，如果成员函数的数目很多以及函数的长度很长，类的声明就会占很大的篇幅，不利于阅读程序。而且为了隐藏实现，一般是有必要将类的声明和实现（具体方法代码）分开编写的，这也是一个良好的编程习惯。即可以在类的外面定义成员函数，而在类中只用函数的原型作声明。
+
+三篇博客：
+http://blog.chinaunix.net/uid-20773165-id-1847729.html    //c++自学博客
+http://www.cnblogs.com/mr-wid/archive/2013/02/19/2917911.html
+http://www.cnblogs.com/luxiaoxun/archive/2012/09/06/2673249.html
