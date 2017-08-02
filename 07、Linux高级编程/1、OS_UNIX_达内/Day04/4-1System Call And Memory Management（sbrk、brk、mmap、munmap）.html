@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>System Call And Memory Management（sbrk、brk、mmap、munmap）</title>
+<link rel="stylesheet" href="https://stackedit.io/res-min/themes/base.css" />
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body><div class="container"><h1 id="一系统调用system-call">一、系统调用（System Call）：</h1>
+
+<p>在Linux中，4G内存可分为两部分——内核空间1G（3~4G）与用户空间3G（0~3G）,我们通常写的C代码都是在对用户空间即0~3G的内存进行操作。而且，用户空间的代码不能直接访问内核空间，因此内核空间提供了一系列的函数，实现用户空间进入内核空间的接口，这一系列的函数称为系统调用（System Call）。比如我们经常使用的open、close、read、write等函数都是系统级别的函数（man 2 function_name），而像fopen、fclose、fread、fwrite等都是用户级别的函数（man 3 function_name）。不同级别的函数能够操作的内存区域自然也就不同。</p>
+
+<p>我们用一幅图来描述函数的调用过程：</p>
+
+<p><img src="http://img.blog.csdn.net/20170116172148542?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXBvbGxvbl9rcmo=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" title=""></p>
+
+<p>对于C++中new与delete的底层则是用malloc和free实现。而我们所用的malloc()、free()与内核之间的接口（桥梁）就是sbrk()等系统函数；当然我们也可以直接调用系统调用（系统函数）,达到同样的作用。我们可以用下面这幅图来描述基本内存相关操作之间的关系：</p>
+
+<p><img src="http://img.blog.csdn.net/20170115234108145?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXBvbGxvbl9rcmo=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" title=""></p>
+
+<p>虽然使用系统调用会带来一定的好处，但是物极必反，系统调用并非能频繁使用。由于程序由用户进入内核层时，会将用户层的状态先封存起来，然后到内核层运行代码，运行结束以后，从内核层出来到用户层时，再把数据加载回来。因此，频繁的系统调用效率很低。今天我们就系统调用层面来对内存操作做进一步的了解。</p>
+
+
+
+<h1 id="二内存管理memory-management系统调用">二、内存管理（Memory Management）系统调用：</h1>
+
+
+
+<h2 id="1brk与sbrk">1、brk()与sbrk():</h2>
+
+
+
+<h3 id="1函数原型与实现">（1）、函数原型与实现：</h3>
+
+
+
+<pre class="prettyprint"><code class=" hljs vala"><span class="hljs-comment">//函数原型：</span>
+<span class="hljs-preprocessor">#include&lt;unistd.h&gt;</span>
+<span class="hljs-keyword">int</span> brk(<span class="hljs-keyword">void</span> * addr); 
+<span class="hljs-keyword">void</span> * sbrk(intptr_t increment);</code></pre>
+
+<p>由于sbrk()与brk()这两个系统函数有点所谓怪异，我们先来看看man手册对于sbrk()与brk()的描述：</p>
+
+<p><strong>DESCRIPTION</strong></p>
+
+<pre><code>   brk() and sbrk() change the location of the program break, which
+   defines the end of the process's data segment (i.e., the program
+   break is the first location after the end of the uninitialized data
+   segment).  Increasing the program break has the effect of allocating
+   memory to the process; decreasing the break deallocates memory.
+
+   brk() sets the end of the data segment to the value specified by
+   addr, when that value is reasonable, the system has enough memory,
+   and the process does not exceed its maximum data size (see
+   setrlimit(2)).
+
+   sbrk() increments the program's data space by increment bytes.
+   Calling sbrk() with an increment of 0 can be used to find the current
+   location of the program break.
+</code></pre>
+
+<p><strong>RETURN VALUE</strong></p>
+
+<pre><code>   On success, brk() returns zero.  On error, -1 is returned, and errno
+   is set to ENOMEM.
+
+   On success, sbrk() returns the previous program break.  (If the break
+   was increased, then this value is a pointer to the start of the newly
+   allocated memory).  On error, (void *) -1 is returned, and errno is
+   set to ENOMEM.
+</code></pre>
+
+<p><strong>描述：</strong> <br>
+brk()和sbrk()改变程序间断点的位置。程序间断点就是程序数据段的结尾。（程序间断点是为初始化数据段的起始位置）.通过增加程序间断点进程可以更有效的申请内存 。当addr参数合理、系统有足够的内存并且不超过最大值时brk()函数将数据段结尾设置为addr,即间断点设置为addr。sbrk()将程序数据空间增加increment字节。当increment为0时则返回程序间断点的当前位置。 </p>
+
+<p><strong>返回值：</strong> <br>
+ brk()成功返回0，失败返回-1并且设置errno值为ENOMEM（注：在mmap中会提到）。 <br>
+ sbrk()成功返回之前的程序间断点地址。如果间断点值增加，那么这个指针（指的是返回的之前的间断点地址）是指向分配的新的内存的首地址。如果出错失败，就返回一个指针并设置errno全局变量的值为ENOMEM。</p>
+
+<p><strong>总结：</strong> <br>
+这两个函数都用来改变 “program break” (程序间断点)的位置，改变数据段长度（Change data segment size），实现虚拟内存到物理内存的映射。 <br>
+brk()函数直接修改有效访问范围的末尾地址实现分配与回收。sbrk()参数函数中：当increment为正值时，间断点位置向后移动increment字节。同时返回移动之前的位置，相当于分配内存。当increment为负值时，位置向前移动increment字节，相当与于释放内存，其返回值没有实际意义。当increment为0时，不移动位置只返回当前位置。参数increment的符号决定了是分配还是回收内存。而关于program break的位置如图所示：</p>
+
+<p><img src="http://img.blog.csdn.net/20170116174212008?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXBvbGxvbl9rcmo=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" title=""></p>
+
+
+
+<h3 id="2简单测试">（2）、简单测试：</h3>
+
+<p>对于分配好的内存，我们只要有其首地址old与长度MAX*MAX即可不越界的准确使用（如下图所示），其效果与malloc相同，只不过sbrk()与brk()是C标准函数的底层实现而已，其机制较为复杂（测试中，死循环是为了查看maps文件，不至于进程消亡文件随之消失）。 <br>
+<img src="http://img.blog.csdn.net/20170116184600471?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXBvbGxvbl9rcmo=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" title=""></p>
+
+<p>虽然，sbrk()与brk()均可分配回收兼职，但是我们一般用sbrk()分配内存，而用brk()回收内存，上例中回收内存可以这样写：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs java"><span class="hljs-keyword">int</span> err = brk(old);
+<span class="hljs-javadoc">/**或者brk(p);效果与sbrk(-MAX*MAX);是一样的，但brk()更方便与清晰明了。**/</span>
+<span class="hljs-keyword">if</span>(-<span class="hljs-number">1</span> == err){
+    perror(<span class="hljs-string">"brk"</span>);
+    exit(EXIT_FAILURE);
+}
+</code></pre>
+
+
+
+<h2 id="2mmap与munmap">2、mmap()与munmap():</h2>
+
+<p>mmap函数（地址映射）：mmap将一个文件或者其它对象映射进内存。文件被映射到多个页上，如果文件的大小不是所有页的大小之和，最后一个页不被使用的空间将会清零(Linux堆空间未使用内存均清零)。这里我们只研究mmap的内存映射，而暂时不讨论文件方面的问题。关于mmap的文件映射的更详细的内容可参考<a href="http://www.cnblogs.com/huxiao-tee/p/4660352.html">认真分析mmap：是什么 为什么 怎么用</a></p>
+
+
+
+<pre class="prettyprint"><code class=" hljs glsl"><span class="hljs-comment">//函数原型：</span>
+<span class="hljs-preprocessor">#incldue&lt;sys/mman.h&gt;</span>
+<span class="hljs-keyword">void</span> * mmap(<span class="hljs-keyword">void</span> * addr, size_t <span class="hljs-built_in">length</span>,<span class="hljs-keyword">int</span> prot,<span class="hljs-keyword">int</span> flags,<span class="hljs-keyword">int</span> fd,off_t offset);</code></pre>
+
+<blockquote>
+  <p>参数：</p>
+  
+  <blockquote>
+    <p><strong>（1）、addr:</strong> <br>
+    起始地址，置零让系统自行选择并返回即可. <br>
+    <strong>（2）、length:</strong> <br>
+    长度，不够一页会自动凑够一页的整数倍，我们可以宏定义#define MIN_LENGTH_MMAP 4096为一页大小 <br>
+    <strong>（3）、prot:</strong> <br>
+    读写操作权限，PROT_READ可读、PROT_WRITE可写、PROT_EXEC可执行、PROT_NONE映射区域不能读取。（注意PROT_XXXXX与文件本身的权限不冲突，如果在程序中不设定任何权限，即使本身存在读写权限，该进程也不能对其操作） <br>
+    <strong>（4）、flags常用标志:</strong> <br>
+    ①<strong>MAP_SHARED</strong>【share this mapping】、<strong>MAP_PRIVATE</strong>【Create a private copy-on-write mapping】 <br>
+    MAP_SHARED只能设置文件共享，不能地址共享，即使设置了共享，对于两个进程来说，也不会生效。而MAP_PRIVATE则对于文件与内存都可以设置为私有。 <br>
+    ②<strong>MAP_ANON</strong>【Deprecated】、<strong>MAP_ANONYMOUS</strong>：匿名映射，如果映射地址需要加该参数，如果不加默认映射文件。MAP_ANON已经过时，只需使用MAP_ANONYMOUS即可 <br>
+    <strong>（5）</strong>、文件描述符：fd <br>
+    <strong>（6）</strong>、文件描述符偏移量：offset <br>
+    （fd和offset对于一般性内存分配来说设置为0即可）</p>
+  </blockquote>
+  
+  <p>返回值：</p>
+  
+  <blockquote>
+    <p>失败返回MAP_FAILED，即(void * (-1))并设置errno全局变量。 <br>
+    成功返回指向mmap area的指针pointer。</p>
+  </blockquote>
+  
+  <p>常见errno错误：</p>
+  
+  <blockquote>
+    <p><strong>①ENOMEM</strong>：内存不足； <br>
+    <strong>②EAGAIN</strong>：文件被锁住或有太多内存被锁住； <br>
+    <strong>③EBADF</strong>：参数fd不是有效的文件描述符； <br>
+    <strong>④EACCES</strong>：存在权限错误，。如果是MAP_PRIVATE情况下文件必须可读；使用MAP_SHARED则文件必须能写入，且设置prot权限必须为PROT_WRITE。 <br>
+    <strong>⑤EINVAL</strong>：参数addr、length或者offset中有不合法参数存在。</p>
+  </blockquote>
+</blockquote>
+
+
+
+<pre class="prettyprint"><code class=" hljs glsl">munmap函数：解除映射关系
+<span class="hljs-keyword">int</span> munmap(<span class="hljs-keyword">void</span> * addr, size_t <span class="hljs-built_in">length</span>);<span class="hljs-comment">//addr为mmap函数返回接收的地址，length为请求分配的长度。</span></code></pre>
+
+<p><img src="http://img.blog.csdn.net/20170116130958395?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXBvbGxvbl9rcmo=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" title=""></p>
+
+<p>这张图描述了mmap内存地址映射的位置关系（栈区以上为内核空间）。关于这一点我们可以作以简单的测试(我采用MIN_LENGTH_MMAP宏，当然你也可以用多少申请多少，系统总是以最小1页来映射的，关于内存分页与虚拟地址映射可参考<a href="http://blog.csdn.net/apollon_krj/article/details/53869173">Linux系统内存管理与内存分页机制 </a>)： <br>
+<img src="http://img.blog.csdn.net/20170116133153809?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQXBvbGxvbl9rcmo=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" title=""></p>
+
+<p>mmap映射的地址处于堆区与栈区中间，malloc映射的堆区内存为33页（最小映射大小），而mmap映射的内存为3页，也是4096B的整数倍。</p></div></body>
+</html>

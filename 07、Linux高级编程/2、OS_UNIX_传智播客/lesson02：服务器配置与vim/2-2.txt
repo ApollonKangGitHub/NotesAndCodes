@@ -1,0 +1,57 @@
+vim打造IDE：
+vim 配置文件：
+
+系统级别：vim /etc/vim/vimrc
+用户级别：vim ~/.vimrc
+若无~/.vimrc则去找/etc/vim/vimrc，否则按~/.vimrc配置优先，即用户级别的.vimrc优先级高。
+
+vim --v查看vim的版本
+----------------------------------------------------------------
+tag文件：记录函数/宏变量在哪个文件中
+
+在项目文件中生成tags文件：
+ctags ./* -R:递归创建项目所有文件的tags文件
+
+在代码中(命令模式)：
+Ctrl + ]：查看光标所在位置函数的函数原型，可多级查看
+Ctrl + t：返回上一级，多级查看则需要多级退出(类似于su与exit)
+----------------------------------------------------------------
+gcc以及参数：
+-v 、 --v 、 -version：查看版本
+-I：指定头文件
+-g：包含调试信息(可以gdb test后list调试)
+-Wall：提示更多警告信息
+-E：生成预处理文件，test.i
+-On ：n=0--3，编译优化，n越大优化的越多
+-c：只编译不链接
+-S：生成汇编文件
+----------------------------------------------------------------
+nm命令(查看符号表)：
+nm a.out
+
+objdump命令(查看反汇编)：
+objdump -dSsx a.out
+
+ldd命令(查看可执行文件的共享库依赖关系库)：
+ldd a.out：只检测共享库，不检测静态库
+----------------------------------------------------------------
+静态库：直接将需要的函数链接(复制)到可执行文件中(即可执行文件中包含库函数)；共享库：将库的位置(符号表)链接到可执行文件中，在运行时才去库中找需要的函数(可执行文件中不包含库函数)。
+
+静态库：
+生成与位置无关的.o文件：gcc -c -fPIC *.c
+生成.a文件：ar rcs libmyname.a *.o
+
+动态库(共享库)：
+共享库的三种名字(libmycalc.so.1.10为例)：
+real name：①libmycalc.so.1.10
+so name：②libmycalc.so.1
+link name：③libmycalc.so
+②和③都是一个符号链接，指向①。linkname方便编译连接时使用Makefile，当库更新时不需要更新Makefile只需要修改符号链接指向。而so name则是用来检测共享库版本号的。
+
+方法：
+①生关的*.o文件：gcc -fPIC -o *.c
+②生成real name(指定so name 名字，但不生成)：gcc -shared -Wl,-soname,libmyname.so.1 -o libmyname.so.1.10 *.o
+③sudo vim /etc/ld/so/conf修改配置文件：
+在配置文件中加上共享库的路径。
+④sudo ldconfig -v更新配置文件。更新后自动生成so name。
+⑤手动生成link name：ln -s libmyname.so.1.10 libmyname.so

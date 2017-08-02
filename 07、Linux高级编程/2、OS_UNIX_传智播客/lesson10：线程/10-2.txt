@@ -1,0 +1,78 @@
+1、线程终止方式：
+线程主函数：即与返回值与参数均是“void *”的函数指针对应的函数
+
+①从线程的主函数里return。这种方法对于主线程不适用，从main函数return相当于调用exit()。
+②一个线程可以调用pthread_cancel终止同一个进程中的另外一个线程。
+③线程自己调用pthread_exit()终止自己，这种方式可以适用于任一线程。
+注意：对于统一进程的线程间，使用pthread_cancel向另外一个线程发送终止信号，系统并不会马上关闭被取消的线程，只有在被取消的线程下次调用系统函数时，才会真正结束线程。或者调用pthread_testcancel()，让内核去检测是否需要取消当前线程。
+(可在主线程中pthread_cancel()区结束子线程，子线程中写个while(1){i++;sleep(10);}。注释与不注释sleep(),分别用ps -eLf测试。再注释sleep并加上pthread_testcancel()用ps -eLf试)
+--------------------------------------------------------------------------------------------------------------------------------------
+2、线程属性：
+对于高并发多线程的开发，就需要修改线程属性,比如线程创建时默认分配8MB，一个进程最多创建300多个线程。但是很多时候，用不了8MB这么多空间，且线程数目很多，就需要减小线程栈空间而增大线程数目，比如栈大小减小到1MB们就可以创建2000多个线程。
+
+ulimit -a：
+stack size项为默认栈大小(Ubuntu14.04为8MB，而Redahat6.4位10MB)
+
+属性结构体：
+typedef struct
+{
+       int                           detachstate;	//线程的分离状态
+       int                           schedpolicy;	//线程调度策略
+       structsched_param             schedparam;	//线程的调度参数
+       int                           inheritsched;	//线程的继承性
+       int                           scope;		//线程的作用域
+       size_t                        guardsize;		//线程栈末尾的警戒缓冲区大小
+       int                           stackaddr_set;	//线程的栈设置
+       void*                         stackaddr;		//线程栈的位置
+       size_t                        stacksize;		//线程栈的大小
+}pthread_attr_t;
+
+(1)、使用方法步骤：
+pthread_attr_init();//初始化为默认属性
+	|
+设置需要修改的相关属性
+	|
+pthread_create();//创建线程并设置为修改后的&attr
+	|
+.................//线程使用过程	
+	|
+pthread_attr_destory();//释放线程资源
+
+int pthread_attr_init(pthread_attr_t * attr);
+int pthread_attr_destory(pthread_attr_t * attr);
+
+
+(2)、设置分离状态：
+int pthread_setdetachstate(pthread_attr_t * attr, int detachstate);//设置线程分离状态属性
+itn pthread_setdetachstate(pthread_attr_t * attr, int * detachstate);//获取线程分离状态属性
+分离：PTHREAD_CREATE_DETACHED
+非分离：PTHREAD_CREATE_JOINABLE/*非分离为默认一般不用设置*/
+
+(3)、线程的栈地址与栈大小：
+int pthread_setstackaddr(pthread_attr_t * attr, void * stackaddr);//设置线程栈地址属性
+int pthread_setstackaddr(pthread_attr_t * attr, void ** stackaddr);//获取线程栈地址属性
+int pthread_setstacksize(pthread_attr_t * attr, size_t stacksize);//设置线程栈大小属性
+int pthread_setstacksize(pthread_attr_t * attr, size_t * stacksize);//获取线程栈大小属性
+
+以上函数已经过时，一般采用pthread_getstack和pthread_setstack代替：
+
+int pthread_setstack(pthread_attr_t * attr, void * stackaddr, size_t stacksize);//设置线程栈属性
+int pthread_setstack(pthread_attr_t * attr, void ** stackaddr, size_t * stacksize);//获取线程栈属性
+--------------------------------------------------------------------------------------------------------------------------------------
+NPTL(Native POSIX Thread Library)：
+查看当前pthread库版本：getconf GNU_LIBPTHREAD_VERSION
+
+注意：
+①主线程退出，其它线程不退出，主线程需要用pthread_exit退出
+②malloc和mmap申请的内存可以被其它线程释放(毕竟属于同一个进程，内存共享)
+③尽可能避免僵尸线程：要么pthread_join让指定线程回收，要么设置为分离态让系统自动回收
+④不要反回线程栈中的值/地址。
+⑤线程终止的时候没有释放加锁的互斥量，则该互斥量不能再使用
+⑥应该避免在多线程的模型中调用fork，除非fork后马上exec。若子进程创建前已经有多个线程，那么子进程中只有调用fork的线程存在，其它线程在子进程中均pthread_exit
+⑦信号的复杂语义很难和多线程共存，应该避免在多线程中引入信号机制
+
+------------------------------------------------------------------------------------------------------------------------------------
+练习：
+①实现多线程拷贝：./mycp fileold filenew N(N位指定线程数)
+迅雷下载其实就是一个网络版的多线程拷贝
+②实现多线程检索(查找)

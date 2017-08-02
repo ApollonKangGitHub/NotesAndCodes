@@ -1,0 +1,86 @@
+回顾：
+信号--信号集sigset_t 及其相关函数
+sigemptyset sigaddset sigdelset sigismember
+信号屏蔽 -- sigprocmask
+信号注册增强版函数 -- sigaction
+sa_flags：参数SA_SIGINFO选择第二个成员sa_sigaction
+IPC管道 -- 有名管道
+mkfifo -- 创建管道文件 命令/函数
+按照普通文件的操作方式去操作管道即可
+----------------------------------------------------------------
+无名管道：管道文件由内核管理、只能用于fork()创建的父子进程之间。借助pipe()创建一个读管道一个写管道。（本是四个端、四个管道，关闭了2个端即3个管道）。
+int pipe(int fd[2]);
+成功返回0，失败返回-1
+fd[0]读端
+fd[1]写端
+
+eg：int fd[2] = {0};
+pipe(fd);
+
+在子进程与父进程中分别关闭一个描述符（一个端口）即可。
+----------------------------------------------------------------
+XSI IPC的共性(以System V IPC为核心，不牵扯Posix IPC)：
+1、消息队列、信号量集、共享内存统称为XSI IPC(Inter Process Communiction)，隶属于同一个规范，有着共同的特征。每个XSI IPC结构，都是在内核中存储与维护的。用ipcs命令可以查看、用ipcrm命令可以删除。
+
+ipcs（IPC Show）与ipcrm（IPC Remove）命令：
+
+ipcs -a:查看内核所有IPC
+Shared Memory Segments共享内存
+Semaphore Arrays信号量集
+Message Queues消息队列
+
+ipcs -m：显示共享内存(memory)
+ipcs -q：显示消息队列(queue)
+ipcs -s：显示信号量集(semaphore)
+
+ipcrm -m ID：删除共享内存
+ipcrm -q ID：删除消息队列
+ipcrm -s ID：删除信号量集
+
+2、每个XSI IPC结构都有两个东西定位：①外部到内核要用key(键)，内核中定位②具体IPC要用ID标识。
+
+key的生成：key的类型是key_t(长整形)；有三种方法可以得到key：
+①使用宏 IPC_PRIVATE 做key，但是这种方式无法实现进程间通信(因为IPC是private私有的)，极少使用。
+②把所有的key定义在一个头文件中，用宏去定义。
+③使用ftok()函数生成key，返回值即为key。参数(两个)：真实存在的路径与项目编号(0-255)
+
+ID的生成/获取：IPC结构在内核中都用ID做唯一标识，创建/获取ID都有对应的函数,eg：
+int shmid = shmget(key,...);
+int megid = msgget(key,...);
+调用XXX个体时，都有一个flags，创建时的值为恒定的：
+权限|IPC_CREAT|IPC_EXCL
+IPC_EXCL:如果存在会返回错误(但是，是和IPC_CREAT共同使用时)。
+
+3、IPC结构都有一个特殊的操作函数：提供查询、修改、删除的功能。函数名为XXXctl，比如：shmxtl()、msgctl()。
+
+int shmctl(int shmid, int cmd, struct shmid_ds * buf);
+参数cmd指定提供功能：
+IPC_STAT -- 查询IPC结构的属性/状态
+IPC_SET -- 修改IPC结构的属性/状态，但只能修改权限
+IPC_RMID -- 删除结构，按ID删除
+----------------------------------------------------------------
+不同XSI IPC各自的特性
+1、共享内存：
+每个进程的内存时相互独立无法直接互访，共享内存就是内核管理一段内存(物理内存)，这段物理内存允许每个进程进程映射(不同虚拟内存映射同一块物理内存)。
+	编程步骤：
+	①系统创建/获取共享内存(拿到物理内存):
+		ftok()->key
+		shmget()->创建/获取共享内存，返回ID
+	②挂接共享内存(映射):shmat()
+	③使用共享内存:
+	④脱接共享内存(解除映射):shmdt()
+	⑤如果共享内存不再被使用，可以删除:shmctl()
+#include<sys/ipc.h>
+key_t ftok(const char * pathname, int proj_id);/*路径，项目id*/
+/*成功返回key，失败返回-1*/
+#include<sys/shm.h>
+int shmget(key_t key, size_t size, int shmflg);
+	key是ftok的返回值
+	shmflg：0666|IPC_CREAT|IPC_EXCL
+void * shmat(int shmid, const void * shmaddr,int shmflg);
+	shmid是shmget的返回值
+	shmaddr：默认为NULL即可，由系统指定
+	shmflg：默认为0(可读可写)即可，SHM_RDONLY(只读)
+	成功返回映射首地址，失败返回(void *)(-1),设置errno
+int shmdt(const void * shmaddr);
+	成功返回0，失败返回-1，,设置errno

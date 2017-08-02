@@ -1,0 +1,95 @@
+select最大的问题在于其采用多路I/O转接时依然伴随轮询的机制，过多的文件描述符轮训周期太长，所以只能处理1024以下的文件描述符(默认，即使调大ulimit的值也不行)。
+
+pselect()函数：
+
+#include <sys/select.h>
+int pselect(int nfds, fd_set *readfds, fd_set *writefds,fd_set *exceptfds, const struct timespec *timeout,const sigset_t *sigmask);
+
+struct timespec {
+long tv_sec; /* seconds */
+long tv_nsec; /* nanoseconds */
+};
+
+用sigmask替代当前进程的阻塞信号集，调用返回后还原原有阻塞信号集
+--------------------------------------------------------------------------------------------------------------------------------------1、poll多路I/O模型：
+优势：不再局限于最大文件描述符个数
+
+#include<poll.h>
+int poll(struct pollfd * fds, nfds_t nfds, int timeout);
+
+struct pollfd{
+	int fd;//文件描述符
+	short events;//监控的事件：r、w、e，传入参数
+	short revents;//监控事件中满足条件返回的事件，传出参数
+};
+events：
+POLLIN普通或带外优先数据可读,即POLLRDNORM | POLLRDBAND(普通数据可读|优先级带数据可读)、POLLPRI 高优先级可读数据
+
+POLLOUT普通或带外优先数据可写，即POLLWRNORM | POLLWRBAND(普通数据可写|优先级带数据可写)
+
+POLLERR 发生错误、POLLHUP 发生挂起、POLLNVAL 描述字不是一个打开的文件
+(event常用：POLLIN、POLLOUT、POLLERR)
+
+nfds：监控数组中有多少文件描述符需要被监控
+timeout：毫秒级等待
+-1：阻塞等，#define INFTIM -1 Linux中没有定义此宏
+0：立即返回，不阻塞进程
+>0：等待指定毫秒数，如当前系统时间精度不够毫秒，向上取值
+
+如果不再监控某个文件描述符，则将该文件描述符对应数组中位置置为-1，下次会将events置为0.
+GNU定义了ppoll(非POSIX标准)、可以设置信号屏蔽字。
+
+如果在检测的读文件描述符中有读数据到达，但是read失败，就去判断是不是客户端已经关闭(判断errno是否等于ECONNRESET)，并向服务器发送了RST标志。如果是，则关闭该文件描述符并将数组中的文件描述符对应位置置为-1。
+--------------------------------------------------------------------------------------------------------------------------------------
+vim /etc/security/limits.conf
+写入新的配置修改文件描述符的软限制与硬限制(domain为*表示所有用户)。
+soft nofile 65536
+hard nofile 100000
+cat /proc/sys/fs/file-max查看文件描述符个数最大限制
+
+2、epoll多路I/O模型(三个函数)：
+最大的提升：获取事件时，无需再整个遍历查看监听的文件描述符是否有信息到达，而将被信息请求唤醒的文件描述符存入一个队列中，只需处理队列中唤醒的就绪的描述符。适用于Linux大规模并发服务器(多链接，低活跃度)。
+
+(1)、int epoll_create(int size);
+创建一个epoll句柄，参数size用来告诉内核监听的文件描述符个数
+
+(2)、控制某个epoll监控的文件描述符上的事件：注册、修改、删除
+#include <sys/epoll.h>
+int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)
+epfd：为epoll_creat的句柄
+
+op：表示动作，用3个宏来表示：
+EPOLL_CTL_ADD(注册新的fd到epfd)，
+EPOLL_CTL_MOD(修改已经注册的fd的监听事件)，
+EPOLL_CTL_DEL(从epfd删除一个fd)；
+
+event：告诉内核需要监听的事件(EPOLLIN 、EPOLLOUT、EPOLLERR等)
+struct epoll_event {
+	__uint32_t events; /* Epoll events */
+	epoll_data_t data; /* User data variable，联合体:event.data.fd可取出文件描述符*/
+};
+EPOLLIN ：表示对应的文件描述符可以读（包括对端SOCKET正常关闭）
+EPOLLOUT：表示对应的文件描述符可以写
+EPOLLPRI：表示对应的文件描述符有紧急的数据可读（这里应该表示有带外数据到来）
+EPOLLERR：表示对应的文件描述符发生错误
+EPOLLHUP：表示对应的文件描述符被挂断；
+EPOLLET： 将EPOLL设为边缘触发(Edge Triggered)模式，这是相对于水平触发(Level Triggered)来说的
+EPOLLONESHOT：只监听一次事件，当监听完这次事件之后，如果还需要继续监听这个socket的话，需要再次把这个socket加入到EPOLL队列里
+
+(3)、等待所监控文件描述符上有事件的产生，类似于select()调用。
+#include <sys/epoll.h>
+int epoll_wait(int epfd, struct epoll_event *events, int maxevents, int timeout)
+
+events：用来从内核得到事件的集合：结构体数组(传出参数)
+
+maxevents：告之内核这个events有多大，这个maxevents的值不能大于创建epoll_create()时的size，
+
+timeout：是超时时间
+-1：阻塞
+0：立即返回，非阻塞
+>0：指定微秒
+返回值：成功返回有多少文件描述符就绪，时间到时返回0，出错返回-1
+
+epoll_create负责创建文件描述符的存储红黑树，返回句柄(文件描述符，用来索引这棵树)；
+epoll_ctl负责向创建的树中；置文件描述符的属性参数；
+epoll_wait负责将树中的就绪的文件描述符复制到结构体数组(队列)中，返回接收到的个数。

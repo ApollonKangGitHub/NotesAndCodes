@@ -1,0 +1,368 @@
+"=====================================================================================
+" Description: My daily vimrc with dozens of plugins.
+" Originally derived from MetaCosm's http://vi-improved.org/vimrc.php
+" Last Change: 0 14/05/2006 20:54:07 Leal@RAINT:_vimrc
+"
+" Author: Leal <linxiao.li AT gmail DOT com>
+" http://www.leal.cn
+" Version: 1.0065
+"
+" Usage: 1. Prepare necessary dirs and files
+" $VIMDATA X:\Vim\vimdata on Win, ~/vimdata on Linux
+" |
+" |-- temp to put swap files <DIR>
+" |-- backup to put backup files <DIR>
+" |-- diary to save calendar.vim's diaries <DIR>
+" |-- GetLatest to save GetLatestVimScripts.vim's <DIR>
+" | |
+" | `-- GetLatestVimScripts.dat to store GLVS's items
+" |
+" |-- _vim_fav_files to store favmenu.vim's items
+" `-- _vim_mru_files to store mru.vim's items
+"
+" 2. Get all scripts you favor on www.vim.org better with GLVS
+"
+" 3. Get all needed utilities, especially on Windows, e.g.
+" wget -- WGET for Windows (win32) http://users.ugent.be/~bpuype/wget/
+" ctags -- Exuberant Ctags http://ctags.sf.net/
+"
+" 4. If you have no idea of some option, just press K (<S-k>) on it.
+"
+" 5. HTML file is produced with :TOhtml, with colo default.
+"
+"=====================================================================================
+
+"-------------------------------------------------------------------------------------
+" TODO List
+"-------------------------------------------------------------------------------------
+" 1. Install Chinese Vim help helplang -> cn
+
+"-------------------------------------------------------------------------------------
+" general
+"-------------------------------------------------------------------------------------
+set nocompatible " use vim as vim, should be put at the very start
+set history=1000 " lines of Ex-mode commands, search history
+set browsedir=buffer " use directory of the related buffer for file browser
+set clipboard+=unnamed " use clipboard register '*' for all y, d, c, p ops
+set viminfo+=! " make sure it can save viminfo
+set isk+=$,%,#,- " none of these should be word dividers
+set confirm " raise a dialog confirm whether to save changed buffer
+set ffs=unix,dos,mac " favor unix ff, which behaves good under bot Winz & Linux
+set fenc=utf-8 " default fileencoding
+set fencs=utf-8,ucs-bom,euc-jp,gb18030,gbk,gb2312,cp936
+map Q gq
+" don't use Ex-mode, use Q for formatting
+filetype on " enable file type detection
+filetype plugin on " enable loading the plugin for appropriate file type
+
+"-------------------------------------------------------------------------------------
+" platform dependent
+"-------------------------------------------------------------------------------------
+if has("win32")
+let $VIMDATA = $VIM.'/vimdata'
+let $VIMFILES = $VIM.'/vimfiles'
+let PYTHON_BIN_PATH = 'd:/foo/python/python.exe' " ensure the path right
+else
+let $VIMDATA = $HOME.'/vimdata'
+let $VIMFILES = $HOME.'/.vim'
+let PYTHON_BIN_PATH = '/usr/bin/python'
+set guifont=courier\ 10
+endif
+
+"-------------------------------------------------------------------------------------
+" path/backup
+"-------------------------------------------------------------------------------------
+set backup " make backup file and leave it around
+set backupdir=$VIMDATA/backup " where to put backup file
+set directory=$VIMDATA/temp " where to put swap file
+set runtimepath+=$VIMDATA " add this path to rtp, support GetLatestVimScripts.vim
+set path=.,/usr/include/*,, " where gf, ^Wf, :find will search
+set tags=./tags,tags,$VIMRUNTIME/doc/tags,$VIMFILES/doc/tags " tags files CTRL-] uses
+set makeef=error.err " the errorfile for :make and :grep
+
+"-------------------------------------------------------------------------------------
+" colors
+"-------------------------------------------------------------------------------------
+set background=dark " use a dark background
+syntax on " syntax highlighting
+
+"-------------------------------------------------------------------------------------
+" gui-only settings
+"-------------------------------------------------------------------------------------
+if has("gui_running")
+colo inkpot " colorscheme, inkpot.vim
+set lines=40 " window tall and wide, only if gui_running,
+set columns=120 " or vim under console behaves badly
+endif
+
+"-------------------------------------------------------------------------------------
+" Vim UI
+"-------------------------------------------------------------------------------------
+set linespace=1 " space it out a little more (easier to read)
+set wildmenu " type :h and press <Tab> to look what happens
+set ruler " always show current position along the bottom
+set cmdheight=2 " use 2 screen lines for command-line
+set lazyredraw " do not redraw while executing macros (much faster)
+set nonumber " don't print line number
+set hid " allow to change buffer without saving
+set backspace=2 " make backspace work normal
+set whichwrap+=<,>,h,l " allow backspace and cursor keys to wrap
+set mouse=a " use mouse in all modes
+set shortmess=atI " shorten messages to avoid 'press a key' prompt
+set report=0 " tell us when anything is changed via :...
+set fillchars=vert:\ ,stl:\ ,stlnc:\
+" make the splitters between windows be blank
+
+"-------------------------------------------------------------------------------------
+" visual cues
+"-------------------------------------------------------------------------------------
+set showmatch " show matching paren
+set matchtime=5 " 1/10 second to show the matching paren
+set nohlsearch " do not highlight searched for phrases
+set incsearch " BUT do highlight where the so far typed pattern matches
+set scrolloff=10 " minimal number of screen lines to keep above/below the cursor
+set novisualbell " use visual bell instead of beeping
+set noerrorbells " do not make noise
+set laststatus=2 " always show the status line
+set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,eol:$ " what to show while :set list
+set statusline=%{VimBuddy()}\ %F%m%r%h%w\ [%{&ff}]\ [%Y]\ [\%03.3b\ \%02.2B]\ [%02v\ %03l\ %L\ %p%%]
+
+"-------------------------------------------------------------------------------------
+" text formatting/layout
+"-------------------------------------------------------------------------------------
+set ai " autoindent
+set si " smartindent
+set cindent " do C-style indenting
+set fo=tcrqn " see help (complex)
+set tabstop=4 " tab spacing (settings below are just to unify it)
+set softtabstop=4 " unify
+set shiftwidth=4 " unify
+set noexpandtab " real tabs please!
+set smarttab " use tabs at the start of a line, spaces elsewhere
+set nowrap " do not wrap lines
+set formatoptions+=mM " so that vim can reformat multibyte text (e.g. Chinese)
+
+"-------------------------------------------------------------------------------------
+" folding
+"-------------------------------------------------------------------------------------
+set foldenable " turn on folding
+set foldmethod=indent " make folding indent sensitive
+set foldlevel=100 " don't autofold anything (but I can still fold manually)
+set foldopen -=search " don't open folds when you search into them
+set foldopen -=undo " don't open folds when you undo stuff
+
+"-------------------------------------------------------------------------------------
+" plugin - a.vim
+"-------------------------------------------------------------------------------------
+" alternate files quickly (.c --> .h etc)
+
+"-------------------------------------------------------------------------------------
+" plugin - c.vim
+"-------------------------------------------------------------------------------------
+"set makeprg=g++\ %
+let g:C_AuthorName = 'Leal'
+let g:C_Email = 'linxiao.li NOSPAM gmail DOT com'
+
+"-------------------------------------------------------------------------------------
+" plugin - runscript.vim (for Python)
+"-------------------------------------------------------------------------------------
+"let PYTHON_BIN_PATH = ...
+
+"-------------------------------------------------------------------------------------
+" plugin - calendar.vim
+"-------------------------------------------------------------------------------------
+let g:calendar_diary = $VIMDATA.'/diary' " where to store your diary
+
+"-------------------------------------------------------------------------------------
+" plugin - mru.vim (most recently used files)
+"-------------------------------------------------------------------------------------
+let MRU_File = $VIMDATA.'/_vim_mru_files' " which file to save mru entries
+let MRU_Max_Entries = 20 " max mru entries in _vim_mru_files
+
+"-------------------------------------------------------------------------------------
+" plugin - favmenu.vim
+"-------------------------------------------------------------------------------------
+let FAV_File = $VIMDATA.'/_vim_fav_files' " which file to save favorite entries
+
+"-------------------------------------------------------------------------------------
+" plugin - minibufexpl.vim
+"-------------------------------------------------------------------------------------
+let g:miniBufExplTabWrap = 1 " make tabs show complete (no broken on two lines)
+let g:miniBufExplModSelTarget = 1
+
+"-------------------------------------------------------------------------------------
+" plugin - taglist.vim
+"-------------------------------------------------------------------------------------
+if has("win32")
+let Tlist_Ctags_Cmd = $VIMFILES.'/ctags.exe' " location of ctags tool
+else
+let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
+endif
+
+let Tlist_Sort_Type = "name" " order by
+let Tlist_Use_Right_Window = 1 " split to the right side of the screen
+let Tlist_Compart_Format = 1 " show small meny
+let Tlist_Exist_OnlyWindow = 1 " if you are the last, kill yourself
+let Tlist_File_Fold_Auto_Close = 0 " do not close tags for other files
+let Tlist_Enable_Fold_Column = 0 " do not show folding tree
+
+"-------------------------------------------------------------------------------------
+" plugin - matchit.vim
+"-------------------------------------------------------------------------------------
+let b:match_ignorecase = 1
+
+"-------------------------------------------------------------------------------------
+" plugin - supertab.vim
+"-------------------------------------------------------------------------------------
+" <Tab> has been mapped to SuperTab() func in that plugin
+
+"-------------------------------------------------------------------------------------
+" plugin - timestamp.vim
+"-------------------------------------------------------------------------------------
+let g:timestamp_regexp = '\v\C%(<Last %([cC]hanged?|[Mm]odified):\s+)@<=.*$'
+let g:timestamp_rep = '%w %d/%m/%Y %H:%M:%S #u@#h:#f'
+augroup TimeStampHtml
+au filetype html let b:timestamp_regexp = '\v\C%(\<!-- Timestamp:\s{-1,})@<=.{-}%(\s*--\>)@='
+au filetype html let b:timestamp_rep = '%a %d/%m/%Y %r #u@#h:#f'
+augroup END
+
+"-------------------------------------------------------------------------------------
+" plugin - perl-support.vim
+"-------------------------------------------------------------------------------------
+let g:Perl_AuthorName = 'Leal'
+let g:Perl_Email = 'linxiao.li NOSPAM gmail DOT com'
+let tlist_perl_settings = 'perl;c:constants;l:labels;s:subroutines;d:POD'
+
+"-------------------------------------------------------------------------------------
+" utilities
+"-------------------------------------------------------------------------------------
+" select range, then hit :SuperRetab($width) - by p0g and FallingCow
+fu! SuperRetab(width) range
+sil! exe a:firstline . ',' . a:lastline . 's/\v%(^ *)@<= {'. a:width .'}/\t/g'
+endf
+
+" bind :CD to :cd %:h, then change cwd to the dir that includes current file
+sil! com -nargs=0 CD exe 'cd %:h'
+
+"TODO just do it
+fu! AddLineNo(isVM)
+if(a:isVM == 1)
+sil! exe 's/^/\=' . strpart((line('.')-line("'<")+1)." ", 0, 4)
+else
+sil! exe '%s/^/\=' . strpart(line('.')." ", 0, 4)
+endif
+endf
+" add line number befor each line of the text
+" :g/^/exec "s/^/".strpart(line(".")." ", 0, 4)
+" :%s/^/\=strpart(line('.')." ", 0, 4)
+" visual mode
+" :s/^/\=strpart((line('.')-line("'<")+1)." ", 0, 4)
+
+" XML support, e.g. element,,,<CR> -> <element> </element>
+" Bart van Deenen , www.vandeenensupport.com
+fu! MakeElement()
+if match(getline('.'),'^\s*>\s*$') == -1
+"the deleted word was not alone on the line
+let @w = "i<pla</pa>F<i"
+else
+"the deleted word was on it's own on the line
+let @w = "i<po</pa>kA"
+endif
+endf
+
+" include colon(5Cool for namespaces in xsl for instance
+"setlocal iskeyword=@,48-57,_,192-255,58
+inoremap <buffer> ,,, ><Esc>db:call MakeElement()<enter>@w
+
+"-------------------------------------------------------------------------------------
+" mappings
+"-------------------------------------------------------------------------------------
+map <right> <ESC>:MBEbn<RETURN>
+" -> switches buffers
+map <left> <ESC>:MBEbp<RETURN>
+" <- switches buffers
+map <up> <ESC>:Sex<RETURN><ESC><C-W><C-W>
+" up arrow to bring up a file explorer
+map <down> <ESC>:Tlist<RETURN>
+" down arrow to bring up the taglist
+map <A-i> i <ESC>r
+" Alt-i inserts a single char, and back to normal
+map <F3> <ESC>ggVG:call SuperRetab()<left>
+map <F4> ggVGg?
+" Rot13 encode the current file
+
+"noremap <silent> <C-F11> :cal VimCommanderToggle()<CR>
+
+" plugin - php_console.vim
+"map <F5> :call ParsePhpFile()<cr> " call function in normal mode
+"imap <F5> <ESC>:call ParsePhpFile()<cr> " call function in insert mode
+
+"-------------------------------------------------------------------------------------
+" autocommands
+"-------------------------------------------------------------------------------------
+au BufEnter * :syntax sync fromstart " ensure every file does syntax highlighting (full)
+au BufNewFile,BufRead *.asp :set ft=jscript " all my .asp files ARE jscript
+au BufNewFile,BufRead *.tpl :set ft=html " all my .tpl files ARE html
+
+" ftplugin - python_fold - $VIMFILES/ftplugin/python_fold.vim
+" add names in pydiction to autocomplete class or object's class, attribute or method
+au FileType python set complete+=k$VIMFILES/dict/pydiction isk+=.,(
+"au FileType python pyfile $VIMFILES/plugin/pyCallTips.py
+au FileType python source $VIMFILES/plugin/python.vim
+"au FileType java source $VIMFILES/ftplugin/JavaRun.vim
+"au FileType php set complete+=k$VIMFILES/dict/php.dict isk+=.,(
+au FileType text setlocal textwidth=78
+
+"-------------------------------------------------------------------------------------
+" highlight active line in normal mode, Vim7 don't need this
+"-------------------------------------------------------------------------------------
+"highlight CurrentLine guibg=darkgrey guifg=white ctermbg=darkgrey ctermfg=white
+"au! Cursorhold * exe 'match CurrentLine /\%' . line('.') . 'l.*/'
+"set ut=19
+
+"-------------------------------------------------------------------------------------
+" stuffs I don't like
+"-------------------------------------------------------------------------------------
+"set ignorecase -- turns out, I like case sensitivity
+"set list -- turns out, do not display unprintable characters such as Tab
+"autocmd GUIEnter * :simalt ~x -- having it auto maximize the screen is annoying
+"autocmd BufEnter * :lcd %:p:h -- switch to current dir (breaks some scripts)
+
+"-------------------------------------------------------------------------------------
+" useful abbrevs
+"-------------------------------------------------------------------------------------
+iab xasp <%@language=jscript%><CR><%<CR><TAB><CR><BS>%><ESC><<O<TAB>
+iab xdate <c-r>=strftime("%m/%d/%y %H:%M:%S")<cr>
+
+"-------------------------------------------------------------------------------------
+" customize cursor color to indicate IM is on
+"-------------------------------------------------------------------------------------
+if has('multi_byte_ime')
+hi Cursor guifg=NONE guibg=Green
+hi CursorIM guifg=NONE guibg=Blue
+endif
+
+"-------------------------------------------------------------------------------------
+" TVO defaults - otl.vim
+"-------------------------------------------------------------------------------------
+let otl_install_menu =1
+let no_otl_maps =0
+let no_otl_insert_maps =0
+
+let otl_bold_headers =0
+let otl_use_thlnk =0
+
+let g:otl_use_viki =0
+let maplocalleader =","
+
+map <c-w><c-f> :FirstExplorerWindow<cr>
+map <c-w><c-b> :BottomExplorerWindow<cr>
+map <c-w><c-t> :WMToggle<cr>
+
+let g:winManagerWidth = 35
+let g:winManagerWindowLayout = 'TodoList'
+
+let g:tskelDir = $VIMFILES."/skeletons"
+
+"-------------------------------------------------------------------------------------
+" vim: set et ft=vim tw=98 path+=$VIMFILES/*:

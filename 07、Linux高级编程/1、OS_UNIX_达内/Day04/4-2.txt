@@ -1,0 +1,59 @@
+一、#incldue<sys/mman.h>
+1、mmap函数（地址映射）：
+void * mmap(void * addr, size_t length,int port,int flags,int fd,off_t offset);
+	----->addr:
+	起始地址，置零让系统自行选择并返回
+	----->length:
+	长度，不够一页会自动凑够一页的整数倍
+	----->port:
+	读写权限，PROT_READ|PROT_WRITE|PROT_EXEC。（100(B)|010(B)|001(B) == 111(B) == 7）
+	----->flags:
+	①MAP_SHARED【share this mapping】、MAP_PRIVATE【Create a private copy-on-write mapping】
+	MAP_SHARED只能设置文件共享，不能地址共享，即使设置了共享，对于两个进程来说，也不会生效。而MAP_PRIVATE则对于文件与内存都可以设置为私有。
+	②MAP_ANON【Deprecated过时】、MAP_ANONYMOUS：匿名映射，如果映射地址需要加该参数，如果不加默认映射文件。
+	文件描述符：fd
+	文件描述符偏移量：offset
+	----->返回值：失败返回MAP_FAILED，(void * (-1))并设置errno全局变量。
+2、munmap函数：解除映射关系
+	int munmap(void * addr, size_t length);
+
+二、系统调用：
+用户空间的代码不能直接访问内核空间，因此内核空间提供了一系列的函数，实现用户空间进入内核空间的接口，这一系列的函数称为系统调用（System Call）。由于程序由用户进入内核层时，会将用户层的状态先封存起来，然后到内核层运行代码，运行结束以后，从内核层出来到用户层时，再把数据加载回来。因此，频繁的系统调用效率很低。可以使用time来测试用户层与内核层的函数调用的程序运行时间。
+
+三、文件系统：
+/proc/maps：内存
+/dev/console：控制台
+/dev/tty：标准输入输出（键盘、显示器）。（cat < /dev/tty输入重定向到tty---键盘）、（echo hello > /dev/tty输出重定向到tty---显示器，直接在显示器上显示hello）。
+/dev/null：Linux黑洞，写入该文件的内容，被吞噬消失，不会再出来
+
+Linux中文件权限用8进制4、2、1、0的组合
+----------------------------------------------------------------
+1、open：
+int open(const char * filename,int flag,...);
+
+·filename：可带路径文件名
+·flag设定打开的方式：
+->选择打开的权限，必须且只能包含其中一个：
+O_RDONLY只读、O_WRONLY只写、O_RDWR读写；
+->打开与操作方式：
+O_CREAT不存在则创建，存在则打开、
+O_EXCL不存在则新建，不存在则返回-1表示错误（与O_CREAT结合使用）、
+O_TRUNC覆盖（与O_CREAT结合使用）、
+O_APPEND追加的方式打开
+·...:如果是新建则需要第三个参数，如果不是新建则不需要（0XXX表示权限，如：0666）
+
+·返回值：文件描述符，返回-1表示出错
+文件open的过程 ：
+ 	先打开一个文件-->用文件表记录该文件信息-->在文件描述符总表中，找到没有使用的文件描述符（默认最小）-->把最小的文件描述符和文件表对应起来，放入文件描述符总表中。
+----------------------------------------------------------------
+2、read & write：
+ssize_t read(int fd,void * buf,size_t count);
+从buf中读取，返回读到的个数，void*表示不止能读字符串，指针均可。
+ssize_t write(int fd,const void * buf,size_t count);
+写到buf中，count一般设定为read的返回的个数，返回写入的数据字节数。
+
+read、write失败均返回-1
+----------------------------------------------------------------
+作业：
+用UC系统函数实现文件复制
+录入员工信息到文件a.txt中，并在另外一段程序中读出该员工信息。

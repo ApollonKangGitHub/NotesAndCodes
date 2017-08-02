@@ -1,0 +1,82 @@
+int shmctl(int shmid, int cmd, struct shmid_ds * buf);
+①shmid：要操作的共享内存id号
+②cmd指定提供功能：
+IPC_STAT -- 查询IPC结构的属性/状态
+IPC_SET -- 修改IPC结构的属性/状态，但只能修改权限
+IPC_RMID -- 删除结构，按ID删除
+③struct shmid_ds：
+struct shmid_ds{
+	struct ipc_perm sh_perm;/*权限等信息*/
+	size_t shm_segsz;/*大小*/
+	time_t shm_atime/*最后的挂接时间*/
+	time_t shm_dtime/*最后的脱接时间*/
+	time_t shm_ctime/*最后的改变时间*/
+	pid_t shm_cpid;/*创建共享内存进程的pid*/
+	pid_t shm_lpid;/*最后的挂接/脱接的进程的pid*/
+	shmatt_t shm_nattch;/*当前进程的挂接个数*/
+	...
+};
+
+struct ipc_perm{
+	key_t __key;/*共享内存的key*/
+	uid_t uid;/*用户id*/
+	pid_t gid;/*组id*/
+	uid_t cuid;/*创建者的用户id*/
+	uid_t cgid;/*创建者的组id*/
+	unsigned short mode;/*权限*/
+	unsigned short __seq;/**/
+	
+};
+struct shmid_ds在cmd=IPC_STAT时，为传出参数；
+struct shmid_ds在cmd=IPC_SET时，为传入参数；
+cmd=IPC_RMID时，struct shmid_ds置为NULL即可。
+所有成员中只有mode会偶尔使用(mode可以修改)，其它不予以理睬(其它修改不会成功，但是不会报错)。
+
+共享内存的优缺点：
+①优点：快!是速度最快的IPC，因为操作内存(内存共享)与操作硬盘文件(管道、socket)的速度是由明显差异的。②致命缺点：如果有多个进程都在写数据，就会产生数据的覆盖，引发大量数据错误与丢失。
+----------------------------------------------------------------
+2、消息队列：有一个队列，队列中存放各种消息。每个进程把数据封存在消息中，再放入队列。每个进程都可以拿到消息队列，再从中去除/放入消息。消息队列不会产生覆盖问题，但需要考虑队列长度问题(用链表可以实现可变长度，但终归会有长度结束)。
+	消息队列的编程步骤：
+	①先生成一个key：使用ftok()函数或用头文件定义
+	②创建/获取消息队列：msgget()
+	③发送/接收消息(数据)：msgsnd()/msgrcv()
+	④如果不再被使用(所有进程都不用)，可以删除：msgctl()
+
+函数：#include<sys/msg.h>
+①int msgget(key_t key, int flag);
+	获取：flag置为0；
+	设置：flag置为-权限|IPC_CREAT|IPC_EXCL
+②msgsnd(int msqid,const void * buf,size_t size,int flag);
+	msqid：消息队列的id，是msgget的返回值
+	buf：消息的首地址(发送的buf)
+	size：发送消息的长度
+	flag：主要使用IPC_NOWAIT(不等待)队列满了(发送时)/队列空(获取时)直接返回错误。默认的情况是等待(置0为阻塞)。
+③msgrcv(int msqid,const void * buf,size_t size,long msgtyp,int flag);
+	buf、size：接收的buf与大小
+	msgtyp：消息的类型(不考虑类型时置为0)，分为有类型消息与无类型消息。
+失败返回-1；成功msgsnd返回0，msgrcv返回接收到的
+④msgctl(int msqid, int cmd, struct msqid_ds * buf);
+cmd与shmctl的cmd相同，其它参数结构体也基本相似(遵守相同的规范)
+----------------------------------------------------------------
+无类型消息可以使任意类型，比如整数、字符串、浮点...
+无类型消息的取出遵循队列的基本准则：FIFO
+
+有类型消息：类型必须是一个结构体(可自定义,但是有格式)
+struct mymsg{
+	long mtype;/*消息类型,必须要有,格式固定*/
+	char msg[];/*数据*/		
+};
+数据长度与名称可自定义，用其他类型也可以，如：另外一个结构体类型。
+mtype取值时，必须大于0(复制不能小于等于0)
+接收数据时按消息类型接收，msgrcv()中的第四个参数可以指定接收消息的类型：
+	参数==0：代表接收任意类型的消息(遵循先入先出)；
+	参数>0：代表接收特定类型的消息(mtype==value)，先进先出；
+	参数<0：代表接收类型小于等于参数绝对值的消息，接收次序为：从小到大，如果类型相同，按照队列的位置先进先出。
+
+有类型消息在计算发送和接收的size时，可以不计算类型所占的空间(只计算数据空间：sizeof(msgnew) - sizeof(msgnew.mtype)),推荐不计算。
+----------------------------------------------------------------
+练习&&作业：
+	1、为综合案例做准备工作(必定会用)：
+	文件、进程、信号、消息队列
+	(可以考虑是否使用)：内存分配
+	2、使用信号Ctrl+c(SIGINT)实现退出进程时删除消息队列

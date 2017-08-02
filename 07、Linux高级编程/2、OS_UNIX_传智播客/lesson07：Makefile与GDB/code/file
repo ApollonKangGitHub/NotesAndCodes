@@ -1,0 +1,1253 @@
+# GNU Make 3.81
+# Copyright (C) 2006  Free Software Foundation, Inc.
+# This is free software; see the source for copying conditions.
+# There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+#  这个程序创建为 i686-pc-linux-gnu
+make: “app”是最新的。
+
+# Make数据库，显示于 Wed Sep 17 11:19:26 2014
+
+# 变量
+
+# 自动
+<D = $(patsubst %/,%,$(dir $<))
+# 自动
+?F = $(notdir $?)
+# 环境
+DESKTOP_SESSION = ubuntu
+# 默认
+CWEAVE = cweave
+# 自动
+?D = $(patsubst %/,%,$(dir $?))
+# 自动
+@D = $(patsubst %/,%,$(dir $@))
+# 环境
+XAUTHORITY = /home/xingwenpeng/.Xauthority
+# 环境
+GDMSESSION = ubuntu
+# 环境
+XMODIFIERS = @im=ibus
+# makefile
+CURDIR := /home/xingwenpeng/teach/code/calc
+# makefile
+SHELL = /bin/sh
+# 默认
+RM = rm -f
+# 默认
+CO = co
+# 环境
+_ = /usr/bin/make
+# 默认
+PREPROCESS.F = $(FC) $(FFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -F
+# 环境
+XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
+# 默认
+OUTPUT_OPTION = -o $@
+# 默认
+COMPILE.cpp = $(COMPILE.cc)
+# makefile (从'Makefile'，行 1)
+MAKEFILE_LIST :=  Makefile
+# 自动
+@F = $(notdir $@)
+# 默认
+LINK.p = $(PC) $(PFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+# 环境
+MANDATORY_PATH = /usr/share/gconf/ubuntu.mandatory.path
+# 环境
+XDG_DATA_DIRS = /usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/
+# 环境
+DBUS_SESSION_BUS_ADDRESS = unix:abstract=/tmp/dbus-99Gz2dpV6x,guid=deda66d9133357c8efb8d7250000000a
+# 默认
+CC = cc
+# 默认
+CHECKOUT,v = +$(if $(wildcard $@),,$(CO) $(COFLAGS) $< $@)
+# 环境
+LESSOPEN = | /usr/bin/lesspipe %s
+# 环境
+LC_NAME = zh_CN.UTF-8
+# 默认
+CPP = $(CC) -E
+# 默认
+LINK.cc = $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+# 环境
+XDG_SESSION_PATH = /org/freedesktop/DisplayManager/Session0
+# 默认
+LEX = lex
+# 环境
+PATH = /usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/xingwenpeng/aabb/aa
+# 默认
+LD = ld
+# 默认
+TEXI2DVI = texi2dvi
+# 环境
+GPG_AGENT_INFO = /tmp/keyring-GWNbhH/gpg:0:1
+# 默认
+YACC = yacc
+# 环境
+SESSION_MANAGER = local/ubuntu:@/tmp/.ICE-unix/2452,unix/ubuntu:/tmp/.ICE-unix/2452
+# 默认
+COMPILE.mod = $(M2C) $(M2FLAGS) $(MODFLAGS) $(TARGET_ARCH)
+# 默认
+ARFLAGS = rv
+# 默认
+LINK.r = $(FC) $(FFLAGS) $(RFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+# 环境
+WINDOWID = 65063263
+# 默认
+COMPILE.f = $(FC) $(FFLAGS) $(TARGET_ARCH) -c
+# 默认
+LINT.c = $(LINT) $(LINTFLAGS) $(CPPFLAGS) $(TARGET_ARCH)
+# 默认
+LINT = lint
+# 环境
+UBUNTU_MENUPROXY = libappmenu.so
+# 默认
+YACC.y = $(YACC) $(YFLAGS)
+# 默认
+AR = ar
+# 环境
+LC_NUMERIC = zh_CN.UTF-8
+# 默认
+.FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
+# 默认
+TANGLE = tangle
+# 环境
+LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.axa=00;36:*.oga=00;36:*.spx=00;36:*.xspf=00;36:
+# 环境
+SSH_AUTH_SOCK = /tmp/keyring-GWNbhH/ssh
+# 默认
+GET = get
+# 自动
+%F = $(notdir $%)
+# 环境
+DISPLAY = :0
+# 默认
+COMPILE.F = $(FC) $(FFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
+# 默认
+CTANGLE = ctangle
+# 环境
+GTK_IM_MODULE = ibus
+# 默认
+.LIBPATTERNS = lib%.so lib%.a
+# 默认
+LINK.C = $(LINK.cc)
+# 环境
+PWD = /home/xingwenpeng/teach/code/calc
+# 默认
+LINK.S = $(CC) $(ASFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_MACH)
+# 默认
+PREPROCESS.r = $(FC) $(FFLAGS) $(RFLAGS) $(TARGET_ARCH) -F
+# 环境
+SSH_AGENT_PID = 2489
+# 默认
+LINK.c = $(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+# 默认
+LINK.s = $(CC) $(ASFLAGS) $(LDFLAGS) $(TARGET_MACH)
+# 环境
+HOME = /home/xingwenpeng
+# 环境
+XDG_SESSION_COOKIE = b5600ea491bf14fb00ec342b00000002-1410914595.480425-1583054540
+# 环境
+LOGNAME = xingwenpeng
+# 自动
++F = $(notdir $+)
+# 环境
+LESSCLOSE = /usr/bin/lesspipe %s %s
+# 环境
+GNOME_DESKTOP_SESSION_ID = this-is-deprecated
+# 自动
+^D = $(patsubst %/,%,$(dir $^))
+# makefile (从'Makefile'，行 25)
+obj = add.o sub.o mul.o dive.o main.o
+# 环境
+LC_TIME = zh_CN.UTF-8
+# 环境
+COLORTERM = gnome-terminal
+# 默认
+MAKE = $(MAKE_COMMAND)
+# 环境
+QT_IM_MODULE = xim
+# 环境
+SHLVL = 1
+# 默认
+AS = as
+# 默认
+PREPROCESS.S = $(CC) -E $(CPPFLAGS)
+# 环境
+COMPIZ_CONFIG_PROFILE = ubuntu
+# 默认
+COMPILE.p = $(PC) $(PFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
+# 默认
+MAKE_VERSION := 3.81
+# 环境
+USER = xingwenpeng
+# 默认
+FC = f77
+# 环境
+LC_MONETARY = zh_CN.UTF-8
+# makefile
+.DEFAULT_GOAL := app
+# 环境
+XDG_CURRENT_DESKTOP = Unity
+# 自动
+%D = $(patsubst %/,%,$(dir $%))
+# 环境
+GNOME_KEYRING_PID = 2441
+# 环境
+LC_TELEPHONE = zh_CN.UTF-8
+# 默认
+WEAVE = weave
+# 默认
+MAKE_COMMAND := make
+# 默认
+LINK.cpp = $(LINK.cc)
+# 默认
+F77 = $(FC)
+# 环境
+OLDPWD = /home/xingwenpeng/teach/code
+# 默认
+.VARIABLES := 
+# 默认
+PC = pc
+# 自动
+*F = $(notdir $*)
+# 环境
+LANGUAGE = zh_CN:en_US:en
+# 环境
+XDG_SEAT_PATH = /org/freedesktop/DisplayManager/Seat0
+# 默认
+COMPILE.def = $(M2C) $(M2FLAGS) $(DEFFLAGS) $(TARGET_ARCH)
+# 环境
+GNOME_KEYRING_CONTROL = /tmp/keyring-GWNbhH
+# makefile
+MAKEFLAGS = p
+# 环境
+MFLAGS = -p
+# 自动
+*D = $(patsubst %/,%,$(dir $*))
+# 默认
+LEX.l = $(LEX) $(LFLAGS) -t
+# 自动
++D = $(patsubst %/,%,$(dir $+))
+# 默认
+COMPILE.r = $(FC) $(FFLAGS) $(RFLAGS) $(TARGET_ARCH) -c
+# 环境
+LC_PAPER = zh_CN.UTF-8
+# 默认
+M2C = m2c
+# 环境
+DEFAULTS_PATH = /usr/share/gconf/ubuntu.default.path
+# 默认
+MAKEFILES := 
+# 默认
+COMPILE.cc = $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
+# 自动
+<F = $(notdir $<)
+# 默认
+CXX = g++
+# 环境
+LC_MEASUREMENT = zh_CN.UTF-8
+# 默认
+COFLAGS = 
+# 默认
+COMPILE.C = $(COMPILE.cc)
+# 自动
+^F = $(notdir $^)
+# 默认
+COMPILE.S = $(CC) $(ASFLAGS) $(CPPFLAGS) $(TARGET_MACH) -c
+# 默认
+LINK.F = $(FC) $(FFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+# 默认
+SUFFIXES := .out .a .ln .o .c .cc .C .cpp .p .f .F .r .y .l .s .S .mod .sym .def .h .info .dvi .tex .texinfo .texi .txinfo .w .ch .web .sh .elc .el
+# 默认
+COMPILE.c = $(CC) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
+# 默认
+COMPILE.s = $(AS) $(ASFLAGS) $(TARGET_MACH)
+# 默认
+.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+# 环境
+LC_IDENTIFICATION = zh_CN.UTF-8
+# 环境
+MAKELEVEL := 0
+# 默认
+MAKEINFO = makeinfo
+# 环境
+LC_ADDRESS = zh_CN.UTF-8
+# 默认
+LINK.f = $(FC) $(FFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+# 默认
+TEX = tex
+# 环境
+LANG = zh_CN.UTF-8
+# 环境
+TERM = xterm
+# 默认
+F77FLAGS = $(FFLAGS)
+# 默认
+LINK.o = $(CC) $(LDFLAGS) $(TARGET_ARCH)
+# 变量设置哈希表状态：
+# 负载=138/1024=13%, Rehash=0, 冲突=14/166=8%
+
+# Pattern-specific Variable Values
+
+# 没有 pattern-specific 变量的值。
+
+# 目录
+
+# SCCS：无法对其进行 stat 操作。
+# . (设备 2049，i-节点 1716364)： 16 文件， 32 不可能性.
+# RCS：无法对其进行 stat 操作。
+
+# 16 文件， 32 impossibilities in 3 directories.
+
+# 隐含规则
+
+%.out:
+
+%.a:
+
+%.ln:
+
+%.o:
+
+%: %.o
+#  要执行的命令 (内置)：
+	$(LINK.o) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.c:
+
+%: %.c
+#  要执行的命令 (内置)：
+	$(LINK.c) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.ln: %.c
+#  要执行的命令 (内置)：
+	$(LINT.c) -C$* $<
+
+%.o: %.c
+#  要执行的命令 (内置)：
+	$(COMPILE.c) $(OUTPUT_OPTION) $<
+
+%.cc:
+
+%: %.cc
+#  要执行的命令 (内置)：
+	$(LINK.cc) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.cc
+#  要执行的命令 (内置)：
+	$(COMPILE.cc) $(OUTPUT_OPTION) $<
+
+%.C:
+
+%: %.C
+#  要执行的命令 (内置)：
+	$(LINK.C) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.C
+#  要执行的命令 (内置)：
+	$(COMPILE.C) $(OUTPUT_OPTION) $<
+
+%.cpp:
+
+%: %.cpp
+#  要执行的命令 (内置)：
+	$(LINK.cpp) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.cpp
+#  要执行的命令 (内置)：
+	$(COMPILE.cpp) $(OUTPUT_OPTION) $<
+
+%.p:
+
+%: %.p
+#  要执行的命令 (内置)：
+	$(LINK.p) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.p
+#  要执行的命令 (内置)：
+	$(COMPILE.p) $(OUTPUT_OPTION) $<
+
+%.f:
+
+%: %.f
+#  要执行的命令 (内置)：
+	$(LINK.f) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.f
+#  要执行的命令 (内置)：
+	$(COMPILE.f) $(OUTPUT_OPTION) $<
+
+%.F:
+
+%: %.F
+#  要执行的命令 (内置)：
+	$(LINK.F) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.F
+#  要执行的命令 (内置)：
+	$(COMPILE.F) $(OUTPUT_OPTION) $<
+
+%.f: %.F
+#  要执行的命令 (内置)：
+	$(PREPROCESS.F) $(OUTPUT_OPTION) $<
+
+%.r:
+
+%: %.r
+#  要执行的命令 (内置)：
+	$(LINK.r) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.r
+#  要执行的命令 (内置)：
+	$(COMPILE.r) $(OUTPUT_OPTION) $<
+
+%.f: %.r
+#  要执行的命令 (内置)：
+	$(PREPROCESS.r) $(OUTPUT_OPTION) $<
+
+%.y:
+
+%.ln: %.y
+#  要执行的命令 (内置)：
+	$(YACC.y) $< 
+	$(LINT.c) -C$* y.tab.c 
+	$(RM) y.tab.c
+
+%.c: %.y
+#  要执行的命令 (内置)：
+	$(YACC.y) $< 
+	mv -f y.tab.c $@
+
+%.l:
+
+%.ln: %.l
+#  要执行的命令 (内置)：
+	@$(RM) $*.c
+	$(LEX.l) $< > $*.c
+	$(LINT.c) -i $*.c -o $@
+	$(RM) $*.c
+
+%.c: %.l
+#  要执行的命令 (内置)：
+	@$(RM) $@ 
+	$(LEX.l) $< > $@
+
+%.r: %.l
+#  要执行的命令 (内置)：
+	$(LEX.l) $< > $@ 
+	mv -f lex.yy.r $@
+
+%.s:
+
+%: %.s
+#  要执行的命令 (内置)：
+	$(LINK.s) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.s
+#  要执行的命令 (内置)：
+	$(COMPILE.s) -o $@ $<
+
+%.S:
+
+%: %.S
+#  要执行的命令 (内置)：
+	$(LINK.S) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+%.o: %.S
+#  要执行的命令 (内置)：
+	$(COMPILE.S) -o $@ $<
+
+%.s: %.S
+#  要执行的命令 (内置)：
+	$(PREPROCESS.S) $< > $@
+
+%.mod:
+
+%: %.mod
+#  要执行的命令 (内置)：
+	$(COMPILE.mod) -o $@ -e $@ $^
+
+%.o: %.mod
+#  要执行的命令 (内置)：
+	$(COMPILE.mod) -o $@ $<
+
+%.sym:
+
+%.def:
+
+%.sym: %.def
+#  要执行的命令 (内置)：
+	$(COMPILE.def) -o $@ $<
+
+%.h:
+
+%.info:
+
+%.dvi:
+
+%.tex:
+
+%.dvi: %.tex
+#  要执行的命令 (内置)：
+	$(TEX) $<
+
+%.texinfo:
+
+%.info: %.texinfo
+#  要执行的命令 (内置)：
+	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
+
+%.dvi: %.texinfo
+#  要执行的命令 (内置)：
+	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
+
+%.texi:
+
+%.info: %.texi
+#  要执行的命令 (内置)：
+	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
+
+%.dvi: %.texi
+#  要执行的命令 (内置)：
+	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
+
+%.txinfo:
+
+%.info: %.txinfo
+#  要执行的命令 (内置)：
+	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
+
+%.dvi: %.txinfo
+#  要执行的命令 (内置)：
+	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
+
+%.w:
+
+%.c: %.w
+#  要执行的命令 (内置)：
+	$(CTANGLE) $< - $@
+
+%.tex: %.w
+#  要执行的命令 (内置)：
+	$(CWEAVE) $< - $@
+
+%.ch:
+
+%.web:
+
+%.p: %.web
+#  要执行的命令 (内置)：
+	$(TANGLE) $<
+
+%.tex: %.web
+#  要执行的命令 (内置)：
+	$(WEAVE) $<
+
+%.sh:
+
+%: %.sh
+#  要执行的命令 (内置)：
+	cat $< >$@ 
+	chmod a+x $@
+
+%.elc:
+
+%.el:
+
+(%): %
+#  要执行的命令 (内置)：
+	$(AR) $(ARFLAGS) $@ $<
+
+%.out: %
+#  要执行的命令 (内置)：
+	@rm -f $@ 
+	cp $< $@
+
+%.c: %.w %.ch
+#  要执行的命令 (内置)：
+	$(CTANGLE) $^ $@
+
+%.tex: %.w %.ch
+#  要执行的命令 (内置)：
+	$(CWEAVE) $^ $@
+
+%:: %,v
+#  要执行的命令 (内置)：
+	$(CHECKOUT,v)
+
+%:: RCS/%,v
+#  要执行的命令 (内置)：
+	$(CHECKOUT,v)
+
+%:: RCS/%
+#  要执行的命令 (内置)：
+	$(CHECKOUT,v)
+
+%:: s.%
+#  要执行的命令 (内置)：
+	$(GET) $(GFLAGS) $(SCCS_OUTPUT_OPTION) $<
+
+%:: SCCS/s.%
+#  要执行的命令 (内置)：
+	$(GET) $(GFLAGS) $(SCCS_OUTPUT_OPTION) $<
+
+# 86 条隐含规则，5 (5.8%) 终端。
+
+# 文件
+
+# 不是一个目标：
+.web.p:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(TANGLE) $<
+
+# 不是一个目标：
+.l.r:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(LEX.l) $< > $@ 
+	mv -f lex.yy.r $@
+
+# 不是一个目标：
+.dvi:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+
+# 不是一个目标：
+.F.o:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(COMPILE.F) $(OUTPUT_OPTION) $<
+
+# 不是一个目标：
+.l:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+
+# 不是一个目标：
+.y.ln:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(YACC.y) $< 
+	$(LINT.c) -C$* y.tab.c 
+	$(RM) y.tab.c
+
+# 不是一个目标：
+.o:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(LINK.o) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# 不是一个目标：
+.y:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+
+# 不是一个目标：
+.def.sym:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(COMPILE.def) -o $@ $<
+
+.PHONY: clean
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+
+# 不是一个目标：
+.p.o:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(COMPILE.p) $(OUTPUT_OPTION) $<
+
+# 不是一个目标：
+.p:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(LINK.p) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# 不是一个目标：
+.txinfo.dvi:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
+
+sub.o: sub.c
+#  对隐含规则的搜索已完成。
+#  隐含/静态模式主干：“sub”
+#  最近更新 2014-09-17 11:18:25.740842291
+#  文件已经被更新。
+#  更新成功。
+# 变量设置哈希表状态：
+# 负载=0/32=0%, Rehash=0, 冲突=0/0=0%
+#  要执行的命令 (内置)：
+	$(COMPILE.c) $(OUTPUT_OPTION) $<
+
+# 不是一个目标：
+main.c:
+#  对隐含规则的搜索已完成。
+#  最近更新 2014-09-17 10:42:08.324744548
+#  文件已经被更新。
+#  更新成功。
+# 变量设置哈希表状态：
+# 负载=0/32=0%, Rehash=0, 冲突=0/0=0%
+
+# 不是一个目标：
+.a:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+
+add.o: add.c
+#  对隐含规则的搜索已完成。
+#  隐含/静态模式主干：“add”
+#  最近更新 2014-09-17 11:18:25.71684229
+#  文件已经被更新。
+#  更新成功。
+# 变量设置哈希表状态：
+# 负载=0/32=0%, Rehash=0, 冲突=0/0=0%
+#  要执行的命令 (内置)：
+	$(COMPILE.c) $(OUTPUT_OPTION) $<
+
+# 不是一个目标：
+.l.ln:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	@$(RM) $*.c
+	$(LEX.l) $< > $*.c
+	$(LINT.c) -i $*.c -o $@
+	$(RM) $*.c
+
+# 不是一个目标：
+.w.c:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(CTANGLE) $< - $@
+
+# 不是一个目标：
+.texi.dvi:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
+
+# 不是一个目标：
+.sh:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	cat $< >$@ 
+	chmod a+x $@
+
+# 不是一个目标：
+.cc:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(LINK.cc) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# 不是一个目标：
+.cc.o:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(COMPILE.cc) $(OUTPUT_OPTION) $<
+
+# 不是一个目标：
+.def:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+
+# 不是一个目标：
+.SUFFIXES: .out .a .ln .o .c .cc .C .cpp .p .f .F .r .y .l .s .S .mod .sym .def .h .info .dvi .tex .texinfo .texi .txinfo .w .ch .web .sh .elc .el
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+
+# 不是一个目标：
+.c.o:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(COMPILE.c) $(OUTPUT_OPTION) $<
+
+# 不是一个目标：
+Makefile:
+#  对隐含规则的搜索已完成。
+#  最近更新 2014-09-17 11:18:23.748842201
+#  文件已经被更新。
+#  更新成功。
+# 变量设置哈希表状态：
+# 负载=0/32=0%, Rehash=0, 冲突=0/0=0%
+
+# 不是一个目标：
+.r.o:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(COMPILE.r) $(OUTPUT_OPTION) $<
+
+# 不是一个目标：
+.r:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(LINK.r) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+app: add.o sub.o mul.o dive.o main.o
+#  对隐含规则的搜索尚未完成。
+#  最近更新 2014-09-17 11:18:25.872842297
+#  文件已经被更新。
+#  更新成功。
+# 变量设置哈希表状态：
+# 负载=0/32=0%, Rehash=0, 冲突=0/0=0%
+#  要执行的命令 (从“Makefile”，行 27)：
+	gcc $(obj) -o app
+	
+
+test:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (从“Makefile”，行 36)：
+	@echo "hello"
+	
+
+dive.o: dive.c
+#  对隐含规则的搜索已完成。
+#  隐含/静态模式主干：“dive”
+#  最近更新 2014-09-17 11:18:25.804842293
+#  文件已经被更新。
+#  更新成功。
+# 变量设置哈希表状态：
+# 负载=0/32=0%, Rehash=0, 冲突=0/0=0%
+#  要执行的命令 (内置)：
+	$(COMPILE.c) $(OUTPUT_OPTION) $<
+
+# 不是一个目标：
+.info:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+
+# 不是一个目标：
+.elc:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+
+# 不是一个目标：
+.l.c:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	@$(RM) $@ 
+	$(LEX.l) $< > $@
+
+# 不是一个目标：
+.out:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+
+# 不是一个目标：
+.C:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(LINK.C) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# 不是一个目标：
+.r.f:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(PREPROCESS.r) $(OUTPUT_OPTION) $<
+
+# 不是一个目标：
+.S:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(LINK.S) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# 不是一个目标：
+.texinfo.info:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
+
+# 不是一个目标：
+.c:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(LINK.c) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# 不是一个目标：
+.w.tex:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(CWEAVE) $< - $@
+
+# 不是一个目标：
+.c.ln:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(LINT.c) -C$* $<
+
+# 不是一个目标：
+.s.o:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(COMPILE.s) -o $@ $<
+
+# 不是一个目标：
+.s:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(LINK.s) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# 不是一个目标：
+sub.c:
+#  对隐含规则的搜索已完成。
+#  最近更新 2014-09-17 10:57:15.604785275
+#  文件已经被更新。
+#  更新成功。
+# 变量设置哈希表状态：
+# 负载=0/32=0%, Rehash=0, 冲突=0/0=0%
+
+mul.o: mul.c
+#  对隐含规则的搜索已完成。
+#  隐含/静态模式主干：“mul”
+#  最近更新 2014-09-17 11:18:25.764842292
+#  文件已经被更新。
+#  更新成功。
+# 变量设置哈希表状态：
+# 负载=0/32=0%, Rehash=0, 冲突=0/0=0%
+#  要执行的命令 (内置)：
+	$(COMPILE.c) $(OUTPUT_OPTION) $<
+
+# 不是一个目标：
+add.c:
+#  对隐含规则的搜索已完成。
+#  最近更新 2014-09-17 10:55:45.244781219
+#  文件已经被更新。
+#  更新成功。
+# 变量设置哈希表状态：
+# 负载=0/32=0%, Rehash=0, 冲突=0/0=0%
+
+# 不是一个目标：
+.texinfo.dvi:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(TEXI2DVI) $(TEXI2DVI_FLAGS) $<
+
+# 不是一个目标：
+.el:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+
+# 不是一个目标：
+.texinfo:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+
+# 不是一个目标：
+.y.c:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(YACC.y) $< 
+	mv -f y.tab.c $@
+
+# 不是一个目标：
+.web.tex:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(WEAVE) $<
+
+# 不是一个目标：
+.texi.info:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
+
+# 不是一个目标：
+.DEFAULT:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+
+# 不是一个目标：
+.h:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+
+# 不是一个目标：
+.tex.dvi:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(TEX) $<
+
+# 不是一个目标：
+.cpp.o:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(COMPILE.cpp) $(OUTPUT_OPTION) $<
+
+# 不是一个目标：
+.cpp:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(LINK.cpp) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  对隐含规则的搜索尚未完成。
+#  文件不存在。
+#  文件尚未被更新。
+#  要执行的命令 (从“Makefile”，行 31)：
+	-rm -f *.o
+	-rm -f app
+	
+
+# 不是一个目标：
+.C.o:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(COMPILE.C) $(OUTPUT_OPTION) $<
+
+# 不是一个目标：
+.ln:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+
+# 不是一个目标：
+.texi:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+
+# 不是一个目标：
+.txinfo:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+
+# 不是一个目标：
+dive.c:
+#  对隐含规则的搜索已完成。
+#  最近更新 2014-09-17 10:41:21.320742438
+#  文件已经被更新。
+#  更新成功。
+# 变量设置哈希表状态：
+# 负载=0/32=0%, Rehash=0, 冲突=0/0=0%
+
+# 不是一个目标：
+.tex:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+
+# 不是一个目标：
+.txinfo.info:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(MAKEINFO) $(MAKEINFO_FLAGS) $< -o $@
+
+# 不是一个目标：
+.ch:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+
+main.o: main.c
+#  对隐含规则的搜索已完成。
+#  隐含/静态模式主干：“main”
+#  最近更新 2014-09-17 11:18:25.836842295
+#  文件已经被更新。
+#  更新成功。
+# 变量设置哈希表状态：
+# 负载=0/32=0%, Rehash=0, 冲突=0/0=0%
+#  要执行的命令 (内置)：
+	$(COMPILE.c) $(OUTPUT_OPTION) $<
+
+# 不是一个目标：
+.S.s:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(PREPROCESS.S) $< > $@
+
+# 不是一个目标：
+.mod:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(COMPILE.mod) -o $@ -e $@ $^
+
+# 不是一个目标：
+.mod.o:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(COMPILE.mod) -o $@ $<
+
+# 不是一个目标：
+.F.f:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(PREPROCESS.F) $(OUTPUT_OPTION) $<
+
+# 不是一个目标：
+mul.c:
+#  对隐含规则的搜索已完成。
+#  最近更新 2014-09-17 10:56:56.048784397
+#  文件已经被更新。
+#  更新成功。
+# 变量设置哈希表状态：
+# 负载=0/32=0%, Rehash=0, 冲突=0/0=0%
+
+# 不是一个目标：
+.w:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+
+# 不是一个目标：
+.S.o:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(COMPILE.S) -o $@ $<
+
+# 不是一个目标：
+.F:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(LINK.F) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# 不是一个目标：
+.web:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+
+# 不是一个目标：
+.sym:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+
+# 不是一个目标：
+.f:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(LINK.f) $^ $(LOADLIBES) $(LDLIBS) -o $@
+
+# 不是一个目标：
+.f.o:
+#  对隐含规则的搜索尚未完成。
+#  从不检查修改时间。
+#  文件尚未被更新。
+#  要执行的命令 (内置)：
+	$(COMPILE.f) $(OUTPUT_OPTION) $<
+
+# 文件 哈希表 状态:
+# 负载=81/1024=8%, Rehash=0, 冲突=274/1411=19%
+# VPATH 搜索路径
+
+# 没有“vpath”搜索路径。
+
+# 没有通用搜索路径(“VPATH”变量)。
+
+# # of strings in strcache: 1
+# # of strcache buffers: 1
+# strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
+# strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
+
+# 结束Make数据库于Wed Sep 17 11:19:26 2014
+

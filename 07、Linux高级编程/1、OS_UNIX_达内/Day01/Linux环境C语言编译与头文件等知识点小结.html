@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linux环境C语言编译与头文件等知识点小结</title>
+<link rel="stylesheet" href="https://stackedit.io/res-min/themes/base.css" />
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body><div class="container"><h2 id="一c语言的有关文件类型">一、C语言的有关文件类型：</h2>
+
+<p>虽然，在Linux下“一切皆文件”，并且文件类型这个概念不是那么重要，一个“.c”文件可以用gcc编译，一个“.abcdef”文件照样可以用gcc编译。但是有类型的文件毕竟比无类型的文件更加具有直观性，所以我们还是得说说这个文件类型。 <br>
+C语言的有关文件类型如下所示：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs avrasm"><span class="hljs-preprocessor">.c</span><span class="hljs-comment">/*源代码文件*/</span>
+<span class="hljs-preprocessor">.h</span><span class="hljs-comment">/*C语言头文件*/</span>
+<span class="hljs-preprocessor">.i</span><span class="hljs-comment">/*经过预处理之后的源代码文件*/</span>
+<span class="hljs-preprocessor">.s</span><span class="hljs-comment">/*汇编代码文件*/</span>
+<span class="hljs-preprocessor">.o</span><span class="hljs-comment">/*目标代码文件（二进制机器指令文件）*/</span>
+<span class="hljs-preprocessor">.a</span><span class="hljs-comment">/*静态对象库文件*/</span>
+<span class="hljs-preprocessor">.so</span><span class="hljs-comment">/*共享（动态）对象库文件*/</span></code></pre>
+
+<p>一个程序的编译到运行gcc file.c执行了什么？其文件类型有何变化？如下图所示，最终我们只能看到a.out这个可执行文件：</p>
+
+<p><img src="http://img.blog.csdn.net/20161204201413597" alt="这里写图片描述" title=""></p>
+
+
+
+<h2 id="二gcc的有关选项参数与生成文件">二、gcc的有关选项参数与生成文件：</h2>
+
+<p>如果直接gcc file.c，就只会生成a.out执行文件，如果我们想看一下一个C语言文件从预处理到连接过程中各个文件的内容该怎么办？我们可以给gcc加上指定选项，进行指定操作，而不是由编译器直接生成a.out。首先说说这里会用到的重要的选项，如下所示：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs lasso"><span class="hljs-attribute">-o</span><span class="hljs-comment">/*指定目标文件名*/</span>
+<span class="hljs-attribute">-E</span><span class="hljs-comment">/*只进行预处理，不编译*/</span>
+<span class="hljs-attribute">-c</span><span class="hljs-comment">/*只编译，不链接*/</span>
+<span class="hljs-attribute">-S</span><span class="hljs-comment">/*汇编生成.s文件*/</span>
+<span class="hljs-attribute">-Wall</span><span class="hljs-comment">/*显示所有警告，代码较长时最好加上*/</span></code></pre>
+
+<p>我们来测试一下： <br>
+<img src="http://img.blog.csdn.net/20161204190057395" alt="这里写图片描述" title=""></p>
+
+<p>（1）最初，我们只有一个main.c文件，我们使用“-E”参数生成了main.i文件（此处要加一个“-o main.i”,否则不会生成文件，只会将生成文件的内容在屏幕上输出一下，因为预处理的文件内容过大） <br>
+我测试用的代码如下：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs vala"><span class="hljs-preprocessor">#include&lt;stdio.h&gt;</span>
+<span class="hljs-keyword">int</span> main(<span class="hljs-keyword">void</span>)
+{
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}</code></pre>
+
+<p>预处理把stdio.h中不管有关没关的内容都进了main.i文件之中，如图所示（总共853行）：</p>
+
+<p><img src="http://img.blog.csdn.net/20161204185425542" alt="这里写图片描述" title=""></p>
+
+<p>（2）、接着，我们用“-S”参数编译（狭义的编译），只把有用的预编译的函数加以处理，生成汇编代码文件，汇编代码也不算太长，不算太难懂，但相比于C代码就长多了，也不好读，如下所示：</p>
+
+<p><img src="http://img.blog.csdn.net/20161204191556979" alt="这里写图片描述" title=""></p>
+
+<p>（3）、最后我们使用”-c”参数生成了main.o文件，由于该文件是二进制机器代码文件所以我们看到的ASCII形式的文件如下图所示：</p>
+
+<p><img src="http://img.blog.csdn.net/20161204190609762" alt="这里写图片描述" title=""></p>
+
+<p>似乎是乱码？？其实不是，只不过二进制代码中0太多，ASCII码显示的@字符就有点多，我们可以在Vim命令行模式下用“%!xxd”将ASCII形式的文件转换成二进制文件（16进制表示形式）来观察，如下所示（这个就似乎有那么点味道了，机器代码确实比C语言和汇编要长很多，而且基本读不懂）：</p>
+
+<p><img src="http://img.blog.csdn.net/20161204191008943" alt="这里写图片描述" title=""></p>
+
+<p>（4）、最后生成的a.out文件如果要用main.o加选项的方式实现，就必须知道动态库的位置，这里暂时不做演示说明，因为生成的a.out(或者指定名字为main)文件与man.o形式上差不了太多，都是二进制形式。</p>
+
+
+
+<h2 id="三c语言的有关宏定义">三、C语言的有关宏定义：</h2>
+
+<p>C语言中有很多宏定义，对于一些测试有很好的帮助，如下所示：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs markdown"><span class="hljs-strong">__LINE__</span> /<span class="hljs-emphasis">*显示所在行，%d输出*</span>/
+<span class="hljs-strong">__FILE__</span> /<span class="hljs-emphasis">*当前文件名，%s输出*</span>/
+<span class="hljs-strong">__DATE__</span> /<span class="hljs-emphasis">*当前日期，%s输出*</span>/
+<span class="hljs-strong">__TIME__</span> /<span class="hljs-emphasis">*当前时间，%s输出*</span>/
+<span class="hljs-strong">__FUNCTION__</span> /<span class="hljs-emphasis">*所在函数名，%s输出*</span>/
+</code></pre>
+
+<p>我们做个小测试： <br>
+（1）、代码：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs perl"><span class="hljs-comment"># include&lt;stdio.h&gt;</span>
+
+void test_one()
+{
+    <span class="hljs-keyword">printf</span>(<span class="hljs-string">"function name is:<span class="hljs-variable">%s</span>\n"</span>,__FUNCTION_<span class="hljs-number">_</span>);
+}
+void test_two()
+{
+    <span class="hljs-keyword">printf</span>(<span class="hljs-string">"function name is:<span class="hljs-variable">%s</span>\n"</span>,__FUNCTION_<span class="hljs-number">_</span>);
+}
+
+<span class="hljs-keyword">int</span> main()
+{
+    test_one();
+    test_two();
+
+    <span class="hljs-keyword">printf</span>(<span class="hljs-string">"function name is:<span class="hljs-variable">%s</span>\n"</span>,__FUNCTION_<span class="hljs-number">_</span>);
+    <span class="hljs-keyword">printf</span>(<span class="hljs-string">"Line is:<span class="hljs-variable">%d</span>\n"</span>,__LINE_<span class="hljs-number">_</span>);
+    <span class="hljs-keyword">printf</span>(<span class="hljs-string">"Date is:<span class="hljs-variable">%s</span>\n"</span>,__DATE_<span class="hljs-number">_</span>);
+    <span class="hljs-keyword">printf</span>(<span class="hljs-string">"Time is:<span class="hljs-variable">%s</span>\n"</span>,__TIME_<span class="hljs-number">_</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+
+<p>（2）、测试结果：</p>
+
+<p><img src="http://img.blog.csdn.net/20161204193319063" alt="这里写图片描述" title=""></p>
+
+
+
+<h2 id="四c语言有关预处理指令">四、C语言有关预处理指令：</h2>
+
+<p>最后我们说一下C语言的运处理的指令：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs ruleslanguage"><span class="hljs-array">#include</span><span class="hljs-comment">/*将指定的文件插入#include的位置*/</span>
+<span class="hljs-array">#include</span>_next<span class="hljs-comment">/*与#include一样，只是从当前目录之后的目录查找，类似于#include"",但#include""只能查找指定目录一级*/</span>
+<span class="hljs-array">#define</span><span class="hljs-comment">/*定义宏*/</span>
+<span class="hljs-array">#undef</span><span class="hljs-comment">/*删除宏定义*/</span>
+
+<span class="hljs-comment">/*条件编译的几个预处理指令，结合使用*/</span>
+<span class="hljs-array">#ifdef</span><span class="hljs-comment">/*判定宏是否定义*/</span>
+<span class="hljs-array">#ifndef</span><span class="hljs-comment">/*判定宏是否未定义*/</span>
+<span class="hljs-array">#if</span><span class="hljs-comment">/*if判定*/</span>
+<span class="hljs-array">#elif</span><span class="hljs-comment">/*else if判定*/</span>
+<span class="hljs-array">#else</span><span class="hljs-comment">/*else判定*/</span>
+<span class="hljs-array">#endif</span><span class="hljs-comment">/*结束判定*/</span>
+
+
+<span class="hljs-array">#error</span><span class="hljs-comment">/*产生错误挂起预处理程序*/</span>
+<span class="hljs-array">#waring</span><span class="hljs-comment">/*产生一个警告*/</span>
+<span class="hljs-array">#pragma</span><span class="hljs-comment">/*用来提供额外信息的标准方法，用来指定平台*/</span></code></pre>
+
+<p>（1）、条件编译（自定义头文件）： <br>
+在系统内和中，头文件的定义都采用条件编译的凡是来编写，我们的自定义文件也是一样（为了防止头文件重复包含），格式如下：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs vala"><span class="hljs-preprocessor">#ifndef HEADFILE_H_</span>
+<span class="hljs-preprocessor">#define HEADFILE_H_</span>
+......
+<span class="hljs-preprocessor">#endif</span></code></pre>
+
+<p>对于#ifdef、#undef、#define，则可以使我们在对系统的宏定义重定义时不会出错。</p>
+
+<p>（2）、测试一下#error和#waring：</p>
+
+<p>①不会有任何警告语错误： <br>
+<img src="http://img.blog.csdn.net/20161204200711688" alt="这里写图片描述" title=""></p>
+
+<p>②版本过高，发出警告，但编译成功： <br>
+<img src="http://img.blog.csdn.net/20161204200722937" alt="这里写图片描述" title=""></p>
+
+<p>③版本过低，发出错误信息，编译失败： <br>
+<img src="http://img.blog.csdn.net/20161204200734702" alt="这里写图片描述" title=""></p>
+
+<p>（3）、#pragma有三种用法：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs cs">①<span class="hljs-preprocessor">#<span class="hljs-keyword">pragma</span> GCC dependency "filename"</span>
+<span class="hljs-comment">/*当其它文件filename比当前文件新时产生一个警告*/</span>
+
+②<span class="hljs-preprocessor">#<span class="hljs-keyword">pragma</span> GCC posion word</span>
+<span class="hljs-comment">/*将某个单词word设为“毒药”，不允许使用，当代码中有该word时，预处理就会产生一个错误。比如：pragma GCC posion goto，禁止使用goto这种太过古老得且会致使代码逻辑混乱的关键字*/</span></code></pre>
+
+<p>③、第三种用法可参照我的<a href="http://blog.csdn.net/apollon_krj/article/details/52705902">内存地址对齐再学习（# pragma pack(n)预处理） </a>，里面有很详细的介绍。</p></div></body>
+</html>

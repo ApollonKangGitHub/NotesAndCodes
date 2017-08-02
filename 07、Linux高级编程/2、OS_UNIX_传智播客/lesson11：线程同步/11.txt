@@ -1,0 +1,120 @@
+1、线程同步：为何要同步？
+①共享资源，多个进程都可以对共享资源操作
+②线程操作共享资源的先后顺序不确定
+③处理器对存储器的操作一般不是原子操作。
+
+2、互斥量mutex操作原语：
+
+锁类型：
+pthread_mutex_t
+
+初始化：
+法①全局变量静态初始化：
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+法②锁由函数内定义，动态初始化：
+pthread_mutex_t mutex;
+int pthread_mutex_init(&mutex, NULL);
+
+int pthread_mutex_init(pthread_mutex_t *restrict mutex, const pthread_mutexattr_t *restrict attr);//初始化一把锁，attr为属性(NULL默认)
+
+加锁：
+int pthread_mutex_lock(pthread_mutex_t * mutex)	//加锁
+int pthread_mutex_trylock(pthread_mutex_t * mutex)	//试着加锁，能加则加，不能加则返回，不阻塞
+
+释放销毁锁：
+int pthread_mutex_unlock(pthread_mutex_t * mutex)	//释放锁
+int pthread_mutex_destory(pthread_mutex_t * mutex)	//销毁一把锁
+
+步骤：
+①定义、初始化锁
+②关键代码前加锁
+③执行关键代码
+④关键代码后释放所
+⑤销毁锁
+
+临界区：
+保证在某一时刻只有一个线程能访问数据的简便办法。在任意时刻只允许一个线程对共享资源进行访问。如果有多个线程试图同时访问临界区，那么在有一个线程进入后其他所有试图访问此临界区的线程将被挂起，并一直持续到进入临界区的线程离开。临界区在被释放后，其他线程可以继续抢占，并以此达到用原子方式操作共享资源的目的。临界区的选定因尽可能小，如果选定太大会影响程序的并行处理性能。
+
+注意：不按规矩办事的进程加锁依旧是无用的。任意一个进程在操作共享资源时，必须去加锁，用完必须释放所，这就是规矩。
+--------------------------------------------------------------------------------------------------------------------------------------
+3、死锁：
+死锁的两种情况：
+①同一个线程在拥有A锁的情况下再次请求获得A锁
+②线程一拥有A锁，请求获得B锁；线程二拥有B锁，请求获得A锁
+
+产生死锁的原因主要是：
+①竞争不可抢占性资源引起；
+②竞争可消耗资源引起(系统资源不足)；
+③进程推进顺序不当引起；
+如果系统资源充足，进程的资源请求都能够得到满足，死锁出现的可能性就很低，否则就会因争夺有限的资源而陷入死锁。其次，进程运行推进顺序与速度不同，也可能产生死锁。
+
+产生死锁的四个必要条件：
+①互斥条件：一个资源每次只能被一个进程使用。
+②请求与保持条件：一个进程因请求资源而阻塞时，对已获得的资源保持不放。
+③不剥夺条件:进程已获得的资源，在末使用完之前，不能强行剥夺。
+④循环等待条件:若干进程之间形成一种头尾相接的循环等待资源关系。
+--------------------------------------------------------------------------------------------------------------------------------------
+4、读写锁：
+读时共享，写时独占。
+pthread_rwlock_t//读写锁类型
+
+pthread_rwlock_init(pthread_rwlock_t * restrict rwlock, const pthread_rwlock_t * restrict attr)//初始化读写锁,attr为属性(NULL为默认)
+pthread_rwlock_destroy(pthread_rwlock_t * rwlock)//销毁锁
+pthread_rwlock_rdlock(pthread_rwlock_t * rwlock)//获取读锁
+pthread_rwlock_wrlock(pthread_rwlock_t * rwlock)//获取写锁
+pthread_rwlock_tryrdlock(pthread_rwlock_t * rwlock)//尝试获取读锁
+pthread_rwlock_trywrlock(pthread_rwlock_t * rwlock)//尝试获取写锁
+pthread_rwlock_unlock(pthread_rwlock_t * rwlock)//释放锁
+--------------------------------------------------------------------------------------------------------------------------------------
+5、条件变量：
+pthread_cond_t//变量类型
+
+pthread_cond_t cond = PTHREAD_COND_INITIALIZER//静态初始化
+pthread_cond_init(pthread_cond_t * restrict cond, const pthread_condattr_t *restrict attr);//动态初始化
+
+pthread_cond_destroy(pthread_cond_t * cond)//销毁
+pthread_cond_wait(pthread_cond_t * restrict cond, pthread_cond_t * restrict mutex);//等待
+pthread_cond_timedwait(pthread_cond_t * restrict cond, pthread_mutex_t * restrict mutex, const struct timespec * abstime)//加等待时长
+pthread_cond_signal(pthread_cond_t * cond)//通知等待队列中的线程，唤醒等待队列中的一个线程
+pthread_cond_broadcast(pthread_cond_t * cond)//唤醒等待队列中的所有线程，所有线程自由竞争
+--------------------------------------------------------------------------------------------------------------------------------------
+6、信号量：
+互斥锁的升级版。互斥锁只能设置一把。而信号量是互斥锁的集合。
+sem_t
+
+int sem_init (sem_t *sem, int pshared, unsigned int value);
+int sem_wait(sem_t * sem);
+int sem_timedwait(sem_t *sem, const struct timespec * abs_timeout);
+int sem_post(sem_t * sem);
+int sem_destroy(sem_t *sem);
+int sem_trywait(sem_t *sem);
+
+struct timespec{
+	time_t tv_sec;//秒
+	long tv_nsec;//纳秒
+};
+--------------------------------------------------------------------------------------------------------------------------------------
+7、进程间锁
+int pthread_mutexattr_init(pthread_mutexattr_t *attr);
+int pthread_mutexattr_setpshared(pthread_mutexattr_t *attr, int pshared);
+int pthread_mutexattr_destroy(pthread_mutexattr_t *attr);
+pshared:
+线程锁：PTHREAD_PROCESS_PRIVATE
+进程锁：PTHREAD_PROCESS_SHARED
+默认情况是线程锁
+
+--------------------------------------------------------------------------------------------------------------------------------------
+8、文件锁：
+
+struct flock {
+...
+short l_type; /* Type of lock: F_RDLCK,
+F_WRLCK, F_UNLCK */
+short l_whence; /* How to interpret l_start:
+SEEK_SET, SEEK_CUR, SEEK_END */
+off_t l_start; /* Starting offset for lock */94 第9章 线程同步
+off_t l_len; /* Number of bytes to lock */
+pid_t l_pid; /* PID of process blocking our lock
+(F_GETLK only) */
+...
+};

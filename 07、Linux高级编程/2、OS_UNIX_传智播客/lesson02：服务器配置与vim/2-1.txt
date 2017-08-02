@@ -1,0 +1,138 @@
+1、ftp服务器：
+
+①安装：sudo apt-get install vsftpd
+
+②修改配置文件：sudo vim /etc/vsftpd.conf
+在配置文件中增加以下几行：
+anonymous_enable=YES	允许匿名登录(anonymous匿名的)
+anon_root=/home/username/ftp	共享目录(事先创建)
+no_anon_password=YES	匿名登录不需要密码
+write_enable=YES	允许匿名对文件夹写操作
+anon_upload_enable=YES	允许匿名上传
+anon_mkdir_write_enable=YES	允许匿名创建空文件夹
+anon_umask=022	修改匿名用户的上传的文件的默认权限屏蔽
+
+③重启服务器重新加载/etc/vsftpd.conf文件以生效：
+sudo /etc/init.d/vsftpd restart(12.04)
+sudo /lib/init/upstart-job vsftpd restart(14.04)
+
+④在ftp共享文件夹中,创建一个777权限的(share)文件夹,以供上传下载：
+cd ~/ftp
+mkdir share
+chmod share 777
+
+
+ftp客户端Ubuntu默认已经配置，ftp客户端不能上传下载目录，只能上传下载单个文件。
+⑤测试上传下载功能，登录ftp服务器，进入(share)文件夹
+ftp IP
+cd anonymous
+
+⑥上传命令，将当前目录下的文件上传到ftp服务器上：
+put somefile
+下载命令,将ftp服务器上的文件下载到本机：
+get somefile
+
+注意：由于匿名用户默认上传文件权限位为700，也就是default umask=077，所以在配置文件中将默认的umask的077修改为022。
+不是本地用户：local_umask=022
+而是匿名用户：anon_umask=022
+
+lftp客户端(可以上传下载目录)：
+mirror		下载整个目录及其子目录
+mirror -R	上传整个目录及其子目录
+
+安装lftp：
+sudo apt-get install lftp
+登录时用lftp IP即可
+----------------------------------------------------------------
+2、nfs服务器(网络文件系统)：
+①sudo apt-get install nfs-kernel-server
+②配置文件/etc/exports：
+添加：/home/user/nfs *(rw,sync,no_root_squash)一行(ro表示只读)
+*表示任意IP均可挂载，*改为指定IP也可以,不需要root用户即可挂载
+③在用户目录下创建nfs目录：
+mkdir /home/username/nfs
+④重启服务器，加载配置文件：
+sudo /etc/init.d/nfs-kernel-server restart
+⑤客户端将服务器共享文件夹挂载到本地：
+mount -t nfs -o tcp -o nolock ServerIP:/home/username/nfs /mnt
+⑥去上传下载测试:就相当于在自己的机器上操作硬盘一样，cp即可操作
+⑦卸载：umount /mnt
+----------------------------------------------------------------
+3、ssh服务器(远程登录)：
+①安装sudo apt-get install openssh-server
+②远程登录：
+ssh server_username@ServerIP
+③发送文件：
+scp -r dir owner_username@ClientIP即可给自己主机发送文件。、
+4、telenet服务器(明文传输，不作为重点，可自行测试)：
+----------------------------------------------------------------
+Ctrl + Shift + t创建新标签
+Alt + n(n=1,2...)切换标签
+Ctrl + Shift + n新开终端
+----------------------------------------------------------------
+vi编辑器：
+1、三种模式：
+末行模式、编辑(插入)模式、命令模式
+命令模式是纽带
+
+①从命令模式进入插入模式：
+i光标之后
+a光标之后
+I行首
+A行尾
+o向下新开一行
+O向上新开一行
+
+②从插入模式/末行模式回到命令模式：ESC
+③从命令模式进入末行模式：Shift + ；即英文冒号(:)
+
+④w存盘
+q退出
+!强制执行
+wq、q!、wq!等
+
+----------------------------------------------------------------
+vim快捷方式：
+以下快捷方式基本都是在命令模式下使用：
+h：(左移)j(下移)k(上移)l(右移)
+M：(光标移动到中间行)
+L：(光标移动到最后一行行首)
+G：移动到指定行：n G
+w：向后一次移动一个字
+b：向前一次移动一个字
+gg：光标移动到文件开头
+G：光标移动到文件末尾
+
+gg=G：自动排版
+x：等价于 Del
+X：等价于 Backspace
+dd：删除光标所在行
+n dd：删除光标后n行
+dw：删除光标开始位置的字
+u：撤销
+Ctrl+R：反撤销
+.:重复之前的命令
+
+>>：右移
+<<：左移(左移右移可以选定多行再左移/右移)
+yy：复制当前行
+n yy：复制光标所在以及后n-1行
+p：粘贴
+r：替换当前字符
+
+sp：上下分屏操作(sp file)，默认(sp)分当前文件
+vsp：左右分屏
+vim -On fiel1 file2...：启动时纵向分屏
+vim -on fiel1 file2...：启动时横向分屏(n表示要分的屏幕个数)
+(文件个数小于n则是空屏幕)(文件个数大于n则隐藏一部分)
+ctrl + w w顺序切换
+调整分屏的宽度：
+Ctrl + w >：右加宽度
+Ctrl + w <：左加宽度(一次移动一个字符)
+Ctrl + w n >：右加n字符大小宽度
+Ctrl + w n <：左加n字符大小宽度(一次移动多个字符)
+
+/：查找
+K：查看ManPage(将光标放在函数上，按2或3(不按2/3，若该函数也是命令则默认打开1)，再按K(Shift k))
+[-d：查看宏定义，与查看ManPage类似(必须先包含宏的头文件)
+----------------------------------------------------------------

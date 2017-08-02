@@ -1,0 +1,19 @@
+广播、组播、单播：
+广播地址为：192.168.XXX.255，一般内核不允许ping广播地址，因为利用广播地址发包给整个局域网，一般会被利用为攻击性发包，占用带宽。
+组播：一个局域网内的多个分组(IP层，广播也在IP层)，涉及组地址。
+单播：一对一
+
+一般用于UDP领域，但不适合用于TCP。
+--------------------------------------------------------------------------------------------------------------------------------------
+setsockopt(int sockfd, int level, int optname, void * optval, socklen_t *optlen);
+getsockopt(int sockfd, int level, int optname, const void * optval, socklen_t *optlen);
+
+gethostbyname();通过域名获取IP地址
+gethostbyaddr();根据IP地址获取域名
+
+与上面两个函数具有相同功能，只是可以获取IPv6，且线程安全
+getaddrinfo();
+gethostinfo();
+
+getsockname();根据sockfd获取其绑定的IP端口号信息。
+getpeername();获取对端链接的IP端口号等信息

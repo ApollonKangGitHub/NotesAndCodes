@@ -1,0 +1,107 @@
+用途：
+①项目代码编译管理
+②节省编译项目时间
+③一次编写终身受益
+----------------------------------------------------------------
+①三要素：目标、依赖、命令
+
+目标：依赖(条件)
+	命令
+
+②基本实现(加减乘除计算)：
+all:add.c sub.c dive.c mul.c main.c 
+	gcc add.c sub.c dive.c mul.c main.c -o app
+解析：为了打成all目标(目标名自定义，一般以目标生成文件名为目标名)，依赖于一系列“.c”文件(依赖可不写)，如何达成目标？就是执行命令“gcc add.c sub.c dive.c mul.c main.c -o app”。注意：命令前必须有一个Tab键。
+
+③工程编译中的细化：
+app:add.o sub.o dive.o mul.o main.o
+	gcc add.o sub.o dive.o mul.o main.o -o app
+add.o:add.c
+	gcc -c add.c
+sub.o:sub.c
+	gcc -c sub.c
+dive.o:dive.c
+	gcc -c dive.c
+mul.o:mul.c
+	gcc -c mul.c
+main.o:main.c
+	gcc -c main.c
+工作步骤：建立关系树(树根节点为徐要生成的目标可执行文件)->根据关系树从底到上执行命令->根据依赖文件的最后更改时间比目标新来确定更新->如果目标不依赖任何文件，则执行对应命令，以示更新。
+clean:
+	-rm -f *.o
+	-rm -f app
+make clean（只执行clean目标的命令,“make + 目标名”只执行目标对应的命令），注意：rm前的-表示即使该条命令出错也会继续向后执行。
+
+④由于clean无依赖关系所以加上：“.PHONY:clean”用来用来生成一个伪目标，否则如果Makefile文件所在文件夹中有一个clean文件，make clean就会事与愿违。eg：
+.PHONY:clean
+clean:
+	-rm -f *.o
+	-rm -f app
+
+⑤“@”符号，不显示命令本身，只显示结果eg：
+test:
+	@echo "hello" 
+⑥更高级的Makefile(#后为注释)：
+#$表示索引
+#三个重要的变量：$@表示目标，$^表示所有依赖，$<表示依赖中的第一个
+
+obj=add.o sub.o dive.o mul.o main.o
+app:$(obj)
+	gcc $(obj) -o app
+#采用内建语法规则去编译(有的Makefile下面没有的默认，需要自己写)
+%.o:%.c
+	gcc -c $< -o $@
+.PHONY:clean
+clean:
+	-rm -f *.o
+	-rm -f app
+
+⑦借助Makefile的函数去优化：
+#wildcard *.c找到当前目录下的所有.c文件，赋给变量src
+src = $(wildcard *.c)
+#patsubst %.c,%.o,$(src)将匹配到的所有.c转换成.o赋给变量obj
+obj = $(patsubst %.c,%.o,$(src))
+#为目标文件重命名
+target = app
+
+$(target):$(obj)
+	gcc $^ -o $@
+%.o:%.c
+	gcc -c $< -o $@
+.PHONY:clean
+clean:
+	-rm -f *.o
+	-rm -f app
+
+⑧借助变量去优化(变量名固定)：
+CPPFLAGS= -I include#指定头文件位置
+CFLAGS= -g -Wall#指定编译参数
+#指定链接库位置与名字，无连接库不赋值即可
+LDFLAGS= #-L path -lmycalc
+CC=gcc*指定编译器
+#CC=arm-linux-gcc#用于Linux嵌入式编译的编译器
+src = $(wildcard *.c)
+obj = $(patsubst %.c,%.o,$(src))
+target = app
+
+$(target):$(obj)
+	$(CC) $^ $(LDFLAGS) -o $@
+%.o:%.c
+	$(CC) -c $< $(CFLAGS) $(CPPFLAGS) -o $@
+.PHONY:clean
+clean:
+	-rm -f *.o
+	-rm -f app
+⑨用Makefile实现distclean与install：
+#彻底清除生成过程文件和生成的配置文件
+eg：
+distclean：
+	rm -f /usr/bin/app
+#安装软件
+install：
+	cp app /usr/bin
+⑩根目录下有一个Makefile，下一级目录home中有一个Makefile，如何在根目录下make实现home目录下的项目编译？
+实现：在根目录下的Makefile中写：
+all:
+	make -C /home/
+#-C参数指定进入的路径，即在根目录下执行make，读取make -C /home/，先进入/home再执行make。

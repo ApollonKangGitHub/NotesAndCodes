@@ -1,0 +1,70 @@
+1、PCB结构体信息：
+每个进程在内核中(内核空间是共享的，就是虚拟内存的内核空间映射的是同一块物理内存)都有一个进程控制块(PCB)来维护进程相关的信息，Linux内核的进程控制块是task_struct结构体。以下为其主要信息：
+①进程id(pid);进程身份识别的唯一编号
+②进程的状态：运行、挂起、停止、僵尸等；
+③进程切换时需要保存和恢复的一些COU寄存器；
+④描述虚拟地址空间的信息；
+⑤描述控制终端的一些信息；
+⑥当前工作目录(Current Working Directory)；
+⑦umask掩码；
+⑧文件描述符表，包含很多指向file结构体的指针；
+⑨和信号相关的信息；
+⑩用户id和组id；
+控制终端、Session和进程组；
+以及进程资源可以使用的上限(cat /proc/self/limits查看进程限制)
+
+操作系统管理：
+内存管理以页来管理：lpage=4KB
+磁盘管理以块来管理：1block=4KB
+
+CPU管理有四个级别(0~3):
+用户态工作在3级(只能访问0~3G)
+内核态工作在0级(有权限访问内核空间)
+eg：printf写stdin时，调用System CALL：sys_write从用户态(3级)进入内核态(0级)，而sys_write由汇编实现(ARM平台下由swi软中断指令实现)
+----------------------------------------------------------------
+2、环境变量：
+extern char **erviron;
+由于erviron指针不包含在任何头文件中，所以要用extern声明。
+用erviron[i]即可取到相应的环境变量。
+设置自定义环境变量：
+①WWW=www.baidu.com/*写到自定义环境变量中*/
+echo WWW可以看见，但是env | grep WWW不能匹配出来
+
+②而export WWW=www.baidu.com/*写到系统环境变量中*/
+echo WWW可以看见，env | grep WWW也能匹配出来
+
+因为env查看的是系统环境变量。export将WWW输入到env里。但是命令行中修改增加的方式旨在当前shell有效。
+长期有效的修改方式：
+cd
+vim .bashrc
+在最后一行加上要修改的内容即可：
+eg：export PATH=$PATH:.(将系统路径加上./即当前路径)
+
+函数获取设置env：
+char * getenv(const char * name);
+int setenv(const char * name, const char * value, intrewrite);
+/*intrewrite置为1即可修改*/
+void unsetenv(const char * name);//删除
+----------------------------------------------------------------
+3、资源限制：
+修改进程资源限制，软限制可改，最大值不超过硬限制，硬限制只有root用户可以修改。
+
+#include<sys/time.h>
+#include<sys/recource.h>
+int getrlimit(int resource, struct rlimit *rlim);
+/*获取软限制或硬限制*/
+int setrlimit(int resource, const struct rlimit *rlim);
+
+resource：
+是一系列宏定义，指定获取限制的对象，对应cat /proc/self/limits的第一列，如最大文件描述符：RLIMIT_NOFILE
+struct rlimit{
+	rlim_t rlim_cur;/*Soft limit*/
+	rlim_t rlim_max;/*Hard limit*/
+};
+----------------------------------------------------------------
+4、进程原语：
+fork()
+getpid()
+getppid()
+
+fork()时，内存为读时共享(share on read)、写时复制(copy on write)

@@ -1,0 +1,73 @@
+回顾：
+	文件 -- 文件读写/字符串处理：dup()、dup2()文件描述符的复制
+、fcntl()复制文件描述符、设置/获取文件表的状态，lseek()函数、介绍了读写锁的基本概念
+----------------------------------------------------------------
+文件锁（读写锁）：
+（通过fcntl函数第二个参数cmd=GETLK、F_SETLK或F_SETLKW实现）：
+	读锁（锁定其它进程的上写锁操作）：共享锁，对其他进程上读锁不加限制，只针对上写锁；
+	写锁（锁定其它进程的上读锁及写锁操作）：独占锁，无论其它进程是上读锁还是上写锁都不被允许。	
+
+文件锁对应一个结构体：
+struct flock{
+	short l_type;/*锁的类型*/
+	short l_whence;/*锁的参照位置*/
+	int l_start;/*锁的开始位置相对于操作位置的偏移量*/
+	int l_len;/*锁的长度，字节为单位*/
+	pid_t l_pid;/*加锁的Id*/
+}
+①l_type：F_RDLCK读锁、F_WRLCK写锁、F_UNLCK释放锁
+②l_whence与l_start联合决定锁的起始位置：l_whence与lseek函数的whence参数可选项一样。SEEK_SET、SEEK_SUR、SEEK_END
+③l_pid只在F_GETLK（获取锁）时才有用，其他时候(F_SETLK/F_SETLKW)置为-1即可。
+
+一个进程对文件上锁，对其他进程上锁的影响：
+当一个进程对文件上了读锁，其它进程可以上读锁但不可以上写锁。
+当一个进程对文件上了写锁，其它进程读锁写锁都不能上。
+
+注意：文件锁不能锁定硬盘上的文件，也不能锁定read/write函数，只能阻止其它进程的上锁行为。文件锁的正确用法：在调用函数read()之前应该上读锁，在调用write()函数之前上写锁。锁的机制是人指定的，所以正确遵循该机制来使用锁才能发挥锁的作用。
+
+以方式F_SETLK使用文件锁时，其他进程默认是：加锁失败时会返回错误，但是如果使用F_SETLKW（其它均不用改）则可以在加锁失败时继续等待（不报错），直到其他进程释放锁本进程可以加上锁为止。
+
+当fcntl的cmd参数为F_GETLK时不是简单的获取锁，而是测试某个锁对某个进程的文件能否加上，而不去真正加锁。
+如果可以加锁，调用F_GETLK的结果是：struct flock其他数据不变但锁的类型l_type会变为F_UNLCK（表示现在状态是释放，可以去加）。
+如果不可以加锁，调用F_GETLK的结果是：以为当前存在其他锁，struct flock所有数据都会改变，改变为当前正在起作用的锁的相关信息。l_pid变为当前正在上锁的进程id（不是用来测试的进程）。
+----------------------------------------------------------------文件的其它相关函数：
+1、取文件大小：
+fseek()到最后-->ftell()取返回值就是文件大小。（标C取法）
+UC中取文件状态（属性）的函数：stst/fstat
+stat（status）以字符串表示一个文件，而fstat以文件描述符表示文件。也就是说stat不需要open即可取文件状态。
+#include<sys/stat.h>
+int stat(const char * path,struct stat * buf);
+int fstat(int fd,struct stat * buf);/*buf为传出参数*/
+
+struct stat{
+	dev_t st_dev;/*设备id号*/
+	ino_t st_ino;/*i节点号*/
+	mode_t st_mode;/*权限与文件类型*/
+	nlink_t st_nlink;/*硬链接数*/
+	uid_t st_uid;/*用户id*/
+	ggid_t st_gid;/*所在组id*/
+	dev_t st_rdev;/*设备id，对于特殊文件才有*/
+	off_t st_size;/*大小，较为常用*/
+	blksize_t st_blocks;/**/
+	blkcnt_t st_blksize;/**/
+	time_t st_atime;/*最后的访问时间*/
+	time_t st_mtime;/*最后的修改时间，较为常用*/
+	time_t st_ctime;/*最后的状态改变时间*/
+}
+
+**在C里表示时间的方式：
+①秒差形式，1970年1月1日0时0分0秒的秒数差，得到的类型为time_t;
+②结构(man time.h)形式:
+struct tm{
+	int tm_sec; /*Second [0,60].包含闰秒*/
+	int tm_min; /*Minutes [0,59].*/	
+	int tm_hour; /*Hour [0,23].*/
+	int tm_mday; /*Day of month [1,31].*/
+	int tm_mon; /*Month of year [0,11].(January = 0)*/
+	int tm_year; /*Year Since 1900.*/
+	int tm_wday; /*Day of week [0,6] (Sunday = 0).*/
+	int tm_yday; /*Day of year [0,365].包含闰年*/
+	int tm_isdat; /*Daylight Savings flag*//*夏时制，夏时令（Daylight Saving Time：DST）*/
+}
+计算机多数使用time_t，因为效率高。但是显示时为tm结构形式。localtime()函数可以实现： time_t 到 tm 的转换。time_t的指针做参数，返回值tm的指针。可以使用ctime(&st.st_mtime)打印出美式时间显示方式。
+----------------------------------------------------------------

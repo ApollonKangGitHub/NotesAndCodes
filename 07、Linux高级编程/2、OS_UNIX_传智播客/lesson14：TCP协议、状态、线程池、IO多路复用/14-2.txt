@@ -1,0 +1,41 @@
+select与poll为UNIX经典异步I/O处理方式，epoll为Linux异步I/O处理方式。
+
+多路I/O转接模型之select：
+select同时监控多个文件描述符。当描述符无数据到达时，select阻塞，当有数据到达时，select返回到达的数据的文件描述符个数。
+优点：不用多进程与多线程，方便管理。
+
+#include <sys/select.h>
+/* According to earlier standards */
+#include <sys/time.h>
+#include <sys/types.h>
+#include <unistd.h>
+
+int select(int nfds, fd_set * readfds, fd_set * writefds, fd_set * exceptfds, struct timeval * timeout);
+
+fd_set：为描述符集类型；
+
+nfds：监控的文件描述符个数(监控的文件描述符集中最大文件描述+1)
+readfds：监控有读数据到达文件描述符集合，传入传出参数
+writefds：监控有写数据到达文件描述符集合，传入传出参数
+exceptfds：监控有异常发生到达文件描述符集合，传入传出参数
+
+将要监控的文件描述符bit位置为1，作为传入参数。当select返回后，传出参数中将没有数据到达的位置为0.下一次select调用时需要重新将描述符集置为1
+
+timeout：定时等待
+	①NULL，永远等下去
+	②设置timeval，等待固定时间
+	③设置timeval里时间均为0，检查描述字后立即返回，轮询
+	struct timeval {
+		long tv_sec; /* seconds */
+		long tv_usec; /* microseconds */
+	};
+
+文件描述符操作宏函数：
+void FD_CLR(int fd, fd_set *set); //把文件描述符集合里fd位，置为0
+void FD_SET(int fd, fd_set *set); //把文件描述符集合里fd位，置为1
+void FD_ZERO(fd_set *set); //把文件描述符集清0
+int FD_ISSET(int fd, fd_set *set);// 测试文件描述符集合里fd是否置为1
+
+注意：
+①select能监听的文件描述符个数受限于FD_SETSIZE,一般为1024，单纯改变进程打开的文件描述符个数并不能改变select监听文件个数
+②解决1024以下客户端时使用select是合适的，但如果链接客户端过多，select采用的轮询模型，会大大降低服务器响应效率，不应在select上投入更多精力

@@ -1,0 +1,49 @@
+信号量集：
+信号量集(semaphore arrays)是由信号量(semaphore)组成的数组。信号量其实就是一个计数器，用于控制同时访问共享资源的进程/线程的总数，(IPC中的信号量只能控制进程)。
+—————————————————————————————————-信号量的用法：
+	方案1(不采用)：0~10，加到10阻塞后续进程。
+	方案2(采用)：10~0， 减到0阻塞后续进程。
+具体方案：
+①先赋初始值，就是允许并行的进程最大数量
+②如果有进程访问，计数-1，到0就阻塞访问进程
+③如果有进程结束访问，计数+1.
+
+信号量集就是将多个信号量放入数组统一管理。因此IPC使用的是信号量的数组(信号量集)，而不是单一的信号量。信号量集只是一个计数器数组，只能控制数量而不能互发数据。
+
+信号量集的使用步骤：
+①生成一个key，使用ftok()；
+②创建/获取信号量集的ID，semget()；
+③赋初始值，给信号量集中的中的每个信号量赋初始值，semctl()；
+④semop()负责进程访问/结束访问时，计数的-1/+1；
+⑤如果不再使用信号量集，可以semctl()删除。
+----------------------------------------------------------------
+函数：
+#include<sys/types.h>
+#include<sys/sem.h>
+#include<sys/ipc.h>
+
+int semget(key_t key, int nsems, int semflg);
+/*nsems为数组长度，获取时置为0即可*/
+成功返回信号量集ID，失败返回-1.
+****************************************************************
+int semctl(int semid, int semnum, int cmd, ...);
+cmd(或运算):
+	IPC_SET、IPC_RMID、IPC_EXCL、
+	SETALL：设置所有(无需指定semnum)；GETALL：获取所有
+	SETVAL：单独设置(必须指定semnum)；GETVAL：单独获取
+semnum:下标
+可选参数...(自定义联合体)：union semun{
+	int val;/*for SETVAL*/
+	struct semid_ds * buf;/*for IPC_STAT IPC_SET*/
+	unsigned short * array;/*for GETALL SETALL*/
+};
+****************************************************************
+int semop(int semid, struct sembuf * sops, size_t nsops);
+sops:结构体数组(可操控多个信号量)
+struct sembuf{
+	unsigned short 	sem_num;/*信号量集中信号量的下标*/
+	short 		sem_op;/*操作+1或者-1或者0*/
+	short		sem_flg;/*IPC_NOWAIT或者0，是否阻塞*/
+};
+nsops：第二个参数的数组长度
+****************************************************************

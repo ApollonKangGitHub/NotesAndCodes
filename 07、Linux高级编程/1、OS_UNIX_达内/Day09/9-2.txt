@@ -1,0 +1,100 @@
+sigaction()函数：
+int sigaction(int signum, const struct sigaction * act, struct sigaction * oldact);/*一般第三个参数置为NULL即可*/
+sigaction()可以注册信号的处理方式，功能和signal一样，但sigaction是增强版的signal，且signal底层是调用sigaction的。
+
+sigaction结构体：
+struct sigaction{
+	void (*sa_handler)(int);/*与signal一样*/
+	void (*sa_sigaction)(int,siginfo_t *, void *);
+	sigset_t sa_mask;
+	int sa_flags;
+	void (*sa_restorer)(void);/*保留，不会用到*/
+};
+
+siginfo_t结构体(结构体成员较多，只列出重要的)：
+struct siginfo_t{
+	int si_signo;
+	int si_errno;
+	int si_code;
+	int si_trapno;
+	pid_t si_pid;/*发送信号的进程ID*/
+	uid_t si_uid;/*发送信号的进程所属组ID*/
+	int si_status;
+	clock_t si_utime;
+	clock_t si_stime;
+	sigval_t si_value;/*sigqueue()会用到*/
+	....
+};
+
+flags：
+SA_SIGINFO：当sa_flags中包含SA_SIGINFO时，使用第二个函数指针，其它情况使用第一个函数指针（两个不可能同时用）。
+SA_NODEFER，SA_NOMASK：解除了在信号函数执行期间，对自身注册信号的原始屏蔽（只屏蔽sa_mask的屏蔽设置的信号）；若不设置该flags，则会在信号函数执行期间，屏蔽注册信号相同信号与sa_mask设置的信号。
+SA_RESETHAND（第一次信号处理为自定义处理，之后的恢复默认处理）
+----------------------------------------------------------------
+sigqueue()函数：类似于函数kill(),可以发送信号，并且在发送信号的同时附加数据si_value。
+int sigqueue(pid_t pid,int sig, const union sigval value);
+union sigval{
+	int sival_int;
+	void * sival_ptr;/*所有类型的指针*/
+};
+----------------------------------------------------------------
+计时器与信号：
+Linux为每个进程维护三个计时器(计时器定时向进程发送时钟信号)：
+真实计时器：程序运行的实际时间（包括休眠时间）
+虚拟计时期：程序运行在用户态的时间（不包括休眠时间）
+实用计时器：程序运行在用户态与内核态的时间（不包括休眠时间）
+三个计时器发送的信号分别是：SIGALRM(14)、SIGVTALRM、SIGPROF
+
+设置/获取计时器的函数：
+setitimer()、getitimer()
+
+#include<sys/time.h>
+int getitimer(int which,const struct itimerval * curr_value);
+int setitimer(int which,const struct itimerval * new_value,struct itimerval * old_value);
+
+which:
+ITIMER_REAL
+ITIMER_VIRTUAL
+ITIMER_PROF
+
+struct itimerval{
+	struct timeval it_interval;/*next value间隔时间*/
+	struct timeval it_value;/*current value起始时间*/
+};
+
+struct timeval{
+	long tv_sec;/*seconds*/
+	long tv_usec;/*microseconds*/
+};
+----------------------------------------------------------------
+IPC -- 进程间通信：
+IPC就是两个或者多个进程之间的数据交互(在不能直接进行信息交互的两个进程间增加一个“交互媒介”以达到信息交互的目的)。
+1、IPC的方法:
+①文件
+②信号(signal)
+③管道
+④共享内存
+⑤消息队列
+⑥信号量集(semaphore)(与信号无关)
+⑦套接字socket
+......
+管道是UNIX最古老的IPC，现在很少使用。
+共享内存、消息队列、信号量集用法类似，统称为XSI IPC，遵守相同的规范
+网络socket主要目的是网间进程通信而不是本地进程间通信。
+----------------------------------------------------------------
+管道：以前是半双工的，现在大多是全双工的。分为有名管道与无名管道。
+有名管道：由程序员建立管道文件，用于进程间通信；
+无名管道：由内核创建，只用于fork()创建的父子进程之间的通信。
+
+管道是通过管道文件(媒介)进行交互的，管道文件与普通文件是有区别的，通过mkfifo（make first in first out）或者mkfifo()创建管道文件。其他方式是无法创建管道文件的，管道文件后缀是".pipe"（类型为p）即使是touch file.pipe也不行。
+
+注意：管道文件只是媒介，只是数据的中转站，只有读写双方均就绪时才畅通，只有一方就绪时处于阻塞状态，其大小始终为0.
+
+测试(打开两个终端测试)：
+①echo message > file.pipe(处于阻塞)
+②cat file.pipe(管道畅通，cat进程输出message)
+或
+①cat file.pipe(处于阻塞)
+②echo message > file.pipe(管道畅通，cat进程输出message)
+
+管道的使用与普通文件一样，但管道文件创建必须用mkfifo,其它完全相同。

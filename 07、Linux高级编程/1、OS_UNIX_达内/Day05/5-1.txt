@@ -1,0 +1,35 @@
+Unix/Linux内存管理-sbrk()、brk()
+一般用sbrk()分配内存、brk()回收内存，底层维护了一个位置，以一个内存页为基本单位；mmap()/munmap()虚拟内存地址和物理内存/硬盘文件做映射，映射以后虚拟内存地址才可以用来存储数据。
+----------------------------------------------------------------
+文件读写：
+#include<unistd.h>
+int open(const char*pathname,int flags,mode_t mode);
+eg:int fd = open("./a.txt",O_CREAT|O_RDWR|O_TRUNC,0666)
+/*
+#include<fcntl.h>
+O_CREAT没有文件则创建
+O_RDWR只读，O_REDONLY只读
+O_TRUNC清空，不保留原有文件内容即完全覆盖，O_APPEND则是追加
+，权限为0666，新建时可能有文件权限屏蔽即使设置为0666，也会被屏蔽掉0002以保证安全
+*/
+sprintf()、printf()、fprintf()三个函数的区别：
+sprintf(buf,"string",...);输出string并将string存放到自定义缓冲区buf中
+用wq保存退出vim或者vi时会自动在文本末尾加上换行符。
+
+文件读写时标准C函数与UC函数性能不相同：
+标准C函数与UC函数的区别：
+UC函数在用户层没有缓冲区，在内核层有缓冲区，但是缓冲区很小，所以大量数据在输入时，UC函数（如write）需要自己加缓冲区，而标准C（如fwrite）不用自己设置缓冲区，如果UC用自定义缓冲区效率比标C好，不定义缓冲区则效率很低，缓冲区大小要合适，否则物极必反
+----------------------------------------------------------------
+字符串归纳总结：
+1、赋值：=和strcpy
+2、指针操作字符串以'\0'结尾
+3、NULL结束
+4、字符串的拼接：strcat()、strncat()
+5、字符串的和其他类型的转换：
+sprintf()：其它类型转字符串之后写入（fwrite()为不转换类型写入）
+sscanf()：字符串转其它类型
+atoi()：字符串转整型
+atof()：字符串转浮点型
+6、strlen()，strnlen()字符串长度
+7、strcpy()、strncpy()字符串拷贝
+8、strcmp()、strncmp()字符串比较

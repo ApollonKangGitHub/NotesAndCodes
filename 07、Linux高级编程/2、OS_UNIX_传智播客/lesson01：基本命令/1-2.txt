@@ -1,0 +1,215 @@
+sudo只要是权限不够的问题就在执行命令前加该命令即可
+----------------------------------------------------------------
+根据文件名查找：
+sudo find 路径 -name "关键字"
+根据文件内容查找：
+sudo grep "关键字" 路径 -R
+
+find默认递归，不需加-R；而grep需要加-R。
+----------------------------------------------------------------
+安装卸载软件：
+1、apt-get安装(ubuntu提供，连接官方/非官方服务器获取下载资源)：
+
+①修改服务器列表：
+sudo vi /etc/apt/sources.list加入新的服务器地址即可
+
+②更新完毕服务器列表以后，更新软件源：
+sudo apt-get update：更新软件源
+
+重要的常用软件相关命令
+sudo apt-get install packagee：安装package包
+sudo apt-get remove package：删除卸载package包
+sudo apt-get remove package --purage：删除package包，包括配置文件
+sudo apt-get build-dep package：安装相关的编译环境
+
+sudo apt-get source package：下载package包的源代码
+sudo apt-get clean && sudo apt-get autoclean：清理无用的包
+
+sudo apt-cache show package：获取相关包的信息
+sudo apt-cache serach package：搜索软件包
+----------------------------------------------------------------
+2、deb包安装(不需要联网安装,但是本机必须有下载好的包)：
+
+安装deb包：sudo dpkg -i xxx.deb
+删除卸载：sudo dpkg -r xxx.deb
+和配置文件一块删除：sudo dpkg -r --purge xxx.deb
+----------------------------------------------------------------
+3、原码安装：
+①tar package
+解压缩源代码package包
+② cd package_dir
+进入解压后的package_dir文件夹中
+③ ./configure
+运行configure脚本，检测文件是否缺失，检测编译环境，创建了Makefile
+④ make
+编译源代码，生成库和可执行程序
+⑤ sudo make install
+把库和可执行程序，从当前编译目录安装(拷贝移动)到系统路径下
+
+----------------------------------------------------------------
+U盘挂载：
+sudo fdisk -l：显示挂载信息
+mount、umount
+
+dd命令：拷贝光盘/文件
+dd if=fileold of=filenew
+(if == input file, of == output file)
+
+dd也可以与/dev/zero设备进行格式化文件创建：
+/dev/null外号叫无底洞
+/dev/zero 输入设备，用来初始化文件，从里面读出来的数据都是0
+eg：dd if=/dev/zero of=hello.txt bs=100M count=1
+创建一个hello.txt文件大小为100MB，文件内容全部初始化为0
+
+----------------------------------------------------------------
+压缩包管理(gz和bz2的压缩算法不同)：
+1、tar命令：
+
+①归档文件包：
+tar cvf dir.tar dir//dir目录打成归档文件dir.tar(并没有压缩)
+tar xvf dir.tar dir//dir.tar归档文件还原成dir目录
+
+②gz压缩包：
+tar zcvf dir.tar.gz dir//压缩
+tar zxvf dir.tar.gz//解压缩
+
+③bz2压缩包：
+tar jcvf dir.tar.bz2 dir//压缩
+tar jxvf dir.tar.bz2//解压缩
+
+解压缩默认路径为当前目录，-C可以指定解压目录
+
+2、rar包：
+
+打包：rar a -r newdir dir//将dir压缩成newdir.rar
+解包：unrar x newdir.rar//将newdir.rar解压到当前文件
+
+3、zip包：
+
+zip -r dir.zip dir//压缩
+unzip dir.zip//解压缩
+
+----------------------------------------------------------------
+进程管理：
+1、who命令：显示那个用户何时打开了哪个终端/界面
+
+ttyi为界面(tty1~tty7:表示init的不同状态，Ctrl+Alt+Fi)
+pts/n为界面下的终端(eg:pts/1)
+
+2、ps命令：
+查看进程CUP%、STAT、STATR、PID、PPID等信息：
+ps -aux
+ps -ajx
+ps -Lf
+
+3、jobs命令、fg命令、bg命令：
+测试：
+cat//前台shell启动一个作业，shell被放到后台
+Ctrl+z//暂停作业，并放到后台，shell在前台
+cat//启动一个作业，shell被放到后台
+Ctrl+z//暂停作业，并放到后台，shell在前台
+jobs//显示暂停的作业,有两个，均在后台(未运行)
+fg 1//唤醒暂停的作业1(唤醒到前台运行)，即第一个打开的cat作业
+Ctrl+c//终止掉当前作业(作业1)
+jobs//显示暂停的作业，只有一个
+bg 2//唤醒暂停的作业2(唤醒到后台)(运行)，shell在前台
+fg 2//唤醒暂停的作业2(唤醒到前台)(运行)，shell被放到后台
+
+作业cat也可以用一个死循环的作业(./test)来代替测试，运行两次且暂停。然后一个dg一个fg，ps -aux查看这两个状态(前台与后台均是唤醒的运行状态)。
+
+我们可以使用"./test &"直接在后台运行test
+
+4、kill命令：
+
+kill -l：显示信号编号，前31个为UNIX经典信号，后面31个为实时信号
+kill -signum pid：给进程号等于pid的进程发送signum信号
+kill pid：发送默认信号
+
+kill -9 pid：一定能“杀死”
+----------------------------------------------------------------
+env命令：
+显示当前进程的所有环境变量
+echo $PATH：输出$匹配的指定环境变量PATH
+
+配置环境变量(PATH环境变量中加上当前目录)：
+vim ~/.bashrc	/*配置当前用户环境变变量*/
+vim /etc/profile/*配置系统环境变量(需要有root权限)*/
+最后一行加上export = PATH=$PATH:./
+
+file命令：
+file filename：可查看文件属性
+----------------------------------------------------------------
+用户管理：
+创建用户：
+sudo useradd -s /bin/bash -g groupname -d /home/username -m username：创建一个用户，该用户的shell为bash，隶属组为groupname，其家目录为/home/username，其用户名为username。
+-G groupname1,groupname2,groupname3将user隶属于多个组
+设置用户密码：
+passwd username
+
+创建组：
+sudo groupadd groupname
+
+删除用户：
+userdel -r username删除用户并递归删除用户家目录
+删除与U盘卸载类似，当处于要删除的用户或者递归处于时需要Ctrl+D完全退出再删除用户。
+
+----------------------------------------------------------------
+网络管理：
+ifconfig查看网卡信息：
+关闭网卡：ifconfig eth0 down
+关闭网卡：ifconfig eth0 up
+给eth0配置临时动态IP：ifconfig eth0 IP
+
+ping命令：
+ping [选项] IP/hostname
+
+NAT：公用IP
+桥接：公用网卡
+
+netstat命令：
+-a：所有网络
+-t：TCP网络
+
+nslookup命令：
+将域名转换成ip地址
+
+finger命令：
+finger username显示username的登录信息
+----------------------------------------------------------------
+alias命令：类似于define/typedef
+eg：
+alias ll='ls -l'
+ls的文件会显示不同颜色是因为配置文件中
+alias ls='ls --color=auto'
+如果将该行注释掉就不会显示颜色
+----------------------------------------------------------------
+echo $?可以查看之前的返回值
+eg：
+main.c：“...return 5;”
+gcc -o main main.c 
+./main
+echo $?
+显示5
+----------------------------------------------------------------
+umask命令：
+touch默认创建时0666，而umask屏蔽其中一部分
+eg：umask(回车)
+显示的是0002时：
+touch new
+ls -l new
+显示0664，将new0002给屏蔽了即屏蔽了其他用户的写权限:
+mode = 0666
+umask = 0002
+mode &(~umask) 
+= 0666 & 0775 
+= 110 110 110 & 111 111 101	  	     
+= 110 110 100 
+= 0664 == 0666-0002
+
+umask 0XXX可以修改默认屏蔽权限
+----------------------------------------------------------------
+uname -a：查看内核版本信息
+
+lsb_release -a：查看发行版本信息
+
+free -m：查看空闲内存

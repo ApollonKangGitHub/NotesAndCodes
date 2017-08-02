@@ -1,0 +1,96 @@
+文件系统：
+一般微观上来讲，文件不能删除只能覆盖。
+一块磁盘是由许多512Byte(扇区大小)的单位组成的。
+
+说说，从基本使用上为什么需要文件系统？
+如果我们使用文件只写一次，每次创建文件时都写好，不再修改或删除。那么基本完全可以使用随用随占的方式去使用磁盘。也就是说，之前的文件所占空间不需要预留以备增加内容，后面的文件接着磁盘地址使用即可。但是现实中，我们可能对于一个很小的文件进行扩充，那么如果不预留，一个文件会被分成几块甚至几十块不连续的地址，还得记录这些地址的关系。如果预留，却不知道要预留多少算合适。那么这里就需要设计一种文件系统，文件系统就帮我们处理记录这一系列问题。
+
+----------------------------------------------------------------
+ext2文件系统：由设定大小的许多块组成。
+①磁盘第一块(Boot Block)固定大小为1KB(由PC联盟规定，该块与文件系统无关)。之后的均为4KB(8扇区)/块。并且多个块组成一个组。
+②每个组第一个块叫Super Block(即Super Block在每个组第一块都有一个拷贝)：描述整个分区的文件系统信息，例如块的大小、文件系统版本号、上次mount时间等。
+③Super Block(超级块)后，由几个块合称为GDT(块组描述符表)：用来描述每个分类的起始块位置、当前空闲块数等信息。
+④再之后有一个块称为Block Bitmap(块位图)：用来标定该组中哪个块已用，块位图中一个bit位代表一个块，即一个组中有4*1024*8=8192块。
+⑤块位图后面一个块叫Inode Bitmap，用来描述记录inode表中对应inode使用情况。
+⑥再之后多个块合称为Inode Table(inode表)，一个块中存放64个inode，每个inode大小固定(128B，存放文件属性与数据指针两部分内容，数据指针占60B，即有15个指针分别指向15个数据块，后三个指针用于一级/二级/三级间接寻址，ext4的inode则更大，寻址能力更强)。
+⑦最后所有块是Data Blocks，存放数据。
+
+stat filename：可查看系统设定块大小(一般为4KB(IO Block:4096)，其大小为512Byte的整数倍)，stat命令与stat函数查看/获取的都是文件/目录的inode属性信息。
+----------------------------------------------------------------
+①为什么拷贝很慢而删除文件很快：
+其实删除一个文件，只是将该文件所占的块的块位图的bit位置为0，并且相关inode指针(包括多级寻址指针)置为0，以及inode位图置为0。并不去删除真正的数据块的数据，所以数据恢复就是基于该理论，删除文件只有覆盖才属于删除。
+
+②如何找到指定的文件并代开：
+目录一般为4096KB即一个块大小。因为目录中只存储文件记录项，并不存储文件数据。文件数据在其他块中。目录中的记录项中存储：文件inode编号、文件名、文件长度、文件类型等信息。只要一个目录中文件不是太多，该目录就占用一个块。根目录的inode固定为2.根据根目录和目录中的记录项逐级寻址便可找到指定的文件位置。
+
+③group大小与块编号：
+group的大小由块大小决定，因为块位图中总位数就是一个组的总块数。
+每个组中的块编号是统一编号，即下一个组的第一个块号接着上一个组的最后一个块号编号。
+----------------------------------------------------------------
+文件类型记录项与编号:
+0	UnKnow
+1	Regular file
+2	Directory
+3	Character device
+4	Block device
+5	Named pipe
+6	Socket
+7	Symbolic link
+----------------------------------------------------------------
+stat函数：获取文件inode属性
+
+#include <sys/types.h>
+#include <sys/stat.h> 
+int stat(const char *filename, struct stat *buf); 
+int fstat(int fd, struct stat *buf);
+int lstat(const char *filename, struct stat *buf);
+
+ln -s file link:为file创建一个符号链接link
+lstat()函数的接口与stat相同，唯一的区别是lstat()不跟踪符号链接。
+
+struct stat{
+    dev_t       st_dev;     /* ID of device containing file*/
+    ino_t       st_ino;     /* inode number*/
+    mode_t      st_mode;    /* protection*/
+    nlink_t     st_nlink;   /* number of hard links*/
+    uid_t       st_uid;     /* user ID of owner*/
+    gid_t       st_gid;     /* group ID of owner*/
+    dev_t       st_rdev;    /* device ID (if special file)*/
+    off_t       st_size;    /* total size, in bytes*/
+    blksize_t   st_blksize; /* blocksize for filesystem I/O*/
+    blkcnt_t    st_blocks;  /* number of blocks allocated*/
+    time_t      st_atime;   /* time of last access*/
+    time_t      st_mtime;   /* time of last modification*/
+    time_t      st_ctime;   /* time of last status change */
+};
+time of last access：最近访问时间(read的时间)
+time of last modification：最近更改时间(改变文件内容的时间)
+time of last status change：最近改动时间(改动ionde信息的时间)
+----------------------------------------------------------------
+access()函数：
+int access(const char * pathname, int mode);
+测试文件是否有某种权限，或测试文件是否存在。
+
+mode：
+R_OK：是否可读
+W_OK：是否可写
+X_OK：是否可执行
+F_OK：是否存在
+以实际UID与实际GID测试权限，且跟踪符号链接。
+
+成功(具备权限/存在)返回0，失败(不具备权限/不存在)返回-1，并且设置errno。
+----------------------------------------------------------------
+int chmod(const char * pathname, mode_t mode);
+int fchmod(int fd, mode_t mode);
+
+两个与密码和用户信息有关的文件：
+/etc/passwd
+/etc/shadow
+
+chown函数与chown命令一样，必须拥有root权限才能执行。
+chown(const char * path, uid_t owner, gid_t group);
+fchown(int fd, uid_t owner, gid_t group);
+lchown(const char * path, uid_t owner, gid_t group);
+
+utime();//修改文件最后修改与最后访问时间
+truncate();ftruncate();//截断文件

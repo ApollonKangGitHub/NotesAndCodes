@@ -1,0 +1,45 @@
+①cat /etc/shells显示系统中支持的shell
+或者echo $SHELL
+
+②shell下单独快捷键与Ctrl快捷键(针对于命令操作)：
+↑ == 	Ctrl+p (previous)
+↓ == 	Ctrl+n (next)
+← ==	Ctrl+b (backward)
+→ ==	Ctrl+f (forward)
+Del ==	Ctrl+d (delete光标之后的)
+Home == Ctrl+a (the first letter)
+End ==	Ctrl+e (end)
+
+③以"."开头的都是隐藏文件，eg："."、".."、".bashrc"、".ssh"等
+
+④ln命令：创建链接
+ln -s filename link:为filename创建符号链接(软连接)
+ln filename link:为filename创建符号链接(硬连接)
+eg：
+ln -s filename soft_link_file
+ln filename hard_link_file
+
+⑤od命令：指定查看形式：
+od -tc file：t表示输出类型，c表示ASCII码字符形式显示
+
+⑥df查看磁盘使用情况：
+df --block=GB
+df --block=MB
+df --block=KB
+以不同单位显示
+
+⑦文件权限修改：
+文字设定法：
+chmod u+x file	
+chmod g-r file	
+chmod o-w file	
+chmod a+w file	为所有用户开启写权限
+...
+数字设定法：
+chmod 741 file.c	-rwxr----x
+
+⑧文件所属修改：
+文件所有者与所属组设定(chown只能root用户使用)：
+chown krj:root file	将file所属主与所属组修改为krj和root
+如果当前不在root用户下，可以在chown krj:root file之前sudo：
+sudo chown krj:root file来获取临时root权限，修改完后仍然处于普通用户，而不用登录root用户。其它命令也可以在其前加sudo临时获取root权限

@@ -1,0 +1,92 @@
+1、线程基本概念：
+(1)、线程概念：
+①轻量级进程(light-weight process,LWP)，也有PCB，创建线程使用的底层函数和进程一样都是clone。
+②从内核里看进程与线程一样，都有各自不同的PCB，但是PCB中指向内存资源的三级页表是相同的(即线程与进程是共享页表也就是共享内存的)。
+③进程可以蜕变成线程。
+④可以认为线程就是寄存器和内核栈(有了寄存器和内核栈就能进行工作)。
+⑤在Linux下：线程是最小执行单位；进程是最小的资源分配单位。
+
+(2)、线程查看：
+ps -Lf pid：查看指定进程的关于线程的细化信息
+ps -Lw pid：比-Lf信息项目少
+ps -eLf：类似于aux，只不过eLf以线程为最小单位列出
+
+Google浏览器以多进程(每个标签页)&多线程(标签页中细化)实现
+火狐浏览器则为多线程
+
+(3)、线程共享资源：
+①文件描述符
+②信号的处理方式(不包括信号屏蔽字)
+③当前工作目录
+④用户ID和组ID
+⑤内存地址空间0~3G(Text、data、BSS、堆、共享库(通过mmap映射加载到内存中)，不包括用户空间栈)
+
+内核栈：保存处理器现场
+用户栈：存储空间保存局部变量、传参
+
+(4)、线程非共享资源：
+①线程id(tid)，与LWP不同，LWP作用域为CPU，供调度使用；而tid作用域为所属进程，供身份识别；
+②处理器现场(内核栈)和栈指针
+③独立栈空间(用户栈)
+④errno变量
+⑤信号屏蔽字
+⑥调度优先级
+
+(5)、线程优缺点：
+优点：提高程序并发性、开销小、通信与共享数据方便；
+缺点：线程不稳定（库函数实现）、线程调试比较困难（gdb支持不好）、线程无法使用(最好不使用)unix经典事件，例如信号
+
+man -k pthread：查看manpage关于pthread的函数(若查看不到，则需要安装)
+sudo apt-get install manpages-posix manpages-posix-dev:安装pthread相关manpage
+--------------------------------------------------------------------------------------------------------------------------------------
+2、线程原语：
+(1)、线程创建：
+#include<pthread.h>
+连接时需要加 -lpthread进行链接
+int pthread_create(pthread_t *thread, const pthread_attr_t *attr, void *(*start_routine)(void *), void * arg);
+参数：
+pthread_t：unsigned int，thread存储线程ID；
+attr：分配的栈空间、优先级属性，传NULL表示采用默认属性；
+void *(*start_routine)(void *)：函数指针
+arg：函数指针的参数，即void *(*start_routine)(void * arg)
+成功返回0，失败返回errno(而不是返回-1，设置errno)
+
+注意：
+①线程的errno值为其他函数接口而提供，pthread库本身不适用它，采用返回值的方式更明了
+②由于线程创建时的errno不设置，而是以返回值的形式返回，所以要用strerror()代替perror()检测errno
+③strerror_r为可重入版本
+④线程的相关函数基本都是成功返回0，失败返回errno
+
+pthread_t pthread_self(void);//获取tid，类似于getpid()
+
+(2)、线程退出：
+任何一个线程调用exit()/_exit()/_Exit()函数都会导致其它线程一并结束(即使进程结束)不适合于线程退出。
+调用关系：
+用户层：exit()关闭C标准文件流，刷新缓冲区--->系统层：_exit()导致进程退出，关闭文件描述符
+
+-->线程退出函数pthread_exit()：
+void pthread_exit(void * retval);
+retval：线程函数结束时，返回指针，等价于return (void *)retval;
+注意：子线程中不能返回线程栈上的内存地址，因为线程栈为线程私有，线程结束便回收，返回没有意义，也会导致出错。
+
+-->主线程等待子线程结束(回收僵尸线程)pthread_join()：
+int pthread_join(pthread_t thread, void ** retval);
+retval:接收子线程的返回的指针
+调用该函数的线程挂起等待，直到等待的thread线程终止并回收资源。
+等待的thread线程终止的方法不同，pthread_join获取的终止状态是不同的，如下：
+①如果thread线程通过return返回，retval(二级指针)所指向的单元(一级指针)里存储的是thread线程返回值(一级指针)。
+②如果thread线程被别的线程调用pthread_cancel终止掉，retval所指向的单元里存放的是PTHREAD_CANCELED，#define PTHREAD_CANCELED ((void *) -1)
+③如果thread线程是自己调用pthread_exit终止的，retval(二级指针)所指向的单元里存放的是pthread_exit()的参数retval(一级指针)。
+④如果调用pthread_join的线程(不一定是主控线程)对thread线程的返回值不感兴趣，pthread_join的retval置为NULL即可。
+
+-->int pthread_cancel(pthread_t thread);
+在进程内某个线程可以取消另外一个线程，类似于发送一个信号终止线程。
+
+(3)、线程分离态：
+int pthread_detach(pthread_t tid);//将线程置为分离态
+置为分离态的线程就不需要再pthread_join回收，在其结束后，系统自动回收。一般不关系线程返回值就使用pthread_detach
+pthread_join(同步)与pthread_detach(异步)互斥
+
+(4)、比较两个线程是否相等pthread_equal:
+int pthread_equal(pthread_t t1, pthread_t t2);
+--------------------------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,50 @@
+高手调试程序的方式：
+①在合适的位置加printf
+②输出日志文件分析问题
+
+1、首先编译的时候必须先加-g(不加-g无法调试)
+eg：gcc -o test1 -g test.c(×)
+gcc -o test2 -g test.c(√)
+我们发现加了-g的链接文件比不加-g的大一些。因为加-g的包含调试信息。
+
+2、GDB命令：调试时输入GDB  test2进入GDB
+(括号中的字母均是简写)
+help(h)：查看常用命令类，“help + 类名”查看该类的具体包含的命令；
+quit(q)：退出；
+run(r)：全速运行；
+start：启动程序，单步执行；
+list：查看程序代码，一次显示一段，连续list则按顺序一段一段显示(回车可重复上次命令)，“list + 函数名”可查看指定函数；
+next(n)：逐过程，执行下一步(回车可重复上次命令),不进入语句调用的函数中
+step(s)：逐语句，执行下一步(回车可重复上次命令),会进入语句调用的函数中
+print(p)：加变量名可以打印变量内容(eg:print i、print &i等)；
+
+break(b)：设置断点，"break + 行号"为文件中某行设置断点
+continue(c)：继续全速运行
+
+info(i)：查看GDB内部局部变量的值
+info breakpoints：查看设置的断点信息
+delete(d) breakpoints 编号：删除指定编号断点
+
+backtrace(bt)：显示当前的所在位置的函数调用关系
+frame：切换栈帧(frame + 行号)，暂时切换到指定行(eg:当前在100行，要查看其他函数的局部变量(假设在第十行)：frame 10，在第十行的函数中查看局部变量的值，查看完之后next回到101行，next能回到101行是因为frame(f)：是切换栈帧，就是这个意思)
+finsh：结束当前函数，返回函数调用点
+set：设置变量值(eg:set var n=100，set var buf[2]='x',...)
+run argv[1] argv[2]...：调试时命令行传参
+
+display：设置观察点(eg:display num)
+undisplay:取消观察点设置(undisplay 观察点编号)
+
+enable breakpoints:启用所有断点
+disable breakpoints:禁用所有断点
+
+x：查看内存(eg:x/20x buf，20个字节，按十六进制显示)
+watch：被设置观察点的变量被修改时，会打印显示(与display区别)
+(info)i watch：显示观察点
+
+core：核心(日志文件)
+ulimit -a:查看core文件大小，默认是0
+ulimit -c 1024：将core文件大小调节成指定的1024
+gdb ./a.out core：便可查看程序bug出现时的信息。
+
+set follow-fork-mode child:跟踪子进程
+set follow-fork-mode parent：跟踪父进程

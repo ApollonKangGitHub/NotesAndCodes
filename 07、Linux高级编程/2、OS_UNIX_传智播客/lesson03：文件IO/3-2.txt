@@ -1,0 +1,41 @@
+errno定义(前34个)：
+/usr/include/asm-generic/errno-base.h、
+
+函数：
+perror(const char *);
+strerror(int errno);
+
+lseek(int fd, int offset, int whence);//修改的是文件结构体的f_pos
+fcntl();用法一：获取设置文件属性//获取/修改的是文件结构体的flag参数
+
+int flag = O_RDWR|NONBLOCK;
+fcntl(STDIN_FILENO, F_SETFL, flag);
+
+杂货铺ioctl()：
+一般用于底层的驱动开发(设备文件)时候的属性获取与设置：如显卡frambuffer的属性获取，窗口的大小获取。
+
+注意：ioctl获取的是文件(一般为硬件文件)的物理属性，而fcntl获取的是文件的控制访问属性/权限。
+---------------------------------------------------------------
+作业：
+①为什么open的必须项只能选一个，而可选项可以选多个。怎样的实现机制
+②创建一个10M的空文件(如迅雷下载时先创建一个空文件才向空文件中下载)
+③输出重定向，当C标准printf打印时直接打印到test.txt文件中(注意：不能在运行时输出重定向，即不能"./a.out > test.txt")
+④mycp拷贝递归实现(拷贝目录及文件)
+⑤获取屏幕的分辨率(不一定是fb0，也可以获取图形界面的分辨率)
+
+解决方案：
+②
+利用lseek函数：
+先创建一个空文件，将SEEK_SET偏移10M-1字节
+接着在第10M位置写一个'\0'即可
+
+③
+open("test.txt", O_CREAT|O_TRUNC|O_RDWR, 0777);
+dup2(fd,STDOUT_FILENO);
+即可输出重定向
+
+④
+复制目录必然要递归复制，所以要递归判断与创建目录/复制文件
+
+
+

@@ -1,0 +1,23 @@
+ssize_t recv(int sockfd, void *buf, size_t len, int flags);
+ssize_t recvto(int sockfd, void *buf, size_t len, int flags, struct sockaddr *src_addr, socklen_t *addrlen);
+//相当于recv与connect/accept的结合
+
+ssize_t sendto(int sockfd, const void *buf, size_t len, int flags);
+ssize_t sendto(int sockfd, const void *buf, size_t len, int flags, const struct sockaddr *src_addr, socklen_t *addrlen);
+
+注意：UDP编程中socket(AF_INET, SOCK_DGRAM, 0);//server与client的SOCK_DGRAM必须对应，如果客户端写成SOCK_STREAM，服务器会一直阻塞。
+
+
+多进程并发服务器：
+特点：占用资源大，但是一个进程挂了不会影响另一个。这与多线程刚好相反，多线程服务器不稳定。
+父进程循环accept，当父进程接收到链接请求之后，立即fork出一个新的子进程去处理通信，而父进程继续循环等待接收accept()(没有连接请求父进程则阻塞，但是不会影响到子进程通信)。而对于自己进程回收，父进程可以用一个单独的子进程去回收用于通信的子进程。子进程也可以自己fork出新的子进程与原进程分别处理读与写(发与收)，以致于读写之间不受阻塞限制。
+注意：子进程会继承父进程文件描述符，对于用不到的文件描述符listenfd需要关闭，并且父进程中在创建fork之后也需要关闭confd。防止文件描述符无意义的耗费过度。
+
+服务器启动后，连接多个客户端便可：
+netstat -apn | grep "port"查看连接状态等信息
+ps -ajx查看进程个数
+
+可能需要考虑的问题：
+①子进程资源回收，如果客户端关闭，服务器相应的子进程则要结束，不能一直阻塞等待接收信息。
+②不用的文件描述符要回收
+③对于回射式客户-服务器模型，并没有交互式客户-服务器模型那样需要子进程创建新的进程去分别处理读写操作，那么结束一个进程自然不需要发送信号去通知另一个。交互式客户-服务器模型则必须要处理读写进程中任意一个结束，信号告知另外一个进程。

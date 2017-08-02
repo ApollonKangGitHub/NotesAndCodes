@@ -1,0 +1,89 @@
+kill -l:查看信号
+前31个(1-31)为UNIX经典信号，后31个(34-64)为硬件驱动开发的实时信号
+man 7 signal查看信号章节对各信号的介绍
+
+Ctrl + c：	2	SIGINT	默认终止进程
+Ctrl + z：	20	SIGTSTP	停止(fg + id继续运行，dg + id后台运行)
+Ctrl + \：	3	SIGQUIT	默认终止进程
+段错误：		11 	SIGSEGV	非法操作内存
+总线错误	：	7	SIGBUS	非法操作文件映射
+浮点数例外：	8	SIGFPE  CPU不能除0(致命错误)
+管道信号：	13	SIFPIPE	向一个没有读端的管道写操作
+------------------------------------------------------------------------------------------------------------------------------------
+kill函数：
+int kill(pid_t pid, int signal);
+pid > 0:指定pid进程
+pid == 0:与发送信号同组的进程
+pid < 0:发送给指定组gid = |pid|
+pid == -1:向所有权限发送信号的进程发送信号
+
+用kill函数实现kill命令：
+#include<stdio.h>
+#include<stdlib.h>
+#include<signal.h>
+#include<sys/types.h>
+int main(int argc, char *argv[])
+{
+	if(argc < 3){
+		printf("./mykill signal pid");
+		exit(EXIT_FAILURE);
+	}
+	if(kill((pid_t)atoi(arv[2]), atoi(argv[1])) < 0){
+		perror("kill");
+		exit(EXIT_FAILURE);	
+	}
+	return 0; 
+}
+
+int raise(int sig);函数：向自己发送信号
+void abort(void);函数：向自己发送指定信号SIGABRT(6)
+unsigned int alarm(unsigned int seconds);函数：
+定时，seconds秒后为自己发送指定信号SIGALRM(14)，返回值为未睡够的秒数。
+------------------------------------------------------------------------------------------------------------------------------------
+信号的处理方式：
+SIG_IGN：忽略
+SIG_DEL：默认
+a signal handling function：捕捉，自定义处理函数
+1、默认处理五种方式：
+①Term   Default action is to terminate the process.
+	默认动作是终止进程
+②Ign    Default action is to ignore the signal.
+	默认动作是忽略信号(与SIG_IGN不是一个层级的)
+③Core   Default action is to terminate the process and dump core (seecore(5)).
+	默认动作是终止这个进程并产生一个core文件(Core Dump用于GDB调试)
+④Stop   Default action is to stop the process.
+	默认动作是暂停进程
+⑤Cont   Default action is to continue the process if it is currently stopped.
+	默认动作是继续进程(如果当前这个进程被暂停)
+2、忽略：不做处理
+3、自定义捕捉信号：signal函数处理
+------------------------------------------------------------------------------------------------------------------------------------
+信号集与信号集操作函数：
+sigset_t为信号集类型，sizeof(sifset_t)=128
+
+PCB中为信号维护了两个信号集：PEND未决信号集、Block阻塞信号集
+未决信号集初始值每一位均为0，如果产生一个信号则对应bit位置为1，产生的信号如果阻塞信号集对应位置为1，则阻塞。如果不再阻塞进行下一步处理(忽略
+、默认、自定义)时，处理完毕则未决信号对应bit位会被重新置为0。未决信号集对应位为1时，信号状态为未决态(信号产生，没有被响应)；递达态：信号产生并且被相应(不阻塞)。未决信号集由内核自动设置，用户可读，而阻塞信号集用户可以自己设置一屏蔽某些信号。信号SIGKILL不能被忽略/阻塞。并且前三十一个信号不支持排队机制，后三十二个支持排队机制。
+
+程序员可以操作的信号集(阻塞信号集，又叫做信号屏蔽字)操作函数：
+int sigemptyset(sigset_t * set);//清空(全部置为0)
+int sigfillset(sigset_t * set);//全部置为1
+int sigaddset(sigset_t * set, int signo);//将signo信号加入阻塞信号集(对应位1)
+int sigdelset(sigset_t * set, int signo);//对应位0
+int sigismember(sigset_t * set, int signo);//判断signo信号是否存在于信号集
+
+注册阻塞信号集：
+int sigprocmask(int how, const sigset_t * set, sigset_t * oset);
+sigset_t * set：传入参数(可置为NULL)
+sigset_t * oset：传出参数(可置为NULL)
+how：
+SIG_BLOCK：注册/设置为：set | oset
+SIG_UNBLOCK：注册/设置为：set & oset
+SIG_SETMASK：注册/设置为：set替换oset
+
+获取未决信号集：
+int sigpending(sigset_t * set);
+------------------------------------------------------------------------------------------------------------------------------------
+Ctrl + z：暂停放到后台
+fg num：从后台启动到前台运行
+bg num：启动到后台运行

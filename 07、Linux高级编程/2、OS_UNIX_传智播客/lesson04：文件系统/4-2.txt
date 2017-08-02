@@ -1,0 +1,68 @@
+int link(const char * oldpath, const char * newpath);
+创建一个硬链接。
+
+当rm删除文件时，只是删除了目录下的记录项和把inode硬链接计数减1，当硬链接计数减为0时，该文件就被真正删除了。硬链接一般有跨文件系统限制，并且不允许创建目录的硬链接(容易造成死循环：在目录中的硬链接指向包含该链接的目录)，软连接允许跨文件系统。但是POSIX标准是支持跨文件系统的硬链接的，只是为了安全不建议这样做。创建目录一级增加硬链接计数应当是一个原子操作。
+
+symlink();创建一个软链接(符号链接)
+readlink(const char * path,char * buf,size_t size);读一个path链接指向的文件名到大小为size的buf中。
+
+unlink(const char * pathname);
+删除一个链接：
+如果是硬链接，硬链接数减1，当计数减为0时，释放数据块与inode。
+如果文件链接数为0，当时有进程已经打开该文件，并且持有文件描述符，则等待该进程关闭文件时，kernel采取真正删除该文件。
+利用该特性创建临时文件:先open/create创建一个文件，马上unlink()。
+----------------------------------------------------------------
+int rename(const char * oldpath, const char * newpath);
+为文件重命名
+chdir(const char * path);切换目录
+char * getcwd(char * buf, size_t size);
+获取当前目录完整路径,双返回值
+long pathconf(const char *path, int name);fpathconf();
+name:
+_PC_NAME_MAX(测试文件名最大长度)、
+_PC_PATH_MAX(最大路径长度)、
+_PC_LINK_MAX_(最大硬链接数)等
+
+----------------------------------------------------------------
+目录操作：
+int mkdir(const char * pathname, mode_t mode);创建目录
+int rmdir(const char * pathname);删除空目录
+DIR * opendir(const char * pathname);打开目录
+struct dirent * readdir(DIR * dirp);读取目录中的记录项，返回读一次记录项结构体指针，DIR*指针后以一次，到达目录尾返回NULL
+
+#define NAME_MAX 255
+struct dirent
+{
+   long d_ino; /* inode number*/
+   off_t d_off; /* offset to this dirent*/
+   unsigned short d_reclen; /* length of this d_name*/
+   unsigned char d_type; /* the type of d_name*/
+   char d_name [NAME_MAX+1]; /* filename (null-terminated)*/
+};
+
+rewinddir(DIR * dirp);将DIR*指针移动到目录起始位置类似于rewind()
+telldir(DIR * dirp);获取目录指针当前位置，类似于ftell()
+seeldir(DIR * dirp, long offset);设置目录指针位置，类似于fseek()
+int closedir(DIR * dirp);关闭目录
+----------------------------------------------------------------
+虚拟文件系统(VFS，Virtual File System)：
+
+open
+  |
+--|----------------------
+|Linux Kernel		|
+|			|
+|ntfs_open -----------------NTFS		
+|ext3_open -----------------EXT3		
+|FAT32_open ----------------FAT32
+|			|				
+------------------------
+
+不同的文件系统有不同的操作函数
+----------------------------------------------------------------
+dup()与dup2()函数可以实现输入输出重定向
+
+练习作业：
+实现rm -rf 删除目录(unlink、rmdir)
+实现ls -l(stat,opendir,readdir...)
+从一个文件中读取1000个随机数，进行排序并写入另一个文件中(dup、dup2)

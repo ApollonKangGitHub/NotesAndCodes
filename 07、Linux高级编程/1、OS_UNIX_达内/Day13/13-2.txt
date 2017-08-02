@@ -1,0 +1,20 @@
+实现TCP多进程(一个服务器多个客户端)的非阻塞回射式服务器通信。
+----------------------------------------------------------------
+UDP编程：
+UDP开发没有listen()与accept()函数，且发送与接收函数分别为sendto()与recvfrom()函数，个别时候(在connect)也可以使用read()与write()读写，而当不采用connect()函数时的UDP通信则不能使用write()写。
+
+ssize_t sendto(int sockfd, const void * buf, size_t len, int flags, const struct sockaddr * dest_addr, socklen_t addrlen);
+
+ssize_t recvfrom(int sockfd, const void * buf, size_t len, int flags, const struct sockaddr * src_addr, socklen_t addrlen);
+
+sendto()函数相当于send()+connect()，不需要connect(),只需给目标地址，并没有建立连接，在发送时建立短暂连接。前三个参数与write相同，第四个参数置零即可，后两个参数与connect()相同。
+recvfrom()函数类似,在无连接情况下，recvfrom()函数相当于recv() + accept()，前三个参数与read相同，第四个参数置零即可，后两个参数与accept()相同。
+注意：sendto与recvfrom要配套使用，因为在使用sendto发送而用recv或read来接收时，就无法获取发送方地址，不能为发送方回发消息。
+----------------------------------------------------------------
+时间服务器：
+用UDP实现，客户端发一条消息，服务器给客户端返回时间。
+----------------------------------------------------------------
+线程：
+网络一般都要实现代码的并行。代码的并行必须借助多进程/多线程.
+进程与线程的概念区别：
+主流操作系统中都是支持多进程，而在每个进程的内部，都支持多线程并行。进程是重量级的，拥有自己的独立的内存空间。线程是轻量级的，不需要拥有自己独立的内存空间，只是额外拥有一个独立的栈空间。一个进程内存空间的所有线程共享进程的资源(代码区、全局区、堆、文件目录...)。因此网络开发经常是网络+多线程模式。进程中支持多线程并行，其中有且仅有一个是主线程(main函数)

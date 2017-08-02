@@ -1,0 +1,95 @@
+网络基础：
+
+OSI七层模型：
+物理层、数据链路层、网络层、传输层、会话层、表现层、应用层。
+TCP/IP协议模型中，把上三层合并为应用层一层。
+
+常见协议：
+HTTP(超文本传输协议)
+FTP(文件传输协议(上传与下载))
+TELNET(远程登录)
+NFS(文件系统)
+SMTP(简单邮件传送协议)
+DNS(域名解析协议)
+DHCP(动态主机配置协议)
+
+TCP(传输控制协议)
+UDP(用户数据报协议)
+IP(网络协议)
+ICMP(控制报文协议)
+
+ARP(地址解析协议)
+RARP(反向地址转换协议)
+----------------------------------------------------------------
+Socket编程基本概念：
+流(Stream)
+连接(Connection)
+阻塞(Block)、非阻塞(Non-block)
+同步(Synchronous)、异步(asynchronous)
+IP地址、子网掩码(Subnet Mask)
+字节顺序
+****************************************************************
+IP地址、子网掩码、MAC地址、端口号：
+计算机在网络中的地址，用四字节/六字节表示，四字节的IPV4，6字节的IPV6。IP地址由两种表示方法：①计算机底层是支持8位十六进制的整数(32位二进制)。②点分十进制的表示方法(每个字节转成十进制，中间用"."隔开)，其本质是一样的。
+eg：
+(点分十进制)172.40.0.10
+(十六进制)0XAC28000A
+(二进制)10101100 00101000 00000000 00001010
+
+查看IP地址的命令：
+Windowds：ipconfig
+Linux/Unix：ifconfig
+分类：ABCDEF六类
+子网掩码：也用点分十进制表示，判断两个IP地址是否在同一局域网(用IP地址分别于子网掩码作位与运算，如果两个结果相同则在同一网段)，以及用来划分子网。
+MAC地址：网卡地址、物理地址，IP地址与网卡地址绑定(IP地址和MAC地址的绑定不是固定的PC机上的IP地址，但在一段时间段内是固定的)。
+IP地址虽然可以找到计算机，但是计算机如果不授权给外部设备，外部设备无法进行任何操作。计算机用端口代表本机的某个进程，访问本机进程，必须通过端口进行。所以说网络通信，IP地址与端口号缺一不可。
+端口号是为二进制的整数0--65535，其中0--1023基本不用，被系统松散占用，比如：HTTP(80)、FTP(20(控制端口)、21(数据端口))、TELNET(23);1024--48000+为可用端口；某些软件安装后会被占用某些特定端口，比如：1521为Oracle的监听端口，8080为Oracle的Http Server，7001为weblogic服务器占用的端口(Java服务器)等等；48000+ -- 65535为不稳定端口，随时可能被系统拿去做临时端口(即使程序员正在使用，也会被系统剥夺使用权限)，所以我们在1024--48000+中选没有使用的去用即可。
+网络字节序(NBO)与主机字节序(HBO)：主机字节序不固定，但一般(Inter x86)都是小端存储，而网络字节序是固定的，为大端存模式。
+----------------------------------------------------------------
+网络编程的相关函数与概念：
+socket：本意为插座，翻译成套接字。网络编程即Socket编程。网络通信包括一对一、一对多的方式，一对一又分为：本地通信(IPC)与网络通信。
+
+本地通信：两个本地进程进行通信，使用socket文件做交互媒介，后缀是.sock，类型为s。一对一通信步骤：
+#include<sys/socket.h>
+(1)、服务端：
+①创建一个socket，函数socket()，返回socket描述符(文件描述符)。
+int socket(int domain, int type, int protocol);
+dimain(协议族/域):AF_UNIX、AF_LOCAL、AF_INET、AF_INET6、AF_PACKET等，前两个是本地通信，后两个是网络，最后一个是链路层通信；
+type(套接口类型):SOCK_STREAM(数据流)、SOCK_DGRAM(数据报)等
+protocol:一般根据前两个就可以确定，一般置为0即可。
+eg：(AF_INET,SOCK_STREAM,0)<==>(AF_INET,SOCK_STREAM,IPPROTO_TCP)
+②准备通信地址(本地是文件/网络是IP+端口)：
+通信地址有三个结构组成：
+struct sockaddr{
+	int sa_family;/*协议簇*/
+	char sa_data[];/*通信地址*/ 
+};//这个结构体的成员不需要记忆，因为这个结构只用于作为函数的参数类型，从不用来存储数据。该类型用于兼容本地通信地址与网络通信地址，真正存数据的类型(struct sockaddr_un或)转换为该类型之后作为参数传递即可。
+本地通信地址：
+#include<sys/un.h>
+strcut sockaddr_un{
+	int sun_family;//协议簇,与domain一致即可
+	char sun_path[];//带路径的文件socket名
+};
+网络通信地址：
+#include<netinet/in.h>
+struct sockaddr_in{
+	int sin_family;//协议簇,与domain一致即可
+	short int sin_port;//端口号
+	struct in_addr sin_addr;//IP地址	
+};其中struct in_addr为：
+
+③绑定socket和通信地址bind()：
+int bind(int sockfd, const struct sockaddr * addr, socklen_t addrlen);
+④通信(读写操作):read()和write()
+⑤关闭：close()
+
+(2)、客户端：
+①创建socket
+②准备通信地址(网络通信：准备的是服务器的通信地址)
+③连接服务器，函数connect()，用法与bind()基本完全一样
+int connect(int sockfd, const struct sockaddr * addr, socklen_t addrlen);
+④通信(读写操作):read()和write()
+⑤关闭：close()
+
+点分十进制转换十六进制函数：inet_addr()、inet_aton()等函数
+本机字节序转网络字节序(小端转大端)：htons()等函数

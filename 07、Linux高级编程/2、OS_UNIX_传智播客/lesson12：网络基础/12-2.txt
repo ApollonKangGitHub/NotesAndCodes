@@ -1,0 +1,60 @@
+socket
+IP+port为一个socket文件。
+
+1、字节序转换：
+uint32_t htonl(uint32_t hostlong);
+uint16_t htons(uint16_t hostshort);
+uint32_t ntohl(uint32_t netlong);
+uint16_t ntohs(uint16_t netshort);
+
+h表示host，n表示network，l表示32位长整数，s表示16位短整数。如果主机是小端字节序，这些函数将参数做相应的大小端转换然后返回，如果主机是大端字节序，这些函数不做转换，将参数原封不动地返回。
+
+2、IP地址转换：
+int inet_aton(const char *cp, struct in_addr *inp);
+in_addr_t inet_addr(const char *cp);
+char *inet_ntoa(struct in_addr in);
+只能处理IPv4的ip地址
+不可重入函数
+注意参数是struct in_addr
+
+int inet_pton(int af, const char *src, void *dst);//AF_INET、&addr.sin_addr.s_addr、ipaddr
+const char *inet_ntop(int af, const void *src, char *dst, socklen_t size);//AF_INET、&addr.sin_addr.s_addr、ipaddr、sizeof(ipaddr)
+可重入函数
+
+3、几个结构体：
+/*原始结构体*/
+struct sockaddr
+/*IPv4*/ 
+struct sockaddr_in
+struct in_addr
+/*IPv6*/
+struct sockaddr_in6
+struct in6_addr
+struct sockaddr_un//UNIX本地通信
+
+4、socket编程API：
+①int socket(int domain, int type, int protocol);
+/*domain：AF_INET、AF_INET6、AF_UNIX*/
+/*type：SOCK_STREAM(如TCP)、SOCK_AGRAM(如UDP)、SOCK_SEQPACKET、SOCK_RAM(提供单一网络访问，如ICMP，ping命令traceroute命令采用ICMP)、SOCK_RDM(提供给数据链路层)*/
+/*protocol：0根据前两个参数；来确认默认协议*/
+
+②int bind(int sockfd, const struct sockaddr* addr, socklen_t addrlen);//将struct sockaddr_in强制转换成struct sockaddr*
+
+注意：定义的struct sockaddr_in addr类型结构体变量必须用bzero清零，因为结构体变量可能存在补齐的字节，垃圾值可能产生影响。
+addr.sin_addr.s_addr = htonl(IPADDR_ANY);//IPADDR_ANY表示指定主机任意一个网卡。
+
+③int listen(int sockfd, int backlog);//成功返回0，失败返回-1
+backlog:排队建立3次握手队列和完成建立3次握手队列的链接数之和。
+cat /proc/sys/net/ipv4/tcp_max_syn_backlog：用来查看系统默认队列长度。用户可以设置比该值小的值，但是不能设置大于该值的值，否则按默认处理。但是作为系统管理员可以修改默认值。
+
+④int accept(int sockfd, struct sockaddr *addr, socklen_t * addrlen);
+addr：传出参数，返回从监听队列中接收到的客户端信息。
+addrlen：传入传出参数，传入addr的大小，传出实际接受的地址信息大小。
+成功返回新的socket描述符，失败设置errno并返回-1
+
+⑤int connect(int sockfd, const struct sockaddr * addr, socklen_t addrlen);
+
+对于写好的服务器端，可以用在新窗口用“nc IP port”测试
+
+int toupper(int c);将小写字母转换成大写
+int tolower(int c);将大写字母转换成小写
