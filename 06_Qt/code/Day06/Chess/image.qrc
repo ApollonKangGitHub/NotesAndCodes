@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>image/BackGround.PNG</file>
+        <file>image/end.png</file>
+        <file>image/start.png</file>
+        <file>image/White.png</file>
+        <file>image/Black.png</file>
+        <file>runningnew.pcm</file>
+    </qresource>
+</RCC>

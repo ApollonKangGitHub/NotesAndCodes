@@ -1,0 +1,33 @@
+﻿第一天：
+	1、QT的介绍
+	2、QT的框架
+	3、项目文件(.pro)
+	4、第一个QT程序(Hello QT)
+	5、父窗口和子窗口的区别(控件、部件、构件)
+	6、信号和槽
+	7、坐标系统
+	8、内存回收机制(new、delete与对象树)
+	9、带菜单的窗口
+	10、对话框
+第二天：
+	1、QTCreator设计器的使用
+	2、常用控件
+	3、布局
+	4、自定义控件
+	5、常用事件的处理
+第三天：
+	1、Qpainter绘图
+	2、绘图设备(QPixmap、QImage、QBitmap、QPicture)
+	3、文件操作(QFile、QFileInfo、QDataStream、QTextStream、QBuff)
+第四天：
+	1、TCP编程
+	2、UDP编程
+	3、UDP传输图片
+
+第五天：
+	1、多线程编程(多任务)
+	2、数据库编程
+第六天：
+	1、汽车销售管理系统
+	2、XML
+

@@ -1,0 +1,26 @@
+﻿<!--一个简单的XML:-->
+<!-- 注释：固定头部格式 -->
+<!-- Qt编译时需要加"QT += xml"到工程文件中 -->
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- root节点，有且只有一个，可随意命名 -->
+<info>	
+	<stu id = "1">
+		<name>mike</name>
+		<age>20</age>
+		<score>89</score>
+		<sex>female</sex>
+		<love/>	<!--空的节点（元素）<love>与</love>合并为<love/> -->
+	</stu>
+	<stu id = "2">
+		<name>Jake</name>
+		<age>18</age>
+		<score>91</score>
+		<sex>female</sex>
+		<love>eat</love>
+	</stu>
+</info>
+
+<!-- 根节点结束 -->
+<!-- Qt社区：http://www.qter.org/ -->
