@@ -1,0 +1,15 @@
+Status ListDelete(DuLinkList L, int i, ElemType &e) 
+{ 
+  DuLinkList p;
+  if(i<1) 
+    return ERROR; 
+  p=GetElemP(L, i); 
+  if(!p) 
+    return ERROR; 
+  e=p->data; 
+  p->prior->next=p->next; 
+  p->next->prior=p->prior; 
+  free(p); 
+  return OK; 
+}
+

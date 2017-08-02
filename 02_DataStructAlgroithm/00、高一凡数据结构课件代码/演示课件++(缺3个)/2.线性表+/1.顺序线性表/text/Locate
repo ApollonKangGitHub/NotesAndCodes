@@ -1,0 +1,14 @@
+int LocateElem(SqList L, ElemType e, Status(*compare)(ElemType, ElemType))
+{ 
+  
+  
+  int i=1; 
+  ElemType *p=L.elem; 
+  while(i<=L.length && !compare(*p++, e))
+    i++; 
+  if(i<=L.length) 
+    return i; 
+  else 
+    return 0;
+}
+

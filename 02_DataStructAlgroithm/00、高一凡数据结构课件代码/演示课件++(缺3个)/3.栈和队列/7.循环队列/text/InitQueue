@@ -1,0 +1,8 @@
+void InitQueue(SqQueue &Q)
+{ 
+  Q.base=(QElemType*)malloc(MAX_QSIZE*sizeof(QElemType));
+  if(!Q.base) 
+    exit(OVERFLOW);
+  Q.front=Q.rear=0;
+}
+

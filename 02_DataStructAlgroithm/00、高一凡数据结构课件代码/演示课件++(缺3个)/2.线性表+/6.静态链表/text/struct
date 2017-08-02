@@ -1,0 +1,6 @@
+#define MAX_SIZE 10 
+typedef struct
+{
+  ElemType data;
+  int cur;
+}component, SLinkList[MAX_SIZE];

@@ -1,0 +1,28 @@
+Space AllocBuddy(FreeList avail,int n) 
+{ 
+  
+  int i,k;
+  Space pa,pi;
+  for(k=0;k<=m&&(avail[k].nodesize<n+1||!avail[k].first);++k);
+  
+  if(k>m) 
+    return NULL;
+  else 
+  {
+    pa=avail[k].first; 
+    ListDeleteP(avail[k].first,pa);
+    
+    for(i=1;avail[k-i].nodesize>=n+1;++i)
+    { 
+      pi=pa+(int)pow(2,k-i); 
+      ListInsertP(avail[k-i].first,1,pi);
+      
+      pi->tag=0; 
+      pi->kval=k-i; 
+    }
+    pa->tag=1; 
+    pa->kval=k-(--i); 
+  }
+  return pa; 
+}
+

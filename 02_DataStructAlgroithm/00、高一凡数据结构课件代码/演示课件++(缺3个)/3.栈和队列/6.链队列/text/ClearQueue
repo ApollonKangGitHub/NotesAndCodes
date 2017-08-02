@@ -1,0 +1,6 @@
+void ClearQueue(LinkQueue &Q)
+{ 
+  DestroyQueue(Q); 
+  InitQueue(Q); 
+}
+

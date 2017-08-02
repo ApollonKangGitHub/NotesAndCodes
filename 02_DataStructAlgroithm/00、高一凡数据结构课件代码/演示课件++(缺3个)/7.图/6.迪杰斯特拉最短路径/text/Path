@@ -1,0 +1,30 @@
+void Path(MGraph G,int v0, int v, PathMatrix P)
+{ 
+  Boolean path[MAX_VERTEX_NUM]; 
+  VRType min; 
+  int i, j=0, k, m; 
+  for(i=0; i<G.vexnum; i++)
+  {
+    path[i]=P[v][i];
+    if(path[i]) 
+      j++;
+  }
+  path[v0]=FALSE;
+  if(j) 
+    j--; 
+  k=v0; 
+  while(j)
+  {
+    min=INFINITY;
+    for(i=0; i<G.vexnum; i++) 
+      if(path[i] && G.arcs[k][i].adj<min) 
+      {
+        min=G.arcs[k][i].adj; 
+        m=i; 
+      }
+    k=m;
+    path[k]=FALSE;
+    j--; 
+  }
+}
+

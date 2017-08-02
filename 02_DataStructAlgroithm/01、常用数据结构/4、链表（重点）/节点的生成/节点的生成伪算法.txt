@@ -1,0 +1,12 @@
+# include <stdio.h>
+/*用结构体定义一个新的数据类型，作为链表节点的数据类型*/
+typedef struct Node 
+{
+	int data;//数据域
+	struct Node * pNext;//指针域
+}NODE,* PNODE;//NODE等价于struct Node ；PNODE等价于struct Node *
+int main (void)
+{
+
+	return 0;
+}

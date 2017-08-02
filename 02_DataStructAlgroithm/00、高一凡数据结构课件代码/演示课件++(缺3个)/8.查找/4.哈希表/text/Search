@@ -1,0 +1,19 @@
+Status SearchHash(HashTable H, KeyType K, int &p, int &c)
+{ 
+  
+  
+  c=0, p=Hash(K); 
+  while(H.elem[p].key!=NULL_KEY && !EQ(K, H.elem[p].key))
+  { 
+    c++; 
+    if(c<m) 
+      collision(K, p, c); 
+    else 
+      break; 
+  }
+  if EQ(K, H.elem[p].key) 
+    return SUCCESS; 
+  else 
+    return UNSUCCESS; 
+}
+

@@ -1,0 +1,19 @@
+Status DeleteBST(BiTree &T, KeyType key)
+{ 
+  
+  if(!T) 
+    return FALSE;
+  else 
+  {
+    if EQ(key, T->data.key) 
+    {
+      Delete(T); 
+      return TRUE;
+    }
+    else if LT(key, T->data.key) 
+      return DeleteBST(T->lchild, key); 
+    else 
+      return DeleteBST(T->rchild, key); 
+  }
+}
+

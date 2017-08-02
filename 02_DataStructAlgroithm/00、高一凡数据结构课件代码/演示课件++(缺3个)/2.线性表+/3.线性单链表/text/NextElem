@@ -1,0 +1,16 @@
+Status NextElem(LinkList L, ElemType cur_e, ElemType &next_e)
+{ 
+  
+  
+  LinkList p=L->next; 
+  while(p && p->next) 
+  { 
+    if(p->data==cur_e) 
+    {
+      next_e=p->next->data; 
+      return OK; 
+    }
+    p=p->next; 
+  }
+  return ERROR; 
+}

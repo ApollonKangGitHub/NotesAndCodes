@@ -1,0 +1,13 @@
+void Collect(SLCell r[], ArrType f, ArrType e)
+{ 
+  
+  int j, t=0;
+  for(j=0; j<=RADIX; j++)
+    if(f[j]!=0)
+    {
+      r[t].next=f[j];
+      t=e[j];
+    }
+  r[t].next=0;
+}
+

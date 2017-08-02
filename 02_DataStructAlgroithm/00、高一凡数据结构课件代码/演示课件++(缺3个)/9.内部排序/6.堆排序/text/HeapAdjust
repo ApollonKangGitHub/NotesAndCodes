@@ -1,0 +1,17 @@
+void HeapAdjust(HeapType &H, int s, int m)
+{ 
+  
+  int j;
+  H.r[0]=H.r[s]; 
+  for(j=2*s; j<=m; j*=2) 
+  {
+    if(j<m && LT(H.r[j].key, H.r[j+1].key)) 
+      j++; 
+    if(!LT(H.r[0].key, H.r[j].key)) 
+      break; 
+    H.r[s]=H.r[j]; 
+    s=j; 
+  }
+  H.r[s]=H.r[0]; 
+}
+

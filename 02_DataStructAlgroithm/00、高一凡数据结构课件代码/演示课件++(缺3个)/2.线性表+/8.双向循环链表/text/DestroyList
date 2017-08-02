@@ -1,0 +1,7 @@
+void DestroyList(DuLinkList &L)
+{ 
+  ClearList(L); 
+  free(L); 
+  L=NULL; 
+}
+

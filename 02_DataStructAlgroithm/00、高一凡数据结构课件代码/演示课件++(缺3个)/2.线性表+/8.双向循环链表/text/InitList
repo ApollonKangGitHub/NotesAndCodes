@@ -1,0 +1,9 @@
+void InitList(DuLinkList &L)
+{ 
+  L=(DuLinkList)malloc(sizeof(DuLNode));
+  if(L)
+    L->next=L->prior=L;
+  else
+    exit(OVERFLOW);
+}
+

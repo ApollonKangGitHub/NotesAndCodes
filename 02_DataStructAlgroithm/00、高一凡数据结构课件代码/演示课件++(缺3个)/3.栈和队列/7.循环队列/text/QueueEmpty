@@ -1,0 +1,8 @@
+Status QueueEmpty(SqQueue Q)
+{ 
+  if(Q.front==Q.rear) 
+    return TRUE;
+  else
+    return FALSE;
+}
+

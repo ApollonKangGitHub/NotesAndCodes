@@ -1,0 +1,18 @@
+void Replace_Selection(int ls[],WorkArea wa[],FILE *fi)
+{
+  int rc,rmax;
+  FILE *fo;
+  char filename[3];
+  Construct_Loser(ls,wa,fi);
+  rc=rmax=1;
+  do
+  {
+    itoa(rc-1,filename,10);
+    fo=fopen(filename,"w");
+    get_run(ls,wa,rc,rmax,fi,fo);
+    fclose(fo);
+    rc=wa[ls[0]].rnum;
+  }while(rc<=rmax);
+  printf("共产生%d个初始归并段文件\n",rc-1);
+}
+

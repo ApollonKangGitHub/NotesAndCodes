@@ -1,0 +1,21 @@
+TElemType Child(BiTree T, TElemType e, int LR)
+{ 
+  
+  BiTree a;
+  if(T) 
+  {
+    a=Point(T, e); 
+    switch(LR)
+    {
+      case 0: 
+        if(a && a->lchild) 
+          return a->lchild->data; 
+        break;
+      case 1: 
+        if(a && a->rchild) 
+          return a->rchild->data; 
+    }
+  }
+  return Nil; 
+}
+

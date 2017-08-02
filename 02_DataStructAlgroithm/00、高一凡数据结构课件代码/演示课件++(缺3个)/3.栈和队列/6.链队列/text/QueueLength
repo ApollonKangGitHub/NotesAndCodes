@@ -1,0 +1,12 @@
+int QueueLength(LinkQueue Q)
+{ 
+  int i=0; 
+  QueuePtr p=Q.front; 
+  while(Q.rear!=p) 
+  {
+    i++; 
+    p=p->next; 
+  }
+  return i;
+}
+

@@ -1,0 +1,13 @@
+void StrCopy(HString &T, HString S)
+{ 
+  int i;
+  if(T.ch) 
+    free(T.ch); 
+  T.ch=(char*)malloc(S.length*sizeof(char)); 
+  if(!T.ch) 
+    exit(OVERFLOW);
+  for(i=0; i<S.length; i++) 
+    T.ch[i]=S.ch[i]; 
+  T.length=S.length; 
+}
+

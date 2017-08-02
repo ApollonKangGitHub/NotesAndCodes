@@ -1,0 +1,13 @@
+void CreateSOSTree(SOSTree &T, SSTable ST)
+{ 
+  int sw[N+1]; 
+  if(ST.length==0) 
+    T=NULL; 
+  else 
+  {
+    FindSW(sw, ST); 
+    SecondOptimal(T, ST.elem, sw, 1, ST.length);
+    
+  }
+}
+

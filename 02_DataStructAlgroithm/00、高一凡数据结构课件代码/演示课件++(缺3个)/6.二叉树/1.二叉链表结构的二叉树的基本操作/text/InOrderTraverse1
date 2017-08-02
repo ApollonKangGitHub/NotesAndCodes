@@ -1,0 +1,22 @@
+void InOrderTraverse1(BiTree T, void(*Visit)(TElemType))
+{ 
+  
+  SqStack S;
+  InitStack(S); 
+  while(T!=NULL || !StackEmpty(S)) 
+  {
+    if(T!=NULL) 
+    { 
+      Push(S, T); 
+      T=T->lchild; 
+    }
+    else 
+    {
+      Pop(S, T); 
+      Visit(T->data); 
+      T=T->rchild; 
+    }
+  }
+  DestroyStack(S); 
+}
+

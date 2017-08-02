@@ -1,0 +1,3 @@
+大数运算：http://blog.csdn.net/chhuach2005/article/details/21168179
+大数除法：http://blog.csdn.net/zhanxinhang/article/details/6593895
+大数加减法：http://www.cnblogs.com/leader/archive/2013/01/28/2880643.html

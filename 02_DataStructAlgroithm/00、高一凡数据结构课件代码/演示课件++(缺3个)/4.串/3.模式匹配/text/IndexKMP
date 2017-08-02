@@ -1,0 +1,15 @@
+int Index_KMP(SString S, SString T, int pos, int next[])
+{
+ 
+  int i=pos, j=1; 
+  while(i<=S[0] && j<=T[0]) 
+    if(j==0 || S[i]==T[j]) 
+      i++, j++;
+    else 
+      j=next[j];
+  if(j>T[0]) 
+    return i-T[0];
+  else
+    return 0;
+}
+

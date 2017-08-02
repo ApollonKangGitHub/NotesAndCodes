@@ -1,0 +1,6 @@
+void ClearList(LinkList L) 
+{ 
+  LinkList p=L->next; 
+  L->next=NULL; 
+  DestroyList(p); 
+}

@@ -1,0 +1,23 @@
+void conversion()
+{ 
+  SqStack s;
+  unsigned n; 
+  SElemType e;
+  scanf("%u", &n); 
+  InitStack(s); 
+  while(n) 
+  {
+    Push(s, n%N); 
+    n=n/N;
+  }
+  while(!StackEmpty(s)) 
+  {
+    Pop(s, e); 
+    if(e<=9)
+      printf("%d", e); 
+    else
+      printf("%c", e+55); 
+  }
+  DestroyStack(s);
+}
+

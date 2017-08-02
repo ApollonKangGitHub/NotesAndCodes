@@ -1,0 +1,46 @@
+char Precede(SElemType t1, SElemType t2)
+{ 
+  char f;
+  switch(t2)
+  {
+    case '+':
+    case '-': if(t1=='(' || t1=='#')
+                f='<'; 
+              else
+                f='>'; 
+              break;
+    case '*':
+    case '/': if(t1=='*' || t1=='/' || t1==')')
+                f='>'; 
+              else
+                f='<'; 
+              break;
+    case '(': if(t1==')')
+              {
+                printf("À¨ºÅ²»Æ¥Åä\n");
+                exit(OVERFLOW);
+              }
+              else
+                f='<'; 
+              break;
+    case ')': switch(t1)
+              {
+                case '(': f='='; 
+                          break;
+                case '#': printf("È±·¦×óÀ¨ºÅ\n");
+                          exit(OVERFLOW);
+                default : f='>'; 
+              }
+              break;
+    case '#': switch(t1)
+              {
+                case '#': f='='; 
+                          break;
+                case '(': printf("È±·¦ÓÒÀ¨ºÅ\n");
+                          exit(OVERFLOW);
+                default : f='>'; 
+              }
+  }
+  return f;
+}
+

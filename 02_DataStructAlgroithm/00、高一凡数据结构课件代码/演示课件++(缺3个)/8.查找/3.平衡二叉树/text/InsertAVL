@@ -1,0 +1,60 @@
+Status InsertAVL(BSTree &T, ElemType e, Boolean &taller)
+{ 
+  
+  
+  if(T==NULL) 
+  { 
+    T=(BSTree)malloc(sizeof(BSTNode)); 
+    T->data=e; 
+    T->lchild=T->rchild=NULL; 
+    T->bf=EH; 
+    taller=TRUE; 
+  }
+  else 
+  {
+    if EQ(e.key, T->data.key) 
+      return FALSE; 
+    if LT(e.key, T->data.key) 
+    {
+      if(!InsertAVL(T->lchild, e, taller)) 
+        return FALSE; 
+      if(taller) 
+        switch(T->bf) 
+        {
+        case LH: 
+                 LeftBalance(T); 
+                 taller=FALSE; 
+                 break;
+        case EH: 
+                 T->bf=LH; 
+                 taller=TRUE; 
+                 break;
+        case RH: 
+                 T->bf=EH; 
+                 taller=FALSE; 
+        }
+    }
+    else 
+    {
+      if(!InsertAVL(T->rchild, e, taller)) 
+        return FALSE; 
+      if(taller) 
+        switch(T->bf) 
+        {
+        case LH:
+                 T->bf=EH; 
+                 taller=FALSE; 
+                 break;
+        case EH: 
+                 T->bf=RH; 
+                 taller=TRUE; 
+                 break;
+        case RH: 
+                 RightBalance(T); 
+                 taller=FALSE; 
+        }
+    }
+  }
+  return TRUE;
+}
+

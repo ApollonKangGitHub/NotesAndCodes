@@ -1,0 +1,17 @@
+Status ListDelete(LinkList &L, ElemType e, Status(*compare)(ElemType,ElemType))
+{ 
+  LinkList p, q;
+  q=Point(L, e, compare, p); 
+  if(!q) 
+    return ERROR; 
+  else 
+  {
+    if(!p) 
+      L=q->next; 
+    else 
+      p->next=q->next; 
+    free(q); 
+    return OK; 
+  }
+}
+

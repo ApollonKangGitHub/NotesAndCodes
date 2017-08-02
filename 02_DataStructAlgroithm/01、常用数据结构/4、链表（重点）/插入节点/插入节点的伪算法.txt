@@ -1,0 +1,19 @@
+struct Node
+{
+	int data;
+	struct Node * pNext;
+}
+
+
+/*把q指向的节点插入p指向的节点的后面*/
+
+/*方法一*/
+struct Node * r;
+r = p->pNext;//p所指向的节点的指针域，存放的是下一个节点的地址
+p->pNext = q;
+q->pNext = r;
+//r，p，q，p->pNext，q->pNext都是struct Node * 类型
+
+/*方法二*/
+q->pNext = p->pNext;
+p->pNext = q;

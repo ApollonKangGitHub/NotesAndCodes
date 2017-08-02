@@ -1,0 +1,15 @@
+void CreateList(LinkList &L, int n) 
+{ 
+  int i;
+  LinkList p;
+  L=(LinkList)malloc(sizeof(LNode)); 
+  L->next=NULL; 
+  for(i=n; i>0; --i)
+  {
+    p=(LinkList)malloc(sizeof(LNode)); 
+    scanf("%d", &p->data); 
+    p->next=L->next; 
+    L->next=p; 
+  }
+}
+

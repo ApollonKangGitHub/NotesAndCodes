@@ -1,0 +1,10 @@
+void MergeLeft(Space p,Space &s)
+{ 
+  
+  s=(p-1)->uplink; 
+  s->size+=p->size; 
+  Space f=FootLoc(p); 
+  f->uplink=s; 
+  f->tag=0; 
+}
+

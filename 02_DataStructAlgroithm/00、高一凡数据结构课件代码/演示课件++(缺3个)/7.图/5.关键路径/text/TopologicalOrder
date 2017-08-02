@@ -1,0 +1,42 @@
+Status TopologicalOrder(ALGraph G, SqStack &T)
+{ 
+  
+  
+  int i, k, count=0; 
+  int indegree[MAX_VERTEX_NUM]; 
+  SqStack S;
+  ArcNode *p;
+  FindInDegree(G, indegree); 
+  InitStack(S); 
+  for(i=0; i<G.vexnum; i++) 
+    if(!indegree[i]) 
+      Push(S, i); 
+  InitStack(T); 
+  for(i=0; i<G.vexnum; i++) 
+    ve[i]=0;
+  while(!StackEmpty(S)) 
+  {
+    Pop(S, i); 
+    Visit(G.vertices[i].data); 
+    Push(T, i); 
+    count++; 
+    for(p=G.vertices[i].firstarc; p; p=p->nextarc)
+    { 
+      k=p->data.adjvex; 
+      if(--indegree[k]==0) 
+        Push(S, k);
+      if(ve[i]+p->data.info->weight>ve[k])
+      
+        ve[k]=ve[i]+p->data.info->weight;
+        
+    }   
+  }
+  if(count<G.vexnum)
+  {
+    printf("此有向网有回路\n");
+    return ERROR;
+  }
+  else
+    return OK;
+}
+

@@ -1,0 +1,20 @@
+	for(i=0; i<20 && (a[i] != key || (a[i] = setkey) || 1); i++);//空循环的重要代码,与下面注释掉的循环功能相同
+	/*
+		for(i = 0; i<20; i++)
+		{
+			if(a[i] == key)
+				a[i] = setkey;
+		}
+	*/
+	/*
+		for(i=0; i<20 && (a[i] != key || (a[i] = setkey) || 1); i++);语句详解：
+
+		i<10是为了保证判断的数是数组中的元素，所以该条件必须在&&前面；
+		a[i]!=key如果成立则(a[i] != key || (a[i] = setkey))整体为真，继续循环执行；
+		a[i]!=key如果不成立，则a[i]=key,需要换成setkey。则赋值a[i] = setkey，由于该句是赋值语句，
+		先将setkey的值赋给a[i],a[i] != key || (a[i] = setkey)即普通for循环中的循环体。之后再判断；
+		赋值的setkey是非0值时，a[i] = setkey为真则(a[i] != key || (a[i] = setkey))整体为真，继续循环执行；
+		若setkey是0，则a[i] != key || (a[i] = setkey)，最后或一个1，是为了当setkey是0时，
+		将判断语句依然为真，能使循环继续执行下去。
+		所以循环中最重要的代码i<10 && (a[i] != key || (a[i] = setkey) || 1)一定要理解。
+	*/

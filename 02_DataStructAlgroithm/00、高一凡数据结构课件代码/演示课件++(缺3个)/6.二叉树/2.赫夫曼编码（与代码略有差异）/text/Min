@@ -1,0 +1,20 @@
+int min(HTNode *t,int i)
+{ 
+  int j,m,k;
+  for(j=1;j<=i;j++) 
+    if(t[j].parent==0) 
+    {
+      k=t[j].weight; 
+      m=j; 
+      break; 
+    }
+  for(j=m+1;j<=i;j++) 
+    if(t[j].weight<k&&t[j].parent==0) 
+    {
+      k=t[j].weight; 
+      m=j; 
+    }
+  t[m].parent=i+1; 
+  return m; 
+}
+

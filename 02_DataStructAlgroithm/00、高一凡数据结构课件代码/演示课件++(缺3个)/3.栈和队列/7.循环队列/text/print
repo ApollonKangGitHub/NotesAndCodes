@@ -1,0 +1,5 @@
+void print(QElemType c)
+{ 
+  printf("%d ", c);
+}
+

@@ -1,0 +1,23 @@
+void get_run(int ls[],WorkArea wa[],int rc,int &rmax,FILE *fi,FILE *fo)
+{
+  int q;
+  KeyType minimax;
+  while(wa[ls[0]].rnum==rc)
+  {
+    q=ls[0];
+    minimax=wa[q].rec.key;
+    OutputToFile(fo,wa[q].rec);
+    InputFromFile(fi,wa[q].rec);
+    if(feof(fi))
+      wa[q].rnum=rmax+1;
+    else
+    {
+      if(wa[q].rec.key<minimax)
+      {
+        rmax=rc+1;
+        wa[q].rnum=rmax;
+      }
+    }
+    Select_MiniMax(ls,wa,q);
+  }
+}

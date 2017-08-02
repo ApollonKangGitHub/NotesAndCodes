@@ -1,0 +1,10 @@
+void Sort(SqList L, int adr[])
+{ 
+  int i=1, p=L.r[0].next; 
+  while(p) 
+  {
+    adr[i++]=p; 
+    p=L.r[p].next; 
+  }
+}
+

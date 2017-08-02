@@ -1,0 +1,11 @@
+int ListLength(SLinkList L)
+{ 
+  int j=0, i=L[MAX_SIZE-1].cur; 
+  while(i) 
+  {
+    i=L[i].cur; 
+    j++; 
+  }
+  return j;
+}
+

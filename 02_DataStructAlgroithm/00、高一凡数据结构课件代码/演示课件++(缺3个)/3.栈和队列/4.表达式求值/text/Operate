@@ -1,0 +1,11 @@
+SElemType Operate(SElemType a, SElemType theta, SElemType b)
+{ 
+  switch(theta)
+  {
+    case '+': return a+b;
+    case '-': return a-b;
+    case '*': return a*b;
+  }
+  return a/b;
+}
+

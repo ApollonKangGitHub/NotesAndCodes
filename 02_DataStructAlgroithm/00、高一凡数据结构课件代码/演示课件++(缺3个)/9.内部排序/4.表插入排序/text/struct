@@ -1,0 +1,22 @@
+typedef int InfoType; 
+
+struct RedType 
+{
+  KeyType key; 
+  InfoType otherinfo; 
+};
+
+struct SLNode 
+{
+  RedType rc; 
+  int next; 
+};
+
+#define SIZE 20 
+
+struct SLinkListType 
+{
+  SLNode r[SIZE]; 
+  int length; 
+};
+

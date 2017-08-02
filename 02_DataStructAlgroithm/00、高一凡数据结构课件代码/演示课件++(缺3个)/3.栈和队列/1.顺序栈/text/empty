@@ -1,0 +1,8 @@
+Status StackEmpty(SqStack S)
+{ 
+  if(S.top==S.base) 
+    return TRUE;
+  else
+    return FALSE;
+}
+

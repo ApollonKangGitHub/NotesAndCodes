@@ -1,0 +1,10 @@
+void ListTraverse(LinkList L, void(*visit)(ElemType))
+// visit的形参类型为ElemType，与bo2-1.h中相应函数的形参类型ElemType&不同
+{ 
+  LinkList p=L->next; 
+  while(p) 
+  { 
+    visit(p->data); 
+    p=p->next; 
+  }
+}

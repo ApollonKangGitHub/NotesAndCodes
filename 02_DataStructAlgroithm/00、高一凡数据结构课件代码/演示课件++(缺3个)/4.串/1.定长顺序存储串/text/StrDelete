@@ -1,0 +1,12 @@
+Status StrDelete(SString S, int pos, int len)
+{ 
+  
+  int i;
+  if(pos<1 || pos>S[0]-len+1 || len<0) 
+    return ERROR; 
+  for(i=pos+len; i<=S[0]; i++) 
+    S[i-len]=S[i]; 
+  S[0]-=len; 
+  return OK; 
+}
+

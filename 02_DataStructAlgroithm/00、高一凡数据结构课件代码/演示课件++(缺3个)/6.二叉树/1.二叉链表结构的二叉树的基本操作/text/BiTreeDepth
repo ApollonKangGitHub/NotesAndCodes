@@ -1,0 +1,10 @@
+int BiTreeDepth(BiTree T)
+{ 
+  int i, j;
+  if(!T)
+    return 0; 
+  i=BiTreeDepth(T->lchild); 
+  j=BiTreeDepth(T->rchild); 
+  return i>j ? i+1 : j+1; 
+}
+

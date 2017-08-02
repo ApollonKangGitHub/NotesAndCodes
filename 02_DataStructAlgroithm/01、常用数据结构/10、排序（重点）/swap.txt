@@ -1,0 +1,50 @@
+void swap_1 (int * , int *);//经典型
+void swap_2 (void * a, void *b, size_t size);//泛型
+void swap_3 (int * , int *);//取巧型
+void swap_4 (int * , int *);//诡异型
+
+void swap_1 (int * a, int *b)
+{
+	int mediun;//中间介质
+	mediun = *a;
+	*a = *b;
+	*b = mediun;
+
+	return;
+}
+
+void swap_2 (void * a, void *b, size_t size)
+{
+	unsigned char * p = (unsigned char *)a;
+	unsigned char * q = (unsigned char *)b;
+	unsigned char medium;
+
+	while(size--)
+	{
+		int mediun = *p;
+		*p = *q;
+		*q = mediun;
+		p++;
+		q++;
+	}
+
+	return;
+}
+
+void swap_3 (int * a, int *b)
+{
+	*a = *a + *b;
+	*b = *a - *b;
+	*a = *a - *b;
+
+	return;
+}
+
+void swap_4 (int * a, int *b)
+{
+	*a = *a ^ *b;
+	*b = *a ^ *b;
+	*a = *a ^ *b;
+
+	return;
+}

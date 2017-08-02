@@ -1,0 +1,37 @@
+Status CriticalPath(ALGraph G)
+{ 
+  SqStack T;
+  int i, j, k;
+  ArcNode *p;
+  int ee[MAX_VERTEX_NUM]; 
+  int el[MAX_VERTEX_NUM]; 
+  int vl[MAX_VERTEX_NUM]; 
+  if(!TopologicalOrder(G, T)) 
+    return ERROR;
+  j=ve[0]; 
+  for(i=1; i<G.vexnum; i++) 
+    if(ve[i]>j)
+      j=ve[i]; 
+  for(i=0; i<G.vexnum; i++) 
+    vl[i]=j; 
+  while(!StackEmpty(T)) 
+    for(Pop(T, j), p=G.vertices[j].firstarc; p; p=p->nextarc)
+    { 
+      
+      k=p->data.adjvex; 
+      if(vl[k]-p->data.info->weight<vl[j])
+      
+        vl[j]=vl[k]-p->data.info->weight;
+        
+    }   
+  
+  for(j=0; j<G.vexnum; j++) 
+    for(p=G.vertices[j].firstarc; p; p=p->nextarc)
+    { 
+      k=p->data.adjvex; 
+      ee[k]=ve[j]; 
+      el[k]=vl[k]-p->data.info->weight; 
+    }
+  return OK;
+}
+

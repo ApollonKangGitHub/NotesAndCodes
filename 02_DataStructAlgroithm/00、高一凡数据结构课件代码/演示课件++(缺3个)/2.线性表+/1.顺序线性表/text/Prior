@@ -1,0 +1,20 @@
+Status PriorElem(SqList L, ElemType cur_e, ElemType &pre_e)
+{ 
+  
+  
+  int i=2; 
+  ElemType *p=L.elem+1; 
+  while(i<=L.length && *p!=cur_e) 
+  {
+    p++; 
+    i++; 
+  }
+  if(i>L.length) 
+    return ERROR; 
+  else 
+  {
+    pre_e=*--p; 
+    return OK; 
+  }
+}
+

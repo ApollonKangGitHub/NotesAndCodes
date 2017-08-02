@@ -1,0 +1,10 @@
+void DestroyList(LinkList &L)
+{ 
+  LinkList q;
+  while(L) 
+  { 
+    q=L->next; 
+    free(L); 
+    L=q; 
+  }
+}

@@ -1,0 +1,19 @@
+void MakeTableSorted(SLinkListType &SL)
+{ 
+  int i, p, q;
+  SL.r[0].rc.key=INT_MAX; 
+  SL.r[0].next=0; 
+  for(i=1; i<=SL.length; i++) 
+  { 
+    q=0; 
+    p=SL.r[0].next; 
+    while(SL.r[p].rc.key<=SL.r[i].rc.key) 
+    { 
+      q=p; 
+      p=SL.r[p].next; 
+    } 
+    SL.r[q].next=i; 
+    SL.r[i].next=p;
+  }
+}
+

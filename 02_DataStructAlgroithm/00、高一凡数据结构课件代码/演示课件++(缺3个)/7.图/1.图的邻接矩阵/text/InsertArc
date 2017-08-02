@@ -1,0 +1,19 @@
+Status InsertArc(MGraph &G, VertexType v, VertexType w)
+{ 
+  
+  int i, v1, w1;
+  v1=LocateVex(G, v); 
+  w1=LocateVex(G, w); 
+  if(v1<0 || w1<0) 
+    return ERROR;
+  if(G.kind%2 && G.arcs[v1][w1].adj==INFINITY || G.kind%2==0 && G.arcs[v1][w1].adj==0) 
+    G.arcnum++; 
+  if(G.kind%2) 
+    scanf("%d", &G.arcs[v1][w1].adj);
+  else 
+    G.arcs[v1][w1].adj=1;
+  if(G.kind>1) 
+    G.arcs[w1][v1]=G.arcs[v1][w1]; 
+  return OK;
+}
+

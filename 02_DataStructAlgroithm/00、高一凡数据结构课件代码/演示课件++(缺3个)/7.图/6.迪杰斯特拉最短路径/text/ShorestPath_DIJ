@@ -1,0 +1,42 @@
+void ShortestPath_DIJ(MGraph G, int v0, PathMatrix P, ShortPathTable D)
+{ 
+  
+  
+  int v, w, i, j;
+  VRType min;
+  Boolean final[MAX_VERTEX_NUM];
+  
+  for(v=0; v<G.vexnum; v++)
+  {
+    final[v]=FALSE; 
+    D[v]=G.arcs[v0][v].adj; 
+    for(w=0; w<G.vexnum; w++)
+      P[v][w]=FALSE; 
+    if(D[v]<INFINITY) 
+      P[v][v0]=P[v][v]=TRUE;
+      
+  }
+  D[v0]=0; 
+  final[v0]=TRUE; 
+  for(i=1; i<G.vexnum; i++) 
+  { 
+    min=INFINITY; 
+    for(w=0; w<G.vexnum; w++) 
+      if(!final[w] && D[w]<min) 
+      { 
+        v=w; 
+        min=D[w]; 
+      }
+    final[v]=TRUE; 
+    for(w=0; w<G.vexnum; w++) 
+      if(!final[w] && min<INFINITY && G.arcs[v][w].adj<INFINITY && (min+G.arcs[v][w].adj<D[w]))
+      { 
+        D[w]=min+G.arcs[v][w].adj; 
+        for(j=0; j<G.vexnum; j++)
+        
+          P[w][j]=P[v][j];
+        P[w][w]=TRUE;
+      }
+  }
+}
+

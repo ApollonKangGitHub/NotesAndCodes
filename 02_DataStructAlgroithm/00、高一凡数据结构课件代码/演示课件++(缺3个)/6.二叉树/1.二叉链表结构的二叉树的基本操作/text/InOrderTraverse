@@ -1,0 +1,11 @@
+void InOrderTraverse(BiTree T, void(*Visit)(TElemType))
+{ 
+  
+  if(T)
+  {
+    InOrderTraverse(T->lchild, Visit); 
+    Visit(T->data); 
+    InOrderTraverse(T->rchild, Visit); 
+  }
+}
+

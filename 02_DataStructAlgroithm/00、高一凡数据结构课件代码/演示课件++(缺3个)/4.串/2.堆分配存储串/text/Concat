@@ -1,0 +1,15 @@
+void Concat(HString &T, HString S1, HString S2)
+{ 
+  int i;
+  if(T.ch) 
+    free(T.ch); 
+  T.length=S1.length+S2.length; 
+  T.ch=(char*)malloc(T.length*sizeof(char)); 
+  if(!T.ch) 
+    exit(OVERFLOW);
+  for(i=0; i<S1.length; i++) 
+    T.ch[i]=S1.ch[i];
+  for(i=0; i<S2.length; i++) 
+    T.ch[S1.length+i]=S2.ch[i];
+}
+

@@ -1,0 +1,21 @@
+Status DeleteArc(MGraph &G, VertexType v, VertexType w)
+{ 
+  
+  int v1, w1;
+  VRType j=0; 
+  if(G.kind%2) 
+    j=INFINITY;
+  v1=LocateVex(G, v); 
+  w1=LocateVex(G, w); 
+  if(v1<0 || w1<0) 
+    return ERROR;
+  if(G.arcs[v1][w1].adj!=j) 
+  {
+    G.arcs[v1][w1].adj=j; 
+    if(G.kind>=2) 
+      G.arcs[w1][v1]=G.arcs[v1][w1]; 
+    G.arcnum--; 
+  }
+  return OK;
+}
+

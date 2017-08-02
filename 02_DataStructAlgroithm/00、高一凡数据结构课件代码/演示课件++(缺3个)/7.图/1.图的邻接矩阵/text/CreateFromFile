@@ -1,0 +1,36 @@
+void CreateFromFile(MGraph &G, char* filename)
+{ 
+  int i, j, k;
+  VRType w=0; 
+  VertexType v1, v2; 
+  FILE *f; 
+  f=fopen(filename, "r"); 
+  fscanf(f, "%d", &G.kind); 
+  if(G.kind%2) 
+    w=INFINITY;
+  fscanf(f, "%d", &G.vexnum); 
+  for(i=0; i<G.vexnum; i++)
+    InputFromFile(f, G.vexs[i]); 
+  fscanf(f, "%d", &G.arcnum); 
+  for(i=0; i<G.vexnum; i++) 
+    for(j=0; j<G.vexnum; j++)
+    {
+      G.arcs[i][j].adj=w; 
+      G.arcs[i][j].info=NULL; 
+    }
+  if(!(G.kind%2)) 
+    w=1;
+  for(k=0; k<G.arcnum; k++) 
+  {
+    fscanf(f, "%s%s", v1.name, v2.name); 
+    if(G.kind%2) 
+      fscanf(f, "%d", &w); 
+    i=LocateVex(G, v1); 
+    j=LocateVex(G, v2); 
+    G.arcs[i][j].adj=w; 
+    if(G.kind>1) 
+      G.arcs[j][i]=G.arcs[i][j]; 
+  }
+  fclose(f); 
+}
+

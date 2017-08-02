@@ -1,0 +1,10 @@
+void QueueTraverse(SqQueue Q, void(*visit)(QElemType))
+{ 
+  int i=Q.front; 
+  while(i!=Q.rear) 
+  {
+    visit(Q.base[i]); 
+    i=(i+1)%MAX_QSIZE; 
+  }
+}
+

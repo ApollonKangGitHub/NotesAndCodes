@@ -1,0 +1,17 @@
+Status NextElem(SLinkList L, ElemType cur_e, ElemType &next_e)
+{ 
+  
+  
+  int j, i=LocateElem(L, cur_e); 
+  if(i) 
+  { 
+    j=L[i].cur; 
+    if(j) 
+    { 
+      next_e=L[j].data; 
+      return OK; 
+    }
+  }
+  return ERROR; 
+}
+

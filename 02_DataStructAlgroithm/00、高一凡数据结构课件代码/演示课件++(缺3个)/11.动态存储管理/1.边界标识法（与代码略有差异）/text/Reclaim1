@@ -1,0 +1,34 @@
+void Reclaim1(Space &pav,Space &p)
+{ 
+  
+  Space s,t=p+p->size; 
+  int lft=(p-1)->tag,r=(p+p->size)->tag; 
+  if(lft==1&&r==1) 
+  {
+    ListInsertP(pav,1,p); 
+    AmendDomain(p); 
+  }
+  else if(lft==0&&r==1) 
+    MergeLeft(p,s); 
+  else if(lft==1&&r==0) 
+  { 
+    p->tag=0; 
+    p->llink=t->llink; 
+    p->llink->rlink=p; 
+    p->rlink=t->rlink; 
+    p->rlink->llink=p; 
+    p->size+=t->size; 
+    (FootLoc(t))->uplink=p; 
+    if(pav==t) 
+      pav=p; 
+  }
+  else 
+  { 
+    ListDeleteP(pav,t); 
+    s=(p-1)->uplink; 
+    s->size+=p->size+t->size; 
+    (FootLoc(t))->uplink=s; 
+  }
+  p=NULL; 
+}
+

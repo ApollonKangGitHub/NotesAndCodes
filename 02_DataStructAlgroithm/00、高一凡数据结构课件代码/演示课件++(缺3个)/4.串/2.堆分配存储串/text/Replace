@@ -1,0 +1,22 @@
+Status Replace(String &S, String T, String V)
+{ 
+  
+  int i=1; 
+  Status k;
+  if(StrEmpty(T)) 
+    return ERROR;
+  while(i)
+  {
+    i=Index(S, T, i); 
+    if(i) 
+    {
+      StrDelete(S, i, StrLength(T)); 
+      k=StrInsert(S, i, V); 
+      if(!k) 
+        return ERROR;
+      i+=StrLength(V); 
+    }
+  };
+  return OK;
+}
+

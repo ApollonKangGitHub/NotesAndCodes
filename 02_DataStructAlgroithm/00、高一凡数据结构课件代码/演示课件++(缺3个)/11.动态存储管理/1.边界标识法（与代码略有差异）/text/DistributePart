@@ -1,0 +1,13 @@
+void DistributePart(Space p,int n)
+{ 
+  Space f=FootLoc(p); 
+  f->tag=1; 
+  p->size-=n; 
+  f=FootLoc(p); 
+  f->tag=0; 
+  f->uplink=p; 
+  f=f+1; 
+  f->tag=1; 
+  f->size=n; 
+}
+

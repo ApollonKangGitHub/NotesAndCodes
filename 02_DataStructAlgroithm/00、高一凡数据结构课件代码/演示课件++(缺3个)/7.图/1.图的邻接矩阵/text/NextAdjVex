@@ -1,0 +1,14 @@
+int NextAdjVex(MGraph G, int v, int w)
+{ 
+  
+  
+  int i;
+  VRType j=0; 
+  if(G.kind%2) 
+    j=INFINITY;
+  for(i=w+1; i<G.vexnum; i++) 
+    if(G.arcs[v][i].adj!=j) 
+      return i; 
+  return -1; 
+}
+

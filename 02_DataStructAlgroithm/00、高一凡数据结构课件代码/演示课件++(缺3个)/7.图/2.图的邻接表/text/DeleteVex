@@ -1,0 +1,28 @@
+Status DeleteVex(ALGraph &G, VertexType v)
+{ 
+  int i, k;
+  LinkList p; 
+  k=LocateVex(G, v); 
+  if(k<0) 
+    return ERROR;
+  for(i=0; i<G.vexnum; i++)
+    DeleteArc(G, v, G.vertices[i].data); 
+  if(G.kind<2) 
+    for(i=0; i<G.vexnum; i++)
+      DeleteArc(G, G.vertices[i].data, v); 
+  for(i=0; i<G.vexnum; i++) 
+  {
+    p=G.vertices[i].firstarc; 
+    while(p) 
+    {
+      if(p->data.adjvex>k) 
+        p->data.adjvex--; 
+      p=p->next; 
+    }
+  }
+  for(i=k+1; i<G.vexnum; i++)
+    G.vertices[i-1]=G.vertices[i]; 
+  G.vexnum--; 
+  return OK;
+}
+

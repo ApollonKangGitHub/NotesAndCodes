@@ -1,0 +1,8 @@
+Status Pass(PosType b)
+{ 
+  if(m[b.x][b.y]==1)
+    return OK;
+  else
+    return ERROR;
+}
+

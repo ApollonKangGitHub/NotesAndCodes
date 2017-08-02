@@ -1,0 +1,22 @@
+Status SubString(HString &Sub, HString S, int pos, int len)
+{ 
+  
+  int i;
+  if(pos<1 || pos>S.length || len<0 || len>S.length-pos+1) 
+    return ERROR; 
+  if(Sub.ch) 
+    free(Sub.ch); 
+  if(!len) 
+    InitString(Sub); 
+  else 
+  {
+    Sub.ch=(char*)malloc(len*sizeof(char)); 
+    if(!Sub.ch) 
+      exit(OVERFLOW);
+    for(i=0; i<=len-1; i++) 
+      Sub.ch[i]=S.ch[pos-1+i];
+    Sub.length=len; 
+  }
+  return OK;
+}
+

@@ -1,0 +1,9 @@
+void ListTraverse(SqList L, void(*visit)(ElemType&))
+{ 
+  
+  
+  ElemType *p=L.elem; 
+  for(int i=1; i<=L.length; i++) 
+    visit(*p++); 
+}
+

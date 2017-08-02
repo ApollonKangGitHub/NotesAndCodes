@@ -1,0 +1,8 @@
+Status ListEmpty(DuLinkList L)
+{ 
+  if(L->next==L && L->prior==L)
+    return TRUE;
+  else
+    return FALSE;
+}
+

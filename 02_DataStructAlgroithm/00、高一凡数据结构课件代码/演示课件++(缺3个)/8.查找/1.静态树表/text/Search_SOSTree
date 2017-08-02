@@ -1,0 +1,12 @@
+Status Search_SOSTree(SOSTree &T, KeyType key)
+{ 
+  while(T) 
+    if(T->data.key==key) 
+      return OK; 
+    else if(T->data.key>key) 
+      T=T->lchild; 
+    else 
+      T=T->rchild; 
+  return FALSE; 
+}
+

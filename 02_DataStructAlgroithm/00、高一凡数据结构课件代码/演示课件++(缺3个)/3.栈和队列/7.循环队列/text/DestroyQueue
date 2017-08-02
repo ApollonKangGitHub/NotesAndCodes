@@ -1,0 +1,8 @@
+void DestroyQueue(SqQueue &Q)
+{ 
+  if(Q.base) 
+    free(Q.base); 
+  Q.base=NULL; 
+  Q.front=Q.rear=0;
+}
+

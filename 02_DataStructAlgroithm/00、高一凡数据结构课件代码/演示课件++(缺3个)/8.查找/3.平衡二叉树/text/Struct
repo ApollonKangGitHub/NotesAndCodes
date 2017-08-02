@@ -1,0 +1,7 @@
+typedef struct BSTNode
+{ 
+  TElemType data; 
+  int bf;
+  BSTNode *lchild, *rchild; 
+}BSTNode, *BSTree;
+

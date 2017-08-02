@@ -1,0 +1,9 @@
+void Select_MiniMax(int ls[],WorkArea wa[],int q)
+{
+  int t=(w+q)/2;
+  for(;t>0;t=t/2)
+    if(wa[ls[t]].rnum<wa[q].rnum||wa[ls[t]].rnum==wa[q].rnum&&wa[ls[t]].rec.key<wa[q].rec.key)
+      swap(q,ls[t]);
+  ls[0]=q;
+}
+

@@ -1,0 +1,33 @@
+Status TopologicalSort(ALGraph G)
+{ 
+  int i, k, count=0; 
+  int indegree[MAX_VERTEX_NUM]; 
+  SqStack S;
+  ArcNode *p;
+  FindInDegree(G, indegree); 
+  InitStack(S); 
+  for(i=0; i<G.vexnum; i++) 
+    if(!indegree[i]) 
+      Push(S, i); 
+  while(!StackEmpty(S)) 
+  {
+    Pop(S, i); 
+    printf("%s ", G.vertices[i].data.name); 
+    count++; 
+    for(p=G.vertices[i].firstarc; p!=NULL; p=p->nextarc) 
+    {
+      k=p->data.adjvex; 
+      if(!(--indegree[k])) 
+        Push(S,k);
+    }
+  }
+  if(count<G.vexnum) 
+  { printf("此有向图有回路\n");
+    return ERROR;
+  }
+  else
+  { printf("为一个拓扑序列。\n");
+    return OK;
+  }
+}##
+

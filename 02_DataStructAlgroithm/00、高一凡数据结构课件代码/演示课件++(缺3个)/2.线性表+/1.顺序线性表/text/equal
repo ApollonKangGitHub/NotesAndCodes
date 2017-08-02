@@ -1,0 +1,8 @@
+Status equal(ElemType c1, ElemType c2)
+{ 
+  if(c1==c2)
+    return TRUE;
+  else
+    return FALSE;
+}
+

@@ -1,0 +1,18 @@
+Status PriorElem(SLinkList L, ElemType cur_e, ElemType &pre_e)
+{ 
+  
+  
+  int j, i=L[MAX_SIZE-1].cur; 
+  do 
+  {
+    j=i; 
+    i=L[i].cur; 
+  }while(i && cur_e!=L[i].data); 
+  if(i) 
+  {
+    pre_e=L[j].data; 
+    return OK;
+  }
+  return ERROR; 
+}
+

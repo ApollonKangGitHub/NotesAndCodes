@@ -1,0 +1,8 @@
+void TraverseHash(HashTable H, void(*Visit)(int, ElemType))
+{ 
+  int i;
+  for(i=0; i<m; i++) 
+    if(H.elem[i].key!=NULL_KEY) 
+      Visit(i, H.elem[i]); 
+}
+

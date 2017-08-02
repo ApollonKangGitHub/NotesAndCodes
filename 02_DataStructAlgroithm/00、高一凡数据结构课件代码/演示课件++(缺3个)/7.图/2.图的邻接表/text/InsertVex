@@ -1,0 +1,8 @@
+void InsertVex(ALGraph &G, VertexType v)
+{ 
+  
+  G.vertices[G.vexnum].data=v; 
+  G.vertices[G.vexnum].firstarc=NULL; 
+  G.vexnum++; 
+}
+

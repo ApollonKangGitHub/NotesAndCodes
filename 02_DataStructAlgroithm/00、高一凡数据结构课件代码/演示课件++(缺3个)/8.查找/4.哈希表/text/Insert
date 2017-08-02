@@ -1,0 +1,19 @@
+Status InsertHash(HashTable &H, ElemType e)
+{ 
+  
+  int p, c=0; 
+  if(SearchHash(H, e.key, p, c)) 
+    return DUPLICATE; 
+  else if(c<hashsize[H.sizeindex]/2) 
+  {
+    H.elem[p]=e; 
+    ++H.count; 
+    return OK; 
+  }
+  else 
+  {
+    RecreateHashTable(H); 
+    return UNSUCCESS; 
+  }
+}
+

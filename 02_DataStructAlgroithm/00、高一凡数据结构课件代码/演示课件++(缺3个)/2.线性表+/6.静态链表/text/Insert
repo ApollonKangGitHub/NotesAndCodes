@@ -1,0 +1,18 @@
+Status ListInsert(SLinkList L, int i ,ElemType e)
+{ 
+  int m, j, k=MAX_SIZE-1; 
+  if(i<1 || i>ListLength(L)+1) 
+    return ERROR;
+  j=Malloc(L); 
+  if(j) 
+  {
+    L[j].data=e; 
+    for(m=1; m<i; m++) 
+      k=L[k].cur; 
+    L[j].cur=L[k].cur; 
+    L[k].cur=j; 
+    return OK;
+  }
+  return ERROR;
+}
+

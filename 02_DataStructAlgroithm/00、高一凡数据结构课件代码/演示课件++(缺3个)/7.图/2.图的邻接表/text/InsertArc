@@ -1,0 +1,23 @@
+Status InsertArc(ALGraph &G, VertexType v, VertexType w)
+{ 
+  
+  ElemType e; 
+  int i, j;
+  i=LocateVex(G, v); 
+  j=LocateVex(G, w); 
+  if(i<0 || j<0) 
+    return ERROR;
+  G.arcnum++; 
+  e.adjvex=j; 
+  e.info=NULL; 
+  if(G.kind%2) 
+    InputArc(e.info); 
+  ListInsert(G.vertices[i].firstarc, 1, e); 
+  if(G.kind>=2) 
+  {
+    e.adjvex=i; 
+    ListInsert(G.vertices[j].firstarc, 1, e); 
+  }
+  return OK;
+}
+

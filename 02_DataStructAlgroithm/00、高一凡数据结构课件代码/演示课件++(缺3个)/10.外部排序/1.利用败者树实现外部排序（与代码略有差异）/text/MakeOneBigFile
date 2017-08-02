@@ -1,0 +1,20 @@
+void MakeOneBigFile(int k)
+{ 
+  RedType *b=new RedType[k+1]; 
+  int *ls=new int[k]; 
+  FILE* *fp;
+  fp=new FILE* [k+1]; 
+  int i;
+  char outfile[10], filename[3]; 
+  for(i=0; i<k; i++)
+  {
+    itoa(i, filename, 10); 
+    fp[i]=fopen(filename, "r"); 
+  }
+  scanf("%s", outfile); 
+  fp[k]=fopen(outfile, "w"); 
+  K_Merge(ls, b, k, fp); 
+  for(i=0; i<=k; i++)
+    fclose(fp[i]); 
+}
+

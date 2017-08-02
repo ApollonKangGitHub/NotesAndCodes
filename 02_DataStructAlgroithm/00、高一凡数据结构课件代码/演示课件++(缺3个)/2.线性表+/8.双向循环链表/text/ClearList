@@ -1,0 +1,11 @@
+void ClearList(DuLinkList L) 
+{ 
+  DuLinkList p=L->next; 
+  while(p!=L) 
+  {
+    p=p->next; 
+    free(p->prior); 
+  }
+  L->next=L->prior=L; 
+}
+

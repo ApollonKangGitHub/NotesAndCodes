@@ -1,0 +1,10 @@
+void LR_Rotate(BSTree &p)
+{ 
+  BSTree lc=p->lchild; 
+  p->lchild=lc->rchild->rchild; 
+  lc->rchild->rchild=p; 
+  p=lc->rchild; 
+  lc->rchild=p->lchild; 
+  p->lchild=lc; 
+}
+

@@ -1,0 +1,34 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: 输出星号 - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\Users\user\AppData\Local\Temp\RSPD181.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"Debug/输出星号.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"F:\Computer\Notes and code\01、C and C++\02、数据结构与算法\01、C语言数据结构实现\12、算法练习\4、按规律输出星号\输出星号.cpp"
+]
+Creating command line "cl.exe @C:\Users\user\AppData\Local\Temp\RSPD181.tmp" 
+Creating temporary file "C:\Users\user\AppData\Local\Temp\RSPD182.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/输出星号.pdb" /debug /machine:I386 /out:"Debug/输出星号.exe" /pdbtype:sept 
+".\Debug\输出星号.obj"
+]
+Creating command line "link.exe @C:\Users\user\AppData\Local\Temp\RSPD182.tmp"
+<h3>Output Window</h3>
+Compiling...
+输出星号.cpp
+f:\computer\notes and code\01、c and c++\02、数据结构与算法\01、c语言数据结构实现\12、算法练习\4、按规律输出星号\输出星号.cpp(11) : warning C4101: 'i' : unreferenced local variable
+f:\computer\notes and code\01、c and c++\02、数据结构与算法\01、c语言数据结构实现\12、算法练习\4、按规律输出星号\输出星号.cpp(11) : warning C4101: 'j' : unreferenced local variable
+Linking...
+
+
+
+<h3>Results</h3>
+输出星号.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

@@ -1,0 +1,8 @@
+Status QueueEmpty(LinkQueue Q)
+{ 
+  if(Q.front->next==NULL)
+    return TRUE;
+  else
+    return FALSE;
+}
+

@@ -1,0 +1,8 @@
+int Malloc(SLinkList space) 
+{ 
+  int i=space[0].cur; 
+  if(i) 
+    space[0].cur=space[i].cur; 
+  return i; 
+}
+

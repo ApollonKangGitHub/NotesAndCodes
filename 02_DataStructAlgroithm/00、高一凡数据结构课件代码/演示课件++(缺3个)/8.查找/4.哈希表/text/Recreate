@@ -1,0 +1,21 @@
+void RecreateHashTable(HashTable &H)
+{ 
+  int i, count=H.count; 
+  ElemType *p, *elem=(ElemType*)malloc(count*sizeof(ElemType));
+  
+  p=elem; 
+  for(i=0; i<m; i++) 
+    if((H.elem+i)->key!=NULL_KEY) 
+      *p++=*(H.elem+i); 
+  H.count=0; 
+  H.sizeindex++; 
+  m=hashsize[H.sizeindex]; 
+  H.elem=(ElemType*)realloc(H.elem, m*sizeof(ElemType));
+  
+  for(i=0; i<m; i++)
+    H.elem[i].key=NULL_KEY; 
+  for(p=elem; p<elem+count; p++) 
+    InsertHash(H, *p);
+  free(elem); 
+}
+

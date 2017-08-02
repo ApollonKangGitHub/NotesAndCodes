@@ -1,0 +1,19 @@
+Status ListInsert(DuLinkList L, int i, ElemType e)
+{ 
+  DuLinkList p, s;
+  if(i<1 || i>ListLength(L)+1) 
+    return ERROR; 
+  p=GetElemP(L, i-1); 
+  if(!p) 
+    return ERROR; 
+  s=(DuLinkList)malloc(sizeof(DuLNode)); 
+  if(!s)
+    return ERROR; 
+  s->data=e; 
+  s->prior=p; 
+  s->next=p->next; 
+  p->next->prior=s; 
+  p->next=s; 
+  return OK; 
+}
+

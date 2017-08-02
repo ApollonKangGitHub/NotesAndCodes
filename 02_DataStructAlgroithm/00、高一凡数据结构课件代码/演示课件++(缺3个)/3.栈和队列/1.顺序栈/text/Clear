@@ -1,0 +1,5 @@
+void ClearStack(SqStack &S)
+{ 
+  S.top=S.base; 
+}
+

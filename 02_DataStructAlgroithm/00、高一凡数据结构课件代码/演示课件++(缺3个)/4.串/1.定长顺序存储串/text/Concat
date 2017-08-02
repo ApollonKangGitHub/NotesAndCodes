@@ -1,0 +1,23 @@
+Status Concat(SString T, SString S1, SString S2) 
+{ 
+  int i;
+  if(S1[0]+S2[0]<=MAX_STR_LEN) 
+  { 
+    for(i=1; i<=S1[0]; i++)
+      T[i]=S1[i];
+    for(i=1; i<=S2[0]; i++)
+      T[S1[0]+i]=S2[i];
+    T[0]=S1[0]+S2[0];
+    return TRUE;
+  }
+  else 
+  {
+    for(i=1; i<=S1[0]; i++)
+      T[i]=S1[i];
+    for(i=1; i<=MAX_STR_LEN-S1[0]; i++) 
+      T[S1[0]+i]=S2[i];
+    T[0]=MAX_STR_LEN;
+    return FALSE;
+  }
+}
+

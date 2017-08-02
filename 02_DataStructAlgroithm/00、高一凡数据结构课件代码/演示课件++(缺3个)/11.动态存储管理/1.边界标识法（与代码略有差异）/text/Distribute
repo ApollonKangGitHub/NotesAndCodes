@@ -1,0 +1,7 @@
+void Distribute(Space &pav,Space p)
+{ 
+  
+  ListDeleteP(pav,p); 
+  p->tag=(FootLoc(p))->tag=1; 
+}
+

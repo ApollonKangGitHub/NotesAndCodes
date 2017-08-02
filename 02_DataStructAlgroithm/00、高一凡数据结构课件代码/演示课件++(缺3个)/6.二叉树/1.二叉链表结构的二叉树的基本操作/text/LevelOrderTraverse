@@ -1,0 +1,22 @@
+void LevelOrderTraverse(BiTree T, void(*Visit)(TElemType))
+{ 
+  
+  LinkQueue q;
+  QElemType a;
+  if(T) 
+  {
+    InitQueue(q); 
+    EnQueue(q, T); 
+    while(!QueueEmpty(q)) 
+    {
+      DeQueue(q, a); 
+      Visit(a->data); 
+      if(a->lchild!=NULL) 
+        EnQueue(q, a->lchild); 
+      if(a->rchild!=NULL) 
+        EnQueue(q, a->rchild); 
+    }
+    DestroyQueue(q); 
+  }
+}
+

@@ -1,0 +1,11 @@
+void PreOrderTraverse(BiTree T, void(*Visit)(TElemType))
+{ 
+  
+  if(T) 
+  {
+    Visit(T->data); 
+    PreOrderTraverse(T->lchild, Visit); 
+    PreOrderTraverse(T->rchild, Visit); 
+  }
+}
+

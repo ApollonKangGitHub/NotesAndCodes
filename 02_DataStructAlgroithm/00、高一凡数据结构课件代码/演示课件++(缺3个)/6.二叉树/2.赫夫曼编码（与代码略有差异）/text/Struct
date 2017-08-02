@@ -1,0 +1,6 @@
+struct HTNode 
+{
+  int weight; 
+  int parent, lchild, rchild;
+};
+

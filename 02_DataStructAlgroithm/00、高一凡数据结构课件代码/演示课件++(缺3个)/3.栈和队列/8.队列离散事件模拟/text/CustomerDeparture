@@ -1,0 +1,16 @@
+void CustomerDeparture()
+{ 
+  int i=en.NType; 
+  DeQueue(q[i], customer); 
+  TotalTime+=en.OccurTime-customer.ArrivalTime;
+  
+  if(!QueueEmpty(q[i]))
+  { 
+    GetHead(q[i], customer); 
+    et.OccurTime=en.OccurTime+customer.Duration;
+    
+    et.NType=i; 
+    OrderInsert(ev, et, cmp); 
+  }
+}
+

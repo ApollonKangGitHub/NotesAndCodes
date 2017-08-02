@@ -1,0 +1,15 @@
+void Bank_Simulation()
+{ 
+  LNode *p;
+  OpenForDay(); 
+  while(!ListEmpty(ev)) 
+  { DelFirst(ev, ev.head, p); 
+    en.OccurTime=GetCurElem(p).OccurTime; 
+    en.NType=GetCurElem(p).NType;
+    if(en.NType==Qu) 
+      CustomerArrived(); 
+    else 
+      CustomerDeparture(); 
+  } 
+}
+

@@ -1,0 +1,20 @@
+Status SearchBST(BiTree &T, KeyType key, BiTree f, BiTree &p) 
+{ 
+  
+  
+  if(!T) 
+  {
+    p=f; 
+    return FALSE;
+  }
+  else if EQ(key, T->data.key) 
+  {
+    p=T; 
+    return TRUE;
+  }
+  else if LT(key, T->data.key) 
+    return SearchBST(T->lchild, key, T, p); 
+  else 
+    return SearchBST(T->rchild, key, T, p); 
+}
+

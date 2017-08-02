@@ -1,0 +1,13 @@
+void Adjust(int *ls, RedType *b, int k, int s) 
+{ 
+  int t;
+  t=(s+k)/2; 
+  while(t>0) 
+  {
+    if(b[s].key>b[ls[t]].key) 
+      swap(s, ls[t]); 
+    t=t/2; 
+  }
+  ls[0]=s; 
+}
+

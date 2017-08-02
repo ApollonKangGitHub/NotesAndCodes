@@ -1,0 +1,10 @@
+void OpenForDay()
+{ 
+  InitList(ev); 
+  en.OccurTime=0; 
+  en.NType=Qu; 
+  OrderInsert(ev, en, cmp); 
+  for(int i=0; i<Qu; i++)
+    InitQueue(q[i]); 
+}
+

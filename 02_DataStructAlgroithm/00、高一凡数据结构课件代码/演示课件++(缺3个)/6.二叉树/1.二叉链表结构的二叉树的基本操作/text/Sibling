@@ -1,0 +1,26 @@
+TElemType Sibling(BiTree T, TElemType e, int LR)
+{ 
+  
+  TElemType a;
+  BiTree p;
+  if(T) 
+  {
+    a=Parent(T, e); 
+    if(a!=Nil) 
+    {
+      p=Point(T, a); 
+      switch(LR)
+      {
+        case 0: 
+          if(p->lchild && p->rchild && p->rchild->data==e) 
+            return p->lchild->data; 
+          break;
+        case 1: 
+          if(p->lchild && p->rchild && p->lchild->data==e) 
+            return p->rchild->data; 
+      }
+    }
+  }
+  return Nil; 
+}
+

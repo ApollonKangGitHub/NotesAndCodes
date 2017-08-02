@@ -1,0 +1,38 @@
+void RightBalance(BSTree &T)
+{ 
+  
+  
+  
+  BSTree rc, ld;
+  rc=T->rchild; 
+  switch(rc->bf) 
+  {
+  case RH: 
+           T->bf=rc->bf=EH; 
+           L_Rotate(T); 
+           break;
+  case LH: 
+           ld=rc->lchild; 
+           switch(ld->bf) 
+           {
+           case RH: 
+                    T->bf=LH; 
+                    rc->bf=EH; 
+                    break;
+           case EH: 
+                    T->bf=rc->bf=EH; 
+                    break;
+           case LH: 
+                    T->bf=EH; 
+                    rc->bf=RH; 
+           }
+           ld->bf=EH; 
+#ifndef FLAG 
+           R_Rotate(T->rchild); 
+           L_Rotate(T); 
+#else 
+           RL_Rotate(T); 
+#endif
+  }
+}
+

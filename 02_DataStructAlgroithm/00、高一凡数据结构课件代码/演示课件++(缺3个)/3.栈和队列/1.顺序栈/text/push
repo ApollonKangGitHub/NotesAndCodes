@@ -1,0 +1,13 @@
+void Push(SqStack &S, SElemType e)
+{ 
+  if(S.top-S.base==S.stacksize) 
+  {
+    S.base=(SElemType*)realloc(S.base, (S.stacksize+STACK_INCREMENT)*sizeof(SElemType)); 
+    if(!S.base)
+      exit(OVERFLOW); 
+    S.top=S.base+S.stacksize; 
+    S.stacksize+=STACK_INCREMENT; 
+  }
+  *(S.top)++=e; 
+}
+

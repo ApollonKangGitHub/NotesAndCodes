@@ -1,0 +1,15 @@
+int LocateElem(LinkList L, ElemType e, Status(*compare)(ElemType, ElemType))
+{ 
+  
+  
+  int i=0; 
+  LinkList p=L->next; 
+  while(p) 
+  {
+    i++; 
+    if(compare(p->data, e)) 
+      return i; 
+    p=p->next; 
+  }
+  return 0; 
+}

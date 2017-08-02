@@ -1,0 +1,9 @@
+int SelectMinKey(SqList L, int i)
+{ 
+  int j, k=i; 
+  for(j=i+1; j<=L.length; j++) 
+    if(L.r[j].key<L.r[k].key) 
+      k=j; 
+  return k; 
+}
+

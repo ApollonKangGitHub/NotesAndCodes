@@ -1,0 +1,5 @@
+void ClearQueue(SqQueue &Q)
+{ 
+  Q.front=Q.rear=0;
+}
+

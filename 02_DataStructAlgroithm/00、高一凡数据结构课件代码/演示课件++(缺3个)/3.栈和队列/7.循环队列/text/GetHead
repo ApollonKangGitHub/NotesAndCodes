@@ -1,0 +1,8 @@
+Status GetHead(SqQueue Q, QElemType &e)
+{ 
+  if(Q.front==Q.rear) 
+    return ERROR;
+  e=Q.base[Q.front]; 
+  return OK;
+}
+

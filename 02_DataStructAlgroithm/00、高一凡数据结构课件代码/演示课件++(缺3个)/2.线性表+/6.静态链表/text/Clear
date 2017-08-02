@@ -1,0 +1,12 @@
+void ClearList(SLinkList L)
+{ 
+  int j, i=L[0].cur; 
+  while(i) 
+  {
+    j=i; 
+    i=L[i].cur; 
+  }
+  L[j].cur=L[MAX_SIZE-1].cur; 
+  L[MAX_SIZE-1].cur=0; 
+}
+

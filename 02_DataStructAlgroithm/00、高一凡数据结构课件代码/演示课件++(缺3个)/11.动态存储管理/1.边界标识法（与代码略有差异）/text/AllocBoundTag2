@@ -1,0 +1,24 @@
+Space AllocBoundTag2(Space &pav,int n) 
+{ 
+  
+  for(p=pav;p&&p->size<n&&p->rlink!=pav;p=p->rlink);
+    if(!p||p->size<n) 
+      return NULL; 
+    else 
+    {
+      if(p->size-n<e) 
+        Distribute(pav,p); 
+      else 
+      {
+        DistributePart(p,n); 
+        if(p->size<p->llink->size) 
+        {
+          ListDeleteP(pav,p); 
+          InsertByAscend(pav,p); 
+        }
+        p=p+p->size; 
+      }
+      return p; 
+    }
+}
+

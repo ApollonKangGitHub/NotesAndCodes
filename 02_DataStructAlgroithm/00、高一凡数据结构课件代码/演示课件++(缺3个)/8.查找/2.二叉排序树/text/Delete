@@ -1,0 +1,30 @@
+void Delete(BiTree &p)
+{ 
+  BiTree s, q=p; 
+  if(!p->rchild) 
+  {
+    p=p->lchild; 
+    free(q); 
+  }
+  else if(!p->lchild) 
+  {
+    p=p->rchild; 
+    free(q); 
+  }
+  else 
+  {
+    s=p->lchild; 
+    while(s->rchild) 
+    {
+      q=s; 
+      s=s->rchild; 
+    } 
+    p->data=s->data; 
+    if(q!=p) 
+      q->rchild=s->lchild; 
+    else 
+      q->lchild=s->lchild; 
+    free(s); 
+  }
+}
+

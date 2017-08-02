@@ -1,0 +1,11 @@
+void PostOrderTraverse(BiTree T, void(*Visit)(TElemType))
+{ 
+  
+  if(T) 
+  {
+    PostOrderTraverse(T->lchild, Visit); 
+    PostOrderTraverse(T->rchild, Visit); 
+    Visit(T->data); 
+  }
+}
+

@@ -1,0 +1,26 @@
+BiTree Point(BiTree T, TElemType s)
+{ 
+  LinkQueue q;
+  QElemType a;
+  if(T) 
+  {
+    InitQueue(q); 
+    EnQueue(q, T); 
+    while(!QueueEmpty(q)) 
+    {
+      DeQueue(q, a); 
+      if(a->data==s) 
+      {
+        DestroyQueue(q); 
+        return a; 
+      }
+      if(a->lchild) 
+        EnQueue(q, a->lchild); 
+      if(a->rchild) 
+        EnQueue(q, a->rchild); 
+    }
+    DestroyQueue(q); 
+  }
+  return NULL; 
+}
+

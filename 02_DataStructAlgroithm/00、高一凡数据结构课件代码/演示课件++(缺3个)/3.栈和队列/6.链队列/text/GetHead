@@ -1,0 +1,10 @@
+Status GetHead(LinkQueue Q, QElemType &e)
+{ 
+  QueuePtr p;
+  if(Q.front==Q.rear) 
+    return ERROR;
+  p=Q.front->next; 
+  e=p->data; 
+  return OK;
+}
+

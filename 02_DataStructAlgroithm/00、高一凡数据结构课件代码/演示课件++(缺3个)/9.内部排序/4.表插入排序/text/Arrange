@@ -1,0 +1,21 @@
+void Arrange(SLinkListType &SL)
+{ 
+  int i, p, q;
+  SLNode t;
+  p=SL.r[0].next; 
+  for(i=1; i<SL.length; i++)
+  { 
+    while(p<i) 
+      p=SL.r[p].next; 
+    q=SL.r[p].next; 
+    if(p!=i) 
+    {
+      t=SL.r[p]; 
+      SL.r[p]=SL.r[i];
+      SL.r[i]=t;
+      SL.r[i].next=p; 
+    }
+    p=q; 
+  }
+}
+

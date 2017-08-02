@@ -1,0 +1,11 @@
+10
+ebb a
+bee b
+add c
+bad d
+bed e
+cab f
+dad g
+be h
+a i
+db j

@@ -1,0 +1,25 @@
+void HuffmanCodingFromLeaf(HTNode *HT, int n)
+{ 
+  char *cd;
+  int start, i, c, f;
+  char** HC=(char**)malloc((n+1)*sizeof(char*));
+  
+  cd=(char*)malloc(n*sizeof(char)); 
+  cd[n-1]='\0'; 
+  for(i=1; i<=n; i++)
+  { 
+    start=n-1; 
+    for(c=i, f=HT[i].parent; f!=0; c=f, f=HT[f].parent) 
+      if(HT[f].lchild==c) 
+        cd[--start]='0'; 
+      else 
+        cd[--start]='1'; 
+    HC[i]=(char*)malloc((n-start)*sizeof(char)); 
+    strcpy(HC[i], &cd[start]); 
+  }
+  free(cd); 
+  for(i=1; i<=n; i++)
+    puts(HC[i]); 
+  free(HC); 
+}
+

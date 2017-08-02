@@ -1,0 +1,32 @@
+Status DeleteArc(ALGraph &G, VertexType v, VertexType w)
+{ 
+  
+  int i, j, n;
+  ElemType e; 
+  i=LocateVex(G, v); 
+  j=LocateVex(G, w); 
+  if(i<0 || j<0 || i==j) 
+    return ERROR;
+  e.adjvex=j; 
+  n=LocateElem(G.vertices[i].firstarc, e, equalvex);
+  
+  if(n) 
+  {
+    ListDelete(G.vertices[i].firstarc, n, e); 
+    G.arcnum--; 
+    if(G.kind%2) 
+      free(e.info); 
+    if(G.kind>=2) 
+    {
+      e.adjvex=i; 
+      n=LocateElem(G.vertices[j].firstarc, e, equalvex);
+      
+      ListDelete(G.vertices[j].firstarc, n, e);
+      
+    }
+    return OK;
+  }
+  else 
+    return ERROR;
+}
+

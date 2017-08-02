@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>image/black.PNG</file>
+        <file>image/light.PNG</file>
+        <file>image/press_black.png</file>
+        <file>image/press_light.png</file>
+    </qresource>
+</RCC>

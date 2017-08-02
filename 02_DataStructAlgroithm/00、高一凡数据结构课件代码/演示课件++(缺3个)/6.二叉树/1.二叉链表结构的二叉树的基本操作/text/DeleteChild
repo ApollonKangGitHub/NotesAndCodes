@@ -1,0 +1,14 @@
+Status DeleteChild(BiTree p, int LR) 
+{ 
+  
+  if(p) 
+  {
+    if(LR==0) 
+      ClearBiTree(p->lchild); 
+    else if(LR==1) 
+      ClearBiTree(p->rchild); 
+    return OK;
+  }
+  return ERROR; 
+}
+

@@ -1,0 +1,21 @@
+void Reclaim(FreeList pav,Space &p)
+{ 
+  Space s;
+  s=buddy(p); 
+  while(s>=r&&s<r+pav[m].nodesize&&s->tag==0&&s->kval==p->kval) 
+  { 
+    ListDeleteP(pav[s->kval].first,s); 
+    if((p-r)%(int)pow(2,p->kval+1)==0) 
+      p->kval++; 
+    else 
+    {
+      s->kval=p->kval+1; 
+      p=s; 
+    }
+    s=buddy(p); 
+  } 
+  p->tag=0; 
+  ListInsertP(pav[p->kval].first,1,p); 
+  p=NULL; 
+}
+

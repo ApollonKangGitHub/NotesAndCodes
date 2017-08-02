@@ -1,0 +1,7 @@
+void StrCopy(SString T, SString S)
+{ 
+  int i;
+  for(i=0; i<=S[0]; i++)
+    T[i]=S[i];
+}
+

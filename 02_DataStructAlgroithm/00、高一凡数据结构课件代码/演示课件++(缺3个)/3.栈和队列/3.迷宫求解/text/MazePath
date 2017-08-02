@@ -1,0 +1,47 @@
+Status MazePath(PosType start, PosType end) 
+{ 
+  
+  PosType curpos=start; 
+  SqStack S; 
+  SElemType e; 
+  InitStack(S); 
+  do
+  {
+    if(Pass(curpos)) 
+    {
+      FootPrint(curpos); 
+      e.ord=curstep; 
+      e.seat=curpos; 
+      e.di=0; 
+      Push(S, e); 
+      curstep++; 
+      if(curpos.x==end.x && curpos.y==end.y) 
+        return TRUE;
+      NextPos(curpos, e.di); 
+    }
+    else 
+    {
+      if(!StackEmpty(S)) 
+      {
+        Pop(S, e); 
+        curstep--; 
+        while(e.di==3 && !StackEmpty(S)) 
+        {
+          MarkPrint(e.seat); 
+          Pop(S, e); 
+          curstep--; 
+        }
+        if(e.di<3) 
+        {
+          e.di++; 
+          Push(S, e); 
+          curstep++; 
+          curpos=e.seat; 
+          NextPos(curpos, e.di); 
+        }
+      }
+    }
+  }while(!StackEmpty(S));
+  return FALSE;
+}
+

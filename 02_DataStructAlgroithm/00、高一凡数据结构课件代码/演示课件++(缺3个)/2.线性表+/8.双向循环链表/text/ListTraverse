@@ -1,0 +1,10 @@
+void ListTraverse(DuLinkList L, void(*visit)(ElemType))
+{ 
+  DuLinkList p=L->next; 
+  while(p!=L) 
+  {
+    visit(p->data); 
+    p=p->next; 
+  }
+}
+

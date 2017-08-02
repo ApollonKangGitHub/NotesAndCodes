@@ -1,0 +1,14 @@
+void Construct_Loser(int ls[],WorkArea wa[],FILE *fi)
+{
+  int i;
+  for(i=0;i<w;i++)
+    ls[i]=0;
+  wa[0].rnum=0;
+  for(i=w-1;i>=0;i--)
+  {
+    InputFromFile(fi,wa[i].rec);
+    wa[i].rnum=1;
+    Select_MiniMax(ls,wa,i);
+  }
+}
+

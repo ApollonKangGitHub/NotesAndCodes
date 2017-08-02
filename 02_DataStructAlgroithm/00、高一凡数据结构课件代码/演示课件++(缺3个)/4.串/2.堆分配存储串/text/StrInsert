@@ -1,0 +1,19 @@
+Status StrInsert(HString &S, int pos, HString T) 
+{ 
+  int i;
+  if(pos<1 || pos>S.length+1) 
+    return ERROR;
+  if(T.length) 
+  {
+    S.ch=(char*)realloc(S.ch, (S.length+T.length)*sizeof(char));
+    if(!S.ch) 
+      exit(OVERFLOW);
+    for(i=S.length-1; i>=pos-1; --i) 
+      S.ch[i+T.length]=S.ch[i];
+    for(i=0; i<T.length; i++) 
+      S.ch[pos-1+i]=T.ch[i];
+    S.length+=T.length; 
+  }
+  return OK;
+}
+

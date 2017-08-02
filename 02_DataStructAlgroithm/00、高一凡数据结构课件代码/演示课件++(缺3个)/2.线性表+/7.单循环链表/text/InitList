@@ -1,0 +1,8 @@
+void InitList(LinkList &L)
+{ 
+  L=(LinkList)malloc(sizeof(LNode)); 
+  if(!L) 
+    exit(OVERFLOW);
+  L->next=L; 
+}
+

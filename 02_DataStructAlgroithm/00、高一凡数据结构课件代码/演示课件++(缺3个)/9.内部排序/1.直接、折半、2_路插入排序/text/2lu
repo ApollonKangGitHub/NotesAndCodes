@@ -1,0 +1,43 @@
+void P2_InsertSort(SqList &L, int flag)
+{ 
+  int i, j, first, final, mid=0;
+  RedType *d=(RedType*)malloc(L.length*sizeof(RedType)); 
+  d[0]=L.r[1]; 
+  first=final=0; 
+  for(i=2; i<=L.length; i++) 
+  {
+    if(flag) 
+    {
+      if(first>final)
+        j=L.length; 
+      else
+        j=0;
+      mid=(first+final+j)/2%L.length; 
+    }
+    if(L.r[i].key<d[mid].key) 
+    { 
+      j=first; 
+      first=(first-1+L.length)%L.length; 
+      while(L.r[i].key>d[j].key) 
+      {
+        d[(j-1+L.length)%L.length]=d[j]; 
+        j=(j+1)%L.length; 
+      }
+      d[(j-1+L.length)%L.length]=L.r[i]; 
+    }
+    else 
+    {
+      j=final++; 
+      while(L.r[i].key<d[j].key) 
+      {
+        d[(j+1)%L.length]=d[j]; 
+        j=(j-1+L.length)%L.length; 
+      }
+      d[(j+1)%L.length]=L.r[i]; 
+    }
+  }
+  for(i=1; i<=L.length; i++) 
+    L.r[i]=d[(first+i-1)%L.length]; 
+  free(d); 
+}
+

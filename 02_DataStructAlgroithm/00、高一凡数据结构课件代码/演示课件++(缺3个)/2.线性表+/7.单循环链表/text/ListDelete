@@ -1,0 +1,20 @@
+Status ListDelete(LinkList &L, int i, ElemType &e)
+{ 
+  LinkList q, p=L->next; 
+  int j=0; 
+  if(i<=0 || i>ListLength(L)) 
+    return ERROR; 
+  while(j<i-1) 
+  {
+    j++; 
+    p=p->next; 
+  }
+  q=p->next; 
+  p->next=q->next; 
+  e=q->data; 
+  if(L==q) 
+    L=p; 
+  free(q); 
+  return OK; 
+}
+

@@ -1,0 +1,19 @@
+void StrAssign(HString &T, char* chars)
+{ 
+  int i, j;
+  if(T.ch) 
+    free(T.ch); 
+  i=strlen(chars); 
+  if(!i) 
+    InitString(T); 
+  else 
+  {
+    T.ch=(char*)malloc(i*sizeof(char)); 
+    if(!T.ch) 
+      exit(OVERFLOW);
+    for(j=0; j<i; j++) 
+      T.ch[j]=chars[j];
+    T.length=i; 
+  }
+}
+

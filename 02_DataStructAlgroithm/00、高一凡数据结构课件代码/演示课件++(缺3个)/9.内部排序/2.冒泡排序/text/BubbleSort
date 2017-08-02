@@ -1,0 +1,16 @@
+void BubbleSort()
+{ 
+  int i, j;
+  Boolean change; 
+  for(i=length, change=TRUE; i>1 && change; i--)
+  { 
+    change=FALSE; 
+    for(j=1; j<i; j++)
+      if LT(elem[j+1].key, elem[j].key)
+      { 
+        swap(elem[j], elem[j+1]); 
+        change=TRUE; 
+      }
+  }
+}
+

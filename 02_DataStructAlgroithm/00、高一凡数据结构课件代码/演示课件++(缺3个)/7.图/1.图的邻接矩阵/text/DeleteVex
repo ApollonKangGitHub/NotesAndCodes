@@ -1,0 +1,23 @@
+Status DeleteVex(MGraph &G, VertexType v)
+{ 
+  int i, j, k;
+  k=LocateVex(G, v); 
+  if(k<0) 
+    return ERROR;
+  for(i=0; i<G.vexnum; i++)
+    DeleteArc(G, v, G.vexs[i]); 
+  if(G.kind<2) 
+    for(i=0; i<G.vexnum; i++)
+      DeleteArc(G, G.vexs[i], v); 
+  for(j=k+1; j<G.vexnum; j++)
+    G.vexs[j-1]=G.vexs[j]; 
+  for(i=0; i<G.vexnum; i++)
+    for(j=k+1; j<G.vexnum; j++)
+      G.arcs[i][j-1]=G.arcs[i][j]; 
+  for(i=0; i<G.vexnum-1; i++)
+    for(j=k+1; j<G.vexnum; j++)
+      G.arcs[j-1][i]=G.arcs[j][i]; 
+  G.vexnum--; 
+  return OK;
+}
+

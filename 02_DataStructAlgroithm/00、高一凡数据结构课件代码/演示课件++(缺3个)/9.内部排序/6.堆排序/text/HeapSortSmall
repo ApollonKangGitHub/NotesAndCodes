@@ -1,0 +1,14 @@
+void HeapSortSmall(HeapType &H)
+{ 
+  int i;
+  for(i=H.length/2; i>0; i--) 
+    HeapAdjustSmall(H, i, H.length); 
+  for(i=H.length; i>1; i--)
+  {
+    H.r[0]=H.r[1]; 
+    H.r[1]=H.r[i];
+    H.r[i]=H.r[0];
+    HeapAdjustSmall(H, 1, i-1); 
+  }
+}
+

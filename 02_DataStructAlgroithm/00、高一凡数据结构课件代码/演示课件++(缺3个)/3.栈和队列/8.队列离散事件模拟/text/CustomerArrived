@@ -1,0 +1,22 @@
+void CustomerArrived()
+{ 
+  QElemType f;
+  int durtime, intertime, i;
+  ++CustomerNum; 
+  Random(durtime, intertime); 
+  et.OccurTime=en.OccurTime+intertime; 
+  et.NType=Qu; 
+  i=Minimum(q); 
+  if(et.OccurTime<CloseTime) 
+    OrderInsert(ev, et, cmp); 
+  f.ArrivalTime=en.OccurTime; 
+  f.Duration=durtime;
+  EnQueue(q[i], f); 
+  if(QueueLength(q[i])==1) 
+  {
+    et.OccurTime=en.OccurTime+durtime; 
+    et.NType=i;
+    OrderInsert(ev, et, cmp); 
+  }
+}
+

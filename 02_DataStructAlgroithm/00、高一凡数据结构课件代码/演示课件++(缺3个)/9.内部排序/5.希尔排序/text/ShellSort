@@ -1,0 +1,7 @@
+void ShellSort(SqList &L, int dlta[], int t)
+{ 
+  int k;
+  for(k=0; k<t; k++) 
+    ShellInsert(L, dlta[k]); 
+}
+

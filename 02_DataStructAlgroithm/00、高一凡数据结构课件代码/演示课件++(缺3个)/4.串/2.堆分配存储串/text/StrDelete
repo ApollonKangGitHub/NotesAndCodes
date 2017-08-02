@@ -1,0 +1,12 @@
+Status StrDelete(HString &S, int pos, int len)
+{ 
+  int i;
+  if(S.length<pos+len-1) 
+    return ERROR;
+  for(i=pos-1; i<=S.length-len; i++) 
+    S.ch[i]=S.ch[i+len];
+  S.length-=len; 
+  S.ch=(char*)realloc(S.ch, S.length*sizeof(char)); 
+  return OK;
+}
+

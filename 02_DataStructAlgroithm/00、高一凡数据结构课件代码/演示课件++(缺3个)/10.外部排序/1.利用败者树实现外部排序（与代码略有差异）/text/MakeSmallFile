@@ -1,0 +1,33 @@
+void MakeSmallFile(int N, int &FileNum)
+{
+  SqList m; 
+  RedType c; 
+  FILE *f, *g; 
+  char filename[3], FileName[13]; 
+  scanf("%s", FileName);
+  f=fopen(FileName, "r"); 
+  int j=0; 
+  while(!feof(f)) 
+  {
+    do
+    {
+      InputFromFile(f, c); 
+      if(!feof(f)) 
+        m.r[++j]=c; 
+    }while(!feof(f) && j<N); 
+    m.length=j; 
+    InsertSort(m); 
+    if(j>0) 
+    {
+      itoa(FileNum, filename, 10); 
+      g=fopen(filename, "w"); 
+      for(j=1; j<=m.length; j++) 
+        fprintf(g, "%d %d\n", m.r[j].key, m.r[j].otherinfo);
+      fclose(g); 
+      FileNum++; 
+      j=0; 
+    }
+  }
+  fclose(f); 
+}
+

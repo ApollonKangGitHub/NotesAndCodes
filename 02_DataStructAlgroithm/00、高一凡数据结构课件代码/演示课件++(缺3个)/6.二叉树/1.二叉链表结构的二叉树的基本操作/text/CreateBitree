@@ -1,0 +1,18 @@
+void CreateBiTree(BiTree &T)
+{ 
+  
+  TElemType ch;
+  scanf(form, &ch); 
+  if(ch==Nil) 
+    T=NULL;
+  else 
+  {
+    T=(BiTree)malloc(sizeof(BiTNode)); 
+    if(!T)
+      exit(OVERFLOW);
+    T->data=ch; 
+    CreateBiTree(T->lchild); 
+    CreateBiTree(T->rchild); 
+  }
+}
+

@@ -1,0 +1,24 @@
+void CreateHuffmanTree(HTNode* &HT,int* w,int n)
+{ 
+  int m,i,s1,s2;
+  if(n<=1) 
+    return;
+  m=2*n-1; 
+  HT=(HTNode*)malloc((m+1)*sizeof(HTNode)); 
+  for(i=1;i<=n;++i)
+  { 
+    HT[i].weight=w[i-1]; 
+    HT[i].parent=HT[i].lchild=HT[i].rchild=0HT[i].parent=0; 
+  }
+  for(i=n+1;i<=m;++i) 
+    HT[i].parent=0; 
+  for(i=n+1;i<=m;++i) 
+  { 
+    s1=min(HT,i-1);
+    s2=min(HT,i-1);
+    HT[i].lchild=s1; 
+    HT[i].rchild=s2;
+    HT[i].weight=HT[s1].weight+HT[s2].weight; 
+  }
+}
+

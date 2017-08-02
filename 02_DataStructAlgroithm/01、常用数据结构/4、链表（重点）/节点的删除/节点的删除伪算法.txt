@@ -1,0 +1,15 @@
+struct Node
+{
+	int data;
+	struct Node * pNext;
+}
+
+
+/*把p指向的节点的后面的节点删除*/
+PNODE r;
+r = p->pNext;
+p->pNext = p->pNext->pNext;
+free(r);
+//要把p指向的节点的后面的节点删除，不能只把p指向的节点的后面的节点的后面的节点的地址赋给p->pNext
+//(或者说不能只把p指向的节点的后面的节点的指针域赋给p->pNext)，这样p指向的节点的后面的节点的内存一直存在会导致内存泄漏
+//p指向的节点的后面的节点的内存要释放

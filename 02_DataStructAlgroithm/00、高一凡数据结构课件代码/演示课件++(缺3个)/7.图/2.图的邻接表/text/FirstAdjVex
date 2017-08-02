@@ -1,0 +1,10 @@
+int FirstAdjVex(ALGraph G, int v)
+{ 
+  
+  ArcNode *p=G.vertices[v].firstarc; 
+  if(p) 
+    return p->data.adjvex; 
+  else
+    return -1; 
+}
+

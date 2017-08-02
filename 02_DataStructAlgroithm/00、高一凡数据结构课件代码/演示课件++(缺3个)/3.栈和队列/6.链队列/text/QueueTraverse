@@ -1,0 +1,10 @@
+void QueueTraverse(LinkQueue Q, void(*visit)(QElemType))
+{ 
+  QueuePtr p=Q.front->next; 
+  while(p) 
+  {
+    visit(p->data); 
+    p=p->next; 
+  }
+}
+

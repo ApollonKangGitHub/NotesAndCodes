@@ -1,0 +1,6 @@
+void Free(SLinkList space, int k) 
+{ 
+  space[k].cur=space[0].cur; 
+  space[0].cur=k; 
+}
+

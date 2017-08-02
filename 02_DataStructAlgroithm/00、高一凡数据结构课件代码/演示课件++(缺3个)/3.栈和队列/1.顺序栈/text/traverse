@@ -1,0 +1,7 @@
+void StackTraverse(SqStack S, void(*visit)(SElemType))
+{ 
+  SElemType *p=S.base;
+  while(S.top>p) 
+    visit(*p++); 
+}
+

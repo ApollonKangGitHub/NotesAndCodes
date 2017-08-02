@@ -1,0 +1,21 @@
+void Distribute(SLCell r[], unsigned int i, ArrType f, ArrType e)
+{ 
+  
+  
+  int j, p;
+  for(j=0; j<=RADIX; j++)
+    f[j]=0; 
+  for(p=r[0].next; p; p=r[p].next) 
+  {
+    if(strlen(r[p].keys)<=i) 
+      j=0;
+    else
+      j=ord(r[p].keys[i]); 
+    if(!f[j]) 
+      f[j]=p; 
+    else 
+      r[e[j]].next=p; 
+    e[j]=p; 
+  }
+}
+

@@ -1,0 +1,49 @@
+void HuffmanCodingFromRoot(HTNode *HT,int n)
+{ 
+  char *cd;
+  int c,cdlen,i,m;
+  char** HC=(char**)malloc((n+1)*sizeof(char*));
+  
+  cd=(char*)malloc(n*sizeof(char)); 
+  m=2*n-1;
+  c=m; 
+  cdlen=0; 
+  for(i=1;i<=m;++i)
+    HT[i].weight=0; 
+  while(c) 
+  {
+    if(HT[c].weight==0) 
+    { 
+      HT[c].weight=1; 
+      if(HT[c].lchild!=0) 
+      {
+        c=HT[c].lchild; 
+        cd[cdlen++]='0'; 
+      }
+      else 
+      { 
+        HC[c]=(char*)malloc((cdlen+1)*sizeof(char)); 
+        cd[cdlen]='\0'; 
+        strcpy(HC[c],cd); 
+        c=HT[c].parent; 
+        --cdlen; 
+      }
+    }
+    else if(HT[c].weight==1) 
+    { 
+      HT[c].weight=2; 
+      c=HT[c].rchild; 
+      cd[cdlen++]='1'; 
+    }
+    else 
+    {
+      c=HT[c].parent; 
+      --cdlen; 
+    }
+  }
+  free(cd); 
+  for(i=1;i<=n;i++)
+    puts(HC[i]); 
+  free(HC); 
+}
+

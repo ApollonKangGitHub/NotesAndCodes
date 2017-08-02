@@ -1,0 +1,8 @@
+#define STACK_INIT_SIZE 5 
+#define STACK_INCREMENT 2 
+struct SqStack 
+{
+  SElemType *base; 
+  SElemType *top; 
+  int stacksize; 
+};

@@ -1,0 +1,8 @@
+Status sq(ElemType c1, ElemType c2)
+{ 
+  if(c1==c2*c2)
+    return TRUE;
+  else
+    return FALSE;
+}
+

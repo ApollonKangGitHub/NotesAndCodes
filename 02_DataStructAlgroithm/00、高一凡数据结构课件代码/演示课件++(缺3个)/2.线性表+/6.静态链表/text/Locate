@@ -1,0 +1,9 @@
+int LocateElem(SLinkList L, ElemType e) 
+{ 
+  
+  int i=L[MAX_SIZE-1].cur; 
+  while(i&&L[i].data!=e) 
+    i=L[i].cur; 
+  return i;
+}
+

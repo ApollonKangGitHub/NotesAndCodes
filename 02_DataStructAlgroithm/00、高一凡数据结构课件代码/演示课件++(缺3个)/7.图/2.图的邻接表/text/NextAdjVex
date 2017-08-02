@@ -1,0 +1,14 @@
+int NextAdjVex(ALGraph G, int v, int w)
+{ 
+  
+  
+  LinkList p, p1; 
+  ElemType e; 
+  e.adjvex=w;
+  p=Point(G.vertices[v].firstarc, e, equalvex, p1); 
+  if(!p || !p->next) 
+    return -1;
+  else 
+    return p->next->data.adjvex; 
+}
+

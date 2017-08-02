@@ -1,0 +1,22 @@
+Status InsertChild(BiTree p, int LR, BiTree c) 
+{ 
+  
+  
+  
+  if(p) 
+  {
+    if(LR==0) 
+    {
+      c->rchild=p->lchild; 
+      p->lchild=c; 
+    }
+    else 
+    {
+      c->rchild=p->rchild; 
+      p->rchild=c; 
+    }
+    return OK;
+  }
+  return ERROR; 
+}
+

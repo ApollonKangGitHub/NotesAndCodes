@@ -1,0 +1,14 @@
+Status StrAssign(SString T, char* chars)
+{ 
+  int i;
+  if(strlen(chars)>MAX_STR_LEN) 
+    return ERROR;
+  else
+  {
+    T[0]=strlen(chars); 
+    for(i=1; i<=T[0]; i++) 
+      T[i]=*(chars+i-1);
+    return OK;
+  }
+}
+

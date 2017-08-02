@@ -1,0 +1,11 @@
+void InsertByAscend(Space &pav,Space p)
+{ 
+  Space s=pav; 
+  int i=1; 
+  while(i<=ListLength(pav)&&s->size<p->size)
+  { 
+    i++; s=s->rlink;
+  }
+  ListInsertP(pav,i,p); 
+}
+

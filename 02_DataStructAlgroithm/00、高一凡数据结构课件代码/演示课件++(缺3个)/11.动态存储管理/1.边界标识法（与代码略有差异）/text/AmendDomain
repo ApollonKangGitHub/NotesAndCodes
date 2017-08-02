@@ -1,0 +1,7 @@
+void AmendDomain(Space p)
+{ 
+  p->tag=0; 
+  (FootLoc(p))->uplink=p; 
+  (FootLoc(p))->tag=0; 
+}
+

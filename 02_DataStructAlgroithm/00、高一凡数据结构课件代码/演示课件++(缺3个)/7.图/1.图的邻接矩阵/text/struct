@@ -1,0 +1,26 @@
+#define INFINITY INT_MAX 
+#define MAX_VERTEX_NUM 13 
+enum GraphKind{DG, DN, UDG, UDN}; 
+
+typedef int VRType; 
+typedef char InfoType; 
+typedef struct 
+{
+  VRType adj; 
+  InfoType *info; 
+}ArcCell, AdjMatrix[MAX_VERTEX_NUM][MAX_VERTEX_NUM]; 
+
+#define MAX_NAME 3 
+struct VertexType 
+{
+  char name[MAX_NAME]; 
+};
+
+struct MGraph
+{
+  VertexType vexs[MAX_VERTEX_NUM]; 
+  AdjMatrix arcs; 
+  int vexnum,arcnum; 
+  GraphKind kind; 
+};
+

@@ -1,0 +1,3 @@
+rmdir /S 		删除
+shutdown /p 		关机
+shutdown /a（或-a）	终止关机，以及取消设定的定时关机

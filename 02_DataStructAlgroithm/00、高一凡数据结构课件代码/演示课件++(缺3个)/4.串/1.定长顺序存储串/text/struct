@@ -1,0 +1,3 @@
+ #define MAX_STR_LEN 20 
+ typedef unsigned char SString[MAX_STR_LEN+1]; 
+

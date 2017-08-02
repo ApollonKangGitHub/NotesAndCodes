@@ -1,0 +1,36 @@
+void CreateFromFile(ALGraph &G, char* filename)
+{ 
+  int i, j, k;
+  VertexType v1, v2; 
+  ElemType e; 
+  FILE *f; 
+  f=fopen(filename, "r"); 
+  fscanf(f, "%d", &G.kind); 
+  fscanf(f, "%d", &G.vexnum); 
+  for(i=0; i<G.vexnum; i++) 
+  {
+    InputFromFile(f, G.vertices[i].data); 
+    G.vertices[i].firstarc=NULL; 
+  }
+  fscanf(f, "%d", &G.arcnum); 
+  for(k=0; k<G.arcnum; k++) 
+  {
+    fscanf(f, "%s%s", v1.name, v2.name); 
+    i=LocateVex(G, v1); 
+    j=LocateVex(G, v2); 
+    e.info=NULL; 
+    if(G.kind%2) 
+      InputArcFromFile(f, e.info);
+      
+    e.adjvex=j; 
+    ListInsert(G.vertices[i].firstarc, 1, e);
+    
+    if(G.kind>=2) 
+    {
+      e.adjvex=i; 
+      ListInsert(G.vertices[j].firstarc, 1, e); 
+    }
+  }
+  fclose(f); 
+}
+

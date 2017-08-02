@@ -1,0 +1,5 @@
+int QueueLength(SqQueue Q)
+{ 
+  return(Q.rear-Q.front+MAX_QSIZE)%MAX_QSIZE;
+}
+

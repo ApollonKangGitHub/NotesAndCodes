@@ -1,0 +1,26 @@
+Status StrInsert(SString S, int pos, SString T)
+{ 
+  
+  int i;
+  if(pos<1 || pos>S[0]+1) 
+    return ERROR;
+  if(S[0]+T[0]<=MAX_STR_LEN) 
+  {
+    for(i=S[0]; i>=pos; i--) 
+      S[i+T[0]]=S[i]; 
+    for(i=pos; i<pos+T[0]; i++) 
+      S[i]=T[i-pos+1];
+    S[0]+=T[0]; 
+    return TRUE; 
+  }
+  else 
+  {
+    for(i=MAX_STR_LEN; i>=pos+T[0]; i--) 
+      S[i]=S[i-T[0]];
+    for(i=pos; i<pos+T[0] && i<=MAX_STR_LEN; i++) 
+      S[i]=T[i-pos+1];
+    S[0]=MAX_STR_LEN; 
+    return FALSE; 
+  }
+}
+

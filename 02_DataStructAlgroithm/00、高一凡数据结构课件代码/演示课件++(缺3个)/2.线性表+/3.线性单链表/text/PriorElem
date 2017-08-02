@@ -1,0 +1,17 @@
+Status PriorElem(LinkList L, ElemType cur_e, ElemType &pre_e)
+{ 
+  
+  
+  LinkList q, p=L->next; 
+  while(p && p->next) 
+  {  
+    q=p->next; 
+    if(q->data==cur_e) 
+    { 
+      pre_e=p->data; 
+      return OK; 
+    }
+    p=q; 
+  }
+  return ERROR; 
+}

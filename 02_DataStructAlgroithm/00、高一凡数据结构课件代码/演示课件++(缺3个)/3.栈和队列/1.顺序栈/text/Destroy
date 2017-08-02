@@ -1,0 +1,7 @@
+void DestroyStack(SqStack &S)
+{ 
+  free(S.base); 
+  S.top=S.base=NULL; 
+  S.stacksize=0; 
+}
+

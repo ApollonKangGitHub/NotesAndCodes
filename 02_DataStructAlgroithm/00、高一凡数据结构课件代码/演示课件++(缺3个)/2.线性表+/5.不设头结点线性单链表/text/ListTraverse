@@ -1,0 +1,11 @@
+void ListTraverse(LinkList L, void(*vi)(ElemType))
+{ 
+  
+  LinkList p=L; 
+  while(p) 
+  { 
+    vi(p->data); 
+    p=p->next; 
+  }
+}
+

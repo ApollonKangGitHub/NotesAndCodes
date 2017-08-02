@@ -1,0 +1,87 @@
+Status DeleteAVL(BSTree &p, ElemType &e, Boolean &lower) 
+{ 
+  
+  
+  BSTree rc, lc;
+  ElemType e1;
+  if(p==NULL) 
+    return FALSE; 
+  else 
+  {
+    if(EQ(e.key, p->data.key)) 
+    { e=p->data; 
+      rc=p; 
+      if(p->lchild!=NULL && p->rchild!=NULL)
+      { 
+        if(p->bf==RH) 
+        {
+          lc=p->rchild; 
+          while(lc->lchild!=NULL) 
+            lc=lc->lchild; 
+        } 
+        else 
+        {
+          lc=p->lchild; 
+          while(lc->rchild!=NULL) 
+            lc=lc->rchild; 
+        }
+        e1=lc->data; 
+        DeleteAVL(p, e1, lower); 
+        rc->data=e1; 
+      } 
+      else 
+      {
+        if(p->rchild==NULL) 
+          p=p->lchild; 
+        else 
+          p=p->rchild; 
+        delete rc; 
+        lower=TRUE; 
+      }
+    }
+    else if(LT(e.key, p->data.key))
+    {
+      if(!DeleteAVL(p->lchild, e, lower)) 
+        return FALSE;
+      if(lower) 
+      {
+        switch(p->bf) 
+        {
+        case EH: 
+          p->bf=RH; 
+          lower=FALSE; 
+          break;
+        case LH: 
+          p->bf=EH; 
+          lower=TRUE; 
+          break;
+        case RH: 
+          D_LeftBalance(p, lower); 
+        }
+      }
+    }
+    else 
+    {
+      if(!DeleteAVL(p->rchild, e, lower)) 
+        return FALSE;
+      if(lower) 
+      {
+        switch(p->bf) 
+        {
+        case EH: 
+          p->bf=LH; 
+          lower=FALSE; 
+          break;
+        case RH: 
+          p->bf=EH; 
+          lower=TRUE; 
+          break;
+        case LH: 
+          D_RightBalance(p, lower); 
+        }
+      }
+    }
+    return TRUE;
+  }
+}
+

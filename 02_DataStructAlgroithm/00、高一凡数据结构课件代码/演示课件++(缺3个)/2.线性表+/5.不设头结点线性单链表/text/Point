@@ -1,0 +1,26 @@
+LinkList Point(LinkList L,ElemType e,Status(*compare)(ElemType,ElemType),LinkList &p)
+{ 
+  
+  
+  if(L) 
+  {
+    if(compare(L->data,e)) 
+    {
+      p=NULL;
+      return L;
+    }
+    else
+    {
+      p=L; 
+      while(p->next) 
+      {
+        if(compare(p->next->data,e)) 
+          return p->next; 
+        else
+          p=p->next; 
+      }
+    }
+  }
+  return NULL; 
+}
+

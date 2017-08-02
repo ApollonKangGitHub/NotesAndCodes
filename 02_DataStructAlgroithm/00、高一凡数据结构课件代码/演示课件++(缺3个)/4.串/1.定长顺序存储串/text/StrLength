@@ -1,0 +1,5 @@
+int StrLength(SString S)
+{ 
+  return S[0];
+}
+

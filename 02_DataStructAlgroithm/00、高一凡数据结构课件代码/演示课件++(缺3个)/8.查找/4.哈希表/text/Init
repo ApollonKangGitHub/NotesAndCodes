@@ -1,0 +1,13 @@
+void InitHashTable(HashTable &H)
+{ 
+  int i;
+  H.count=0; 
+  H.sizeindex=0; 
+  m=hashsize[0]; 
+  H.elem=(ElemType*)malloc(m*sizeof(ElemType));
+  if(!H.elem)
+    exit(OVERFLOW); 
+  for(i=0; i<m; i++)
+    H.elem[i].key=NULL_KEY; 
+}
+

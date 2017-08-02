@@ -1,0 +1,9 @@
+int SelectMaxKey(SqList L, int i)
+{ 
+  int j, k=1; 
+  for(j=2; j<=i; j++) 
+    if(L.r[j].key>L.r[k].key) 
+      k=j; 
+  return k; 
+}
+

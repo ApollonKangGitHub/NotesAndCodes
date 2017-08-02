@@ -1,0 +1,15 @@
+void SelectSort1(SqList &L)
+{ 
+  int i, j;
+  for(i=L.length; i>1; i--)
+  {
+    j=SelectMaxKey(L, i); 
+    if(i!=j)
+    { 
+      L.r[0]=L.r[i];
+      L.r[i]=L.r[j];
+      L.r[j]=L.r[0];
+    }
+  }
+}
+

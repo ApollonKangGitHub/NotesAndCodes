@@ -1,0 +1,5 @@
+void FootPrint(PosType b)
+{ 
+  m[b.x][b.y]=curstep;
+}
+

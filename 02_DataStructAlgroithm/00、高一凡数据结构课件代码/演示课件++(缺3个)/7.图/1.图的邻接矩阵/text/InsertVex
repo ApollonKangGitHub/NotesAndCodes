@@ -1,0 +1,17 @@
+void InsertVex(MGraph &G, VertexType v)
+{ 
+  
+  int i;
+  VRType j=0; 
+  if(G.kind%2) 
+    j=INFINITY;
+  G.vexs[G.vexnum]=v; 
+  for(i=0; i<=G.vexnum; i++) 
+  {
+    G.arcs[G.vexnum][i].adj=G.arcs[i][G.vexnum].adj=j;
+    
+    G.arcs[G.vexnum][i].info=G.arcs[i][G.vexnum].info=NULL; 
+  }
+  G.vexnum++; 
+}
+

@@ -1,0 +1,12 @@
+#define SUCCESS 1
+#define UNSUCCESS 0
+#define DUPLICATE -1
+#define NULL_KEY 0 
+int hashsize[]={11, 19, 29, 37}; 
+struct HashTable
+{
+  ElemType *elem; 
+  int count; 
+  int sizeindex; 
+};
+

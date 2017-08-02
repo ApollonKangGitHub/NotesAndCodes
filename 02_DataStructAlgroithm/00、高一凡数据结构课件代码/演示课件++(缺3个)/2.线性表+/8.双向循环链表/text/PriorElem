@@ -1,0 +1,16 @@
+Status PriorElem(DuLinkList L, ElemType cur_e, ElemType &pre_e)
+{ 
+  
+  DuLinkList p=L->next->next; 
+  while(p!=L) 
+  {
+    if(p->data==cur_e) 
+    {
+      pre_e=p->prior->data; 
+      return OK; 
+    }
+    p=p->next; 
+  }
+  return ERROR; 
+}
+

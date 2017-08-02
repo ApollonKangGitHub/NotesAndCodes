@@ -1,0 +1,25 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: 队列实现 - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\Users\user\AppData\Local\Temp\RSPA1C0.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"Debug/队列实现.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"F:\Computer\Notes and code\01、C and C++\02、数据结构与算法\6、队列（重点）\队列实现.cpp"
+]
+Creating command line "cl.exe @C:\Users\user\AppData\Local\Temp\RSPA1C0.tmp" 
+<h3>Output Window</h3>
+Compiling...
+队列实现.cpp
+
+
+
+<h3>Results</h3>
+队列实现.obj - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

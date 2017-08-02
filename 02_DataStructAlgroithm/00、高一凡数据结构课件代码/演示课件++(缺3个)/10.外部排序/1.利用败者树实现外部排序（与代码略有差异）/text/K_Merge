@@ -1,0 +1,21 @@
+void K_Merge(int *ls, RedType *b, int k, FILE **fp)
+{ 
+  
+  int i;
+  for(i=0; i<k; i++) 
+  {
+    InputFromFile(fp[i], b[i]); 
+    if(feof(fp[i])) 
+      b[i].key=MAX_KEY; 
+  }
+  CreateLoserTree(ls, b, k); 
+  while(b[ls[0]].key!=MAX_KEY) 
+  {
+    OutputToFile(fp[k], b[ls[0]]); 
+    InputFromFile(fp[ls[0]], b[ls[0]]); 
+    if(feof(fp[ls[0]])) 
+      b[ls[0]].key=MAX_KEY; 
+    Adjust(ls, b, k, ls[0]); 
+  }
+}
+

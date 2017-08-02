@@ -1,0 +1,9 @@
+Status EnQueue(SqQueue &Q, QElemType e)
+{ 
+  if((Q.rear+1)%MAX_QSIZE==Q.front) 
+    return ERROR;
+  Q.base[Q.rear]=e; 
+  Q.rear=(Q.rear+1)%MAX_QSIZE; 
+  return OK;
+}
+

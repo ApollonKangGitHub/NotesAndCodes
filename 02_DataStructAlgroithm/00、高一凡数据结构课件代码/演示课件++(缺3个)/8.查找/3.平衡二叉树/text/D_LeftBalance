@@ -1,0 +1,42 @@
+void D_LeftBalance(BSTree &p, Boolean &lower) 
+{ 
+  BSTree ld, rc=p->rchild; 
+  switch(rc->bf) 
+  {
+  case EH: 
+    rc->bf=LH; 
+    p->bf=RH;
+    L_Rotate(p); 
+    lower=FALSE; 
+    break;
+  case RH: 
+    p->bf=rc->bf=EH; 
+    L_Rotate(p); 
+    lower=TRUE; 
+    break;
+  case LH: 
+    ld=rc->lchild; 
+    switch(ld->bf) 
+    {
+    case EH: 
+      p->bf=rc->bf=EH; 
+      break;
+    case LH: 
+      p->bf=EH; 
+      rc->bf=RH;
+      break;     
+    case RH: 
+      p->bf=LH; 
+      rc->bf=EH;
+    }
+    ld->bf=EH;
+#ifndef FLAG 
+    R_Rotate(p->rchild); 
+    L_Rotate(p); 
+#else 
+    RL_Rotate(p); 
+#endif
+    lower=TRUE; 
+  }
+}
+

@@ -1,0 +1,6 @@
+void ClearString(HString &S)
+{ 
+  free(S.ch); 
+  InitString(S); 
+}
+

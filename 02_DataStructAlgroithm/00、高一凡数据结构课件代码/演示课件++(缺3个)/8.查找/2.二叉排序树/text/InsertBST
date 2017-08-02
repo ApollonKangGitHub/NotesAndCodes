@@ -1,0 +1,20 @@
+Status InsertBST(BiTree &T, TElemType e)
+{ 
+  BiTree p, t;
+  if(!SearchBST(T, e.key, NULL, p)) 
+  {
+    t=(BiTree)malloc(sizeof(BiTNode)); 
+    t->data=e; 
+    t->lchild=t->rchild=NULL; 
+    if(!p) 
+      T=t; 
+    else if LT(e.key, p->data.key) 
+      p->lchild=t; 
+    else 
+      p->rchild=t; 
+    return TRUE;
+  }
+  else
+    return FALSE; 
+}
+

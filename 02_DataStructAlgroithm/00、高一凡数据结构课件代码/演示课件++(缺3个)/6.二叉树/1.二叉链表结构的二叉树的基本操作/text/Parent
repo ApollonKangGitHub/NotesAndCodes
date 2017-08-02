@@ -1,0 +1,30 @@
+TElemType Parent(BiTree T, TElemType e)
+{ 
+  
+  LinkQueue q;
+  QElemType a;
+  if(T) 
+  {
+    InitQueue(q); 
+    EnQueue(q, T); 
+    while(!QueueEmpty(q)) 
+    {
+      DeQueue(q, a); 
+      if(a->lchild && a->lchild->data==e || a->rchild && a->rchild->data==e) 
+      {
+        DestroyQueue(q); 
+        return a->data; 
+      }
+      else 
+      { 
+        if(a->lchild) 
+          EnQueue(q, a->lchild); 
+        if(a->rchild) 
+          EnQueue(q, a->rchild); 
+      }
+    }
+    DestroyQueue(q); 
+  }
+  return Nil; 
+}
+

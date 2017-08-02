@@ -1,0 +1,11 @@
+Status GetTop(SqStack S, SElemType &e) 
+{ 
+  if(S.top>S.base) 
+  {
+    e=*(S.top-1); 
+    return OK;
+  }
+  else
+    return ERROR;
+}
+

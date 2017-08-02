@@ -1,0 +1,11 @@
+void ClearBiTree(BiTree &T)
+{ 
+  if(T) 
+  {
+    ClearBiTree(T->lchild); 
+    ClearBiTree(T->rchild); 
+    free(T); 
+    T=NULL; 
+  }
+}
+

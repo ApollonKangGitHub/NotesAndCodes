@@ -1,0 +1,10 @@
+void ListTraverse(SLinkList L, void(*visit)(ElemType))
+{ 
+  int i=L[MAX_SIZE-1].cur; 
+  while(i) 
+  {
+    visit(L[i].data); 
+    i=L[i].cur; 
+  }
+}
+

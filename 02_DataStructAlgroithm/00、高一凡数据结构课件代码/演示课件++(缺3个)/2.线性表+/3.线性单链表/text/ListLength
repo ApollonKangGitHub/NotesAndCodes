@@ -1,0 +1,11 @@
+int ListLength(LinkList L)
+{ 
+  int i=0; 
+  LinkList p=L->next; 
+  while(p) 
+  {
+    i++; 
+    p=p->next; 
+  }
+  return i;
+}

@@ -1,0 +1,12 @@
+int ListLength(DuLinkList L)
+{ 
+  int i=0; 
+  DuLinkList p=L->next; 
+  while(p!=L) 
+  {
+    i++; 
+    p=p->next; 
+  }
+  return i;
+}
+
