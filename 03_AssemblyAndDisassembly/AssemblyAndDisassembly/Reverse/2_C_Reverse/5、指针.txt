@@ -1,0 +1,168 @@
+想学好汇编要站在CPU的角度去考虑
+想学好C语言要站在编译器的角度去考虑
+
+指针类型自加自减的长度？根据其去掉一个*剩余类型的宽度来决定：
+char * a = (char *)100;
+short * b = (short *)100;
+int * c = (int *)100;
+a++;	//101
+b++;	//102
+c++;	//104
+
+char ** a = (char **)100;
+short ** b = (short **)100;
+int ** c = (int **)100;
+a++;	//104
+b++;	//104
+c++;	//104
+
+①去掉一个*，如果还有*，则自加肯定是加4；
+②指针类型 ± N = 指针类型变量的值 ± N * (去掉一个*后的类型宽度)；
+③指针不可以做乘法与除法；
+④两个指针类型完全相同的变量a、b，则a-b的值为其内存值的差值除以去掉一个*的宽度。
+eg:
+short ** a = (short **)200;
+short ** b = (short **)100;
+a - b = (200-100)/(sizeof(short *)) = 25
+
+short * a = (short *)200;
+short * b = (short *)100;
+a - b = (200-100)/(sizeof(short)) = 50
+
+//=====================================================================================
+char str[] = "china";"china"在常量区，但是str[]将"china"从常量区复制到函数栈中，
+复制过来以后，常量区的无名的"china"就不再被使用，str则是副本的地址，由str可以修改字符串。
+char * str = "china";在常量区，str只保存其在常量区的地址，所以不能用str修改字符串。
+
+举例查看反汇编区分：
+#include "stdafx.h"
+
+int main(int argc, char* argv[])
+{
+	char str1[] = "china";//从常量区复制到函数栈中
+	char str2[] = {"china"};//同上
+	char * str3 = "china";//保存字符串在常量区的地址
+	char str4[6] = {'c','h','i','n','a'}; //函数栈中的字符
+	return 0;
+}
+
+//8:        char str1[] = "china";
+00401028   mov         eax,[string "china" (0042201c)]
+0040102D   mov         dword ptr [ebp-8],eax
+00401030   mov         cx,word ptr [string "china"+4 (00422020)]
+00401037   mov         word ptr [ebp-4],cx
+//9:        char str2[] = {"china"};
+0040103B   mov         edx,dword ptr [string "china" (0042201c)]
+00401041   mov         dword ptr [ebp-10h],edx
+00401044   mov         ax,[string "china"+4 (00422020)]
+0040104A   mov         word ptr [ebp-0Ch],ax
+//10:       char * str3 = "china";
+0040104E   mov         dword ptr [ebp-14h],offset string "china" (0042201c)
+//11:       char str4[6] = {'c','h','i','n','a'};
+00401055   mov         byte ptr [ebp-1Ch],63h
+00401059   mov         byte ptr [ebp-1Bh],68h
+0040105D   mov         byte ptr [ebp-1Ah],69h
+00401061   mov         byte ptr [ebp-19h],6Eh
+00401065   mov         byte ptr [ebp-18h],61h
+00401069   xor         ecx,ecx
+0040106B   mov         byte ptr [ebp-17h],cl
+
+//内存分布：
+0012FF64  63 68 69 6E  chin
+0012FF68  61 00 CC CC  a.烫
+0012FF6C  1C 20 42 00  . B.	
+0012FF70  63 68 69 6E  chin
+0012FF74  61 00 CC CC  a.烫
+0012FF78  63 68 69 6E  chin
+0012FF7C  61 00 CC CC  a.烫
+//0042201C  63 68 69 6E  chin
+//00422020  61 00 00 00  a...
+//=====================================================================================
+函数指针：int (*fun)(int);	//int (__cdecl *)(int);
+指针函数：int* fun(int);
+数组指针：int (*a)[5];	//a是int (*)[5]类型
+指针数组：int* a[5];	//a是 int * [5]类型
+指针和地址没有直接联系，只是指针这种类型适合存储地址，但是不能说其他类型无法存储地址。
+
+int (*arr)[20] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20};
+int (*parr)[3]; 
+parr = (int(*)[3])arr;
+printf("%d,%d,%d",*(*(p+2)+2),p[3][1],(*(p+1))[9]);
+//result:9,11,15
+
+//======================================================================================
+
+函数指针与其他指针有区别：其它指针可以自加、自减、相减、比较的运算
+而函数指针不能进行自加、自减、相减等于宽度有关的运算，因为函数指针不确定宽度。
+函数指针用的最多的地方是加载dll，获取dll文件中的函数。
+当然我们也可以用函数指针做函数隐藏到数据中的“骚气”操作：
+将函数的硬编码复制到数组中，然后用函数指针读取调用。如下所示：
+
+#include "stdafx.h"
+#if 0
+int add(int x, int y)
+{
+	return (x+y);
+}
+#endif
+#if 0
+//add函数的反汇编与硬编码
+add:
+		00401020 55                   push        ebp
+		00401021 8B EC                mov         ebp,esp
+		00401023 83 EC 40             sub         esp,40h
+		00401026 53                   push        ebx
+		00401027 56                   push        esi
+		00401028 57                   push        edi
+		00401029 8D 7D C0             lea         edi,[ebp-40h]
+		0040102C B9 10 00 00 00       mov         ecx,10h
+		00401031 B8 CC CC CC CC       mov         eax,0CCCCCCCCh
+		00401036 F3 AB                rep stos    dword ptr [edi]
+		00401038 8B 45 08             mov         eax,dword ptr [ebp+8]
+		0040103B 03 45 0C             add         eax,dword ptr [ebp+0Ch]
+		0040103E 5F                   pop         edi
+		0040103F 5E                   pop         esi
+		00401040 5B                   pop         ebx
+		00401041 8B E5                mov         esp,ebp
+		00401043 5D                   pop         ebp
+		00401044 C3                   ret
+#endif
+	
+char add[] = {
+	0X55,             
+	0X8B, 0XEC,          
+	0X83, 0XEC, 0X40,       
+	0X53,             
+	0X56,             
+	0X57,             
+	0X8D, 0X7D, 0XC0,       
+	0XB9, 0X10, 0X00, 0X00, 0X00, 
+	0XB8, 0XCC, 0XCC, 0XCC, 0XCC, 
+	0XF3, 0XAB,          
+	0X8B, 0X45, 0X08,       
+	0X03, 0X45, 0X0C,       
+	0X5F,             
+	0X5E,             
+	0X5B,             
+	0X8B, 0XE5,          
+	0X5D,             
+	0XC3,             
+};
+int main(int argc, char* argv[])
+{
+	//printf("%d\n",add(10,20));
+	int (*pAdd)(int,int);
+	pAdd = (int (__cdecl *)(int,int))&add;
+	printf("%d\n",pAdd(10,21));
+	return 0;
+}
+#if 0
+data:
+00427318  55 8B EC 83 EC 40  U嬱冹@
+0042731E  53 56 57 8D 7D C0  SVW峿.
+00427324  B9 10 00 00 00 B8  ......
+0042732A  CC CC CC CC F3 AB  烫烫螳
+00427330  8B 45 08 03 45 0C  婨..E.
+00427336  5F 5E 5B 8B E5 5D  _^[嬪]
+0042733C  C3 00 00 00 00 00  ......
+#endif

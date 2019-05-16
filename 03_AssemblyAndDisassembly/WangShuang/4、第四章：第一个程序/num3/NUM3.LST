@@ -1,0 +1,68 @@
+Microsoft (R) Macro Assembler Version 5.00                  4/24/17 17:19:56
+                                                             Page     1-1
+
+
+       1				assume cs:codeseg 
+       2				 
+       3 0000				codeseg segment 
+       4				 
+       5 0000  B8 B810				mov ax,47120	;B810H 
+       6 0003  8E D0				mov ss,ax 
+       7 0005  BC 0000				mov sp,0H 
+       8 0008  81 C4 0080			add sp,80H 
+       9					 
+      10 000C  B8 0001				mov ax,1 
+      11 000F  50				push ax 
+      12 0010  50				push ax 
+      13 0011  50				push ax 
+      14 0012  50				push ax 
+      15					 
+      16					;mov ax,2 
+      17 0013  50				push ax 
+      18 0014  50				push ax 
+      19 0015  50				push ax 
+      20 0016  50				push ax 
+      21					 
+      22					;mov ax,3 
+      23 0017  50				push ax 
+      24 0018  50				push ax 
+      25 0019  50				push ax 
+      26 001A  50				push ax 
+      27					 
+      28					;mov ax,4 
+      29 001B  50				push ax 
+      30 001C  50				push ax 
+      31 001D  50				push ax 
+      32 001E  50				push ax 
+      33					 
+      34 001F  B8 4C00				mov ax,4C00H 
+      35 0022  CD 21				int 21H 
+      36					 
+      37 0024				codeseg ends 
+      38				 
+      39				end 
+Microsoft (R) Macro Assembler Version 5.00                  4/24/17 17:19:56
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+CODESEG  . . . . . . . . . . . .  	0024	PARA	NONE	
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+@FILENAME  . . . . . . . . . . .  	TEXT  num3		
+
+
+     39 Source  Lines
+     39 Total   Lines
+      3 Symbols
+
+  50712 + 465832 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

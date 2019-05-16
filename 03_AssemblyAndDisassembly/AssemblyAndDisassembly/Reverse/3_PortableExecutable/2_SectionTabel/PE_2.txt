@@ -1,0 +1,63 @@
+联合体：
+①联合体的成员是共享内存空间的；
+②联合体的内存空间大小是联合体成员中size最大的成员的大小；
+③联合体最多只有一个成员有效。
+
+union test{
+	char c;
+	int i;
+};
+union{
+	char c;
+	int i;
+}test;
+二者的区别：
+第一个是声明test类型(未分配内存空间)；
+第二个是匿名变量test定义(分配了内存)(匿名指无类型名)。
+这一点与结构体是一样的。
+//=========================================================================
+节表：线性数组结构
+起始位置：
+_IMAGE_DOS_HEADER.e_lfanew + 4 + IMAGE_SIZEOF_FILE_HEADER + _IMAGE_FILE_HEADER.SizeOfOptionalHeader
+即DOS头 +中间空闲 + NT头(三部分)
+
+//节表中一个元素结构
+#define IMAGE_SIZEOF_SHORT_NAME              8
+typedef struct _IMAGE_SECTION_HEADER{
+    0X00 BYTE    Name[IMAGE_SIZEOF_SHORT_NAME];	//节(段)的名字.text/.data/.rdata/.cmd等。
+												//由于长度固定8字节，所以可以没有\0结束符，因此不能用char *直接打印
+    0X08 union{
+            DWORD   PhysicalAddress;		//物理地址
+            DWORD   VirtualSize;			//虚拟大小
+    }Misc;//存储的是该节在没有对齐前的真实尺寸,可改,不一定准确(可干掉)
+    0X0C DWORD   VirtualAddress;			//块的RVA，相对虚拟地址
+    0X10 DWORD   SizeOfRawData;				//该节在文件对齐后的尺寸大小(FileAlignment的整数倍)
+    0X14 DWORD   PointerToRawData;      	//节区在文件中的偏移量
+    //0X18 DWORD   PointerToRelocations;    //重定位偏移(obj中使用)
+    //0X1C DWORD   PointerToLinenumbers;    //行号表偏移(调试用)
+    //0X20 WORD    NumberOfRelocations;     //重定位项目数(obj中使用)
+    //0X22 WORD    NumberOfLinenumbers;		//行号表中行号的数目
+    0X24 DWORD   Characteristics;			//节属性(按bit位设置属性)
+} IMAGE_SECTION_HEADER, *PIMAGE_SECTION_HEADER;
+#define IMAGE_SIZEOF_SECTION_HEADER          40
+
+VirtualAddress与PointerToRawData只可能一个有效，在内存中ointerToRawData无效
+在文件中VirtualAddress无效。同样的有关内存的地址在文件中无效，有关文件的在内存中无效。
+有效无效指的是有意义无意义。
+
+而节表大小为(#define IMAGE_SIZEOF_SECTION_HEADER 20)：
+_IMAGE_FILE_HEADER.NumberOfSections * sizeof(_IMAGE_SECTION_HEADER)  
+= _IMAGE_FILE_HEADER.NumberOfSections * IMAGE_SIZEOF_SECTION_HEADER
+∴ SizeOfHeaders = (DOS头+中间空闲+4字节) + 20字节的标准PE头 + 可选PE头大小 + 节表大小
+∴ SizeOfHeaders = _IMAGE_DOS_HEADER.e_lfanew + 20 
++ _IMAGE_FILE_HEADER.SizeOfOptionalHeader 
++ _IMAGE_FILE_HEADER.NumberOfSections * IMAGE_SIZEOF_SECTION_HEADER
+并且sizeofHeaders的大小是按照对齐方式对齐后的大小。
+//==============================================================================
+注意：SizeOfRawData的大小在硬盘上一定不小于Misc，但在加载进内存中运行时则不一定大于Misc。
+比如：在该节有一个未初始化的数组char a[1000],在编译连接完成生成.exe文件后并没有分配内存(因为是未初始化的)，
+对应在硬盘上就是没有预留的一块地址空间初始化为0。SizeOfRawData是文件对齐的倍数，文件对齐时参考的大小是不包含未初始化的a[1000]，
+可能大小是170则对齐是200，SizeOfRawData(200)在硬盘上大于Misc(170)。
+而在真正加载进内存运行时，a[1000]就要分配1000字节，Misc就变成了(1170)超过了SizeOfRawData的大小(200)。
+产生这一特点的原因就是：SizeOfRawData是在编译连接完成后就确定的，是不可变的。而Misc是在硬盘上内存里随时可能发生变化的。
+更本质一点的原因是：未初始化的变量在装载时才分配空间，如果不存在这种动态变化的且无人为修改Misc，则SizeOfRawData定不小于Misc。

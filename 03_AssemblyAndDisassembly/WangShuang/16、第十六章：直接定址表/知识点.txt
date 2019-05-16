@@ -1,0 +1,23 @@
+数据标号：
+用标号标记了存储数据的单元的地址和长度。
+
+如果想在代码段中直接使用数据标号访问数据，就需要用伪指令assume将标号所在段和一个段寄存器关联起来，
+否则在编译时无法确定标号所在位置。并且需要在code段中将标号所在段与关联的段寄存器建立实际的联系。
+因为第一步是编译器的需要，而第二步是连接器的需要，连接器如果在重定位修正地址时不能找到正确的数据地址就会出错
+
+;===============================
+eg:
+data segment											data segment
+	a db 1,2,3,4,5,6,7,8                                	a db 1,2,3,4,5,6,7,8  
+	b dw 0                                <==>             	b dw 0
+	c dw a,b	;数据标号当做数据来使用                 	c dw offset a,offset b
+data ends                                               data ends
+
+eg2:
+data segment											data segment
+	a db 1,2,3,4,5,6,7,8                                	a db 1,2,3,4,5,6,7,8  
+	b dw 0                                <==>             	b dw 0
+	c dd a,b	;数据标号当做数据来使用                 	c dd offset a,seg a,offset b,seg b
+data ends                                               data ends
+
+;seg伪指令(操作符)为获取一个标号的段地址

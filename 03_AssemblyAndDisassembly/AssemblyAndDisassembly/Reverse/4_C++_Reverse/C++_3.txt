@@ -1,0 +1,56 @@
+//1、模板：编译完成后就找不到模板的影子了。因为模板的具体类型是编译器来识别后转换的。
+template<typename type>
+template<class type>
+
+//2、引用：通常是为了扩展变量作用域，解决值传递的浪费空间时间的问题、解决指针传递的不安全问题(正向的角度)。
+引用必须初始化，并且其初始化一旦确定就不可以再修改，不可以重新。
+
+//3、友元函数：一个普通的全局函数声明为另一个类的友元函数，则该函数就可以访问该类的私有成员。友元类也是相似概念。
+注意：友元不能被继承，编译器并不为友元函数传递this指针。
+
+//4、运算符重载:
+struct Number{
+	int x;
+	int y;
+	Number(int x, int y){
+		this->x = x;
+		this->y = y;
+	}
+	Number operator +(const Number &);
+};
+Number operator +(const Number & b){
+	x = x + b.x;
+	y = y + b.y;
+	return *this;
+}
+
+Number a(1,2);
+Number b(3,4);
+a = a+b <==> a.operator+(b);
+
+//5、前自加与后自加区分：operator +()前自加、operator +(int)后自加。前后自减同理。
+//6、常用的重载运算符是条件判断的运算符:
+bool operator!(const type &);
+bool operator!=(const type &);
+bool operator<(const type &);
+bool operator>(const type &);
+bool operator<=(const type &);
+bool operator>=(const type &);
+bool operator==(const type &);
+
+//7、什么情况下只能用友元函数实现运算符重载？
+在iostream中，>>和<<本身就已经被定义为一个类了，和传统的+，-，++等都是不同的，
+所以在进行这两个操作符重载的时候就非常的特殊的，因为它们本身是一个类，重载了以后就必须是用友元函数来调用访问，
+这里就有一个问题了，一个类里面是可以定义另一个类的成员的，但是，总不可能在一个类里面用操作符来实例化一个成员
+所以想要对这两个操作符重载的时候也就只能用友元函数了。
+
+//8、new与delete
+Debug调试版：
+
+malloc()-->_nh_malloc_dbg()-->_heap_alloc_dbg()-->_heap_alloc_base()-->HeapAlloc()存在于KERNEL32.dll中。
+free()-->_free_dbg()-->_free_base()-->HeapFree()有一个间接调用，也存在于KERNEL32.dll中。
+
+new(call operator new)-->_nh_malloc()-->...-->HeapAlloc()
+delete(call operator delete)-->_free_dbg()-->...-->HeapFree()
+
+//int * p = new int<--> delete p ;int * p = new int[5]<-->delete[] p;

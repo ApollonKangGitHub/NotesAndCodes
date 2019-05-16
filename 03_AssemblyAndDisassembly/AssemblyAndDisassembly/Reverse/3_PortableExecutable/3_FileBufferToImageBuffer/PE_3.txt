@@ -1,0 +1,23 @@
+FileBuffer到ImageBuffer的转化：
+需要用到可选PE头中的ImageBase成员、SizeOfImage成员、SizeOfHeaders成员；
+节表结构体中VirtualAddress成员(该节在内存中偏移)、PointerToRawData成员(该节在文件中偏移)、Misc.VirtualSize成员等
+需要注意的点：内存地址转换与拉伸。
+
+①分配空间：根据SizeofImage分配
+②拷贝头们：根据大小SizeofHeaders拷贝，其实地址均为缓冲区指针
+③分析节表循环拷贝节：循环次数为：_IMAGE_FILE_HEADER.NumberOfSections
+节表起始位置为:dos.e_lfanew + 4 + 20 + _IMAGE_FILE_HEADER.SizeOfOptionalHeader
+从pFileBuffer + section[i].PointerToRawData复制到pImageBuffer + section[i].VirtualAddress
+共复制SizeOfRawData个字节。
+
+注意：
+RVA的偏移地址虽然也是基址的偏移地址，但是基址是ImageBase不是0
+所以RVA->FOA的转换：
+	①获取Section数目
+	②获取SectionAlignment
+	③判断需要转换的RVA位于哪个Section中(section[n])，diff = 需要转换的RVA-VirtualAddress，计算出RVA相对于本节的偏移地址
+	④section[n].PointerToRawData + diff。就是RVA转换后的FOA
+相反FOA->VA的转换：
+	①计算FOA在哪个Section(section[n])
+	②计算diff = Section[n].PointerToRawData - FOA
+	③VA = ImageBase + Section[n].VirtualAddress + diff

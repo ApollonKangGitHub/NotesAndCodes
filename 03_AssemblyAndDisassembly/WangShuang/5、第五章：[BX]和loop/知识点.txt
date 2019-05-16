@@ -1,0 +1,75 @@
+①不允许操作数以字母开头
+eg:
+mov ax,B810H(×),mov ax,47120(√),mov ax,0B810H(√)
+mov ax,E7H(×)，mov ax,0E7H（√）
+②-g cs:ip
+ -g ip 省略cs，默认去ds寄存器中找
+③用[bx]代替[n]
+				
+eg:	 
+							assume cs:codeseg 
+      				 
+       0000					codeseg segment 
+      				 
+       037F:0000  B8 1000			mov ax,1000H 
+       037F:0003  8E D8				mov ds,ax 
+      				 
+       037F:0005  BB 0000			mov bx,0 
+       037F:0008  8B 07				mov ax,ds:[bx] 
+       037F:000A  BB 0002			mov bx,2 
+       037F:000D  8B 07				mov ax,ds:[bx] 
+      					 
+       037F:000F  BB 0004			mov bx,4 
+       037F:0012  8B 07				mov ax,ds:[bx] 
+       037F:0014  BB 0006			mov bx,6 
+       037F:0017  8B 07				mov ax,ds:[bx] 
+      					 
+       037F:0019  BB 0008			mov bx,8 
+       037F:001C  8B 07				mov ax,ds:[bx] 
+       037F:001E  BB 000A			mov bx,10 
+       037F:0021  8B 07				mov ax,ds:[bx] 
+      				 
+       037F:0023  B8 4C00			mov ax,4C00H 
+       037F:0026  CD 21				int 21H 
+      				 
+       037F:0028				codeseg ends 
+      				 
+							end 
+直接debug dabx.exe
+-g 000F
+将000F之前的运行完跳到"mov bx,4"这一行等待运行
+
+④inc指令：自加1
+eg:
+mov ax,1
+inc ax
+inc ax
+mov bx,ax
+结果：AX=3，BX=3
+
+;------------------------------------------------------------
+loop指令：
+①CX设定初始值；
+②loop执行一次，(CX)=(CX)-1
+③检测CX是否等于0，不等于0则继续循环(跳到标记处执行)
+
+eg：用加法的方式计算123*236，将结果存放在AX中。
+add.asm
+
+loop与BX、CX寄存器联合使用：
+编程求FFFF:0到FFFF:F的字节型数据的和，结果存放到DX中。
+ByteAdd.asm
+
+;-------------------------------------------------------------
+安全的地址(程序员可自己控制)：
+①0:200H ~ 0:2FFH共256Byte
+②0:7E00H开始的内存，基本够用
+练习：
+将FFFF:0~FFFF:F的数据复制到0:200~020F中
+copy.asm
+
+在copy.asm中我们发现只用一个ds在与源和目标之间不同切换很浪费时间
+那么就要使用ES寄存器优化
+DS:数据从哪里来
+ES:数据到哪里去
+EScopy.asm

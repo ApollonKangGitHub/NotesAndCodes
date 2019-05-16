@@ -1,0 +1,1316 @@
+Area Number:1	Area Coding:A1
+¡¡	¡¢	¡£	¡¤	¡¥	¡¦	¡§	¡¨	
+¡©	¡ª	¡«	¡¬	¡­	¡®	¡¯	¡°	
+¡±	¡²	¡³	¡´	¡µ	¡¶	¡·	¡¸	
+¡¹	¡º	¡»	¡¼	¡½	¡¾	¡¿	¡À	
+¡Á	¡Â	¡Ã	¡Ä	¡Å	¡Æ	¡Ç	¡È	
+¡É	¡Ê	¡Ë	¡Ì	¡Í	¡Î	¡Ï	¡Ð	
+¡Ñ	¡Ò	¡Ó	¡Ô	¡Õ	¡Ö	¡×	¡Ø	
+¡Ù	¡Ú	¡Û	¡Ü	¡Ý	¡Þ	¡ß	¡à	
+¡á	¡â	¡ã	¡ä	¡å	¡æ	¡ç	¡è	
+¡é	¡ê	¡ë	¡ì	¡í	¡î	¡ï	¡ð	
+¡ñ	¡ò	¡ó	¡ô	¡õ	¡ö	¡÷	¡ø	
+¡ù	¡ú	¡û	¡ü	¡ý	¡þ	
+
+Area Number:2	Area Coding:A2
+¢¡	¢¢	¢£	¢¤	¢¥	¢¦	¢§	¢¨	
+¢©	¢ª	¢«	¢¬	¢­	¢®	¢¯	¢°	
+¢±	¢²	¢³	¢´	¢µ	¢¶	¢·	¢¸	
+¢¹	¢º	¢»	¢¼	¢½	¢¾	¢¿	¢À	
+¢Á	¢Â	¢Ã	¢Ä	¢Å	¢Æ	¢Ç	¢È	
+¢É	¢Ê	¢Ë	¢Ì	¢Í	¢Î	¢Ï	¢Ð	
+¢Ñ	¢Ò	¢Ó	¢Ô	¢Õ	¢Ö	¢×	¢Ø	
+¢Ù	¢Ú	¢Û	¢Ü	¢Ý	¢Þ	¢ß	¢à	
+¢á	¢â	¢ã	¢ä	¢å	¢æ	¢ç	¢è	
+¢é	¢ê	¢ë	¢ì	¢í	¢î	¢ï	¢ð	
+¢ñ	¢ò	¢ó	¢ô	¢õ	¢ö	¢÷	¢ø	
+¢ù	¢ú	¢û	¢ü	¢ý	¢þ	
+
+Area Number:3	Area Coding:A3
+£¡	£¢	££	£¤	£¥	£¦	£§	£¨	
+£©	£ª	£«	£¬	£­	£®	£¯	£°	
+£±	£²	£³	£´	£µ	£¶	£·	£¸	
+£¹	£º	£»	£¼	£½	£¾	£¿	£À	
+£Á	£Â	£Ã	£Ä	£Å	£Æ	£Ç	£È	
+£É	£Ê	£Ë	£Ì	£Í	£Î	£Ï	£Ð	
+£Ñ	£Ò	£Ó	£Ô	£Õ	£Ö	£×	£Ø	
+£Ù	£Ú	£Û	£Ü	£Ý	£Þ	£ß	£à	
+£á	£â	£ã	£ä	£å	£æ	£ç	£è	
+£é	£ê	£ë	£ì	£í	£î	£ï	£ð	
+£ñ	£ò	£ó	£ô	£õ	£ö	£÷	£ø	
+£ù	£ú	£û	£ü	£ý	£þ	
+
+Area Number:4	Area Coding:A4
+¤¡	¤¢	¤£	¤¤	¤¥	¤¦	¤§	¤¨	
+¤©	¤ª	¤«	¤¬	¤­	¤®	¤¯	¤°	
+¤±	¤²	¤³	¤´	¤µ	¤¶	¤·	¤¸	
+¤¹	¤º	¤»	¤¼	¤½	¤¾	¤¿	¤À	
+¤Á	¤Â	¤Ã	¤Ä	¤Å	¤Æ	¤Ç	¤È	
+¤É	¤Ê	¤Ë	¤Ì	¤Í	¤Î	¤Ï	¤Ð	
+¤Ñ	¤Ò	¤Ó	¤Ô	¤Õ	¤Ö	¤×	¤Ø	
+¤Ù	¤Ú	¤Û	¤Ü	¤Ý	¤Þ	¤ß	¤à	
+¤á	¤â	¤ã	¤ä	¤å	¤æ	¤ç	¤è	
+¤é	¤ê	¤ë	¤ì	¤í	¤î	¤ï	¤ð	
+¤ñ	¤ò	¤ó	¤ô	¤õ	¤ö	¤÷	¤ø	
+¤ù	¤ú	¤û	¤ü	¤ý	¤þ	
+
+Area Number:5	Area Coding:A5
+¥¡	¥¢	¥£	¥¤	¥¥	¥¦	¥§	¥¨	
+¥©	¥ª	¥«	¥¬	¥­	¥®	¥¯	¥°	
+¥±	¥²	¥³	¥´	¥µ	¥¶	¥·	¥¸	
+¥¹	¥º	¥»	¥¼	¥½	¥¾	¥¿	¥À	
+¥Á	¥Â	¥Ã	¥Ä	¥Å	¥Æ	¥Ç	¥È	
+¥É	¥Ê	¥Ë	¥Ì	¥Í	¥Î	¥Ï	¥Ð	
+¥Ñ	¥Ò	¥Ó	¥Ô	¥Õ	¥Ö	¥×	¥Ø	
+¥Ù	¥Ú	¥Û	¥Ü	¥Ý	¥Þ	¥ß	¥à	
+¥á	¥â	¥ã	¥ä	¥å	¥æ	¥ç	¥è	
+¥é	¥ê	¥ë	¥ì	¥í	¥î	¥ï	¥ð	
+¥ñ	¥ò	¥ó	¥ô	¥õ	¥ö	¥÷	¥ø	
+¥ù	¥ú	¥û	¥ü	¥ý	¥þ	
+
+Area Number:6	Area Coding:A6
+¦¡	¦¢	¦£	¦¤	¦¥	¦¦	¦§	¦¨	
+¦©	¦ª	¦«	¦¬	¦­	¦®	¦¯	¦°	
+¦±	¦²	¦³	¦´	¦µ	¦¶	¦·	¦¸	
+¦¹	¦º	¦»	¦¼	¦½	¦¾	¦¿	¦À	
+¦Á	¦Â	¦Ã	¦Ä	¦Å	¦Æ	¦Ç	¦È	
+¦É	¦Ê	¦Ë	¦Ì	¦Í	¦Î	¦Ï	¦Ð	
+¦Ñ	¦Ò	¦Ó	¦Ô	¦Õ	¦Ö	¦×	¦Ø	
+¦Ù	¦Ú	¦Û	¦Ü	¦Ý	¦Þ	¦ß	¦à	
+¦á	¦â	¦ã	¦ä	¦å	¦æ	¦ç	¦è	
+¦é	¦ê	¦ë	¦ì	¦í	¦î	¦ï	¦ð	
+¦ñ	¦ò	¦ó	¦ô	¦õ	¦ö	¦÷	¦ø	
+¦ù	¦ú	¦û	¦ü	¦ý	¦þ	
+
+Area Number:7	Area Coding:A7
+§¡	§¢	§£	§¤	§¥	§¦	§§	§¨	
+§©	§ª	§«	§¬	§­	§®	§¯	§°	
+§±	§²	§³	§´	§µ	§¶	§·	§¸	
+§¹	§º	§»	§¼	§½	§¾	§¿	§À	
+§Á	§Â	§Ã	§Ä	§Å	§Æ	§Ç	§È	
+§É	§Ê	§Ë	§Ì	§Í	§Î	§Ï	§Ð	
+§Ñ	§Ò	§Ó	§Ô	§Õ	§Ö	§×	§Ø	
+§Ù	§Ú	§Û	§Ü	§Ý	§Þ	§ß	§à	
+§á	§â	§ã	§ä	§å	§æ	§ç	§è	
+§é	§ê	§ë	§ì	§í	§î	§ï	§ð	
+§ñ	§ò	§ó	§ô	§õ	§ö	§÷	§ø	
+§ù	§ú	§û	§ü	§ý	§þ	
+
+Area Number:8	Area Coding:A8
+¨¡	¨¢	¨£	¨¤	¨¥	¨¦	¨§	¨¨	
+¨©	¨ª	¨«	¨¬	¨­	¨®	¨¯	¨°	
+¨±	¨²	¨³	¨´	¨µ	¨¶	¨·	¨¸	
+¨¹	¨º	¨»	¨¼	¨½	¨¾	¨¿	¨À	
+¨Á	¨Â	¨Ã	¨Ä	¨Å	¨Æ	¨Ç	¨È	
+¨É	¨Ê	¨Ë	¨Ì	¨Í	¨Î	¨Ï	¨Ð	
+¨Ñ	¨Ò	¨Ó	¨Ô	¨Õ	¨Ö	¨×	¨Ø	
+¨Ù	¨Ú	¨Û	¨Ü	¨Ý	¨Þ	¨ß	¨à	
+¨á	¨â	¨ã	¨ä	¨å	¨æ	¨ç	¨è	
+¨é	¨ê	¨ë	¨ì	¨í	¨î	¨ï	¨ð	
+¨ñ	¨ò	¨ó	¨ô	¨õ	¨ö	¨÷	¨ø	
+¨ù	¨ú	¨û	¨ü	¨ý	¨þ	
+
+Area Number:9	Area Coding:A9
+©¡	©¢	©£	©¤	©¥	©¦	©§	©¨	
+©©	©ª	©«	©¬	©­	©®	©¯	©°	
+©±	©²	©³	©´	©µ	©¶	©·	©¸	
+©¹	©º	©»	©¼	©½	©¾	©¿	©À	
+©Á	©Â	©Ã	©Ä	©Å	©Æ	©Ç	©È	
+©É	©Ê	©Ë	©Ì	©Í	©Î	©Ï	©Ð	
+©Ñ	©Ò	©Ó	©Ô	©Õ	©Ö	©×	©Ø	
+©Ù	©Ú	©Û	©Ü	©Ý	©Þ	©ß	©à	
+©á	©â	©ã	©ä	©å	©æ	©ç	©è	
+©é	©ê	©ë	©ì	©í	©î	©ï	©ð	
+©ñ	©ò	©ó	©ô	©õ	©ö	©÷	©ø	
+©ù	©ú	©û	©ü	©ý	©þ	
+
+Area Number:10	Area Coding:AA
+ª¡	ª¢	ª£	ª¤	ª¥	ª¦	ª§	ª¨	
+ª©	ªª	ª«	ª¬	ª­	ª®	ª¯	ª°	
+ª±	ª²	ª³	ª´	ªµ	ª¶	ª·	ª¸	
+ª¹	ªº	ª»	ª¼	ª½	ª¾	ª¿	ªÀ	
+ªÁ	ªÂ	ªÃ	ªÄ	ªÅ	ªÆ	ªÇ	ªÈ	
+ªÉ	ªÊ	ªË	ªÌ	ªÍ	ªÎ	ªÏ	ªÐ	
+ªÑ	ªÒ	ªÓ	ªÔ	ªÕ	ªÖ	ª×	ªØ	
+ªÙ	ªÚ	ªÛ	ªÜ	ªÝ	ªÞ	ªß	ªà	
+ªá	ªâ	ªã	ªä	ªå	ªæ	ªç	ªè	
+ªé	ªê	ªë	ªì	ªí	ªî	ªï	ªð	
+ªñ	ªò	ªó	ªô	ªõ	ªö	ª÷	ªø	
+ªù	ªú	ªû	ªü	ªý	ªþ	
+
+Area Number:11	Area Coding:AB
+«¡	«¢	«£	«¤	«¥	«¦	«§	«¨	
+«©	«ª	««	«¬	«­	«®	«¯	«°	
+«±	«²	«³	«´	«µ	«¶	«·	«¸	
+«¹	«º	«»	«¼	«½	«¾	«¿	«À	
+«Á	«Â	«Ã	«Ä	«Å	«Æ	«Ç	«È	
+«É	«Ê	«Ë	«Ì	«Í	«Î	«Ï	«Ð	
+«Ñ	«Ò	«Ó	«Ô	«Õ	«Ö	«×	«Ø	
+«Ù	«Ú	«Û	«Ü	«Ý	«Þ	«ß	«à	
+«á	«â	«ã	«ä	«å	«æ	«ç	«è	
+«é	«ê	«ë	«ì	«í	«î	«ï	«ð	
+«ñ	«ò	«ó	«ô	«õ	«ö	«÷	«ø	
+«ù	«ú	«û	«ü	«ý	«þ	
+
+Area Number:12	Area Coding:AC
+¬¡	¬¢	¬£	¬¤	¬¥	¬¦	¬§	¬¨	
+¬©	¬ª	¬«	¬¬	¬­	¬®	¬¯	¬°	
+¬±	¬²	¬³	¬´	¬µ	¬¶	¬·	¬¸	
+¬¹	¬º	¬»	¬¼	¬½	¬¾	¬¿	¬À	
+¬Á	¬Â	¬Ã	¬Ä	¬Å	¬Æ	¬Ç	¬È	
+¬É	¬Ê	¬Ë	¬Ì	¬Í	¬Î	¬Ï	¬Ð	
+¬Ñ	¬Ò	¬Ó	¬Ô	¬Õ	¬Ö	¬×	¬Ø	
+¬Ù	¬Ú	¬Û	¬Ü	¬Ý	¬Þ	¬ß	¬à	
+¬á	¬â	¬ã	¬ä	¬å	¬æ	¬ç	¬è	
+¬é	¬ê	¬ë	¬ì	¬í	¬î	¬ï	¬ð	
+¬ñ	¬ò	¬ó	¬ô	¬õ	¬ö	¬÷	¬ø	
+¬ù	¬ú	¬û	¬ü	¬ý	¬þ	
+
+Area Number:13	Area Coding:AD
+­¡	­¢	­£	­¤	­¥	­¦	­§	­¨	
+­©	­ª	­«	­¬	­­	­®	­¯	­°	
+­±	­²	­³	­´	­µ	­¶	­·	­¸	
+­¹	­º	­»	­¼	­½	­¾	­¿	­À	
+­Á	­Â	­Ã	­Ä	­Å	­Æ	­Ç	­È	
+­É	­Ê	­Ë	­Ì	­Í	­Î	­Ï	­Ð	
+­Ñ	­Ò	­Ó	­Ô	­Õ	­Ö	­×	­Ø	
+­Ù	­Ú	­Û	­Ü	­Ý	­Þ	­ß	­à	
+­á	­â	­ã	­ä	­å	­æ	­ç	­è	
+­é	­ê	­ë	­ì	­í	­î	­ï	­ð	
+­ñ	­ò	­ó	­ô	­õ	­ö	­÷	­ø	
+­ù	­ú	­û	­ü	­ý	­þ	
+
+Area Number:14	Area Coding:AE
+®¡	®¢	®£	®¤	®¥	®¦	®§	®¨	
+®©	®ª	®«	®¬	®­	®®	®¯	®°	
+®±	®²	®³	®´	®µ	®¶	®·	®¸	
+®¹	®º	®»	®¼	®½	®¾	®¿	®À	
+®Á	®Â	®Ã	®Ä	®Å	®Æ	®Ç	®È	
+®É	®Ê	®Ë	®Ì	®Í	®Î	®Ï	®Ð	
+®Ñ	®Ò	®Ó	®Ô	®Õ	®Ö	®×	®Ø	
+®Ù	®Ú	®Û	®Ü	®Ý	®Þ	®ß	®à	
+®á	®â	®ã	®ä	®å	®æ	®ç	®è	
+®é	®ê	®ë	®ì	®í	®î	®ï	®ð	
+®ñ	®ò	®ó	®ô	®õ	®ö	®÷	®ø	
+®ù	®ú	®û	®ü	®ý	®þ	
+
+Area Number:15	Area Coding:AF
+¯¡	¯¢	¯£	¯¤	¯¥	¯¦	¯§	¯¨	
+¯©	¯ª	¯«	¯¬	¯­	¯®	¯¯	¯°	
+¯±	¯²	¯³	¯´	¯µ	¯¶	¯·	¯¸	
+¯¹	¯º	¯»	¯¼	¯½	¯¾	¯¿	¯À	
+¯Á	¯Â	¯Ã	¯Ä	¯Å	¯Æ	¯Ç	¯È	
+¯É	¯Ê	¯Ë	¯Ì	¯Í	¯Î	¯Ï	¯Ð	
+¯Ñ	¯Ò	¯Ó	¯Ô	¯Õ	¯Ö	¯×	¯Ø	
+¯Ù	¯Ú	¯Û	¯Ü	¯Ý	¯Þ	¯ß	¯à	
+¯á	¯â	¯ã	¯ä	¯å	¯æ	¯ç	¯è	
+¯é	¯ê	¯ë	¯ì	¯í	¯î	¯ï	¯ð	
+¯ñ	¯ò	¯ó	¯ô	¯õ	¯ö	¯÷	¯ø	
+¯ù	¯ú	¯û	¯ü	¯ý	¯þ	
+
+Area Number:16	Area Coding:B0
+°¡	°¢	°£	°¤	°¥	°¦	°§	°¨	
+°©	°ª	°«	°¬	°­	°®	°¯	°°	
+°±	°²	°³	°´	°µ	°¶	°·	°¸	
+°¹	°º	°»	°¼	°½	°¾	°¿	°À	
+°Á	°Â	°Ã	°Ä	°Å	°Æ	°Ç	°È	
+°É	°Ê	°Ë	°Ì	°Í	°Î	°Ï	°Ð	
+°Ñ	°Ò	°Ó	°Ô	°Õ	°Ö	°×	°Ø	
+°Ù	°Ú	°Û	°Ü	°Ý	°Þ	°ß	°à	
+°á	°â	°ã	°ä	°å	°æ	°ç	°è	
+°é	°ê	°ë	°ì	°í	°î	°ï	°ð	
+°ñ	°ò	°ó	°ô	°õ	°ö	°÷	°ø	
+°ù	°ú	°û	°ü	°ý	°þ	
+
+Area Number:17	Area Coding:B1
+±¡	±¢	±£	±¤	±¥	±¦	±§	±¨	
+±©	±ª	±«	±¬	±­	±®	±¯	±°	
+±±	±²	±³	±´	±µ	±¶	±·	±¸	
+±¹	±º	±»	±¼	±½	±¾	±¿	±À	
+±Á	±Â	±Ã	±Ä	±Å	±Æ	±Ç	±È	
+±É	±Ê	±Ë	±Ì	±Í	±Î	±Ï	±Ð	
+±Ñ	±Ò	±Ó	±Ô	±Õ	±Ö	±×	±Ø	
+±Ù	±Ú	±Û	±Ü	±Ý	±Þ	±ß	±à	
+±á	±â	±ã	±ä	±å	±æ	±ç	±è	
+±é	±ê	±ë	±ì	±í	±î	±ï	±ð	
+±ñ	±ò	±ó	±ô	±õ	±ö	±÷	±ø	
+±ù	±ú	±û	±ü	±ý	±þ	
+
+Area Number:18	Area Coding:B2
+²¡	²¢	²£	²¤	²¥	²¦	²§	²¨	
+²©	²ª	²«	²¬	²­	²®	²¯	²°	
+²±	²²	²³	²´	²µ	²¶	²·	²¸	
+²¹	²º	²»	²¼	²½	²¾	²¿	²À	
+²Á	²Â	²Ã	²Ä	²Å	²Æ	²Ç	²È	
+²É	²Ê	²Ë	²Ì	²Í	²Î	²Ï	²Ð	
+²Ñ	²Ò	²Ó	²Ô	²Õ	²Ö	²×	²Ø	
+²Ù	²Ú	²Û	²Ü	²Ý	²Þ	²ß	²à	
+²á	²â	²ã	²ä	²å	²æ	²ç	²è	
+²é	²ê	²ë	²ì	²í	²î	²ï	²ð	
+²ñ	²ò	²ó	²ô	²õ	²ö	²÷	²ø	
+²ù	²ú	²û	²ü	²ý	²þ	
+
+Area Number:19	Area Coding:B3
+³¡	³¢	³£	³¤	³¥	³¦	³§	³¨	
+³©	³ª	³«	³¬	³­	³®	³¯	³°	
+³±	³²	³³	³´	³µ	³¶	³·	³¸	
+³¹	³º	³»	³¼	³½	³¾	³¿	³À	
+³Á	³Â	³Ã	³Ä	³Å	³Æ	³Ç	³È	
+³É	³Ê	³Ë	³Ì	³Í	³Î	³Ï	³Ð	
+³Ñ	³Ò	³Ó	³Ô	³Õ	³Ö	³×	³Ø	
+³Ù	³Ú	³Û	³Ü	³Ý	³Þ	³ß	³à	
+³á	³â	³ã	³ä	³å	³æ	³ç	³è	
+³é	³ê	³ë	³ì	³í	³î	³ï	³ð	
+³ñ	³ò	³ó	³ô	³õ	³ö	³÷	³ø	
+³ù	³ú	³û	³ü	³ý	³þ	
+
+Area Number:20	Area Coding:B4
+´¡	´¢	´£	´¤	´¥	´¦	´§	´¨	
+´©	´ª	´«	´¬	´­	´®	´¯	´°	
+´±	´²	´³	´´	´µ	´¶	´·	´¸	
+´¹	´º	´»	´¼	´½	´¾	´¿	´À	
+´Á	´Â	´Ã	´Ä	´Å	´Æ	´Ç	´È	
+´É	´Ê	´Ë	´Ì	´Í	´Î	´Ï	´Ð	
+´Ñ	´Ò	´Ó	´Ô	´Õ	´Ö	´×	´Ø	
+´Ù	´Ú	´Û	´Ü	´Ý	´Þ	´ß	´à	
+´á	´â	´ã	´ä	´å	´æ	´ç	´è	
+´é	´ê	´ë	´ì	´í	´î	´ï	´ð	
+´ñ	´ò	´ó	´ô	´õ	´ö	´÷	´ø	
+´ù	´ú	´û	´ü	´ý	´þ	
+
+Area Number:21	Area Coding:B5
+µ¡	µ¢	µ£	µ¤	µ¥	µ¦	µ§	µ¨	
+µ©	µª	µ«	µ¬	µ­	µ®	µ¯	µ°	
+µ±	µ²	µ³	µ´	µµ	µ¶	µ·	µ¸	
+µ¹	µº	µ»	µ¼	µ½	µ¾	µ¿	µÀ	
+µÁ	µÂ	µÃ	µÄ	µÅ	µÆ	µÇ	µÈ	
+µÉ	µÊ	µË	µÌ	µÍ	µÎ	µÏ	µÐ	
+µÑ	µÒ	µÓ	µÔ	µÕ	µÖ	µ×	µØ	
+µÙ	µÚ	µÛ	µÜ	µÝ	µÞ	µß	µà	
+µá	µâ	µã	µä	µå	µæ	µç	µè	
+µé	µê	µë	µì	µí	µî	µï	µð	
+µñ	µò	µó	µô	µõ	µö	µ÷	µø	
+µù	µú	µû	µü	µý	µþ	
+
+Area Number:22	Area Coding:B6
+¶¡	¶¢	¶£	¶¤	¶¥	¶¦	¶§	¶¨	
+¶©	¶ª	¶«	¶¬	¶­	¶®	¶¯	¶°	
+¶±	¶²	¶³	¶´	¶µ	¶¶	¶·	¶¸	
+¶¹	¶º	¶»	¶¼	¶½	¶¾	¶¿	¶À	
+¶Á	¶Â	¶Ã	¶Ä	¶Å	¶Æ	¶Ç	¶È	
+¶É	¶Ê	¶Ë	¶Ì	¶Í	¶Î	¶Ï	¶Ð	
+¶Ñ	¶Ò	¶Ó	¶Ô	¶Õ	¶Ö	¶×	¶Ø	
+¶Ù	¶Ú	¶Û	¶Ü	¶Ý	¶Þ	¶ß	¶à	
+¶á	¶â	¶ã	¶ä	¶å	¶æ	¶ç	¶è	
+¶é	¶ê	¶ë	¶ì	¶í	¶î	¶ï	¶ð	
+¶ñ	¶ò	¶ó	¶ô	¶õ	¶ö	¶÷	¶ø	
+¶ù	¶ú	¶û	¶ü	¶ý	¶þ	
+
+Area Number:23	Area Coding:B7
+·¡	·¢	·£	·¤	·¥	·¦	·§	·¨	
+·©	·ª	·«	·¬	·­	·®	·¯	·°	
+·±	·²	·³	·´	·µ	·¶	··	·¸	
+·¹	·º	·»	·¼	·½	·¾	·¿	·À	
+·Á	·Â	·Ã	·Ä	·Å	·Æ	·Ç	·È	
+·É	·Ê	·Ë	·Ì	·Í	·Î	·Ï	·Ð	
+·Ñ	·Ò	·Ó	·Ô	·Õ	·Ö	·×	·Ø	
+·Ù	·Ú	·Û	·Ü	·Ý	·Þ	·ß	·à	
+·á	·â	·ã	·ä	·å	·æ	·ç	·è	
+·é	·ê	·ë	·ì	·í	·î	·ï	·ð	
+·ñ	·ò	·ó	·ô	·õ	·ö	·÷	·ø	
+·ù	·ú	·û	·ü	·ý	·þ	
+
+Area Number:24	Area Coding:B8
+¸¡	¸¢	¸£	¸¤	¸¥	¸¦	¸§	¸¨	
+¸©	¸ª	¸«	¸¬	¸­	¸®	¸¯	¸°	
+¸±	¸²	¸³	¸´	¸µ	¸¶	¸·	¸¸	
+¸¹	¸º	¸»	¸¼	¸½	¸¾	¸¿	¸À	
+¸Á	¸Â	¸Ã	¸Ä	¸Å	¸Æ	¸Ç	¸È	
+¸É	¸Ê	¸Ë	¸Ì	¸Í	¸Î	¸Ï	¸Ð	
+¸Ñ	¸Ò	¸Ó	¸Ô	¸Õ	¸Ö	¸×	¸Ø	
+¸Ù	¸Ú	¸Û	¸Ü	¸Ý	¸Þ	¸ß	¸à	
+¸á	¸â	¸ã	¸ä	¸å	¸æ	¸ç	¸è	
+¸é	¸ê	¸ë	¸ì	¸í	¸î	¸ï	¸ð	
+¸ñ	¸ò	¸ó	¸ô	¸õ	¸ö	¸÷	¸ø	
+¸ù	¸ú	¸û	¸ü	¸ý	¸þ	
+
+Area Number:25	Area Coding:B9
+¹¡	¹¢	¹£	¹¤	¹¥	¹¦	¹§	¹¨	
+¹©	¹ª	¹«	¹¬	¹­	¹®	¹¯	¹°	
+¹±	¹²	¹³	¹´	¹µ	¹¶	¹·	¹¸	
+¹¹	¹º	¹»	¹¼	¹½	¹¾	¹¿	¹À	
+¹Á	¹Â	¹Ã	¹Ä	¹Å	¹Æ	¹Ç	¹È	
+¹É	¹Ê	¹Ë	¹Ì	¹Í	¹Î	¹Ï	¹Ð	
+¹Ñ	¹Ò	¹Ó	¹Ô	¹Õ	¹Ö	¹×	¹Ø	
+¹Ù	¹Ú	¹Û	¹Ü	¹Ý	¹Þ	¹ß	¹à	
+¹á	¹â	¹ã	¹ä	¹å	¹æ	¹ç	¹è	
+¹é	¹ê	¹ë	¹ì	¹í	¹î	¹ï	¹ð	
+¹ñ	¹ò	¹ó	¹ô	¹õ	¹ö	¹÷	¹ø	
+¹ù	¹ú	¹û	¹ü	¹ý	¹þ	
+
+Area Number:26	Area Coding:BA
+º¡	º¢	º£	º¤	º¥	º¦	º§	º¨	
+º©	ºª	º«	º¬	º­	º®	º¯	º°	
+º±	º²	º³	º´	ºµ	º¶	º·	º¸	
+º¹	ºº	º»	º¼	º½	º¾	º¿	ºÀ	
+ºÁ	ºÂ	ºÃ	ºÄ	ºÅ	ºÆ	ºÇ	ºÈ	
+ºÉ	ºÊ	ºË	ºÌ	ºÍ	ºÎ	ºÏ	ºÐ	
+ºÑ	ºÒ	ºÓ	ºÔ	ºÕ	ºÖ	º×	ºØ	
+ºÙ	ºÚ	ºÛ	ºÜ	ºÝ	ºÞ	ºß	ºà	
+ºá	ºâ	ºã	ºä	ºå	ºæ	ºç	ºè	
+ºé	ºê	ºë	ºì	ºí	ºî	ºï	ºð	
+ºñ	ºò	ºó	ºô	ºõ	ºö	º÷	ºø	
+ºù	ºú	ºû	ºü	ºý	ºþ	
+
+Area Number:27	Area Coding:BB
+»¡	»¢	»£	»¤	»¥	»¦	»§	»¨	
+»©	»ª	»«	»¬	»­	»®	»¯	»°	
+»±	»²	»³	»´	»µ	»¶	»·	»¸	
+»¹	»º	»»	»¼	»½	»¾	»¿	»À	
+»Á	»Â	»Ã	»Ä	»Å	»Æ	»Ç	»È	
+»É	»Ê	»Ë	»Ì	»Í	»Î	»Ï	»Ð	
+»Ñ	»Ò	»Ó	»Ô	»Õ	»Ö	»×	»Ø	
+»Ù	»Ú	»Û	»Ü	»Ý	»Þ	»ß	»à	
+»á	»â	»ã	»ä	»å	»æ	»ç	»è	
+»é	»ê	»ë	»ì	»í	»î	»ï	»ð	
+»ñ	»ò	»ó	»ô	»õ	»ö	»÷	»ø	
+»ù	»ú	»û	»ü	»ý	»þ	
+
+Area Number:28	Area Coding:BC
+¼¡	¼¢	¼£	¼¤	¼¥	¼¦	¼§	¼¨	
+¼©	¼ª	¼«	¼¬	¼­	¼®	¼¯	¼°	
+¼±	¼²	¼³	¼´	¼µ	¼¶	¼·	¼¸	
+¼¹	¼º	¼»	¼¼	¼½	¼¾	¼¿	¼À	
+¼Á	¼Â	¼Ã	¼Ä	¼Å	¼Æ	¼Ç	¼È	
+¼É	¼Ê	¼Ë	¼Ì	¼Í	¼Î	¼Ï	¼Ð	
+¼Ñ	¼Ò	¼Ó	¼Ô	¼Õ	¼Ö	¼×	¼Ø	
+¼Ù	¼Ú	¼Û	¼Ü	¼Ý	¼Þ	¼ß	¼à	
+¼á	¼â	¼ã	¼ä	¼å	¼æ	¼ç	¼è	
+¼é	¼ê	¼ë	¼ì	¼í	¼î	¼ï	¼ð	
+¼ñ	¼ò	¼ó	¼ô	¼õ	¼ö	¼÷	¼ø	
+¼ù	¼ú	¼û	¼ü	¼ý	¼þ	
+
+Area Number:29	Area Coding:BD
+½¡	½¢	½£	½¤	½¥	½¦	½§	½¨	
+½©	½ª	½«	½¬	½­	½®	½¯	½°	
+½±	½²	½³	½´	½µ	½¶	½·	½¸	
+½¹	½º	½»	½¼	½½	½¾	½¿	½À	
+½Á	½Â	½Ã	½Ä	½Å	½Æ	½Ç	½È	
+½É	½Ê	½Ë	½Ì	½Í	½Î	½Ï	½Ð	
+½Ñ	½Ò	½Ó	½Ô	½Õ	½Ö	½×	½Ø	
+½Ù	½Ú	½Û	½Ü	½Ý	½Þ	½ß	½à	
+½á	½â	½ã	½ä	½å	½æ	½ç	½è	
+½é	½ê	½ë	½ì	½í	½î	½ï	½ð	
+½ñ	½ò	½ó	½ô	½õ	½ö	½÷	½ø	
+½ù	½ú	½û	½ü	½ý	½þ	
+
+Area Number:30	Area Coding:BE
+¾¡	¾¢	¾£	¾¤	¾¥	¾¦	¾§	¾¨	
+¾©	¾ª	¾«	¾¬	¾­	¾®	¾¯	¾°	
+¾±	¾²	¾³	¾´	¾µ	¾¶	¾·	¾¸	
+¾¹	¾º	¾»	¾¼	¾½	¾¾	¾¿	¾À	
+¾Á	¾Â	¾Ã	¾Ä	¾Å	¾Æ	¾Ç	¾È	
+¾É	¾Ê	¾Ë	¾Ì	¾Í	¾Î	¾Ï	¾Ð	
+¾Ñ	¾Ò	¾Ó	¾Ô	¾Õ	¾Ö	¾×	¾Ø	
+¾Ù	¾Ú	¾Û	¾Ü	¾Ý	¾Þ	¾ß	¾à	
+¾á	¾â	¾ã	¾ä	¾å	¾æ	¾ç	¾è	
+¾é	¾ê	¾ë	¾ì	¾í	¾î	¾ï	¾ð	
+¾ñ	¾ò	¾ó	¾ô	¾õ	¾ö	¾÷	¾ø	
+¾ù	¾ú	¾û	¾ü	¾ý	¾þ	
+
+Area Number:31	Area Coding:BF
+¿¡	¿¢	¿£	¿¤	¿¥	¿¦	¿§	¿¨	
+¿©	¿ª	¿«	¿¬	¿­	¿®	¿¯	¿°	
+¿±	¿²	¿³	¿´	¿µ	¿¶	¿·	¿¸	
+¿¹	¿º	¿»	¿¼	¿½	¿¾	¿¿	¿À	
+¿Á	¿Â	¿Ã	¿Ä	¿Å	¿Æ	¿Ç	¿È	
+¿É	¿Ê	¿Ë	¿Ì	¿Í	¿Î	¿Ï	¿Ð	
+¿Ñ	¿Ò	¿Ó	¿Ô	¿Õ	¿Ö	¿×	¿Ø	
+¿Ù	¿Ú	¿Û	¿Ü	¿Ý	¿Þ	¿ß	¿à	
+¿á	¿â	¿ã	¿ä	¿å	¿æ	¿ç	¿è	
+¿é	¿ê	¿ë	¿ì	¿í	¿î	¿ï	¿ð	
+¿ñ	¿ò	¿ó	¿ô	¿õ	¿ö	¿÷	¿ø	
+¿ù	¿ú	¿û	¿ü	¿ý	¿þ	
+
+Area Number:32	Area Coding:C0
+À¡	À¢	À£	À¤	À¥	À¦	À§	À¨	
+À©	Àª	À«	À¬	À­	À®	À¯	À°	
+À±	À²	À³	À´	Àµ	À¶	À·	À¸	
+À¹	Àº	À»	À¼	À½	À¾	À¿	ÀÀ	
+ÀÁ	ÀÂ	ÀÃ	ÀÄ	ÀÅ	ÀÆ	ÀÇ	ÀÈ	
+ÀÉ	ÀÊ	ÀË	ÀÌ	ÀÍ	ÀÎ	ÀÏ	ÀÐ	
+ÀÑ	ÀÒ	ÀÓ	ÀÔ	ÀÕ	ÀÖ	À×	ÀØ	
+ÀÙ	ÀÚ	ÀÛ	ÀÜ	ÀÝ	ÀÞ	Àß	Àà	
+Àá	Àâ	Àã	Àä	Àå	Àæ	Àç	Àè	
+Àé	Àê	Àë	Àì	Àí	Àî	Àï	Àð	
+Àñ	Àò	Àó	Àô	Àõ	Àö	À÷	Àø	
+Àù	Àú	Àû	Àü	Àý	Àþ	
+
+Area Number:33	Area Coding:C1
+Á¡	Á¢	Á£	Á¤	Á¥	Á¦	Á§	Á¨	
+Á©	Áª	Á«	Á¬	Á­	Á®	Á¯	Á°	
+Á±	Á²	Á³	Á´	Áµ	Á¶	Á·	Á¸	
+Á¹	Áº	Á»	Á¼	Á½	Á¾	Á¿	ÁÀ	
+ÁÁ	ÁÂ	ÁÃ	ÁÄ	ÁÅ	ÁÆ	ÁÇ	ÁÈ	
+ÁÉ	ÁÊ	ÁË	ÁÌ	ÁÍ	ÁÎ	ÁÏ	ÁÐ	
+ÁÑ	ÁÒ	ÁÓ	ÁÔ	ÁÕ	ÁÖ	Á×	ÁØ	
+ÁÙ	ÁÚ	ÁÛ	ÁÜ	ÁÝ	ÁÞ	Áß	Áà	
+Áá	Áâ	Áã	Áä	Áå	Áæ	Áç	Áè	
+Áé	Áê	Áë	Áì	Áí	Áî	Áï	Áð	
+Áñ	Áò	Áó	Áô	Áõ	Áö	Á÷	Áø	
+Áù	Áú	Áû	Áü	Áý	Áþ	
+
+Area Number:34	Area Coding:C2
+Â¡	Â¢	Â£	Â¤	Â¥	Â¦	Â§	Â¨	
+Â©	Âª	Â«	Â¬	Â­	Â®	Â¯	Â°	
+Â±	Â²	Â³	Â´	Âµ	Â¶	Â·	Â¸	
+Â¹	Âº	Â»	Â¼	Â½	Â¾	Â¿	ÂÀ	
+ÂÁ	ÂÂ	ÂÃ	ÂÄ	ÂÅ	ÂÆ	ÂÇ	ÂÈ	
+ÂÉ	ÂÊ	ÂË	ÂÌ	ÂÍ	ÂÎ	ÂÏ	ÂÐ	
+ÂÑ	ÂÒ	ÂÓ	ÂÔ	ÂÕ	ÂÖ	Â×	ÂØ	
+ÂÙ	ÂÚ	ÂÛ	ÂÜ	ÂÝ	ÂÞ	Âß	Âà	
+Âá	Ââ	Âã	Âä	Âå	Âæ	Âç	Âè	
+Âé	Âê	Âë	Âì	Âí	Âî	Âï	Âð	
+Âñ	Âò	Âó	Âô	Âõ	Âö	Â÷	Âø	
+Âù	Âú	Âû	Âü	Âý	Âþ	
+
+Area Number:35	Area Coding:C3
+Ã¡	Ã¢	Ã£	Ã¤	Ã¥	Ã¦	Ã§	Ã¨	
+Ã©	Ãª	Ã«	Ã¬	Ã­	Ã®	Ã¯	Ã°	
+Ã±	Ã²	Ã³	Ã´	Ãµ	Ã¶	Ã·	Ã¸	
+Ã¹	Ãº	Ã»	Ã¼	Ã½	Ã¾	Ã¿	ÃÀ	
+ÃÁ	ÃÂ	ÃÃ	ÃÄ	ÃÅ	ÃÆ	ÃÇ	ÃÈ	
+ÃÉ	ÃÊ	ÃË	ÃÌ	ÃÍ	ÃÎ	ÃÏ	ÃÐ	
+ÃÑ	ÃÒ	ÃÓ	ÃÔ	ÃÕ	ÃÖ	Ã×	ÃØ	
+ÃÙ	ÃÚ	ÃÛ	ÃÜ	ÃÝ	ÃÞ	Ãß	Ãà	
+Ãá	Ãâ	Ãã	Ãä	Ãå	Ãæ	Ãç	Ãè	
+Ãé	Ãê	Ãë	Ãì	Ãí	Ãî	Ãï	Ãð	
+Ãñ	Ãò	Ãó	Ãô	Ãõ	Ãö	Ã÷	Ãø	
+Ãù	Ãú	Ãû	Ãü	Ãý	Ãþ	
+
+Area Number:36	Area Coding:C4
+Ä¡	Ä¢	Ä£	Ä¤	Ä¥	Ä¦	Ä§	Ä¨	
+Ä©	Äª	Ä«	Ä¬	Ä­	Ä®	Ä¯	Ä°	
+Ä±	Ä²	Ä³	Ä´	Äµ	Ä¶	Ä·	Ä¸	
+Ä¹	Äº	Ä»	Ä¼	Ä½	Ä¾	Ä¿	ÄÀ	
+ÄÁ	ÄÂ	ÄÃ	ÄÄ	ÄÅ	ÄÆ	ÄÇ	ÄÈ	
+ÄÉ	ÄÊ	ÄË	ÄÌ	ÄÍ	ÄÎ	ÄÏ	ÄÐ	
+ÄÑ	ÄÒ	ÄÓ	ÄÔ	ÄÕ	ÄÖ	Ä×	ÄØ	
+ÄÙ	ÄÚ	ÄÛ	ÄÜ	ÄÝ	ÄÞ	Äß	Äà	
+Äá	Äâ	Äã	Ää	Äå	Äæ	Äç	Äè	
+Äé	Äê	Äë	Äì	Äí	Äî	Äï	Äð	
+Äñ	Äò	Äó	Äô	Äõ	Äö	Ä÷	Äø	
+Äù	Äú	Äû	Äü	Äý	Äþ	
+
+Area Number:37	Area Coding:C5
+Å¡	Å¢	Å£	Å¤	Å¥	Å¦	Å§	Å¨	
+Å©	Åª	Å«	Å¬	Å­	Å®	Å¯	Å°	
+Å±	Å²	Å³	Å´	Åµ	Å¶	Å·	Å¸	
+Å¹	Åº	Å»	Å¼	Å½	Å¾	Å¿	ÅÀ	
+ÅÁ	ÅÂ	ÅÃ	ÅÄ	ÅÅ	ÅÆ	ÅÇ	ÅÈ	
+ÅÉ	ÅÊ	ÅË	ÅÌ	ÅÍ	ÅÎ	ÅÏ	ÅÐ	
+ÅÑ	ÅÒ	ÅÓ	ÅÔ	ÅÕ	ÅÖ	Å×	ÅØ	
+ÅÙ	ÅÚ	ÅÛ	ÅÜ	ÅÝ	ÅÞ	Åß	Åà	
+Åá	Åâ	Åã	Åä	Åå	Åæ	Åç	Åè	
+Åé	Åê	Åë	Åì	Åí	Åî	Åï	Åð	
+Åñ	Åò	Åó	Åô	Åõ	Åö	Å÷	Åø	
+Åù	Åú	Åû	Åü	Åý	Åþ	
+
+Area Number:38	Area Coding:C6
+Æ¡	Æ¢	Æ£	Æ¤	Æ¥	Æ¦	Æ§	Æ¨	
+Æ©	Æª	Æ«	Æ¬	Æ­	Æ®	Æ¯	Æ°	
+Æ±	Æ²	Æ³	Æ´	Æµ	Æ¶	Æ·	Æ¸	
+Æ¹	Æº	Æ»	Æ¼	Æ½	Æ¾	Æ¿	ÆÀ	
+ÆÁ	ÆÂ	ÆÃ	ÆÄ	ÆÅ	ÆÆ	ÆÇ	ÆÈ	
+ÆÉ	ÆÊ	ÆË	ÆÌ	ÆÍ	ÆÎ	ÆÏ	ÆÐ	
+ÆÑ	ÆÒ	ÆÓ	ÆÔ	ÆÕ	ÆÖ	Æ×	ÆØ	
+ÆÙ	ÆÚ	ÆÛ	ÆÜ	ÆÝ	ÆÞ	Æß	Æà	
+Æá	Æâ	Æã	Æä	Æå	Ææ	Æç	Æè	
+Æé	Æê	Æë	Æì	Æí	Æî	Æï	Æð	
+Æñ	Æò	Æó	Æô	Æõ	Æö	Æ÷	Æø	
+Æù	Æú	Æû	Æü	Æý	Æþ	
+
+Area Number:39	Area Coding:C7
+Ç¡	Ç¢	Ç£	Ç¤	Ç¥	Ç¦	Ç§	Ç¨	
+Ç©	Çª	Ç«	Ç¬	Ç­	Ç®	Ç¯	Ç°	
+Ç±	Ç²	Ç³	Ç´	Çµ	Ç¶	Ç·	Ç¸	
+Ç¹	Çº	Ç»	Ç¼	Ç½	Ç¾	Ç¿	ÇÀ	
+ÇÁ	ÇÂ	ÇÃ	ÇÄ	ÇÅ	ÇÆ	ÇÇ	ÇÈ	
+ÇÉ	ÇÊ	ÇË	ÇÌ	ÇÍ	ÇÎ	ÇÏ	ÇÐ	
+ÇÑ	ÇÒ	ÇÓ	ÇÔ	ÇÕ	ÇÖ	Ç×	ÇØ	
+ÇÙ	ÇÚ	ÇÛ	ÇÜ	ÇÝ	ÇÞ	Çß	Çà	
+Çá	Çâ	Çã	Çä	Çå	Çæ	Çç	Çè	
+Çé	Çê	Çë	Çì	Çí	Çî	Çï	Çð	
+Çñ	Çò	Çó	Çô	Çõ	Çö	Ç÷	Çø	
+Çù	Çú	Çû	Çü	Çý	Çþ	
+
+Area Number:40	Area Coding:C8
+È¡	È¢	È£	È¤	È¥	È¦	È§	È¨	
+È©	Èª	È«	È¬	È­	È®	È¯	È°	
+È±	È²	È³	È´	Èµ	È¶	È·	È¸	
+È¹	Èº	È»	È¼	È½	È¾	È¿	ÈÀ	
+ÈÁ	ÈÂ	ÈÃ	ÈÄ	ÈÅ	ÈÆ	ÈÇ	ÈÈ	
+ÈÉ	ÈÊ	ÈË	ÈÌ	ÈÍ	ÈÎ	ÈÏ	ÈÐ	
+ÈÑ	ÈÒ	ÈÓ	ÈÔ	ÈÕ	ÈÖ	È×	ÈØ	
+ÈÙ	ÈÚ	ÈÛ	ÈÜ	ÈÝ	ÈÞ	Èß	Èà	
+Èá	Èâ	Èã	Èä	Èå	Èæ	Èç	Èè	
+Èé	Èê	Èë	Èì	Èí	Èî	Èï	Èð	
+Èñ	Èò	Èó	Èô	Èõ	Èö	È÷	Èø	
+Èù	Èú	Èû	Èü	Èý	Èþ	
+
+Area Number:41	Area Coding:C9
+É¡	É¢	É£	É¤	É¥	É¦	É§	É¨	
+É©	Éª	É«	É¬	É­	É®	É¯	É°	
+É±	É²	É³	É´	Éµ	É¶	É·	É¸	
+É¹	Éº	É»	É¼	É½	É¾	É¿	ÉÀ	
+ÉÁ	ÉÂ	ÉÃ	ÉÄ	ÉÅ	ÉÆ	ÉÇ	ÉÈ	
+ÉÉ	ÉÊ	ÉË	ÉÌ	ÉÍ	ÉÎ	ÉÏ	ÉÐ	
+ÉÑ	ÉÒ	ÉÓ	ÉÔ	ÉÕ	ÉÖ	É×	ÉØ	
+ÉÙ	ÉÚ	ÉÛ	ÉÜ	ÉÝ	ÉÞ	Éß	Éà	
+Éá	Éâ	Éã	Éä	Éå	Éæ	Éç	Éè	
+Éé	Éê	Éë	Éì	Éí	Éî	Éï	Éð	
+Éñ	Éò	Éó	Éô	Éõ	Éö	É÷	Éø	
+Éù	Éú	Éû	Éü	Éý	Éþ	
+
+Area Number:42	Area Coding:CA
+Ê¡	Ê¢	Ê£	Ê¤	Ê¥	Ê¦	Ê§	Ê¨	
+Ê©	Êª	Ê«	Ê¬	Ê­	Ê®	Ê¯	Ê°	
+Ê±	Ê²	Ê³	Ê´	Êµ	Ê¶	Ê·	Ê¸	
+Ê¹	Êº	Ê»	Ê¼	Ê½	Ê¾	Ê¿	ÊÀ	
+ÊÁ	ÊÂ	ÊÃ	ÊÄ	ÊÅ	ÊÆ	ÊÇ	ÊÈ	
+ÊÉ	ÊÊ	ÊË	ÊÌ	ÊÍ	ÊÎ	ÊÏ	ÊÐ	
+ÊÑ	ÊÒ	ÊÓ	ÊÔ	ÊÕ	ÊÖ	Ê×	ÊØ	
+ÊÙ	ÊÚ	ÊÛ	ÊÜ	ÊÝ	ÊÞ	Êß	Êà	
+Êá	Êâ	Êã	Êä	Êå	Êæ	Êç	Êè	
+Êé	Êê	Êë	Êì	Êí	Êî	Êï	Êð	
+Êñ	Êò	Êó	Êô	Êõ	Êö	Ê÷	Êø	
+Êù	Êú	Êû	Êü	Êý	Êþ	
+
+Area Number:43	Area Coding:CB
+Ë¡	Ë¢	Ë£	Ë¤	Ë¥	Ë¦	Ë§	Ë¨	
+Ë©	Ëª	Ë«	Ë¬	Ë­	Ë®	Ë¯	Ë°	
+Ë±	Ë²	Ë³	Ë´	Ëµ	Ë¶	Ë·	Ë¸	
+Ë¹	Ëº	Ë»	Ë¼	Ë½	Ë¾	Ë¿	ËÀ	
+ËÁ	ËÂ	ËÃ	ËÄ	ËÅ	ËÆ	ËÇ	ËÈ	
+ËÉ	ËÊ	ËË	ËÌ	ËÍ	ËÎ	ËÏ	ËÐ	
+ËÑ	ËÒ	ËÓ	ËÔ	ËÕ	ËÖ	Ë×	ËØ	
+ËÙ	ËÚ	ËÛ	ËÜ	ËÝ	ËÞ	Ëß	Ëà	
+Ëá	Ëâ	Ëã	Ëä	Ëå	Ëæ	Ëç	Ëè	
+Ëé	Ëê	Ëë	Ëì	Ëí	Ëî	Ëï	Ëð	
+Ëñ	Ëò	Ëó	Ëô	Ëõ	Ëö	Ë÷	Ëø	
+Ëù	Ëú	Ëû	Ëü	Ëý	Ëþ	
+
+Area Number:44	Area Coding:CC
+Ì¡	Ì¢	Ì£	Ì¤	Ì¥	Ì¦	Ì§	Ì¨	
+Ì©	Ìª	Ì«	Ì¬	Ì­	Ì®	Ì¯	Ì°	
+Ì±	Ì²	Ì³	Ì´	Ìµ	Ì¶	Ì·	Ì¸	
+Ì¹	Ìº	Ì»	Ì¼	Ì½	Ì¾	Ì¿	ÌÀ	
+ÌÁ	ÌÂ	ÌÃ	ÌÄ	ÌÅ	ÌÆ	ÌÇ	ÌÈ	
+ÌÉ	ÌÊ	ÌË	ÌÌ	ÌÍ	ÌÎ	ÌÏ	ÌÐ	
+ÌÑ	ÌÒ	ÌÓ	ÌÔ	ÌÕ	ÌÖ	Ì×	ÌØ	
+ÌÙ	ÌÚ	ÌÛ	ÌÜ	ÌÝ	ÌÞ	Ìß	Ìà	
+Ìá	Ìâ	Ìã	Ìä	Ìå	Ìæ	Ìç	Ìè	
+Ìé	Ìê	Ìë	Ìì	Ìí	Ìî	Ìï	Ìð	
+Ìñ	Ìò	Ìó	Ìô	Ìõ	Ìö	Ì÷	Ìø	
+Ìù	Ìú	Ìû	Ìü	Ìý	Ìþ	
+
+Area Number:45	Area Coding:CD
+Í¡	Í¢	Í£	Í¤	Í¥	Í¦	Í§	Í¨	
+Í©	Íª	Í«	Í¬	Í­	Í®	Í¯	Í°	
+Í±	Í²	Í³	Í´	Íµ	Í¶	Í·	Í¸	
+Í¹	Íº	Í»	Í¼	Í½	Í¾	Í¿	ÍÀ	
+ÍÁ	ÍÂ	ÍÃ	ÍÄ	ÍÅ	ÍÆ	ÍÇ	ÍÈ	
+ÍÉ	ÍÊ	ÍË	ÍÌ	ÍÍ	ÍÎ	ÍÏ	ÍÐ	
+ÍÑ	ÍÒ	ÍÓ	ÍÔ	ÍÕ	ÍÖ	Í×	ÍØ	
+ÍÙ	ÍÚ	ÍÛ	ÍÜ	ÍÝ	ÍÞ	Íß	Íà	
+Íá	Íâ	Íã	Íä	Íå	Íæ	Íç	Íè	
+Íé	Íê	Íë	Íì	Íí	Íî	Íï	Íð	
+Íñ	Íò	Íó	Íô	Íõ	Íö	Í÷	Íø	
+Íù	Íú	Íû	Íü	Íý	Íþ	
+
+Area Number:46	Area Coding:CE
+Î¡	Î¢	Î£	Î¤	Î¥	Î¦	Î§	Î¨	
+Î©	Îª	Î«	Î¬	Î­	Î®	Î¯	Î°	
+Î±	Î²	Î³	Î´	Îµ	Î¶	Î·	Î¸	
+Î¹	Îº	Î»	Î¼	Î½	Î¾	Î¿	ÎÀ	
+ÎÁ	ÎÂ	ÎÃ	ÎÄ	ÎÅ	ÎÆ	ÎÇ	ÎÈ	
+ÎÉ	ÎÊ	ÎË	ÎÌ	ÎÍ	ÎÎ	ÎÏ	ÎÐ	
+ÎÑ	ÎÒ	ÎÓ	ÎÔ	ÎÕ	ÎÖ	Î×	ÎØ	
+ÎÙ	ÎÚ	ÎÛ	ÎÜ	ÎÝ	ÎÞ	Îß	Îà	
+Îá	Îâ	Îã	Îä	Îå	Îæ	Îç	Îè	
+Îé	Îê	Îë	Îì	Îí	Îî	Îï	Îð	
+Îñ	Îò	Îó	Îô	Îõ	Îö	Î÷	Îø	
+Îù	Îú	Îû	Îü	Îý	Îþ	
+
+Area Number:47	Area Coding:CF
+Ï¡	Ï¢	Ï£	Ï¤	Ï¥	Ï¦	Ï§	Ï¨	
+Ï©	Ïª	Ï«	Ï¬	Ï­	Ï®	Ï¯	Ï°	
+Ï±	Ï²	Ï³	Ï´	Ïµ	Ï¶	Ï·	Ï¸	
+Ï¹	Ïº	Ï»	Ï¼	Ï½	Ï¾	Ï¿	ÏÀ	
+ÏÁ	ÏÂ	ÏÃ	ÏÄ	ÏÅ	ÏÆ	ÏÇ	ÏÈ	
+ÏÉ	ÏÊ	ÏË	ÏÌ	ÏÍ	ÏÎ	ÏÏ	ÏÐ	
+ÏÑ	ÏÒ	ÏÓ	ÏÔ	ÏÕ	ÏÖ	Ï×	ÏØ	
+ÏÙ	ÏÚ	ÏÛ	ÏÜ	ÏÝ	ÏÞ	Ïß	Ïà	
+Ïá	Ïâ	Ïã	Ïä	Ïå	Ïæ	Ïç	Ïè	
+Ïé	Ïê	Ïë	Ïì	Ïí	Ïî	Ïï	Ïð	
+Ïñ	Ïò	Ïó	Ïô	Ïõ	Ïö	Ï÷	Ïø	
+Ïù	Ïú	Ïû	Ïü	Ïý	Ïþ	
+
+Area Number:48	Area Coding:D0
+Ð¡	Ð¢	Ð£	Ð¤	Ð¥	Ð¦	Ð§	Ð¨	
+Ð©	Ðª	Ð«	Ð¬	Ð­	Ð®	Ð¯	Ð°	
+Ð±	Ð²	Ð³	Ð´	Ðµ	Ð¶	Ð·	Ð¸	
+Ð¹	Ðº	Ð»	Ð¼	Ð½	Ð¾	Ð¿	ÐÀ	
+ÐÁ	ÐÂ	ÐÃ	ÐÄ	ÐÅ	ÐÆ	ÐÇ	ÐÈ	
+ÐÉ	ÐÊ	ÐË	ÐÌ	ÐÍ	ÐÎ	ÐÏ	ÐÐ	
+ÐÑ	ÐÒ	ÐÓ	ÐÔ	ÐÕ	ÐÖ	Ð×	ÐØ	
+ÐÙ	ÐÚ	ÐÛ	ÐÜ	ÐÝ	ÐÞ	Ðß	Ðà	
+Ðá	Ðâ	Ðã	Ðä	Ðå	Ðæ	Ðç	Ðè	
+Ðé	Ðê	Ðë	Ðì	Ðí	Ðî	Ðï	Ðð	
+Ðñ	Ðò	Ðó	Ðô	Ðõ	Ðö	Ð÷	Ðø	
+Ðù	Ðú	Ðû	Ðü	Ðý	Ðþ	
+
+Area Number:49	Area Coding:D1
+Ñ¡	Ñ¢	Ñ£	Ñ¤	Ñ¥	Ñ¦	Ñ§	Ñ¨	
+Ñ©	Ñª	Ñ«	Ñ¬	Ñ­	Ñ®	Ñ¯	Ñ°	
+Ñ±	Ñ²	Ñ³	Ñ´	Ñµ	Ñ¶	Ñ·	Ñ¸	
+Ñ¹	Ñº	Ñ»	Ñ¼	Ñ½	Ñ¾	Ñ¿	ÑÀ	
+ÑÁ	ÑÂ	ÑÃ	ÑÄ	ÑÅ	ÑÆ	ÑÇ	ÑÈ	
+ÑÉ	ÑÊ	ÑË	ÑÌ	ÑÍ	ÑÎ	ÑÏ	ÑÐ	
+ÑÑ	ÑÒ	ÑÓ	ÑÔ	ÑÕ	ÑÖ	Ñ×	ÑØ	
+ÑÙ	ÑÚ	ÑÛ	ÑÜ	ÑÝ	ÑÞ	Ñß	Ñà	
+Ñá	Ñâ	Ñã	Ñä	Ñå	Ñæ	Ñç	Ñè	
+Ñé	Ñê	Ñë	Ñì	Ñí	Ñî	Ñï	Ñð	
+Ññ	Ñò	Ñó	Ñô	Ñõ	Ñö	Ñ÷	Ñø	
+Ñù	Ñú	Ñû	Ñü	Ñý	Ñþ	
+
+Area Number:50	Area Coding:D2
+Ò¡	Ò¢	Ò£	Ò¤	Ò¥	Ò¦	Ò§	Ò¨	
+Ò©	Òª	Ò«	Ò¬	Ò­	Ò®	Ò¯	Ò°	
+Ò±	Ò²	Ò³	Ò´	Òµ	Ò¶	Ò·	Ò¸	
+Ò¹	Òº	Ò»	Ò¼	Ò½	Ò¾	Ò¿	ÒÀ	
+ÒÁ	ÒÂ	ÒÃ	ÒÄ	ÒÅ	ÒÆ	ÒÇ	ÒÈ	
+ÒÉ	ÒÊ	ÒË	ÒÌ	ÒÍ	ÒÎ	ÒÏ	ÒÐ	
+ÒÑ	ÒÒ	ÒÓ	ÒÔ	ÒÕ	ÒÖ	Ò×	ÒØ	
+ÒÙ	ÒÚ	ÒÛ	ÒÜ	ÒÝ	ÒÞ	Òß	Òà	
+Òá	Òâ	Òã	Òä	Òå	Òæ	Òç	Òè	
+Òé	Òê	Òë	Òì	Òí	Òî	Òï	Òð	
+Òñ	Òò	Òó	Òô	Òõ	Òö	Ò÷	Òø	
+Òù	Òú	Òû	Òü	Òý	Òþ	
+
+Area Number:51	Area Coding:D3
+Ó¡	Ó¢	Ó£	Ó¤	Ó¥	Ó¦	Ó§	Ó¨	
+Ó©	Óª	Ó«	Ó¬	Ó­	Ó®	Ó¯	Ó°	
+Ó±	Ó²	Ó³	Ó´	Óµ	Ó¶	Ó·	Ó¸	
+Ó¹	Óº	Ó»	Ó¼	Ó½	Ó¾	Ó¿	ÓÀ	
+ÓÁ	ÓÂ	ÓÃ	ÓÄ	ÓÅ	ÓÆ	ÓÇ	ÓÈ	
+ÓÉ	ÓÊ	ÓË	ÓÌ	ÓÍ	ÓÎ	ÓÏ	ÓÐ	
+ÓÑ	ÓÒ	ÓÓ	ÓÔ	ÓÕ	ÓÖ	Ó×	ÓØ	
+ÓÙ	ÓÚ	ÓÛ	ÓÜ	ÓÝ	ÓÞ	Óß	Óà	
+Óá	Óâ	Óã	Óä	Óå	Óæ	Óç	Óè	
+Óé	Óê	Óë	Óì	Óí	Óî	Óï	Óð	
+Óñ	Óò	Óó	Óô	Óõ	Óö	Ó÷	Óø	
+Óù	Óú	Óû	Óü	Óý	Óþ	
+
+Area Number:52	Area Coding:D4
+Ô¡	Ô¢	Ô£	Ô¤	Ô¥	Ô¦	Ô§	Ô¨	
+Ô©	Ôª	Ô«	Ô¬	Ô­	Ô®	Ô¯	Ô°	
+Ô±	Ô²	Ô³	Ô´	Ôµ	Ô¶	Ô·	Ô¸	
+Ô¹	Ôº	Ô»	Ô¼	Ô½	Ô¾	Ô¿	ÔÀ	
+ÔÁ	ÔÂ	ÔÃ	ÔÄ	ÔÅ	ÔÆ	ÔÇ	ÔÈ	
+ÔÉ	ÔÊ	ÔË	ÔÌ	ÔÍ	ÔÎ	ÔÏ	ÔÐ	
+ÔÑ	ÔÒ	ÔÓ	ÔÔ	ÔÕ	ÔÖ	Ô×	ÔØ	
+ÔÙ	ÔÚ	ÔÛ	ÔÜ	ÔÝ	ÔÞ	Ôß	Ôà	
+Ôá	Ôâ	Ôã	Ôä	Ôå	Ôæ	Ôç	Ôè	
+Ôé	Ôê	Ôë	Ôì	Ôí	Ôî	Ôï	Ôð	
+Ôñ	Ôò	Ôó	Ôô	Ôõ	Ôö	Ô÷	Ôø	
+Ôù	Ôú	Ôû	Ôü	Ôý	Ôþ	
+
+Area Number:53	Area Coding:D5
+Õ¡	Õ¢	Õ£	Õ¤	Õ¥	Õ¦	Õ§	Õ¨	
+Õ©	Õª	Õ«	Õ¬	Õ­	Õ®	Õ¯	Õ°	
+Õ±	Õ²	Õ³	Õ´	Õµ	Õ¶	Õ·	Õ¸	
+Õ¹	Õº	Õ»	Õ¼	Õ½	Õ¾	Õ¿	ÕÀ	
+ÕÁ	ÕÂ	ÕÃ	ÕÄ	ÕÅ	ÕÆ	ÕÇ	ÕÈ	
+ÕÉ	ÕÊ	ÕË	ÕÌ	ÕÍ	ÕÎ	ÕÏ	ÕÐ	
+ÕÑ	ÕÒ	ÕÓ	ÕÔ	ÕÕ	ÕÖ	Õ×	ÕØ	
+ÕÙ	ÕÚ	ÕÛ	ÕÜ	ÕÝ	ÕÞ	Õß	Õà	
+Õá	Õâ	Õã	Õä	Õå	Õæ	Õç	Õè	
+Õé	Õê	Õë	Õì	Õí	Õî	Õï	Õð	
+Õñ	Õò	Õó	Õô	Õõ	Õö	Õ÷	Õø	
+Õù	Õú	Õû	Õü	Õý	Õþ	
+
+Area Number:54	Area Coding:D6
+Ö¡	Ö¢	Ö£	Ö¤	Ö¥	Ö¦	Ö§	Ö¨	
+Ö©	Öª	Ö«	Ö¬	Ö­	Ö®	Ö¯	Ö°	
+Ö±	Ö²	Ö³	Ö´	Öµ	Ö¶	Ö·	Ö¸	
+Ö¹	Öº	Ö»	Ö¼	Ö½	Ö¾	Ö¿	ÖÀ	
+ÖÁ	ÖÂ	ÖÃ	ÖÄ	ÖÅ	ÖÆ	ÖÇ	ÖÈ	
+ÖÉ	ÖÊ	ÖË	ÖÌ	ÖÍ	ÖÎ	ÖÏ	ÖÐ	
+ÖÑ	ÖÒ	ÖÓ	ÖÔ	ÖÕ	ÖÖ	Ö×	ÖØ	
+ÖÙ	ÖÚ	ÖÛ	ÖÜ	ÖÝ	ÖÞ	Öß	Öà	
+Öá	Öâ	Öã	Öä	Öå	Öæ	Öç	Öè	
+Öé	Öê	Öë	Öì	Öí	Öî	Öï	Öð	
+Öñ	Öò	Öó	Öô	Öõ	Öö	Ö÷	Öø	
+Öù	Öú	Öû	Öü	Öý	Öþ	
+
+Area Number:55	Area Coding:D7
+×¡	×¢	×£	×¤	×¥	×¦	×§	×¨	
+×©	×ª	×«	×¬	×­	×®	×¯	×°	
+×±	×²	×³	×´	×µ	×¶	×·	×¸	
+×¹	×º	×»	×¼	×½	×¾	×¿	×À	
+×Á	×Â	×Ã	×Ä	×Å	×Æ	×Ç	×È	
+×É	×Ê	×Ë	×Ì	×Í	×Î	×Ï	×Ð	
+×Ñ	×Ò	×Ó	×Ô	×Õ	×Ö	××	×Ø	
+×Ù	×Ú	×Û	×Ü	×Ý	×Þ	×ß	×à	
+×á	×â	×ã	×ä	×å	×æ	×ç	×è	
+×é	×ê	×ë	×ì	×í	×î	×ï	×ð	
+×ñ	×ò	×ó	×ô	×õ	×ö	×÷	×ø	
+×ù	×ú	×û	×ü	×ý	×þ	
+
+Area Number:56	Area Coding:D8
+Ø¡	Ø¢	Ø£	Ø¤	Ø¥	Ø¦	Ø§	Ø¨	
+Ø©	Øª	Ø«	Ø¬	Ø­	Ø®	Ø¯	Ø°	
+Ø±	Ø²	Ø³	Ø´	Øµ	Ø¶	Ø·	Ø¸	
+Ø¹	Øº	Ø»	Ø¼	Ø½	Ø¾	Ø¿	ØÀ	
+ØÁ	ØÂ	ØÃ	ØÄ	ØÅ	ØÆ	ØÇ	ØÈ	
+ØÉ	ØÊ	ØË	ØÌ	ØÍ	ØÎ	ØÏ	ØÐ	
+ØÑ	ØÒ	ØÓ	ØÔ	ØÕ	ØÖ	Ø×	ØØ	
+ØÙ	ØÚ	ØÛ	ØÜ	ØÝ	ØÞ	Øß	Øà	
+Øá	Øâ	Øã	Øä	Øå	Øæ	Øç	Øè	
+Øé	Øê	Øë	Øì	Øí	Øî	Øï	Øð	
+Øñ	Øò	Øó	Øô	Øõ	Øö	Ø÷	Øø	
+Øù	Øú	Øû	Øü	Øý	Øþ	
+
+Area Number:57	Area Coding:D9
+Ù¡	Ù¢	Ù£	Ù¤	Ù¥	Ù¦	Ù§	Ù¨	
+Ù©	Ùª	Ù«	Ù¬	Ù­	Ù®	Ù¯	Ù°	
+Ù±	Ù²	Ù³	Ù´	Ùµ	Ù¶	Ù·	Ù¸	
+Ù¹	Ùº	Ù»	Ù¼	Ù½	Ù¾	Ù¿	ÙÀ	
+ÙÁ	ÙÂ	ÙÃ	ÙÄ	ÙÅ	ÙÆ	ÙÇ	ÙÈ	
+ÙÉ	ÙÊ	ÙË	ÙÌ	ÙÍ	ÙÎ	ÙÏ	ÙÐ	
+ÙÑ	ÙÒ	ÙÓ	ÙÔ	ÙÕ	ÙÖ	Ù×	ÙØ	
+ÙÙ	ÙÚ	ÙÛ	ÙÜ	ÙÝ	ÙÞ	Ùß	Ùà	
+Ùá	Ùâ	Ùã	Ùä	Ùå	Ùæ	Ùç	Ùè	
+Ùé	Ùê	Ùë	Ùì	Ùí	Ùî	Ùï	Ùð	
+Ùñ	Ùò	Ùó	Ùô	Ùõ	Ùö	Ù÷	Ùø	
+Ùù	Ùú	Ùû	Ùü	Ùý	Ùþ	
+
+Area Number:58	Area Coding:DA
+Ú¡	Ú¢	Ú£	Ú¤	Ú¥	Ú¦	Ú§	Ú¨	
+Ú©	Úª	Ú«	Ú¬	Ú­	Ú®	Ú¯	Ú°	
+Ú±	Ú²	Ú³	Ú´	Úµ	Ú¶	Ú·	Ú¸	
+Ú¹	Úº	Ú»	Ú¼	Ú½	Ú¾	Ú¿	ÚÀ	
+ÚÁ	ÚÂ	ÚÃ	ÚÄ	ÚÅ	ÚÆ	ÚÇ	ÚÈ	
+ÚÉ	ÚÊ	ÚË	ÚÌ	ÚÍ	ÚÎ	ÚÏ	ÚÐ	
+ÚÑ	ÚÒ	ÚÓ	ÚÔ	ÚÕ	ÚÖ	Ú×	ÚØ	
+ÚÙ	ÚÚ	ÚÛ	ÚÜ	ÚÝ	ÚÞ	Úß	Úà	
+Úá	Úâ	Úã	Úä	Úå	Úæ	Úç	Úè	
+Úé	Úê	Úë	Úì	Úí	Úî	Úï	Úð	
+Úñ	Úò	Úó	Úô	Úõ	Úö	Ú÷	Úø	
+Úù	Úú	Úû	Úü	Úý	Úþ	
+
+Area Number:59	Area Coding:DB
+Û¡	Û¢	Û£	Û¤	Û¥	Û¦	Û§	Û¨	
+Û©	Ûª	Û«	Û¬	Û­	Û®	Û¯	Û°	
+Û±	Û²	Û³	Û´	Ûµ	Û¶	Û·	Û¸	
+Û¹	Ûº	Û»	Û¼	Û½	Û¾	Û¿	ÛÀ	
+ÛÁ	ÛÂ	ÛÃ	ÛÄ	ÛÅ	ÛÆ	ÛÇ	ÛÈ	
+ÛÉ	ÛÊ	ÛË	ÛÌ	ÛÍ	ÛÎ	ÛÏ	ÛÐ	
+ÛÑ	ÛÒ	ÛÓ	ÛÔ	ÛÕ	ÛÖ	Û×	ÛØ	
+ÛÙ	ÛÚ	ÛÛ	ÛÜ	ÛÝ	ÛÞ	Ûß	Ûà	
+Ûá	Ûâ	Ûã	Ûä	Ûå	Ûæ	Ûç	Ûè	
+Ûé	Ûê	Ûë	Ûì	Ûí	Ûî	Ûï	Ûð	
+Ûñ	Ûò	Ûó	Ûô	Ûõ	Ûö	Û÷	Ûø	
+Ûù	Ûú	Ûû	Ûü	Ûý	Ûþ	
+
+Area Number:60	Area Coding:DC
+Ü¡	Ü¢	Ü£	Ü¤	Ü¥	Ü¦	Ü§	Ü¨	
+Ü©	Üª	Ü«	Ü¬	Ü­	Ü®	Ü¯	Ü°	
+Ü±	Ü²	Ü³	Ü´	Üµ	Ü¶	Ü·	Ü¸	
+Ü¹	Üº	Ü»	Ü¼	Ü½	Ü¾	Ü¿	ÜÀ	
+ÜÁ	ÜÂ	ÜÃ	ÜÄ	ÜÅ	ÜÆ	ÜÇ	ÜÈ	
+ÜÉ	ÜÊ	ÜË	ÜÌ	ÜÍ	ÜÎ	ÜÏ	ÜÐ	
+ÜÑ	ÜÒ	ÜÓ	ÜÔ	ÜÕ	ÜÖ	Ü×	ÜØ	
+ÜÙ	ÜÚ	ÜÛ	ÜÜ	ÜÝ	ÜÞ	Üß	Üà	
+Üá	Üâ	Üã	Üä	Üå	Üæ	Üç	Üè	
+Üé	Üê	Üë	Üì	Üí	Üî	Üï	Üð	
+Üñ	Üò	Üó	Üô	Üõ	Üö	Ü÷	Üø	
+Üù	Üú	Üû	Üü	Üý	Üþ	
+
+Area Number:61	Area Coding:DD
+Ý¡	Ý¢	Ý£	Ý¤	Ý¥	Ý¦	Ý§	Ý¨	
+Ý©	Ýª	Ý«	Ý¬	Ý­	Ý®	Ý¯	Ý°	
+Ý±	Ý²	Ý³	Ý´	Ýµ	Ý¶	Ý·	Ý¸	
+Ý¹	Ýº	Ý»	Ý¼	Ý½	Ý¾	Ý¿	ÝÀ	
+ÝÁ	ÝÂ	ÝÃ	ÝÄ	ÝÅ	ÝÆ	ÝÇ	ÝÈ	
+ÝÉ	ÝÊ	ÝË	ÝÌ	ÝÍ	ÝÎ	ÝÏ	ÝÐ	
+ÝÑ	ÝÒ	ÝÓ	ÝÔ	ÝÕ	ÝÖ	Ý×	ÝØ	
+ÝÙ	ÝÚ	ÝÛ	ÝÜ	ÝÝ	ÝÞ	Ýß	Ýà	
+Ýá	Ýâ	Ýã	Ýä	Ýå	Ýæ	Ýç	Ýè	
+Ýé	Ýê	Ýë	Ýì	Ýí	Ýî	Ýï	Ýð	
+Ýñ	Ýò	Ýó	Ýô	Ýõ	Ýö	Ý÷	Ýø	
+Ýù	Ýú	Ýû	Ýü	Ýý	Ýþ	
+
+Area Number:62	Area Coding:DE
+Þ¡	Þ¢	Þ£	Þ¤	Þ¥	Þ¦	Þ§	Þ¨	
+Þ©	Þª	Þ«	Þ¬	Þ­	Þ®	Þ¯	Þ°	
+Þ±	Þ²	Þ³	Þ´	Þµ	Þ¶	Þ·	Þ¸	
+Þ¹	Þº	Þ»	Þ¼	Þ½	Þ¾	Þ¿	ÞÀ	
+ÞÁ	ÞÂ	ÞÃ	ÞÄ	ÞÅ	ÞÆ	ÞÇ	ÞÈ	
+ÞÉ	ÞÊ	ÞË	ÞÌ	ÞÍ	ÞÎ	ÞÏ	ÞÐ	
+ÞÑ	ÞÒ	ÞÓ	ÞÔ	ÞÕ	ÞÖ	Þ×	ÞØ	
+ÞÙ	ÞÚ	ÞÛ	ÞÜ	ÞÝ	ÞÞ	Þß	Þà	
+Þá	Þâ	Þã	Þä	Þå	Þæ	Þç	Þè	
+Þé	Þê	Þë	Þì	Þí	Þî	Þï	Þð	
+Þñ	Þò	Þó	Þô	Þõ	Þö	Þ÷	Þø	
+Þù	Þú	Þû	Þü	Þý	Þþ	
+
+Area Number:63	Area Coding:DF
+ß¡	ß¢	ß£	ß¤	ß¥	ß¦	ß§	ß¨	
+ß©	ßª	ß«	ß¬	ß­	ß®	ß¯	ß°	
+ß±	ß²	ß³	ß´	ßµ	ß¶	ß·	ß¸	
+ß¹	ßº	ß»	ß¼	ß½	ß¾	ß¿	ßÀ	
+ßÁ	ßÂ	ßÃ	ßÄ	ßÅ	ßÆ	ßÇ	ßÈ	
+ßÉ	ßÊ	ßË	ßÌ	ßÍ	ßÎ	ßÏ	ßÐ	
+ßÑ	ßÒ	ßÓ	ßÔ	ßÕ	ßÖ	ß×	ßØ	
+ßÙ	ßÚ	ßÛ	ßÜ	ßÝ	ßÞ	ßß	ßà	
+ßá	ßâ	ßã	ßä	ßå	ßæ	ßç	ßè	
+ßé	ßê	ßë	ßì	ßí	ßî	ßï	ßð	
+ßñ	ßò	ßó	ßô	ßõ	ßö	ß÷	ßø	
+ßù	ßú	ßû	ßü	ßý	ßþ	
+
+Area Number:64	Area Coding:E0
+à¡	à¢	à£	à¤	à¥	à¦	à§	à¨	
+à©	àª	à«	à¬	à­	à®	à¯	à°	
+à±	à²	à³	à´	àµ	à¶	à·	à¸	
+à¹	àº	à»	à¼	à½	à¾	à¿	àÀ	
+àÁ	àÂ	àÃ	àÄ	àÅ	àÆ	àÇ	àÈ	
+àÉ	àÊ	àË	àÌ	àÍ	àÎ	àÏ	àÐ	
+àÑ	àÒ	àÓ	àÔ	àÕ	àÖ	à×	àØ	
+àÙ	àÚ	àÛ	àÜ	àÝ	àÞ	àß	àà	
+àá	àâ	àã	àä	àå	àæ	àç	àè	
+àé	àê	àë	àì	àí	àî	àï	àð	
+àñ	àò	àó	àô	àõ	àö	à÷	àø	
+àù	àú	àû	àü	àý	àþ	
+
+Area Number:65	Area Coding:E1
+á¡	á¢	á£	á¤	á¥	á¦	á§	á¨	
+á©	áª	á«	á¬	á­	á®	á¯	á°	
+á±	á²	á³	á´	áµ	á¶	á·	á¸	
+á¹	áº	á»	á¼	á½	á¾	á¿	áÀ	
+áÁ	áÂ	áÃ	áÄ	áÅ	áÆ	áÇ	áÈ	
+áÉ	áÊ	áË	áÌ	áÍ	áÎ	áÏ	áÐ	
+áÑ	áÒ	áÓ	áÔ	áÕ	áÖ	á×	áØ	
+áÙ	áÚ	áÛ	áÜ	áÝ	áÞ	áß	áà	
+áá	áâ	áã	áä	áå	áæ	áç	áè	
+áé	áê	áë	áì	áí	áî	áï	áð	
+áñ	áò	áó	áô	áõ	áö	á÷	áø	
+áù	áú	áû	áü	áý	áþ	
+
+Area Number:66	Area Coding:E2
+â¡	â¢	â£	â¤	â¥	â¦	â§	â¨	
+â©	âª	â«	â¬	â­	â®	â¯	â°	
+â±	â²	â³	â´	âµ	â¶	â·	â¸	
+â¹	âº	â»	â¼	â½	â¾	â¿	âÀ	
+âÁ	âÂ	âÃ	âÄ	âÅ	âÆ	âÇ	âÈ	
+âÉ	âÊ	âË	âÌ	âÍ	âÎ	âÏ	âÐ	
+âÑ	âÒ	âÓ	âÔ	âÕ	âÖ	â×	âØ	
+âÙ	âÚ	âÛ	âÜ	âÝ	âÞ	âß	âà	
+âá	ââ	âã	âä	âå	âæ	âç	âè	
+âé	âê	âë	âì	âí	âî	âï	âð	
+âñ	âò	âó	âô	âõ	âö	â÷	âø	
+âù	âú	âû	âü	âý	âþ	
+
+Area Number:67	Area Coding:E3
+ã¡	ã¢	ã£	ã¤	ã¥	ã¦	ã§	ã¨	
+ã©	ãª	ã«	ã¬	ã­	ã®	ã¯	ã°	
+ã±	ã²	ã³	ã´	ãµ	ã¶	ã·	ã¸	
+ã¹	ãº	ã»	ã¼	ã½	ã¾	ã¿	ãÀ	
+ãÁ	ãÂ	ãÃ	ãÄ	ãÅ	ãÆ	ãÇ	ãÈ	
+ãÉ	ãÊ	ãË	ãÌ	ãÍ	ãÎ	ãÏ	ãÐ	
+ãÑ	ãÒ	ãÓ	ãÔ	ãÕ	ãÖ	ã×	ãØ	
+ãÙ	ãÚ	ãÛ	ãÜ	ãÝ	ãÞ	ãß	ãà	
+ãá	ãâ	ãã	ãä	ãå	ãæ	ãç	ãè	
+ãé	ãê	ãë	ãì	ãí	ãî	ãï	ãð	
+ãñ	ãò	ãó	ãô	ãõ	ãö	ã÷	ãø	
+ãù	ãú	ãû	ãü	ãý	ãþ	
+
+Area Number:68	Area Coding:E4
+ä¡	ä¢	ä£	ä¤	ä¥	ä¦	ä§	ä¨	
+ä©	äª	ä«	ä¬	ä­	ä®	ä¯	ä°	
+ä±	ä²	ä³	ä´	äµ	ä¶	ä·	ä¸	
+ä¹	äº	ä»	ä¼	ä½	ä¾	ä¿	äÀ	
+äÁ	äÂ	äÃ	äÄ	äÅ	äÆ	äÇ	äÈ	
+äÉ	äÊ	äË	äÌ	äÍ	äÎ	äÏ	äÐ	
+äÑ	äÒ	äÓ	äÔ	äÕ	äÖ	ä×	äØ	
+äÙ	äÚ	äÛ	äÜ	äÝ	äÞ	äß	äà	
+äá	äâ	äã	ää	äå	äæ	äç	äè	
+äé	äê	äë	äì	äí	äî	äï	äð	
+äñ	äò	äó	äô	äõ	äö	ä÷	äø	
+äù	äú	äû	äü	äý	äþ	
+
+Area Number:69	Area Coding:E5
+å¡	å¢	å£	å¤	å¥	å¦	å§	å¨	
+å©	åª	å«	å¬	å­	å®	å¯	å°	
+å±	å²	å³	å´	åµ	å¶	å·	å¸	
+å¹	åº	å»	å¼	å½	å¾	å¿	åÀ	
+åÁ	åÂ	åÃ	åÄ	åÅ	åÆ	åÇ	åÈ	
+åÉ	åÊ	åË	åÌ	åÍ	åÎ	åÏ	åÐ	
+åÑ	åÒ	åÓ	åÔ	åÕ	åÖ	å×	åØ	
+åÙ	åÚ	åÛ	åÜ	åÝ	åÞ	åß	åà	
+åá	åâ	åã	åä	åå	åæ	åç	åè	
+åé	åê	åë	åì	åí	åî	åï	åð	
+åñ	åò	åó	åô	åõ	åö	å÷	åø	
+åù	åú	åû	åü	åý	åþ	
+
+Area Number:70	Area Coding:E6
+æ¡	æ¢	æ£	æ¤	æ¥	æ¦	æ§	æ¨	
+æ©	æª	æ«	æ¬	æ­	æ®	æ¯	æ°	
+æ±	æ²	æ³	æ´	æµ	æ¶	æ·	æ¸	
+æ¹	æº	æ»	æ¼	æ½	æ¾	æ¿	æÀ	
+æÁ	æÂ	æÃ	æÄ	æÅ	æÆ	æÇ	æÈ	
+æÉ	æÊ	æË	æÌ	æÍ	æÎ	æÏ	æÐ	
+æÑ	æÒ	æÓ	æÔ	æÕ	æÖ	æ×	æØ	
+æÙ	æÚ	æÛ	æÜ	æÝ	æÞ	æß	æà	
+æá	æâ	æã	æä	æå	ææ	æç	æè	
+æé	æê	æë	æì	æí	æî	æï	æð	
+æñ	æò	æó	æô	æõ	æö	æ÷	æø	
+æù	æú	æû	æü	æý	æþ	
+
+Area Number:71	Area Coding:E7
+ç¡	ç¢	ç£	ç¤	ç¥	ç¦	ç§	ç¨	
+ç©	çª	ç«	ç¬	ç­	ç®	ç¯	ç°	
+ç±	ç²	ç³	ç´	çµ	ç¶	ç·	ç¸	
+ç¹	çº	ç»	ç¼	ç½	ç¾	ç¿	çÀ	
+çÁ	çÂ	çÃ	çÄ	çÅ	çÆ	çÇ	çÈ	
+çÉ	çÊ	çË	çÌ	çÍ	çÎ	çÏ	çÐ	
+çÑ	çÒ	çÓ	çÔ	çÕ	çÖ	ç×	çØ	
+çÙ	çÚ	çÛ	çÜ	çÝ	çÞ	çß	çà	
+çá	çâ	çã	çä	çå	çæ	çç	çè	
+çé	çê	çë	çì	çí	çî	çï	çð	
+çñ	çò	çó	çô	çõ	çö	ç÷	çø	
+çù	çú	çû	çü	çý	çþ	
+
+Area Number:72	Area Coding:E8
+è¡	è¢	è£	è¤	è¥	è¦	è§	è¨	
+è©	èª	è«	è¬	è­	è®	è¯	è°	
+è±	è²	è³	è´	èµ	è¶	è·	è¸	
+è¹	èº	è»	è¼	è½	è¾	è¿	èÀ	
+èÁ	èÂ	èÃ	èÄ	èÅ	èÆ	èÇ	èÈ	
+èÉ	èÊ	èË	èÌ	èÍ	èÎ	èÏ	èÐ	
+èÑ	èÒ	èÓ	èÔ	èÕ	èÖ	è×	èØ	
+èÙ	èÚ	èÛ	èÜ	èÝ	èÞ	èß	èà	
+èá	èâ	èã	èä	èå	èæ	èç	èè	
+èé	èê	èë	èì	èí	èî	èï	èð	
+èñ	èò	èó	èô	èõ	èö	è÷	èø	
+èù	èú	èû	èü	èý	èþ	
+
+Area Number:73	Area Coding:E9
+é¡	é¢	é£	é¤	é¥	é¦	é§	é¨	
+é©	éª	é«	é¬	é­	é®	é¯	é°	
+é±	é²	é³	é´	éµ	é¶	é·	é¸	
+é¹	éº	é»	é¼	é½	é¾	é¿	éÀ	
+éÁ	éÂ	éÃ	éÄ	éÅ	éÆ	éÇ	éÈ	
+éÉ	éÊ	éË	éÌ	éÍ	éÎ	éÏ	éÐ	
+éÑ	éÒ	éÓ	éÔ	éÕ	éÖ	é×	éØ	
+éÙ	éÚ	éÛ	éÜ	éÝ	éÞ	éß	éà	
+éá	éâ	éã	éä	éå	éæ	éç	éè	
+éé	éê	éë	éì	éí	éî	éï	éð	
+éñ	éò	éó	éô	éõ	éö	é÷	éø	
+éù	éú	éû	éü	éý	éþ	
+
+Area Number:74	Area Coding:EA
+ê¡	ê¢	ê£	ê¤	ê¥	ê¦	ê§	ê¨	
+ê©	êª	ê«	ê¬	ê­	ê®	ê¯	ê°	
+ê±	ê²	ê³	ê´	êµ	ê¶	ê·	ê¸	
+ê¹	êº	ê»	ê¼	ê½	ê¾	ê¿	êÀ	
+êÁ	êÂ	êÃ	êÄ	êÅ	êÆ	êÇ	êÈ	
+êÉ	êÊ	êË	êÌ	êÍ	êÎ	êÏ	êÐ	
+êÑ	êÒ	êÓ	êÔ	êÕ	êÖ	ê×	êØ	
+êÙ	êÚ	êÛ	êÜ	êÝ	êÞ	êß	êà	
+êá	êâ	êã	êä	êå	êæ	êç	êè	
+êé	êê	êë	êì	êí	êî	êï	êð	
+êñ	êò	êó	êô	êõ	êö	ê÷	êø	
+êù	êú	êû	êü	êý	êþ	
+
+Area Number:75	Area Coding:EB
+ë¡	ë¢	ë£	ë¤	ë¥	ë¦	ë§	ë¨	
+ë©	ëª	ë«	ë¬	ë­	ë®	ë¯	ë°	
+ë±	ë²	ë³	ë´	ëµ	ë¶	ë·	ë¸	
+ë¹	ëº	ë»	ë¼	ë½	ë¾	ë¿	ëÀ	
+ëÁ	ëÂ	ëÃ	ëÄ	ëÅ	ëÆ	ëÇ	ëÈ	
+ëÉ	ëÊ	ëË	ëÌ	ëÍ	ëÎ	ëÏ	ëÐ	
+ëÑ	ëÒ	ëÓ	ëÔ	ëÕ	ëÖ	ë×	ëØ	
+ëÙ	ëÚ	ëÛ	ëÜ	ëÝ	ëÞ	ëß	ëà	
+ëá	ëâ	ëã	ëä	ëå	ëæ	ëç	ëè	
+ëé	ëê	ëë	ëì	ëí	ëî	ëï	ëð	
+ëñ	ëò	ëó	ëô	ëõ	ëö	ë÷	ëø	
+ëù	ëú	ëû	ëü	ëý	ëþ	
+
+Area Number:76	Area Coding:EC
+ì¡	ì¢	ì£	ì¤	ì¥	ì¦	ì§	ì¨	
+ì©	ìª	ì«	ì¬	ì­	ì®	ì¯	ì°	
+ì±	ì²	ì³	ì´	ìµ	ì¶	ì·	ì¸	
+ì¹	ìº	ì»	ì¼	ì½	ì¾	ì¿	ìÀ	
+ìÁ	ìÂ	ìÃ	ìÄ	ìÅ	ìÆ	ìÇ	ìÈ	
+ìÉ	ìÊ	ìË	ìÌ	ìÍ	ìÎ	ìÏ	ìÐ	
+ìÑ	ìÒ	ìÓ	ìÔ	ìÕ	ìÖ	ì×	ìØ	
+ìÙ	ìÚ	ìÛ	ìÜ	ìÝ	ìÞ	ìß	ìà	
+ìá	ìâ	ìã	ìä	ìå	ìæ	ìç	ìè	
+ìé	ìê	ìë	ìì	ìí	ìî	ìï	ìð	
+ìñ	ìò	ìó	ìô	ìõ	ìö	ì÷	ìø	
+ìù	ìú	ìû	ìü	ìý	ìþ	
+
+Area Number:77	Area Coding:ED
+í¡	í¢	í£	í¤	í¥	í¦	í§	í¨	
+í©	íª	í«	í¬	í­	í®	í¯	í°	
+í±	í²	í³	í´	íµ	í¶	í·	í¸	
+í¹	íº	í»	í¼	í½	í¾	í¿	íÀ	
+íÁ	íÂ	íÃ	íÄ	íÅ	íÆ	íÇ	íÈ	
+íÉ	íÊ	íË	íÌ	íÍ	íÎ	íÏ	íÐ	
+íÑ	íÒ	íÓ	íÔ	íÕ	íÖ	í×	íØ	
+íÙ	íÚ	íÛ	íÜ	íÝ	íÞ	íß	íà	
+íá	íâ	íã	íä	íå	íæ	íç	íè	
+íé	íê	íë	íì	íí	íî	íï	íð	
+íñ	íò	íó	íô	íõ	íö	í÷	íø	
+íù	íú	íû	íü	íý	íþ	
+
+Area Number:78	Area Coding:EE
+î¡	î¢	î£	î¤	î¥	î¦	î§	î¨	
+î©	îª	î«	î¬	î­	î®	î¯	î°	
+î±	î²	î³	î´	îµ	î¶	î·	î¸	
+î¹	îº	î»	î¼	î½	î¾	î¿	îÀ	
+îÁ	îÂ	îÃ	îÄ	îÅ	îÆ	îÇ	îÈ	
+îÉ	îÊ	îË	îÌ	îÍ	îÎ	îÏ	îÐ	
+îÑ	îÒ	îÓ	îÔ	îÕ	îÖ	î×	îØ	
+îÙ	îÚ	îÛ	îÜ	îÝ	îÞ	îß	îà	
+îá	îâ	îã	îä	îå	îæ	îç	îè	
+îé	îê	îë	îì	îí	îî	îï	îð	
+îñ	îò	îó	îô	îõ	îö	î÷	îø	
+îù	îú	îû	îü	îý	îþ	
+
+Area Number:79	Area Coding:EF
+ï¡	ï¢	ï£	ï¤	ï¥	ï¦	ï§	ï¨	
+ï©	ïª	ï«	ï¬	ï­	ï®	ï¯	ï°	
+ï±	ï²	ï³	ï´	ïµ	ï¶	ï·	ï¸	
+ï¹	ïº	ï»	ï¼	ï½	ï¾	ï¿	ïÀ	
+ïÁ	ïÂ	ïÃ	ïÄ	ïÅ	ïÆ	ïÇ	ïÈ	
+ïÉ	ïÊ	ïË	ïÌ	ïÍ	ïÎ	ïÏ	ïÐ	
+ïÑ	ïÒ	ïÓ	ïÔ	ïÕ	ïÖ	ï×	ïØ	
+ïÙ	ïÚ	ïÛ	ïÜ	ïÝ	ïÞ	ïß	ïà	
+ïá	ïâ	ïã	ïä	ïå	ïæ	ïç	ïè	
+ïé	ïê	ïë	ïì	ïí	ïî	ïï	ïð	
+ïñ	ïò	ïó	ïô	ïõ	ïö	ï÷	ïø	
+ïù	ïú	ïû	ïü	ïý	ïþ	
+
+Area Number:80	Area Coding:F0
+ð¡	ð¢	ð£	ð¤	ð¥	ð¦	ð§	ð¨	
+ð©	ðª	ð«	ð¬	ð­	ð®	ð¯	ð°	
+ð±	ð²	ð³	ð´	ðµ	ð¶	ð·	ð¸	
+ð¹	ðº	ð»	ð¼	ð½	ð¾	ð¿	ðÀ	
+ðÁ	ðÂ	ðÃ	ðÄ	ðÅ	ðÆ	ðÇ	ðÈ	
+ðÉ	ðÊ	ðË	ðÌ	ðÍ	ðÎ	ðÏ	ðÐ	
+ðÑ	ðÒ	ðÓ	ðÔ	ðÕ	ðÖ	ð×	ðØ	
+ðÙ	ðÚ	ðÛ	ðÜ	ðÝ	ðÞ	ðß	ðà	
+ðá	ðâ	ðã	ðä	ðå	ðæ	ðç	ðè	
+ðé	ðê	ðë	ðì	ðí	ðî	ðï	ðð	
+ðñ	ðò	ðó	ðô	ðõ	ðö	ð÷	ðø	
+ðù	ðú	ðû	ðü	ðý	ðþ	
+
+Area Number:81	Area Coding:F1
+ñ¡	ñ¢	ñ£	ñ¤	ñ¥	ñ¦	ñ§	ñ¨	
+ñ©	ñª	ñ«	ñ¬	ñ­	ñ®	ñ¯	ñ°	
+ñ±	ñ²	ñ³	ñ´	ñµ	ñ¶	ñ·	ñ¸	
+ñ¹	ñº	ñ»	ñ¼	ñ½	ñ¾	ñ¿	ñÀ	
+ñÁ	ñÂ	ñÃ	ñÄ	ñÅ	ñÆ	ñÇ	ñÈ	
+ñÉ	ñÊ	ñË	ñÌ	ñÍ	ñÎ	ñÏ	ñÐ	
+ñÑ	ñÒ	ñÓ	ñÔ	ñÕ	ñÖ	ñ×	ñØ	
+ñÙ	ñÚ	ñÛ	ñÜ	ñÝ	ñÞ	ñß	ñà	
+ñá	ñâ	ñã	ñä	ñå	ñæ	ñç	ñè	
+ñé	ñê	ñë	ñì	ñí	ñî	ñï	ñð	
+ññ	ñò	ñó	ñô	ñõ	ñö	ñ÷	ñø	
+ñù	ñú	ñû	ñü	ñý	ñþ	
+
+Area Number:82	Area Coding:F2
+ò¡	ò¢	ò£	ò¤	ò¥	ò¦	ò§	ò¨	
+ò©	òª	ò«	ò¬	ò­	ò®	ò¯	ò°	
+ò±	ò²	ò³	ò´	òµ	ò¶	ò·	ò¸	
+ò¹	òº	ò»	ò¼	ò½	ò¾	ò¿	òÀ	
+òÁ	òÂ	òÃ	òÄ	òÅ	òÆ	òÇ	òÈ	
+òÉ	òÊ	òË	òÌ	òÍ	òÎ	òÏ	òÐ	
+òÑ	òÒ	òÓ	òÔ	òÕ	òÖ	ò×	òØ	
+òÙ	òÚ	òÛ	òÜ	òÝ	òÞ	òß	òà	
+òá	òâ	òã	òä	òå	òæ	òç	òè	
+òé	òê	òë	òì	òí	òî	òï	òð	
+òñ	òò	òó	òô	òõ	òö	ò÷	òø	
+òù	òú	òû	òü	òý	òþ	
+
+Area Number:83	Area Coding:F3
+ó¡	ó¢	ó£	ó¤	ó¥	ó¦	ó§	ó¨	
+ó©	óª	ó«	ó¬	ó­	ó®	ó¯	ó°	
+ó±	ó²	ó³	ó´	óµ	ó¶	ó·	ó¸	
+ó¹	óº	ó»	ó¼	ó½	ó¾	ó¿	óÀ	
+óÁ	óÂ	óÃ	óÄ	óÅ	óÆ	óÇ	óÈ	
+óÉ	óÊ	óË	óÌ	óÍ	óÎ	óÏ	óÐ	
+óÑ	óÒ	óÓ	óÔ	óÕ	óÖ	ó×	óØ	
+óÙ	óÚ	óÛ	óÜ	óÝ	óÞ	óß	óà	
+óá	óâ	óã	óä	óå	óæ	óç	óè	
+óé	óê	óë	óì	óí	óî	óï	óð	
+óñ	óò	óó	óô	óõ	óö	ó÷	óø	
+óù	óú	óû	óü	óý	óþ	
+
+Area Number:84	Area Coding:F4
+ô¡	ô¢	ô£	ô¤	ô¥	ô¦	ô§	ô¨	
+ô©	ôª	ô«	ô¬	ô­	ô®	ô¯	ô°	
+ô±	ô²	ô³	ô´	ôµ	ô¶	ô·	ô¸	
+ô¹	ôº	ô»	ô¼	ô½	ô¾	ô¿	ôÀ	
+ôÁ	ôÂ	ôÃ	ôÄ	ôÅ	ôÆ	ôÇ	ôÈ	
+ôÉ	ôÊ	ôË	ôÌ	ôÍ	ôÎ	ôÏ	ôÐ	
+ôÑ	ôÒ	ôÓ	ôÔ	ôÕ	ôÖ	ô×	ôØ	
+ôÙ	ôÚ	ôÛ	ôÜ	ôÝ	ôÞ	ôß	ôà	
+ôá	ôâ	ôã	ôä	ôå	ôæ	ôç	ôè	
+ôé	ôê	ôë	ôì	ôí	ôî	ôï	ôð	
+ôñ	ôò	ôó	ôô	ôõ	ôö	ô÷	ôø	
+ôù	ôú	ôû	ôü	ôý	ôþ	
+
+Area Number:85	Area Coding:F5
+õ¡	õ¢	õ£	õ¤	õ¥	õ¦	õ§	õ¨	
+õ©	õª	õ«	õ¬	õ­	õ®	õ¯	õ°	
+õ±	õ²	õ³	õ´	õµ	õ¶	õ·	õ¸	
+õ¹	õº	õ»	õ¼	õ½	õ¾	õ¿	õÀ	
+õÁ	õÂ	õÃ	õÄ	õÅ	õÆ	õÇ	õÈ	
+õÉ	õÊ	õË	õÌ	õÍ	õÎ	õÏ	õÐ	
+õÑ	õÒ	õÓ	õÔ	õÕ	õÖ	õ×	õØ	
+õÙ	õÚ	õÛ	õÜ	õÝ	õÞ	õß	õà	
+õá	õâ	õã	õä	õå	õæ	õç	õè	
+õé	õê	õë	õì	õí	õî	õï	õð	
+õñ	õò	õó	õô	õõ	õö	õ÷	õø	
+õù	õú	õû	õü	õý	õþ	
+
+Area Number:86	Area Coding:F6
+ö¡	ö¢	ö£	ö¤	ö¥	ö¦	ö§	ö¨	
+ö©	öª	ö«	ö¬	ö­	ö®	ö¯	ö°	
+ö±	ö²	ö³	ö´	öµ	ö¶	ö·	ö¸	
+ö¹	öº	ö»	ö¼	ö½	ö¾	ö¿	öÀ	
+öÁ	öÂ	öÃ	öÄ	öÅ	öÆ	öÇ	öÈ	
+öÉ	öÊ	öË	öÌ	öÍ	öÎ	öÏ	öÐ	
+öÑ	öÒ	öÓ	öÔ	öÕ	öÖ	ö×	öØ	
+öÙ	öÚ	öÛ	öÜ	öÝ	öÞ	öß	öà	
+öá	öâ	öã	öä	öå	öæ	öç	öè	
+öé	öê	öë	öì	öí	öî	öï	öð	
+öñ	öò	öó	öô	öõ	öö	ö÷	öø	
+öù	öú	öû	öü	öý	öþ	
+
+Area Number:87	Area Coding:F7
+÷¡	÷¢	÷£	÷¤	÷¥	÷¦	÷§	÷¨	
+÷©	÷ª	÷«	÷¬	÷­	÷®	÷¯	÷°	
+÷±	÷²	÷³	÷´	÷µ	÷¶	÷·	÷¸	
+÷¹	÷º	÷»	÷¼	÷½	÷¾	÷¿	÷À	
+÷Á	÷Â	÷Ã	÷Ä	÷Å	÷Æ	÷Ç	÷È	
+÷É	÷Ê	÷Ë	÷Ì	÷Í	÷Î	÷Ï	÷Ð	
+÷Ñ	÷Ò	÷Ó	÷Ô	÷Õ	÷Ö	÷×	÷Ø	
+÷Ù	÷Ú	÷Û	÷Ü	÷Ý	÷Þ	÷ß	÷à	
+÷á	÷â	÷ã	÷ä	÷å	÷æ	÷ç	÷è	
+÷é	÷ê	÷ë	÷ì	÷í	÷î	÷ï	÷ð	
+÷ñ	÷ò	÷ó	÷ô	÷õ	÷ö	÷÷	÷ø	
+÷ù	÷ú	÷û	÷ü	÷ý	÷þ	
+
+Area Number:88	Area Coding:F8
+ø¡	ø¢	ø£	ø¤	ø¥	ø¦	ø§	ø¨	
+ø©	øª	ø«	ø¬	ø­	ø®	ø¯	ø°	
+ø±	ø²	ø³	ø´	øµ	ø¶	ø·	ø¸	
+ø¹	øº	ø»	ø¼	ø½	ø¾	ø¿	øÀ	
+øÁ	øÂ	øÃ	øÄ	øÅ	øÆ	øÇ	øÈ	
+øÉ	øÊ	øË	øÌ	øÍ	øÎ	øÏ	øÐ	
+øÑ	øÒ	øÓ	øÔ	øÕ	øÖ	ø×	øØ	
+øÙ	øÚ	øÛ	øÜ	øÝ	øÞ	øß	øà	
+øá	øâ	øã	øä	øå	øæ	øç	øè	
+øé	øê	øë	øì	øí	øî	øï	øð	
+øñ	øò	øó	øô	øõ	øö	ø÷	øø	
+øù	øú	øû	øü	øý	øþ	
+
+Area Number:89	Area Coding:F9
+ù¡	ù¢	ù£	ù¤	ù¥	ù¦	ù§	ù¨	
+ù©	ùª	ù«	ù¬	ù­	ù®	ù¯	ù°	
+ù±	ù²	ù³	ù´	ùµ	ù¶	ù·	ù¸	
+ù¹	ùº	ù»	ù¼	ù½	ù¾	ù¿	ùÀ	
+ùÁ	ùÂ	ùÃ	ùÄ	ùÅ	ùÆ	ùÇ	ùÈ	
+ùÉ	ùÊ	ùË	ùÌ	ùÍ	ùÎ	ùÏ	ùÐ	
+ùÑ	ùÒ	ùÓ	ùÔ	ùÕ	ùÖ	ù×	ùØ	
+ùÙ	ùÚ	ùÛ	ùÜ	ùÝ	ùÞ	ùß	ùà	
+ùá	ùâ	ùã	ùä	ùå	ùæ	ùç	ùè	
+ùé	ùê	ùë	ùì	ùí	ùî	ùï	ùð	
+ùñ	ùò	ùó	ùô	ùõ	ùö	ù÷	ùø	
+ùù	ùú	ùû	ùü	ùý	ùþ	
+
+Area Number:90	Area Coding:FA
+ú¡	ú¢	ú£	ú¤	ú¥	ú¦	ú§	ú¨	
+ú©	úª	ú«	ú¬	ú­	ú®	ú¯	ú°	
+ú±	ú²	ú³	ú´	úµ	ú¶	ú·	ú¸	
+ú¹	úº	ú»	ú¼	ú½	ú¾	ú¿	úÀ	
+úÁ	úÂ	úÃ	úÄ	úÅ	úÆ	úÇ	úÈ	
+úÉ	úÊ	úË	úÌ	úÍ	úÎ	úÏ	úÐ	
+úÑ	úÒ	úÓ	úÔ	úÕ	úÖ	ú×	úØ	
+úÙ	úÚ	úÛ	úÜ	úÝ	úÞ	úß	úà	
+úá	úâ	úã	úä	úå	úæ	úç	úè	
+úé	úê	úë	úì	úí	úî	úï	úð	
+úñ	úò	úó	úô	úõ	úö	ú÷	úø	
+úù	úú	úû	úü	úý	úþ	
+
+Area Number:91	Area Coding:FB
+û¡	û¢	û£	û¤	û¥	û¦	û§	û¨	
+û©	ûª	û«	û¬	û­	û®	û¯	û°	
+û±	û²	û³	û´	ûµ	û¶	û·	û¸	
+û¹	ûº	û»	û¼	û½	û¾	û¿	ûÀ	
+ûÁ	ûÂ	ûÃ	ûÄ	ûÅ	ûÆ	ûÇ	ûÈ	
+ûÉ	ûÊ	ûË	ûÌ	ûÍ	ûÎ	ûÏ	ûÐ	
+ûÑ	ûÒ	ûÓ	ûÔ	ûÕ	ûÖ	û×	ûØ	
+ûÙ	ûÚ	ûÛ	ûÜ	ûÝ	ûÞ	ûß	ûà	
+ûá	ûâ	ûã	ûä	ûå	ûæ	ûç	ûè	
+ûé	ûê	ûë	ûì	ûí	ûî	ûï	ûð	
+ûñ	ûò	ûó	ûô	ûõ	ûö	û÷	ûø	
+ûù	ûú	ûû	ûü	ûý	ûþ	
+
+Area Number:92	Area Coding:FC
+ü¡	ü¢	ü£	ü¤	ü¥	ü¦	ü§	ü¨	
+ü©	üª	ü«	ü¬	ü­	ü®	ü¯	ü°	
+ü±	ü²	ü³	ü´	üµ	ü¶	ü·	ü¸	
+ü¹	üº	ü»	ü¼	ü½	ü¾	ü¿	üÀ	
+üÁ	üÂ	üÃ	üÄ	üÅ	üÆ	üÇ	üÈ	
+üÉ	üÊ	üË	üÌ	üÍ	üÎ	üÏ	üÐ	
+üÑ	üÒ	üÓ	üÔ	üÕ	üÖ	ü×	üØ	
+üÙ	üÚ	üÛ	üÜ	üÝ	üÞ	üß	üà	
+üá	üâ	üã	üä	üå	üæ	üç	üè	
+üé	üê	üë	üì	üí	üî	üï	üð	
+üñ	üò	üó	üô	üõ	üö	ü÷	üø	
+üù	üú	üû	üü	üý	üþ	
+
+Area Number:93	Area Coding:FD
+ý¡	ý¢	ý£	ý¤	ý¥	ý¦	ý§	ý¨	
+ý©	ýª	ý«	ý¬	ý­	ý®	ý¯	ý°	
+ý±	ý²	ý³	ý´	ýµ	ý¶	ý·	ý¸	
+ý¹	ýº	ý»	ý¼	ý½	ý¾	ý¿	ýÀ	
+ýÁ	ýÂ	ýÃ	ýÄ	ýÅ	ýÆ	ýÇ	ýÈ	
+ýÉ	ýÊ	ýË	ýÌ	ýÍ	ýÎ	ýÏ	ýÐ	
+ýÑ	ýÒ	ýÓ	ýÔ	ýÕ	ýÖ	ý×	ýØ	
+ýÙ	ýÚ	ýÛ	ýÜ	ýÝ	ýÞ	ýß	ýà	
+ýá	ýâ	ýã	ýä	ýå	ýæ	ýç	ýè	
+ýé	ýê	ýë	ýì	ýí	ýî	ýï	ýð	
+ýñ	ýò	ýó	ýô	ýõ	ýö	ý÷	ýø	
+ýù	ýú	ýû	ýü	ýý	ýþ	
+
+Area Number:94	Area Coding:FE
+þ¡	þ¢	þ£	þ¤	þ¥	þ¦	þ§	þ¨	
+þ©	þª	þ«	þ¬	þ­	þ®	þ¯	þ°	
+þ±	þ²	þ³	þ´	þµ	þ¶	þ·	þ¸	
+þ¹	þº	þ»	þ¼	þ½	þ¾	þ¿	þÀ	
+þÁ	þÂ	þÃ	þÄ	þÅ	þÆ	þÇ	þÈ	
+þÉ	þÊ	þË	þÌ	þÍ	þÎ	þÏ	þÐ	
+þÑ	þÒ	þÓ	þÔ	þÕ	þÖ	þ×	þØ	
+þÙ	þÚ	þÛ	þÜ	þÝ	þÞ	þß	þà	
+þá	þâ	þã	þä	þå	þæ	þç	þè	
+þé	þê	þë	þì	þí	þî	þï	þð	
+þñ	þò	þó	þô	þõ	þö	þ÷	þø	
+þù	þú	þû	þü	þý	þþ	
+

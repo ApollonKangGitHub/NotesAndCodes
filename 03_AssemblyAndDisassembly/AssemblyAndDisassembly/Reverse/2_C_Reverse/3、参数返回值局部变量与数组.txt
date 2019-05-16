@@ -1,0 +1,121 @@
+当返回值大小为8bit、16bit、32bit时，返回值存放在al、ax、eax中。
+当返回值大小为64bit(__int64类型)时，返回值高四字节存放到edx，低四字节存放到eax返回。
+//eg:
+#include "stdafx.h"
+
+__int8 test_8(){
+	__int8 a = 0X21;
+	return a;
+}
+__int16 test_16(){
+	__int16 b = 0X4321;
+	return b;
+}
+__int32 test_32(){
+	__int32 c = 0X87654321;
+	return c;
+}
+__int64 test_64(){
+	__int64 d = 0XFEDCBA9876543210;
+	return d;
+}
+int main(int argc, char* argv[])
+{
+	__int8 a = test_8();
+	__int16 b = test_16();
+	__int32 c = test_32();
+	__int64 d = test_64();
+	return 0;
+}
+
+//       __int8 a = test_8();
+00401158   call        @ILT+20(test_8) (00401019)
+0040115D   mov         byte ptr [ebp-4],al
+//       __int16 b = test_16();
+00401160   call        @ILT+10(test_16) (0040100f)
+00401165   mov         word ptr [ebp-8],ax
+//       __int32 c = test_32();
+00401169   call        @ILT+15(test_32) (00401014)
+0040116E   mov         dword ptr [ebp-0Ch],eax
+//       __int64 d = test_64();
+00401171   call        @ILT+0(test_64) (00401005)
+00401176   mov         dword ptr [ebp-14h],eax
+00401179   mov         dword ptr [ebp-10h],edx
+
+//========================================================================================
+参数与局部变量区别只是分配的时间不同：前者在主调函数栈中，一个在被调函数栈中
+但就其本质而言，二者完全无区别，都是局部变量，都在栈中。
+对于传递参数来说，即使声明定义为char、short，在压栈时也是按照eax的4字节进行压栈的：
+
+#include "stdafx.h"
+
+__int8 test_8(char s,int m){
+	__int8 a = 0X21;
+	return a;
+}
+
+int main(int argc, char* argv[])
+{
+	char s = 1;
+	int m = 2;
+	__int8 a = test_8(s,m);
+	return 0;
+}
+
+//       char s = 1;
+00401158   mov         byte ptr [ebp-4],1
+//       int m = 2;
+0040115C   mov         dword ptr [ebp-8],2
+//       __int8 a = test_8(s,m);
+00401163   mov         eax,dword ptr [ebp-8]
+00401166   push        eax
+00401167   mov         cl,byte ptr [ebp-4]		//用的是1字节
+0040116A   push        ecx						//只是压栈用的是4字节
+0040116B   call        @ILT+30(test_8) (00401023)	//使用时也是按1个字节用
+00401170   add         esp,8
+00401173   mov         byte ptr [ebp-0Ch],al
+
+本机尺寸问题：如果计算机是32位的则对于32位数据的处理支持最好，并不比8位和16位数据慢。
+相反本机尺寸的效率是最高的，因为8位16位还需要扩展成32位再传递，32位则直接可以传递。
+	（需要多一条指令进行扩展，32位则直接可以push dword ptr [ebp-4],只需要一条指令，
+	但上例VC++6.0中反汇编的结果还是采用统一的格式，但在应用中，起码32位效率不会比8位低）
+本机尺寸不仅适用于参数传递，变量定义也遵循本机尺寸。
+虽然结构体/数组内部有特殊情况，但是针对于结构体整体和一边量来说都是遵循本机尺寸的。
+所以，即使变量、参数大小不足32位，编译器编译完成后也是占用32位/其倍数，而是用依旧按定义大小使用。
+所以，所谓的定义成小类型的数据省内存空间的说法是无稽之谈。反而增加指令量浪费时间
+但是如果是4个char类型变量，我们可以定义成char arr[4]，然后用数组元素分别表示这4个变量
+那确实是节省空间的。数组的内存如下:
+//======================================================================================
+
+数组定义与初始化测试：
+
+//数组初始化1：
+//const int x = 2;
+0040D5F2   mov         dword ptr [ebp-20h],2
+//char arr[x] = {0};
+0040D5F9   mov         byte ptr [ebp-24h],0
+0040D5FD   xor         edx,edx
+0040D5FF   mov         byte ptr [ebp-23h],dl
+
+
+//数组初始化2：
+//const int x = 4;
+0040D5F2   mov         dword ptr [ebp-20h],4
+//char arr[x] = {0};
+0040D5F9   mov         byte ptr [ebp-24h],0
+0040D5FD   xor         edx,edx
+0040D5FF   mov         word ptr [ebp-23h],dx
+0040D603   mov         byte ptr [ebp-21h],dl
+
+
+//数组初始化3：
+//const int x = 128;
+0040D5F8   mov         dword ptr [ebp-20h],80h
+//char arr[x] = {0};
+0040D5FF   mov         byte ptr [ebp-0A0h],0
+0040D606   mov         ecx,1Fh
+0040D60B   xor         eax,eax
+0040D60D   lea         edi,[ebp-9Fh]
+0040D613   rep stos    dword ptr [edi]
+0040D615   stos        word ptr [edi]
+0040D617   stos        byte ptr [edi]

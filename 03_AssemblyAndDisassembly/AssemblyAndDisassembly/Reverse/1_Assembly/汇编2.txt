@@ -1,0 +1,60 @@
+;MOV 目标,源
+①拷贝源到目标。
+②源可以是立即数、通用寄存器、段寄存器、内存单元。
+③目标可以是通用寄存器、段寄存器、内存单元
+④操作数宽度必须一样(有内存时就需要注意大小匹配)
+⑤源操作数和目标操作数不能同时为内存单元
+	MOV reg,reg/mem/imm
+	MOV mem,reg/imm
+
+;ADD/SUB/AND/OR/XOR/NOT(基本与MOV指令格式相同，除了NOT:NOT reg/mem)
+
+BYTE/WORD/DWORD
+;====================================================================================
+LEA指令：取偏移地址，即[]中的地址值,区分MOV，MOV是取[]地址中的值
+MOV ECX,0X22111111
+MOV ESP,0X0000FFFF
+MOV DWORD PTR DS:[ESP],0X11223344
+MOV DWORD PTR DS:[ESP+ECX],0XAABBCCDD
+
+MOV BX,DS:[ESP]			;取值ESP地址的内存值，BX = 0X3344 
+MOV EDX,DS:[ESP+ECX]	;取值ESP+ECX地址的内存值，EDX = 0XAABBCCDD
+LEA AX,DS:[ESP]			;取偏移地址即ESP的值，(ESP低两个字节值到AX中),AX=SP=0XFFFF
+LEA EAX,DS:[ESP+ECX]	;取偏移地址即ESP+ECX的值，(ESP+ECX放到EAX中),EAX=ESP+ECX=0X22121110
+LEA BX,DS:[ESP+ECX+2]	;BX=0X1112
+LEA EDX,DS:[ESP+ECX+2]	;EDX=0X22121112
+
+;===============================================================================================
+;寻址的形式：reg/reg1/reg2为八个32位通用寄存器的任意一个
+[imm]
+[reg]
+[reg + imm]
+[reg1 + reg2 * (1,2,4,8)]
+[reg1 + reg2 * (1,2,4,8) + imm]
+除了以上几种形式(最多两个寄存器，最多一个乘号)，[]中的其他形式统统不可以。
+但是像[eax*1 + ebx*4 + 2 + 4] <==> [eax + ebx*4 + 6]可以转换成合法的形式，则属于合法的。
+如果[]中计算结果溢出，则溢出的舍弃。
+
+(对于栈：Debug通过Base找；Releas通过Top找。)
+sub edx,4	<==>	lea edx,dword ptr ds:[edx-4]
+
+思想：如果自己找两个寄存器模拟栈，而不用push、pop指令，那么对于初级的逆向破解人员来说，
+汇编代码后，或许函数入口地址一眼都找不到，甚至懵逼了。
+
+;==============================================================================================
+push reg32/reg16/mem32/mem16/imm
+pop reg32/reg16/mem32/mem16
+16位的压栈与出栈栈顶变化为2字节，32位的压栈与出栈栈顶变化为4字节，立即数均认为是32位
+	push byte ptr ds:[esp]和push al均不可以
+;用多种方式实现(栈顶在低地址)：push esp
+法一：
+mov eax,esp
+sub esp,2
+mov ds:[esp],eax
+法二：
+lea eax,ds:[esp]
+lea esp,ds:[esp-4]
+mov ds:[esp],eax
+法三：
+mov ds:[esp-4],esp
+sub esp,4

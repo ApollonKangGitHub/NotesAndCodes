@@ -1,0 +1,113 @@
+;32位的8个通用寄存器：
+EAX、EBX、ECX、EDX、EBP、ESP、EDI、ESI
+EAX为累加器
+ECX为计数器
+ESP为栈顶指针寄存器
+EBX、EBP为基址寻址
+EDI、ESI为变址寻址
+
+;而一个32位通用寄存器EAX|EBX|ECX|EDX可以看作是四个寄存器，以EAX为例
+EAX(32bit)
+AX(low 16bit of EAX)
+AH(high 8bit of AX)
+AL(low 8bit of AX)
+;但是其余四个通用寄存器不存在八位寄存器，即只有(包含两个：32bit与16bit)
+
+;通用寄存器：
+32bit	16bit	8bit
+EAX		AX		AH、AL
+EBX 	BX		BH、BL
+ECX		CX		CH、CL
+EDX		DX		DH、DL
+ESP		SP		
+EBP		BP		
+ESI		SI		
+EDI		DI		
+;所以说通用寄存器总共有24个
+
+;===========================================================================================
+每个进程一个4GB的虚拟内存----(映射)---->物理内存----(映射)---->内存条、显存等硬件
+
+ds:[]地址的五种形式
+
+mov ds:[立即数],EAX
+mov ds:[reg],EAX					;reg是8个通用的32位的寄存器中的任意一个
+mov ds:[reg+立即数],EAX				
+mov ds:[reg1+reg2*N],EAX			;N只能是1、2、4、8中的一个,reg1与reg2可以是同一个寄存器
+mov ds:[reg1+reg2*N+立即数],EAX				
+
+小端存储模式：低位数据存放在低地址，高位数据存放在高地址
+大端存储模式：低位数据存放在高地址，高位数据存放在低地址	
+
+现在的PC机，基于80x86架构的程序基本上都是小端
+而手机基于ARM架构的程序，基本都是大端存储模式
+但是这种模式，编译器是可以修改的，并不是绝对的。但是为了规范一般都是默认的
+
+and、or、xor、not、add、sub等于16位基本都是一样的，但是由于通用寄存器变多了，所以格式也变多了。
+;============================================================================================
+movs指令：
+;mov指令不能从内存到内存，但是movs却可以，并且只能从指定格式内存地址到指定格式内存
+MOVS BYTE PTR ES:[EDI],BYTE PTR DS:[ESI]		;简写为MOVSB
+MOVS WORD PTR ES:[EDI],WORD PTR DS:[ESI]		;简写为MOVSW
+MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]		;简写为MOVSD
+复制完成后自加/自减一次(根据DF的值而定)，每次自加/自减的值也是根据类型而定。
+这与8086的16位是完全相同的。
+
+stos指令：
+;与movs有相似功能，只不过默认缺省数据来源变为AL/AX/EAX，对应BYTE/WORD/DWORD。
+;只用到EDI不用ESI了，其他特点完全相同，也是受DF位影响。
+STOS BYTE PTR ES:[EDI]			;简写为STOSB
+STOS WORD PTR ES:[EDI]			;简写为STOSW
+STOS DWORD PTR ES:[EDI]			;简写为STOSD 
+
+STOS、MOVS与ECX和REP配合使用，则可以批量复制
+;===========================================================================================
+push指令：先减ESP再入栈
+;三种形式(注意8位寄存器与8位内存不可以)
+push 16bit/32bit_reg		;16位的reg，栈顶指针ESP减2;32位的reg,栈顶指针减4
+push 16bit/32bit_mem		;16位的mem，栈顶指针ESP减2;32位的mem,栈顶指针减4
+push 立即数(在8个字节范围内)	;但是对于立即数，无论数多大，只要在4个字节范围内，压栈后，ESP都是减4
+
+pop指令：先出栈再加ESP
+pop 16bit/32bit_reg
+pop 16bit/32bit_mem
+pop后面必须跟“数据容器”，与push相对应使用
+;===========================================================================================
+EIP寄存器：
+存放下一条指令的地址
+jmp 指令用来修改EIP里的值，因为mov无法修改EIP的值
+由于EIP寄存器是32位的，所以jmp后面跟的值/reg/mem也是32位的
+jmp ivalue/32bit_reg/32bit_mem
+
+call指令做了什么：
+push 下一行指令的地址
+jmp ivalue/32bit_reg/32bit_mem
+
+retn/ret/retf指令等价于：
+pop 32bit_reg		;从栈顶取出一个地址放到32bit_reg中，栈顶指针ESP减4
+jmp 32bit_reg		;修改EIP寄存器的值为32bit_reg
+ret和retn等价为近返回，retf为远返回
+;==========================================================================================
+;堆栈平衡
+;外平栈：栈用来传递参数，在call结束以后，紧接着的指令应该修改esp寄存器使得传递参数的栈空间被回收
+eg:
+push 1
+push 2
+call eax
+add esp,8	;在函数结束后的外部恢复参数入栈前的栈状态
+...
+eax_addr:
+...
+retn 
+;==================================
+;内平栈：栈用来传递参数，并且需要call结束后恢复参数压栈前的栈状态，可以直接在ret时指定。
+eg:
+
+push 1
+push 2
+call eax
+...
+eax_addr:
+...
+retn 8	;在函数结束时就恢复参数入栈前的栈状态，retn N (N是2的倍数)
+;其本质也是先返回再恢复，但是其表现特点不一样

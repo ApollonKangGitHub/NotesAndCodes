@@ -1,0 +1,24 @@
+与：and
+或：or
+非：not
+异或：xor
+
+//算数移位：
+SAL/SAR reg/mem,cl/imm
+算数左移(Shift Arithmetic Left)：最高位存储到CF，右边补零
+算数右移(Shift Arithmetic Right)(用于有符号数)：最高位补符号位，最低位存储到CF
+
+//逻辑移位：
+SHL/SHR	reg/mem,cl/imm
+逻辑左移(Shift Left)：最高位存储到CF，右边补零
+逻辑右移(Shift Right)(用于无符号数)：最高位补零，最低位存储到CF
+
+//循环移位：
+ROL reg/mem,imm8 ROR reg/mem,cl
+循环左移(Rotate Left)：最高位拿出来放到CF和最低位
+循环右移(Rotate Right)：最低位拿出来放到CF和最高位
+
+//带进位循环移位：CF作为reg/mem的一部分，即"最高位"
+RCL reg/mem,imm8 RCR reg/mem,cl
+进位循环左移(Rotate through Carry Left)：CF放到最低位，最高位放到CF
+进位循环右移(Rotate through Carry Right)：CF放到最高位，最低位放到CF

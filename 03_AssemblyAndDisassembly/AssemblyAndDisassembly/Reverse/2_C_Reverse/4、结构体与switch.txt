@@ -1,0 +1,27 @@
+struct Point{
+	int x;
+	int y;
+	int z;
+};
+struct Str{
+	unsigned char sex;
+	unsigned char age;
+	float high;
+	char name[20];
+	__int64 far;
+	struct Point point;
+};
+
+struct str mike;
+	mike + 0:sex
+	mike + 1:age
+	mike + 4:high
+	mike + 8:name
+	mike + 28:far
+	mike + 36:point
+		mike.point + 0:x
+		mike.point + 4:y
+		mike.point + 8:z
+mike为基址，+n，n为偏移地址，mike.point + m,m为二级偏移
+
+switch反汇编具体看blog：http://blog.csdn.net/apollon_krj/article/details/76793914

@@ -1,0 +1,47 @@
+VC++6.0静态连接库：
+首先创建一个静态库文件File->New->Project->static library，增加新文件并进行编辑后：
+编译生成一个静态库文件"*.lib"。将静态链接库文件*.lib和其头文件复制到要进行连接的工程中，
+①在工程中包含"xxxlib.h"头文件
+②加上预处理:#pragma comment(lib,"*.lib");
+
+还有一种方式代替#pragma comment(lib,"xxx.lib");即直接在工程项目设置中选择Link进行连接库的添加。
+
+静态库最终被静态编译连接进工程文件的.exe文件中去，而不是运行时再连接。
+如果库被修改则需要重新编译连接，修改的库函数才能被更新到.exe中，否则.exe中依旧是以前的库函数。
+//===============================================================================
+VC++6.0动态链接库（修改dll的函数实现细节，不需要重新编译）：
+//动态库导出：
+	//(1)、常规导出方式：按名字导出
+	先创建一个静态库文件File->New->Project->DynamicLink library，增加新文件并进行编辑：
+		在头文件中声明格式(默认__cdecl)：
+		extern "C" __declspec(dllexport)int Plus(int x, int y);
+
+		//extern声明为全局函数
+		//按照C的方式进行编译连接,编译器不进行重载的名字修改,函数名经过编译后不变
+		//__declspec(dllexport)告诉编译器此函数为导出函数
+	编译生成一个静态库*.lib一个动态库*.dll。
+	//(2)、.def导出方式:按序号导出
+	动态库在建立时不需要在头文件中加export等声明，按照常规写法声明函数
+	在动态库工程文件中新建一个.def文件(文本文件后缀改为.def)
+	//在.def文件中写:
+	EXPORTS
+	Plus 	@12			//12为导出序号
+ 	Sub 	@8 NONAME	//8为导出序号，没有名字
+	div		@5 NONAME 	
+	mul 	@6
+	
+//连接使用：
+//(1)、隐式连接(连接器自动连接):
+	①将*.dll和*.lib复制到工程文件下
+	①加上预处理:#pragma comment(lib,"*.lib");
+	③extern "C" __declspec(dllimport)int Plus(int x, int y);//在调用的文件中导入
+	//__declspec(dllimport)告诉编译器此函数为导入函数
+
+//(2)、显式连接(自己连接调用)#include <windows.h>：
+	①定义函数指针: typedef int (*lPlus)(int, int);
+	②声明函数指针变量: lPlus myPlus;
+	③动态加载dll到内存: HINSTANCE hModule = LoadLibrary("*.dll");//#define HINSTANCE unsigned long是一个编号
+	④获取函数在内存中的地址myPlus = (lPlus)GetProAddress(hModule, "Plus");
+	//GetProAddress(...,name);name这个名字如果导出时被编译器修改，则导入时要为修改后的名字
+	⑤调用: int x = myPlus(1,2);
+//====================================================================================

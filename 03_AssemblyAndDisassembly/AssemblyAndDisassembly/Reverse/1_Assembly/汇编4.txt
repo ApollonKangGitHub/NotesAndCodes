@@ -1,0 +1,71 @@
+CPU是如何计算设置OF位？
+两个操作数的符号位（即最高位）相加，进位为a(0/1).
+有效数据位（次高位）相加，进位为b(0/1).
+则OF = a ^ b;
+
+;======================================================================================
+;===================================EIP的修改指令======================================
+1、jmp指令：
+;jmp imm/reg/mem
+是无条件跳转指令，但本质不是跳转，而是修改eip指令，即：
+	==>“mov eip,address 修改eip” + “CPU再执行一次”两部分。除了影响EIP，其他东西均不影响。
+
+2、call指令：
+;call imm/reg/mem?
+在jmp的基础上将call下一行的指令地址（call指令地址+call指令长度）压到栈中去。
+（16位汇编压CS和IP，而32位只压EIP）
+相当于："push addr_nextcmd" + "jmp imm/reg/mem"
+
+3、retn指令：
+相当于pop eip，但是pop eip写法不合法
+
+4、cmp指令：
+;cmp reg/mem,reg/imm
+格式即：可以同时为reg，但是不能同时为mem，不能同时为imm
+cmp reg1,reg2 在对标志位寄存器的影响上等价于sub reg1,reg2。
+但是区别在于cmp不会改变reg1的值，而sub会改变前面操作数即reg1的值
+
+5、test指令：
+;test reg/mem,reg/imm
+与cmp指令相似，只不过两个操作数进行与操作，不保存结果值，但影响标志寄存器的值
+经常用来测试某位是不是1。
+
+;下面的这些指令（JCC指令）经常与cmp/test指令配合使用
+;JCC指令和jmp一样只修改EIP，只不过是有条件跳转
+je、jz		两数相等(ZF == 1)则跳转
+jne、jnz	两数不等(ZF == 0)则跳转
+
+js	结果为负数跳转(SF == 1)
+jns	结果为正数跳转(SF == 0)
+
+jp、jpe		结果的1的个数为偶数则跳转(PF == 1)
+jnp、jpo	结果的1的个数为奇数则跳转(PF == 0)
+注意：PF值只受低八位影响，odd奇数，even偶数
+
+jo		溢出则跳转(overflow)(OF == 1)
+jno		不溢出则跳转(OF == 0)
+
+无符号数:
+jb、jnae	小于则跳转(CF == 1)
+jnb、jae	不小于则跳转(CF == 0)
+jbe、jna	小于等于则跳转(CF == 1 || ZF == 1)
+jnbe、ja	大于则跳转(CF == 0 && ZF == 0)
+
+有符号数：
+jl、jnge	小于则跳转(SF != OF)
+jnl、jge	不小于则跳转(SF == OF)
+jle、jng	小于等于则跳转(ZF == 1 || OF != SF)
+jnle、jg	大于则跳转(ZF == 0 && SF == OF)
+
+j:jmp跳转
+z:zero零
+e:equal等于
+n:not非，不是	
+s:signel符号
+p:parity奇偶校验
+o:odd奇数
+e:even偶数
+b:below低于
+a:above高于
+l:lesser小于
+g:greater大于

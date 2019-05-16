@@ -1,0 +1,31 @@
+masm/link/debug工具是32位的，在64位系统（如win7以上版本）是无法运行的，而且win7系统已经不自带这些工具了。简而言之
+ 1) Win7以上系统没有debug等工具
+ 2) win7 以上系统基本上是64位的，而debug是32位的，无法运行。
+
+解决问题的方式：
+从网上下载一个32位模拟器（DosBox）以及masm/link/debug等工具 在这个模拟器上就可以运行masm/link/debug等工具了
+
+①将debug.exe、LINK.EXE、MASM.EXE三个可执行文件放到某分区指定目录下(采用d:\ASM)；
+②双击安装DOSBox0.74-win32-installer.exe，按默认位置安装安装完毕后双击运行；
+③在弹出框中输入：
+mount c d:\ASM	(Enter)
+
+c:	(Enter)
+
+debug	(Enter)
+
+debug指令(-*):
+-r  寄存器
+-d  查看  段地址：偏移地址 -   偏移地址
+-u  将后续的字节翻译成汇编指令  查看汇编指令  段地址：偏移地址 -   偏移地址
+-a  段地址：偏移地址 
+-e  修改   段地址：偏移地址
+-t  执行当前CS:IP指令
+
+mount c: d:\ASM
+c:
+上面这两句写DOSBOX的配置文件中，以后打开DOSBOX就不必每次都输入了。
+写入位置：配置文件中最后一行，即[autoexec]选项后面。
+
+配置文件位置：
+C:\Users\user\AppData\Local\DOSBox\dosbox-0.74.conf

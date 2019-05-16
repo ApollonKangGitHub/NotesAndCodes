@@ -1,0 +1,135 @@
+//练习：
+一、用16进制文本编辑器，打开各种类型的文件记录前四个字节：
+.xls:D0CF11E0
+.pdf:25504446
+.exe:4D5A9A00
+.sys:4D5A9A00
+.dll:4D5A9000
+...
+
+我们可以看到.exe/.sys/.dll的前两个字节均为4D5A(MZ)是该文件设计者的名字简写
+这类文件称为PE文件(Portable Executable)，意为可移植的可执行的文件。
+常见的EXE、DLL、OCX、SYS、COM都是PE文件，PE文件是微软Windows操作系统上的程序文件。
+
+二、用WinHex比较内存中的可执行程序和磁盘上的可执行程序有何不同？
+①大小不同，磁盘上小，内存中大且是分块管理，一块和一块之间是空隙。
+在磁盘上空隙有可能小；在内存中空隙大。存在间隙的原因是由于分块，
+	分块的一个原因是节省硬盘：比如notepad.exe由于是比较早的程序，当时硬盘比较小，
+编译器在生成可执行文件时需要设计成节省硬盘空间的结构。所以这种结构遵循的对齐原则：
+内存对齐(1000H)和硬盘对齐(200H)，对齐的补充数据(0X0000)便是间隙。硬盘的对齐值较小，
+补充间隙自然小，因此同一个可执行程序在内存中可能比在硬盘上大。但是现在的硬盘空间大，
+所以编译器生成的可执行程序在硬盘上与内存中对齐方式都是1000H。而对齐的目的是提高效率。
+
+	而分块的另一个目的是节省内存空间，比如QQ开小号，同时在电脑上运行多个QQ程序。
+而代码段只需要一份，数据段需要开辟多份。代码段就是所谓的一块，数据段就是另一块。
+这些块是使用结构体来维护的。分块即创建结构体。
+
+②起始位置不同，硬盘上地址编号从0开始，内存中（虚拟内存）地址不固定。
+//===============================================================================
+PE文件结构：
+.data/.rdata/.text/块表(节表)/PE文件头(标准头+可选头)/DOS头
+注意：一个exe文件本身是一个PE文件，但是由于包含dll库，
+所以一个exe文件也是许多PE文件组成的(包含多个dll)一个PE文件
+//官方对于Image结构的解释：
+//https://msdn.microsoft.com/en-us/library/windows/desktop/ms680198(v=vs.85).aspx
+
+1、DOS头：共40H(64字节)
+struct _IMAGE_DOS_HEADER{
+	0X00 WORD e_magic;    	//Magic DOS signature MZ(4Dh 5Ah):MZ标记:用于标记是否是可执行文件
+	//0X02 WORD e_cblp;    	//Bytes on last page of file
+	//0X04 WORD e_cp;    	//Pages in file
+	//0X06 WORD e_crlc;   	//Relocations
+	//0X08 WORD e_cparhdr; 	//Size of header in paragraphs
+	//0X0A WORD e_minalloc; //Minimun extra paragraphs needs
+	//0X0C WORD e_maxalloc; //Maximun extra paragraphs needs
+	//0X0E WORD e_ss;      	//intial(relative)SS value
+	//0X10 WORD e_sp;     	//intial SP value
+	//0X12 WORD e_csum;    	//Checksum
+	//0X14 WORD e_ip;     	//intial IP value
+	//0X16 WORD e_cs;     	//intial(relative)CS value
+	//0X18 WORD e_lfarlc;   //File Address of relocation table
+	//0X1A WORD e_ovno;     //Overlay number
+	//0x1C WORD e_res[4];   //Reserved words
+	//0x24 WORD e_oemid;    //OEM identifier(for e_oeminfo)
+	//0x26 WORD e_oeminfo; 	//OEM information;e_oemid specific
+	//0x28 WORD e_res2[10]; //Reserved words
+	0x3C DWORD e_lfanew;    //Offset to start of PE header:定位PE文件，PE头相对于文件的偏移量
+};
+
+DOS头在16位系统中用(我们可以看到e_ss、e_sp、e_ip、e_cs还是16位的寄存器)
+现在主要有两个作用：
+①判断一个文件是不是PE文件：e_magic;
+②找到PE头：e_lfanew:相对于文件首的偏移量;
+
+2、PE头：
+//pNTHeader = dosHeader + dosHeader->e_lfanew;
+//NT头
+struct _IMAGE_NT_HEADERS{
+	0x00 DWORD Signature;	//PE文件标识:ASCII的"PE\0\0"
+	0x04 _IMAGE_FILE_HEADER FileHeader;
+	0x18 _IMAGE_OPTIONAL_HEADER OptionalHeader;
+};
+//标准PE头:最基础的文件信息，共20字节
+struct _IMAGE_FILE_HEADER{
+	0x00 WORD Machine;					//※程序执行的CPU平台:0X0:任何平台，0X14C:intel i386及后续处理器
+	0x02 WORD NumberOfSections;			//※PE文件中区块数量
+	0x04 DWORD TimeDateStamp;			//时间戳：连接器产生此文件的时间距1969/12/31-16:00:00的总秒数
+	//0x08 DWORD PointerToSymbolTable;	//COFF符号表格的偏移位置。此字段只对COFF除错信息有用
+	//0x0c DWORD NumberOfSymbols;		//COFF符号表格中的符号个数。该值和上一个值在release版本的程序里为0
+	//0x10 WORD SizeOfOptionalHeader;	//IMAGE_OPTIONAL_HEADER结构的大小(字节数):32位默认E0H,64位默认F0H(可修改)
+	0x12 WORD Characteristics;			//※描述文件属性,eg:
+										//单属性(只有1bit为1)：#define IMAGE_FILE_DLL 0x2000  //File is a DLL.
+										//组合属性(多个bit为1，单属性或运算):0X010F 可执行文件
+};
+
+//可选PE头(提到的地址均是虚拟地址)
+struct _IMAGE_OPTIONAL_HEADER{
+	0x00 WORD Magic;					//※幻数(魔数)，0x0107:ROM image,0x010B:32位PE，0X020B:64位PE 
+	//0x02 BYTE MajorLinkerVersion;		//连接器主版本号
+	//0x03 BYTE MinorLinkerVersion;		//连接器副版本号
+	0x04 DWORD SizeOfCode;				//所有代码段的总和大小,注意：必须是FileAlignment的整数倍,存在但没用
+	0x08 DWORD SizeOfInitializedData;	//已经初始化数据的大小,注意：必须是FileAlignment的整数倍,存在但没用
+	0x0c DWORD SizeOfUninitializedData;	//未经初始化数据的大小,注意：必须是FileAlignment的整数倍,存在但没用
+	0x10 DWORD AddressOfEntryPoint;		//※程序入口地址OEP，这是一个RVA(Relative Virtual Address),通常会落在.textsection,此字段对于DLLs/EXEs都适用。
+	0x14 DWORD BaseOfCode;				//代码段起始地址(代码基址),(代码的开始和程序无必然联系)
+	0x18 DWORD BaseOfData;				//数据段起始地址(数据基址)
+	0x1c DWORD ImageBase;				//※内存镜像基址(默认装入起始地址),默认为4000H
+	0x20 DWORD SectionAlignment;		//※内存对齐:一旦映像到内存中，每一个section保证从一个「此值之倍数」的虚拟地址开始
+	0x24 DWORD FileAlignment;			//※文件对齐：最初是200H，现在是1000H
+	//0x28 WORD MajorOperatingSystemVersion;	//所需操作系统主版本号
+	//0x2a WORD MinorOperatingSystemVersion;	//所需操作系统副版本号
+	//0x2c WORD MajorImageVersion;				//自定义主版本号,使用连接器的参数设置,eg:LINK /VERSION:2.0 myobj.obj
+	//0x2e WORD MinorImageVersion;				//自定义副版本号,使用连接器的参数设置
+	//0x30 WORD MajorSubsystemVersion;			//所需子系统主版本号,典型数值4.0(Windows 4.0/即Windows 95)
+	//0x32 WORD MinorSubsystemVersion;          //所需子系统副版本号
+	//0x34 DWORD Win32VersionValue;             //总是0
+	0x38 DWORD SizeOfImage;			//※PE文件在内存中映像总大小,sizeof(ImageBuffer),SectionAlignment的倍数
+	0x3c DWORD SizeOfHeaders;		//※DOS头(64B)+PE标记(4B)+标准PE头(20B)+可选PE头+节表的总大小按照文件对齐(FileAlignment的倍数)
+	0x40 DWORD CheckSum;			//PE文件CRC校验和，判断文件是否被修改
+	//0x44 WORD Subsystem;          //用户界面使用的子系统类型
+	//0x46 WORD DllCharacteristics; //总是0
+	0x48 DWORD SizeOfStackReserve;  //线程初始化堆栈的保留大小
+	0x4c DWORD SizeOfStackCommit;   //初始化时实际提交的线程栈大小
+	0x50 DWORD SizeOfHeapReserve;   //保留给初始化的process heap的虚拟内存数量
+	0x54 DWORD SizeOfHeapCommit;    //初始化时实际提交的process heap大小
+	//0x58 DWORD LoaderFlags;       //总是0
+	0x5c DWORD NumberOfRvaAndSizes; //目录项数目：总为0X00000010H(16)
+	0x60 _IMAGE_DATA_DIRECTORY DataDirectory[16];
+};
+
+分析ImageBase的作用：
+FileBuffer是磁盘.exe文件在内存中的一份拷贝，但是FileBuffer无法直接在内存中运行
+经过PE loader(装载器)装载以后为ImageBuffer,ImageBuffer是FileBuffer的"拉伸",通过节表进行拉伸。
+即".exe-->FileBuffer-->ImageBuffer"
+//.exe首地址为0
+//FileBuffer首地址为0
+//ImageBuffer首地址(OEP)为ImageBase
+//而真正的程序入口地址是ImageBase + AddressOfEntryPoint(OEP)
+如果一个exe文件中有多个dll其镜像地址均是4000H，操作系统不会修改exe的镜像基址
+因为.exe先被加载，在.exe中才使用的dll库，由于4000H已经被.exe占用，所以会修改dll的镜像基址
+而采用ImageBase + OEP的目的也就是:采用偏移地址的方式可以使得基址修改程序依旧不会出错。
+比如：如果采用绝对地址，那么要修改的就不是一个基址为0X7000H了，而是dll中所有的地址统一
+加上3000H(因为原来为4000H)。
+
+病毒就是修改OEP让存在于间隙的恶意指令先执行，然后恶意指令执行完毕时在其后加一句jmp语句
+跳转到程序的正确入口地址。

@@ -1,0 +1,109 @@
+PUSHAD指令：保护现场
+PUSHAD将8个通用寄存器依次全部压栈（注意顺序eax、ecx、edx、ebx、esp、ebp、esi、edi）。
+POPAD指令：恢复现场
+
+;标志位寄存器EFLAGS(宽度必须要搞清楚)：
+CF(0):进位标志，进位为1，不进位为0，注意数据宽度。
+PF(2):1个数的奇偶标志，偶数为1，奇数为0。;特别注意：PF只检测低八位（即一个字节）
+AF(4):辅助进位标志。判断低半截是否向高半截借位/进位：
+	①如果数据宽度为32位，则判断低16位是否有向高16位进位/借位，有为1，没有为0；
+	①如果数据宽度为16位，则判断低8位是否有向高8位进位/借位，有为1，没有为0；
+	①如果数据宽度为8位，则判断低4位是否有向高4位进位/借位，有为1，没有为0；
+ZF(6):指令运算结果为0，则ZF被置为1
+SF(7):符号标志位，运算结果的最高位(0/1)即为SF的值。1为负向增加，0为正向增加。
+DF(10):方向位。决定movs/stos指令执行完毕，esi、edi的增长方向
+OF(11)：溢出标志位(有符号数进位标志)
+
+;========================================================================================
+(一般没有特别强调的指令，指令两边不能同时为内存，且宽度要一致)
+ADC指令：带进位加法
+	ADC reg/mem,reg/mem/imm
+SBB指令：带借位减法
+	SBB reg/mem,reg/mem/imm
+XCHG指令：交换指令
+	XCHG reg/mem,reg/mem
+
+;STOS:执行一次edi、esi的值会自动增加/减小1/2/4
+STOS <==> STOS DWORD PTR ES:[EDI] ==> MOV ES:[EDI],EAX
+STOSD<==> STOS DWORD PTR ES:[EDI] ==> MOV ES:[EDI],EAX 
+STOSW<==> STOS WORD PTR ES:[EDI] ==> MOV ES:[EDI],AX
+STOSB<==> STOS BYTE PTR ES:[EDI] ==> MOV ES:[EDI],AL 
+
+;MOVS（两边均为内存的特殊指令）:执行一次edi、esi的值会自动增加/减小1/2/4
+MOVS <==> MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]
+MOVSD<==> MOVS DWORD PTR ES:[EDI],DWORD PTR DS:[ESI]
+MOVSB<==> MOVS BYTE PTR ES:[EDI],BYTE PTR DS:[ESI]
+MOVSW<==> MOVS WORD PTR ES:[EDI],WORD PTR DS:[ESI]
+
+;REP指令：重复指令,ECX中存放重复的次数：每执行一次重复的指令，ecx自减一次，减到0则结束
+eg1:
+	mov ecx,10
+	rep movsd
+eg2:
+	mov ecx,15
+	rep stosb
+
+;==========================================================================================
+练习：
+1、编写汇编指令，指令执行后只修改指定标志位，不修改其他位，包括CF、PF、AF、ZF、SF、OF
+假设寄存器初始值为：CF\PF\AF\ZF\SF\OF = 000000
+
+①CF变，其他位不变：
+	mov al,0XEF		1110 1111					（CF\PF\AF\ZF\SF\OF = 010000）
+	add al,0X30		0011 0000	result:0001 1111（CF\PF\AF\ZF\SF\OF = 100000只改变CF）
+②PF变，其他位不变：
+	mov al,0X01 	0000 0001					（CF\PF\AF\ZF\SF\OF = 010000）
+	add al,0X02 	0000 0010	result:0000 0011（CF\PF\AF\ZF\SF\OF = 010000只改变PF）
+③AF变，其他位不变：
+	mov al,0X0E 	0000 1110					（CF\PF\AF\ZF\SF\OF = 010000）
+	add al,0X02	 	0000 0010	reslut:0001 0000（CF\PF\AF\ZF\SF\OF = 001000只改变AF）
+④ZF变，其他位不变：
+	mov al,0									（CF\PF\AF\ZF\SF\OF = 000000）
+	add al,0X03		0000 0011					（CF\PF\AF\ZF\SF\OF = 010000）
+	xor al,al		0000 0011	result:0000 0000（CF\PF\AF\ZF\SF\OF = 010100只改变ZF）
+⑤SF变，其他位不变：
+	mov al,0X01		0000 0001					（CF\PF\AF\ZF\SF\OF = 000000）
+	or al,0X83		1000 0011	result:1000 0011（CF\PF\AF\ZF\SF\OF = 000010只改变SF）
+⑥OF变，其他位不变：
+	
+2、用movs指令分别移动5个字节
+	mov esi,ebp
+	mov edi,ebp
+	add edi,5
+	cld	;0为加，1为减
+	
+	movsb
+	movsb
+	movsb
+	movsb
+3、用stos指令分别存储5个字
+	mov esi,ebp
+	cld
+	
+	mov ax,0	stosw
+	add ax,1	stosw
+	add ax,1	stosw
+	add ax,1	stosw
+	add ax,1	stosw
+4、用rep指令实现movs移动5个字节、5个字、5个双字
+;字节
+	mov esi,ebp
+	mov edi,ebp
+	add edi,5
+	mov ecx,5
+	cld
+	rep movsb
+;字	
+	mov esi,ebp
+	mov edi,ebp
+	add edi,5*2
+	mov ecx,5
+	cld
+	rep movsw
+;双字
+	mov esi,ebp
+	mov edi,ebp
+	add edi,5*4
+	mov ecx,5
+	cld
+	rep movsd

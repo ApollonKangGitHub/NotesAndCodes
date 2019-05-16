@@ -1,0 +1,122 @@
+重定位表保证的是自己dll中的地址值与基址是对应的，如果基址在实际分配时偏移，则dll中写死的地址也要就行偏移。
+这就是所谓的重定位，只和自己dll的基址变化有关系，和其他程序(.exe、.dll)没有关系。
+
+而call指令如果调用的是自己工程中写的函数。则调用"call 0X????????"的值是写死的，不会再变的。
+而如果是调用的是dll中的程序则调用"call dword prt ds:[0X??????]"，函数的地址存放在ds:[0X??????]中，
+是动态变化的，是根据加载器分配的实际地址来进行调整的。但是0X??????依旧是不变的，变得是其中的地址值。
+虽然与重定位表相似都需要修改某一地址中的值来确保程序运行，但是重定位表是自己没站住基址，自身修复自身，
+而这里的call是dll占定位置以后，加载程序将dll中重定位表修复后的地址中的值更新到call的地址中去。
+另外：dll的重定位表是dll加载后便立即修复的，而call是加载完毕将要运行时修改的。
+
+call --------------> [X]:4070B0
+call --------------> [X]:4070B8
+call --------------> [X]:4070C0
+call --------------> [X]:4070C8
+call --------------> [X]:4070D0
+call --------------> [X]:4070D8
+
+X是将来要修正的值，后面的地址是存放X的地址，这种描述call与地址不确定的关系称为IAT表。
+IAT hook则指的是修改该表中的值，让其执行其它代码(想让其执行的代码),执行完毕再调回去。
+(Import Address Table)IAT表的实际目的就是考虑到dll重定位表使得dll函数地址发生变化的问题。
+
+//dll注入的方式是将"功能"程序的代码加载到需要操纵的程序中去。但是不能直接让系统去LoadLibrary()，
+//因为程序可能有检查部分，检查到LoadLibrary()不是自己的dll中的函数，则不允许操作。
+//那么我们就应该自己去遍历进程的空间，查找何处有空余，将代码插入复制到空闲处，并修复重定位表。
+
+//============================================================================================
+导入表：数据目录项的第二个元素保存导入表地址RVA
+typedef struct _IMAGE_IMPORT_DESCRIPTOR {
+    union {
+        DWORD   Characteristics;            
+        DWORD   OriginalFirstThunk;         //RVA指向IAT结构体数组(INT表)(PIMAGE_THUNK_DATA),结构体数组最后一个成员为0
+    };
+    DWORD   TimeDateStamp;                  //时间戳
+    DWORD   ForwarderChain;                 // -1 if no forwarders
+    DWORD   Name;							//RVA指向dll名字，改名字以0结尾
+    DWORD   FirstThunk;                     //RVA指向IAT结构体数组(IAT表)(if bound this IAT has actual addresses)
+} IMAGE_IMPORT_DESCRIPTOR, *PIMAGE_IMPORT_DESCRIPTOR;
+
+导入表是_IMAGE_IMPORT_DESCRIPTOR的结构体数组，一个结构体描述一个dll。最后一个结构(20字节)全为0代表导入表结束。
+导入表中存储IAT表的地址FirstThunk，也可以根据数据目录项来定位IAT表，IAT表在数据目录项中是第13个元素。
+
+//PIMAGE_THUNK_DATA数组的一个结构体成员如下
+typedef struct _IMAGE_THUNK_DATA64 {
+    union {
+        ULONGLONG ForwarderString;  // PBYTE 
+        ULONGLONG Function;         // PDWORD
+        ULONGLONG Ordinal;			//序号
+        ULONGLONG AddressOfData;    //RVA 指向_IMAGE_IMPORT_BY_NAME
+    } u1;
+} IMAGE_THUNK_DATA64;
+typedef IMAGE_THUNK_DATA64 * PIMAGE_THUNK_DATA64;
+
+typedef struct _IMAGE_THUNK_DATA32 {
+    union {
+        DWORD ForwarderString;      // PBYTE 
+        DWORD Function;             // PDWORD
+        DWORD Ordinal;
+        DWORD AddressOfData;        //RVA 指向_IMAGE_IMPORT_BY_NAME 
+    } u1;
+} IMAGE_THUNK_DATA32;
+typedef IMAGE_THUNK_DATA32 * PIMAGE_THUNK_DATA32;
+
+//而IMAGE_THUNK_DATA结构体数组的每一个元素指向一个_IMAGE_IMPORT_BY_NAME结构
+//那么IMAGE_THUNK_DATA结构体数组指向的便是一个_IMAGE_IMPORT_BY_NAME结构体数组
+typedef struct _IMAGE_IMPORT_BY_NAME {
+    WORD    Hint;		//可能为0，编译器决定，如果不为0，是函数在导出表中的索引
+    BYTE    Name[1];	//函数名称，以0结尾，由于不知道到底多长，所以干脆只给出第一个字符，找到0结束
+} IMAGE_IMPORT_BY_NAME, *PIMAGE_IMPORT_BY_NAME;
+
+在加载前OriginalFirstThunk与FirstThunk指向的INT表与IAT表完全相同，均是一个IMAGE_THUNK_DATA的结构体数组，指向一个IMAGE_IMPORT_BY_NAME结构体数组
+在加载后OriginalFirstThunk指向的INT表不变依旧INT表指向IMAGE_IMPORT_BY_NAME结构体数组，
+但是FirstThunk指向的IAT表变化了，其数组元素编程一系列函数地址，不再指向IMAGE_IMPORT_BY_NAME结构体数组
+
+总结：IAT表加载以前存储的数组，每个数组元素指向dll的一个函数名与序号的结构体；
+IAT表加载以后存储的数组，每个数组元素指向dll的一个函数的地址。
+加载后IAT只存储地址，我们要想知道其函数名就得有INT表一直存储备份。GetProAddr(ImageBase, ordinal/name)函数就是运行时根据INT表进行操作的。
+IAT表加载前后系统(加载程序)帮我们做的就是修改IAT表，由IAT表中的结构体指向的序号/名字获取地址更新到IAT中去。
+
+IMAGE_THUNK_DATA结构体数组的每一个元素，如果其最高位为1，则去除最高位所剩的值就是函数的导出序号,
+就不需要去IMAGE_IMPORT_BY_NAME结构体，而直接索引函数地址，将得到的函数地址更新到IAT中去。
+不为1则说明是地址，根据该地址获取IMAGE_IMPORT_BY_NAME结构体中的函数名/索引，根据函数名/索引获取地址
+//============================================================================================================
+绑定导入表(第12个)：
+虽然说IAT加载前与INT一样，在加载时才变为存储函数地址的，但是也并非完全如此，比如早期Windwows自带的许多功能程序(记事本、计算器)。
+IAT中可能直接就把函数地址解析出来，但是如果dll未占住ImageBase的地址则需要重定位。这样就使得启动程序更加快速，称之为绑定导入。
+另外一个缺点是如果dll被更新修改后，绑定的就会产生问题。
+
+但是如何区分未加载前IAT存放的到底是函数地址还是与INT一样？
+如果_IMAGE_IMPORT_DESCRIPTOR.TimeDateStamp为0X00000000则表示该dll的函数地址均为绑定，
+如果为0XFFFFFFFF(有符号数-1)则表示函数地址已经被绑定。而绑定的信息存储在绑定导入表中。
+绑定导入表存放在数据目录的第12项。
+
+typedef struct _IMAGE_BOUND_IMPORT_DESCRIPTOR {
+    DWORD   TimeDateStamp;		//表示绑定的时间戳，如果和PE头中的TimeDateStamp不同则可能被修改过
+    WORD    OffsetModuleName;	//dll名称地址
+    WORD    NumberOfModuleForwarderRefs;	
+	//该dll依赖的dll的个数.值为n代表该结构后面紧跟了n个IMAGE_BOUND_FORWARDER_REF结构。之后才是主dll导入的下一个dll的结构
+// Array of zero or more IMAGE_BOUND_FORWARDER_REF follows
+} IMAGE_BOUND_IMPORT_DESCRIPTOR,  *PIMAGE_BOUND_IMPORT_DESCRIPTOR;
+
+typedef struct _IMAGE_BOUND_FORWARDER_REF {
+    DWORD   TimeDateStamp;	//时间戳，同样的作用检查更新情况
+    WORD    OffsetModuleName;	//dll名称地址
+    WORD    Reserved;	//保留
+} IMAGE_BOUND_FORWARDER_REF, *PIMAGE_BOUND_FORWARDER_REF;
+
+最后一个IMAGE_BOUND_IMPORT_DESCRIPTOR为全0结构表示结束。
+注意：
+所有的OffsetModuleName既不是RVA也不是FOA。
+而是绑定表首地址+OffsetModuleName得到的RVA才是当前name的偏移。
+//===================================================================================================
+注入方式：
+注册表注入
+导入表注入
+特洛伊注入
+远程线程注入
+无dll注入
+Apc注入
+Windows挂钩注入dll
+输入法注入
+Sql注入
+Script注入

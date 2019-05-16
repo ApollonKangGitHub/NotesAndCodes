@@ -1,0 +1,67 @@
+Microsoft (R) Macro Assembler Version 5.00                  5/1/17 17:54:58
+                                                             Page     1-1
+
+
+				;下面的程序能否正常结束？ 
+				assume cs:codeseg  
+				 
+ 0000				codeseg segment 
+ 0000  B8 4C00				mov ax,4C00H 
+ 0003  CD 21				int 21H 
+					 
+ 0005					start: 
+ 0005  B8 0000				mov ax,0 
+ 0008					s: 
+ 0008  90				nop 
+ 0009  90				nop 
+					 
+ 000A  BF 0008 R			mov di,offset s 
+ 000D  BE 0020 R			mov si,offset s2 
+ 0010  2E: 8B 04			mov ax,cs:[si] 
+ 0013  2E: 89 05			mov cs:[di],ax 
+					 
+ 0016					s0: 
+ 0016  EB F0				jmp short s 
+					 
+ 0018					s1: 
+ 0018  B8 0000				mov ax,0 
+ 001B  CD 21				int 21H 
+ 001D  B8 0000				mov ax,0 
+					 
+ 0020					s2: 
+ 0020  EB F6				jmp short s1 
+ 0022  90				nop 
+					 
+ 0023				codeseg ends 
+				end start 
+Microsoft (R) Macro Assembler Version 5.00                  5/1/17 17:54:58
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+CODESEG  . . . . . . . . . . . .  	0023	PARA	NONE	
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+S  . . . . . . . . . . . . . . .  	L NEAR	0008	CODESEG
+S0 . . . . . . . . . . . . . . .  	L NEAR	0016	CODESEG
+S1 . . . . . . . . . . . . . . .  	L NEAR	0018	CODESEG
+S2 . . . . . . . . . . . . . . .  	L NEAR	0020	CODESEG
+START  . . . . . . . . . . . . .  	L NEAR	0005	CODESEG
+
+@FILENAME  . . . . . . . . . . .  	TEXT  TEST8		
+
+
+     32 Source  Lines
+     32 Total   Lines
+      8 Symbols
+
+  51064 + 465480 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

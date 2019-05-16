@@ -1,0 +1,154 @@
+数据目录表：16个_IMAGE_DATA_DIRECTORY结构体元素：
+分别是：导入表、导出表、资源、异常信息、安全证书、重定位、调试信息、版权所有、
+全局指针、TLS、加载配置、绑定导入、IAT、延迟导入、COM信息、最后一个保留未使用。
+
+和程序运行时息息相关的表：
+导出表、导入表、重定位表、IAT表
+
+struct _IMAGE_DATA_DIRECTORY{
+    DWORD   VirtualAddress;
+    DWORD   Size;
+};该结构体标记了各个表在内存中的VirtualAddress
+VirtualAddress是内存中的地址，我们要直接在文件中根据VirtualAddress找到对应的表，就需要进行判断。
+判断VirtualAddress在哪个节，并且计算在节中的偏移量，即RVA->FOA的转换。
+//========================================================================================
+一、导出表：根据_IMAGE_DATA_DIRECTORY结构体数组的第1个元素索引导出表
+一般情况下，dll的函数导出供其他人使用，exe将别人的dll的函数导入运行。
+所以，一般.exe没有导出表。但是并非说.exe一定没有导出表。
+
+导出表结构：
+typedef struct _IMAGE_EXPORT_DIRECTORY {
+    //DWORD   Characteristics;	//未使用
+    //DWORD   TimeDateStamp;	//时间戳
+    //WORD    MajorVersion;		//未使用
+    //WORD    MinorVersion;		//未使用
+    DWORD   Name;				//指向改导出表文件名字符串
+    DWORD   Base;				//导出表的起始序号
+    DWORD   NumberOfFunctions;	//导出函数的个数(更准确来说是AddressOfFunctions的元素数，而不是函数个数)
+    DWORD   NumberOfNames;		//以函数名字导出的函数个数
+    DWORD   AddressOfFunctions;     //导出函数地址表RVA:存储所有导出函数地址(表元素宽度为4，总大小NumberOfFunctions * 4)
+    DWORD   AddressOfNames;         //导出函数名称表RVA:存储函数名字符串所在的地址(表元素宽度为4，总大小为NumberOfNames * 4)
+    DWORD   AddressOfNameOrdinals;  //导出函数序号表RVA:存储函数序号(表元素宽度为2，总大小为NumberOfNames * 2)
+} IMAGE_EXPORT_DIRECTORY, *PIMAGE_EXPORT_DIRECTORY;
+注意：
+里面的地址均是RVA，而我们不想转换成ImageBuffer。所以一定要RVA->FOA直接在FileBuffer中寻找导出表。
+
+注意：三个导出表(地址、名字、序号)
+AddressOfFunctions与AddressOfNames可以不一样大。一个函数必定有地址，但不一定有名字(func @12 NONAME)。
+导出表中的地址表大小根据NumberOfNames决定:AddressOfFunction指向的表大小 = NumberOfNames * 4。
+而名字表大小不由NumberOfNames决定:AddressOfNames指向的表大小 = NumberOfNames * 4。
+地址表可能大于等于，也有可能小于名字表，因为一个地址可能没有名字，也可能有多个名字。
+序号表中的值是非准确的，应该均加上Base才是真正的序号。(Base等于序号表中最小的值)
+
+//按序号找函数地址：
+知道一个函数名字func，如何找到地址？步骤：
+①在名字表遍历RVA地址，转换成FOA地址，然后根据FOA比较FOA指向的字符串与func是否相等，不相等则判断下一个。
+②如果相等则获取到其在名字表中的索引(下标)，根据该索引获取对应的序号表中同一下标索引到的序号值value。
+③value作为地址表的索引，索引到的值即为func()的地址。
+
+	DWORD Headers::RVAToFOA(DWORD imageAddr)
+	{
+		if(imageAddr > imageSize | imageAddr < 0){
+			printf("RVAToFOA in_addr is error!\n");
+			exit(EXIT_FAILURE);
+		}
+		IMAGE_SECTION_HEADER * section = section_header;
+		DWORD offset = 0;
+		for(int i = 0; i < sectionNum; i++){
+			DWORD lower = section[i].VirtualAddress;//该节下限
+			DWORD upper = section[i].VirtualAddress+section[i].Misc.VirtualSize;//该节上限
+			if(imageAddr >= lower && imageAddr <= upper){
+				//printf("%d\n",i);
+				offset = imageAddr - lower + section[i].PointerToRawData;//计算出RVA的FOA
+				break;
+			}
+		}
+		return offset;
+	}
+
+为什么说NumberOfFunctions不一定是函数的个数？
+因为用序号表索引，而序号表的值不一定连续，而NumberOfFunctions = value_max - value_min + 1
+eg:序号表中值为：2,3,7,9。则NumberOfFunctions = 9-2+1 = 8。但是实际只有四个函数，有多个地址没有使用则被置为0。
+
+//按序号找函数地址：
+序号为N。则地址表的索引为N-Base。比如N = 10,Base = 3,则函数地址为((DORD *)AddressOfFunctions)[10-3]
+
+//导出表解析
+void Headers::print_ExportTable()
+{
+    fprintf(fp_peMess, "导出表(export table):\n");
+    DWORD offset = RVAToFOA(dataDir[0].VirtualAddress);//获取导出表地址
+    IMAGE_EXPORT_DIRECTORY * exportTb = (IMAGE_EXPORT_DIRECTORY * )(pFileBuffer + offset);//导出表指针初始化
+
+    //打印导出表
+    fprintf(fp_peMess, "\n\tOrdina\tfunc_FOA\tname_FOA\tFunctionName\n");
+    DWORD * addrFunc = (DWORD *)(pFileBuffer + RVAToFOA(exportTb->AddressOfFunctions));//函数地址导出表指针
+    DWORD * addrName = (DWORD *)(pFileBuffer + RVAToFOA(exportTb->AddressOfNames));//函数名字导出表指针
+    WORD * addrOrdi = (WORD *)(pFileBuffer + RVAToFOA(exportTb->AddressOfNameOrdinals));//函数序号导出表指针
+
+    //Base--->NumberOfFunctions
+    int i, j;
+    for(i = 0; i < exportTb->NumberOfFunctions; i++){//导出时,序号有NumberOfFunctions个
+        if(addrFunc[i] == 0)
+            continue;//地址值为0代表该序号没有对应的函数,是空余的,即序号表中不存在该索引值i
+        for(j = 0; j < exportTb->NumberOfNames; j++){//序号表序号有NumberOfNames个
+            if(addrOrdi[j] == i){//序号表的值为地址表的索引
+                fprintf(fp_peMess, "\t%04X\t%08X\t%08X\t%s\n", i + exportTb->Base, addrFunc[i], addrName[j], pFileBuffer + addrName[j]);
+                break;
+            }
+        }
+        //存在addrOrdi[j]时,i(索引)等于addrOrdi[j](值),不存在，则i依旧有效,i+Base依旧是序号
+        if(j != exportTb->NumberOfNames)
+            continue;//在序号表中找到
+        else//如果在序号表中没有找到地址表的索引，说明函数导出是以地址导出的，匿名函数
+            fprintf(fp_peMess, "\t%04X\t%08X\t%s\t%s\n", i + exportTb->Base, addrFunc[i], "--------", "--------");
+    }
+}
+//=====================================================================================================
+二、重定位表：数据目录项的第六个元素(结构)
+由于exe先分配空间，所以exe文件一般没有重定位表，而dll一般都有重定位表。
+
+typedef struct _IMAGE_BASE_RELOCATION {
+    DWORD   VirtualAddress;
+    DWORD   SizeOfBlock;
+} IMAGE_BASE_RELOCATION,* PIMAGE_BASE_RELOCATION;
+#define IMAGE_SIZEOF_BASE_RELOCATION         8
+
+重定位表具体结构:
+通过IMAGE_DATA_DIRECTORY数组的第六个元素的VirtualAddress成员找到第一个IMAGE_BASE_RELOCATION结构
+①第一个VirtualAddress(本块基址RVA) + SizeOfBlock(本块的大小) + 本块数据
+②第一个VirtualAddress + SizeOfBlock + 数据
+③第一个VirtualAddress + SizeOfBlock + 数据
+④第一个VirtualAddress + SizeOfBlock + 数据
+...
+数据是多个2字节的多个地址，(地址是4字节，只不过是小表的形式而提取了基址，基址存在VirtualAddress中)
+但是实际只用到了低12位，高四位用作他用。即低12位的值加上基址便是要修改内容的地址。
+高四位是0011时低12位才有效，否则此处2字节可能是为了内存对齐而产生的垃圾数据。
+地址数据指向的是该地址的值需要修改。而一个块就是一个页，就是一页需要修改值的地址放在一个块。
+最后一个8字节结构体只有VAddr和Size，没有数据。全为0代表重定位表结束。
+
+//=====================================================================================================
+移动导出表:
+函数名的导出表其地址是有序的。即addrName[0]存储的地址必定小于addrName[1]存储的地址。
+
+步骤：
+①在文件尾部，新增一个节(大小需要计算,并且节表也要新增记录)，并返回新增的节的FOA。
+②依次复制三张表：函数地址表、函数序号表、函数名字表：
+表长度分别为：NumberOfFunctions * 4、NumberOfNames * 2、NumberOfNames * 4
+③依次复制所有函数名(字符串的复制，包括'\0'):长度不确定，复制后直接修改AddressOfNames表。
+④接着下一个地址开始复制IMAGE_EXPORT_TABLE结构体，将新的IMAGE_EXPORT_TABLE结构体的地址更新到目录项中去。
+⑤修复：AddressOfFunctions、AddressOfNames、AddressOfNameOrdinals 
+注意：以上的操作都在FileBuffer中，但是操作的地址可能要进行RVA和FOA的转换。
+
+进行移动的目的是，要对节进行加密，而节中存在导出表、重定位表等。如果被加密程序就无法正确加载。
+最终，只有中间的节加密，头、节表、移动的导出表所在节均不加密。 加密解密是由壳完成的，壳负责身份验证。
+如果验证不通过，解密也就不成功，程序是无法正确运行的。
+
+移动重定位表：
+①开辟新节
+②直接全部按顺序复制即可，当遇到结构为0时即复制结束。
+③更新目录项的重定位表的RVA。
+
+加载程序：
+①加载程序将dll复制到指定内存位置
+②修复重定位表：指的是修复那些写死的绝对地址(加上ΔimageBase)

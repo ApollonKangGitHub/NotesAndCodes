@@ -1,0 +1,11 @@
+dw(define word)定义字型数据。
+eg:
+dw 0123H,0ADDH	;占用2word、4Byte
+
+段名相当于一个标号，它标识(标记)了该段的段地址，所以mov ax,stack、mov ax,data的含义就是：
+将栈段/或者数据段的段地址送入ax寄存器中，在mov ss,ax、mov ds,ax设置SS寄存器与DS寄存器，
+CPU就能识别内存中的一系列二进制那些是数据、那些是栈段、哪些是指令。
+而在code段用end start标识CS:IP从start开始为程序的入口且是指令，这个入口在编译器下被编译器
+将伪指令end start解析，然后将start的地址存放到文件的描述信息中去，可执行程序在被加载到内存中去时
+先设置CS:IP，那么CPU就从CS:IP即我们设置的start开始执行执行程序指令。
+

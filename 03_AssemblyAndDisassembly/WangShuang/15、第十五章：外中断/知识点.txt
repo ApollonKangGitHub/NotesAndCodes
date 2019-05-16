@@ -1,0 +1,11 @@
+键盘中断：
+端口号为60H，可以直接"in al,60H"读取键盘中断信息
+用对应的通码和断码来判断键盘的输入信息
+
+端口和中断机制是CPU进行I/O的基础
+
+断码=通码+80H
+
+;0040:17的单元存储键盘状态字：
+;7			6			5			4			3		2		1			0
+;Insert		CapsLock	NumLock		ScrollLock	Alt		Ctrl	左Shift		右Shift

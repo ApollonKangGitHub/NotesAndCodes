@@ -1,0 +1,159 @@
+国标2312编码的特点：2个字节，每个字节的最高位都是1。而标准ASCII码占用7位，最高位为0。
+因此从字符串中截取一段时，可以根据最高位是0还是1还截取，以免造成中文字符被中间截断而无法识别。
+
+代码区：可读可执行，存储指令；
+栈区（特指函数栈区）：可读可写，函数没被调用时不存在，大小一旦分配不再改变。
+堆区：动态申请，可变大小，可读可写（对于编译器/正向来说）；
+全局变量区：可读可写；
+常量区：只读。
+
+全局变量在编译完成后地址就确定，重新编译地址才会改变。
+
+汇编中与C中的逻辑一般是反的。eg:
+void fun(int x, int y){
+	if(x>y){	//大于则相加
+		return x+y;
+	}
+}
+
+;逻辑相反的对应的汇编
+mov eax,dword ptr ss:[ebp+8]
+cmp eax,dword ptr ss:[ebp+0XC]
+jle 0X????????				;小于等于则结束
+add eax,dword ptr ss:[ebp+0XC]
+0X????????: 
+pop esi
+pop edi
+pop ebx
+...
+//======================================================================
+两道逆向经典题目：
+
+//1、
+void print()
+{
+	printf("Hello World!\n");
+	getchar();
+}
+int main(void)
+{
+	int arr[5] = {1,2,3,4,5};
+	
+	arr[6] = (int)print;
+	//ebp+4被修改，即main函数的返回地址被修改，main函数结束以后直接ret
+	//ret则eip被修改为fun的地址。所以即使没有直接调用fun()，但是还是通过其他方式调用了fun()
+	return 0;
+}
+//2、
+int main(void)
+{
+	int i = 0;
+	int arr[5];
+	for(i=0; i<=5; i++){//死循环
+		arr[i] = 0;
+		printf("Hello World");
+	}
+}
+//===============================================================================\
+由于数据类型包含宽度、存储格式、作用域三个要点。而强制类型转换其实就是宽度、存储格式的修改。
+char -> short -> int是宽度的修改
+int -> float 是存储格式的修改
+
+小类型->大类型扩展：
+//movsx指令(signal符号位扩展)：扩展指令
+//mov ax,al	//不可以，类型不匹配
+mov al,0X80
+movsx ax,al	//ax = 0XFF80
+mov al,0X7F
+movsx ax,al	//ax = 0X007F
+
+//movzx(zero零扩展)：扩展指令
+mov al,0XFF
+movzx ax,al	//ax = 0X00FF
+mov al,0X11
+movzx ax,al	//ax = 0X0011
+
+//test:
+int main(int argc, char* argv[])
+{
+	char x = 0XFF;
+	char y = x;
+	char z = y;
+	unsigned char a = 0XFF;
+	unsigned short b = a; 
+	unsigned int c = b;
+
+	return 0;
+}
+
+//11:   int main(int argc, char* argv[])
+//12:   {
+004010C0   push        ebp
+004010C1   mov         ebp,esp
+004010C3   sub         esp,58h
+004010C6   push        ebx
+004010C7   push        esi
+004010C8   push        edi
+004010C9   lea         edi,[ebp-58h]
+004010CC   mov         ecx,16h
+004010D1   mov         eax,0CCCCCCCCh
+004010D6   rep stos    dword ptr [edi]
+//13:       char x = 0XFF;
+004010D8   mov         byte ptr [ebp-4],0FFh
+//14:       short y = x;
+004010DC   movsx       ax,byte ptr [ebp-4]		//movsx
+004010E1   mov         word ptr [ebp-8],ax
+//15:       int z = y;
+004010E5   movsx       ecx,word ptr [ebp-8]		//movsx
+004010E9   mov         dword ptr [ebp-0Ch],ecx
+//16:       unsigned char a = 0XFF;
+004010E8   mov         byte ptr [ebp-10h],0FFh
+//17:       unsigned short b = a;
+004010EC   movzx       dx,byte ptr [ebp-10h]	//movzx
+004010F1   mov         word ptr [ebp-14h],dx
+//18:       unsigned int c = b;
+004010F5   mov         eax,dword ptr [ebp-14h]
+004010F8   and         eax,0FFFFh
+004010FD   mov         dword ptr [ebp-18h],eax
+//19:
+//20:       return 0;
+00401100   xor         eax,eax
+//21:   }
+00401102   pop         edi
+00401103   pop         esi
+00401104   pop         ebx
+00401105   mov         esp,ebp
+00401107   pop         ebp
+00401108   ret
+
+大类型->小类型：
+只需截取低位即可，不需要扩展。
+//============================================================================
+在C语言中：
+当表达式中存在大类型与小类型运算时，小类型会被自动扩展为大类型
+当表达式中存在无符号数和有符号数时，有符号数会被当作无符号数运算没结果也被当作无符号数
+但是我们知道，在汇编中无符号有符号是程序员赋予其意义的，而不是计算机。
+这就是高级语言赋予的特殊意义，特定解释放大，关于这点或许需要去记忆与区分。
+
+表达式与语句的区别：不在于有无分号结尾，而在于是否对内存/CPU(包含寄存器)有影响
+
+sete/setne指令：sete/setne reg8/reg16/reg32/mem8/mem16/mem32
+与影响标志寄存器的指令同时使用，判断zf标志位；
+对于cmp指令来说：sete即两操作数相同设置为1，setne即两操作数不同设置为1
+使用如：int x=2,y=1;int z = x == y;
+
+int main(int argc, char* argv[])
+{
+	int x = 10;
+	int y=20;
+	printf("%d,%d\n",x,y);
+	//两个值交换
+	__asm{
+		push dword ptr ss:[ebp-4]
+		push dword ptr ss:[ebp-8]
+		pop dword ptr ss:[ebp-4]
+		pop dword ptr ss:[ebp-8]
+	}
+	printf("%d,%d\n",x,y);
+	return 0;
+}

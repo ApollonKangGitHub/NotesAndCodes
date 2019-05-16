@@ -1,0 +1,55 @@
+Microsoft (R) Macro Assembler Version 5.00                  4/25/17 20:31:16
+                                                             Page     1-1
+
+
+       1				assume cs:codeseg 
+       2				 
+       3 0000				codeseg segment 
+       4				 
+       5 0000  8C C8				mov ax,cs	;直接获取代码段寄存器 
+       6 0002  8E D8				mov ds,ax 
+       7 0004  B8 0020				mov ax,0020H 
+       8					 
+       9 0007  8E C0				mov es,ax 
+      10 0009  BB 0000				mov bx,0 
+      11 000C  B9 0015				mov cx,15H		;总共复制的字节数，loop之前21个字节 
+      12					 
+      13 000F					s: 
+      14 000F  8A 07				mov al,[bx] 
+      15 0011  26: 88 07			mov es:[bx],al 
+      16 0014  43				inc bx 
+      17 0015  E2 F8				loop s 
+      18					 
+      19 0017  B8 4C00				mov ax,4C00H 
+      20 001A  CD 21				int 21H 
+      21				 
+      22 001C				codeseg ends 
+      23				 
+      24				end 
+Microsoft (R) Macro Assembler Version 5.00                  4/25/17 20:31:16
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+CODESEG  . . . . . . . . . . . .  	001C	PARA	NONE	
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+S  . . . . . . . . . . . . . . .  	L NEAR	000F	CODESEG
+
+@FILENAME  . . . . . . . . . . .  	TEXT  CopyCmd		
+
+
+     24 Source  Lines
+     24 Total   Lines
+      4 Symbols
+
+  50580 + 465964 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

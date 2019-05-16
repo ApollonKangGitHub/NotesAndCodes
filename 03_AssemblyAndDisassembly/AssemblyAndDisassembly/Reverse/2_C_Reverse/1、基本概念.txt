@@ -1,0 +1,95 @@
+//空函数与裸函数和局部变量，函数传参与调用约定
+在VC++6.0中：
+Ctrl + F7	//编译
+F7			//链接
+Ctrl + F5	//运行
+F5			//运行调试
+			//在运行调试阶段Alt + 5打开寄存器窗口，Alt + 6打开内存窗口
+			//Alt+8转至汇编，Alt+7入口地址窗口，以及Alt+2\Alt+3\Alt+4快捷键
+			//此时寄存器与内存中的值是断点钱已经执行完毕的值
+F9			//设置(取消设置)断点
+Shift + F5	//结束断点处暂停，继续运行
+F11			//单步步入
+F10			//单步步过
+//===============================================================
+裸函数：编译器不会生成函数结构
+void __declspec(naked) fun_name(void)
+{
+	
+}
+裸函数无法直接正确调用，至少需要写一个ret
+void __declspec(naked) fun_name(void)
+{
+	//在C中写汇编
+	__asm{
+		ret
+	}
+}
+int __declspec(naked)plus(int x,int y)
+{
+	_asm{
+		//保存栈底
+		push ebp
+		//提升堆栈
+		mov ebp,esp
+		sub esp,0X40
+		//保留现场
+		push ebx
+		push esi
+		push edi
+		
+		//填充缓冲区
+		mov eax,0XCCCCCCCC
+		mov ecx,0X10
+		lea edi,dword ptr ds:[ebp-0X40]
+		rep stosd	//默认是加
+		
+		mov eax,dword ptr ss:[ebp+0X8]
+		add eax,dword ptr ss:[ebp+0XC]
+		
+		//恢复现场
+		pop edi
+		pop esi
+		pop ebx
+		
+		//降低堆栈
+		mov esp,ebp
+		pop ebp
+		ret
+	}
+}
+//=========================================================================================
+//VC++6.0函数调用约定，写在C函数名之前
+__cdecl		从右至左入栈						调用者做堆栈平衡:外平栈(ret ... add esp,x)
+__stdcall	从右至左入栈						被调者做堆栈平衡:内平栈(ret x)
+__fastcall	ECX/EDX接收最左边两个，其它参数同上	被调者做堆栈平衡:内平栈(ret x)
+
+void __fastcall func(int x,int y)
+{
+	//由于ecx/edx属于寄存器传参，效率较快
+	//而用 __fastcall修饰的目的就是为了快，那一般情况就最多两个参数
+	//否则多余的参数要入栈， __fastcall的效率就不那么明显了
+}
+//在普通C函数编写使，没有声明，默认为__cdecl
+
+//修改程序入口：
+project右键->setting->link->Category:Output->Entry-point Symbol中写入口函数名
+或者Alt+F7->link->Category:Output->Entry-point Symbol中写入口函数名
+
+//=========================================================================================
+数据类型三要素：
+数据宽度、数据存储格式、作用域
+
+movsx宽度扩展指令：
+movsx eax,byte ptr ss:[ebp+8]	//将8位数扩展为32位
+
+浮点数存储：
+float：1个符号位 + 8个指数位 + 23个尾数位=32位
+double：1个符号位 + 11指数位 + 52个尾数位=64位
+
+将浮点数化为二进制10110111.0111011的形式，然后转换为1.xxx * 2^n的形式：
+即小数点移动，指数增加。左移一位指数加1，右移一位指数减1。
+
+符号位：正数为0，负数为1
+指数：
+尾数为：xxx部分，不足23位的补0，超过23位则舍去
