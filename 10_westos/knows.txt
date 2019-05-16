@@ -1,0 +1,11 @@
+framebuffer详解的博客:
+http://www.tuicool.com/articles/j2mEFz
+
+http://www.oschina.net/question/565065_113477?fromerr=3kqP3VZs
+
+Linux常用命令大全:
+http://www.php100.com/html/webkaifa/Linux/2009/1106/3485.html	
+
+http://www.cnblogs.com/JCSU/articles/1306451.html	文件操作
+http://os.51cto.com/linuxman/	man手册的级别		
+http://blog.csdn.net/kevinx_xu/article/details/8501231    Linux下dsp音频处理

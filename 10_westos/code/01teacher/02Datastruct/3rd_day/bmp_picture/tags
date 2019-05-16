@@ -1,0 +1,53 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+BITMAPFILEHEADER	./bmp.h	/^}BITMAPFILEHEADER;$/;"	t	typeref:struct:tagBITMAPFILEHEADER
+BITMAPINFO	./bmp.h	/^}BITMAPINFO;$/;"	t	typeref:struct:tagBITMAPINFO
+BITMAPINFOHEADER	./bmp.h	/^}BITMAPINFOHEADER;$/;"	t	typeref:struct:tagBITMAPINFOHEADER
+BMP_H_INCLUDED	./bmp.h	2;"	d
+BYTE	./bmp.h	/^typedef unsigned char BYTE;$/;"	t
+DWORD	./bmp.h	/^typedef unsigned long DWORD;$/;"	t
+LONG	./bmp.h	/^typedef long LONG;$/;"	t
+RGBQUAD	./bmp.h	/^}RGBQUAD;$/;"	t	typeref:struct:tagRGBQUAD
+WORD	./bmp.h	/^typedef unsigned short WORD;$/;"	t
+bfOffBits	./bmp.h	/^    DWORD bfOffBits;$/;"	m	struct:tagBITMAPFILEHEADER
+bfReserved1	./bmp.h	/^    WORD bfReserved1;$/;"	m	struct:tagBITMAPFILEHEADER
+bfReserved2	./bmp.h	/^    WORD bfReserved2;$/;"	m	struct:tagBITMAPFILEHEADER
+bfSize	./bmp.h	/^    DWORD bfSize;$/;"	m	struct:tagBITMAPFILEHEADER
+bfType	./bmp.h	/^    WORD bfType;$/;"	m	struct:tagBITMAPFILEHEADER
+biBitCount	./bmp.h	/^    WORD biBitCount;$/;"	m	struct:tagBITMAPINFOHEADER
+biClrImportant	./bmp.h	/^    DWORD biClrImportant;$/;"	m	struct:tagBITMAPINFOHEADER
+biClrUsed	./bmp.h	/^    DWORD biClrUsed;$/;"	m	struct:tagBITMAPINFOHEADER
+biCompression	./bmp.h	/^    DWORD biCompression;$/;"	m	struct:tagBITMAPINFOHEADER
+biHeight	./bmp.h	/^    LONG biHeight;$/;"	m	struct:tagBITMAPINFOHEADER
+biPlanes	./bmp.h	/^    WORD biPlanes;$/;"	m	struct:tagBITMAPINFOHEADER
+biSize	./bmp.h	/^    DWORD biSize;$/;"	m	struct:tagBITMAPINFOHEADER
+biSizeImage	./bmp.h	/^    DWORD biSizeImage;$/;"	m	struct:tagBITMAPINFOHEADER
+biWidth	./bmp.h	/^    LONG biWidth;$/;"	m	struct:tagBITMAPINFOHEADER
+biXPelsPerMeter	./bmp.h	/^    LONG biXPelsPerMeter;$/;"	m	struct:tagBITMAPINFOHEADER
+biYPelsPerMeter	./bmp.h	/^    LONG biYPelsPerMeter;$/;"	m	struct:tagBITMAPINFOHEADER
+bmiColors	./bmp.h	/^RGBQUAD bmiColors[1];$/;"	m	struct:tagBITMAPINFO
+bmiHeader	./bmp.h	/^BITMAPINFOHEADER bmiHeader;$/;"	m	struct:tagBITMAPINFO
+checkPath	./function.c	/^int checkPath(char *path)$/;"	f
+main	./main.c	/^int main()$/;"	f
+printBmpFileHeader	./function.c	/^int printBmpFileHeader(char *path)$/;"	f
+printBmpInfoHeader	./function.c	/^int printBmpInfoHeader(char *path)$/;"	f
+printMenu	./function.c	/^int printMenu()$/;"	f
+readBmpFileHeader	./function.c	/^int readBmpFileHeader(char *path,BITMAPFILEHEADER *bmfh)$/;"	f
+readBmpInfoHeader	./function.c	/^int readBmpInfoHeader(char *path,BITMAPINFOHEADER *bmih)$/;"	f
+readBmpPixelData	./function.c	/^int readBmpPixelData(char *path,BYTE *imgData)$/;"	f
+rgbBlue	./bmp.h	/^    BYTE rgbBlue;$/;"	m	struct:tagRGBQUAD
+rgbGreen	./bmp.h	/^    BYTE rgbGreen;$/;"	m	struct:tagRGBQUAD
+rgbRed	./bmp.h	/^    BYTE rgbRed;$/;"	m	struct:tagRGBQUAD
+rgbReserved	./bmp.h	/^    BYTE rgbReserved;$/;"	m	struct:tagRGBQUAD
+saveBmp	./function.c	/^int saveBmp(char *Newpath,char *Oldpath)$/;"	f
+saveBmpClrPalette	./function.c	/^int saveBmpClrPalette(FILE *fp)$/;"	f
+saveBmpFileHeader	./function.c	/^int saveBmpFileHeader(FILE *fp,BITMAPFILEHEADER *bmfh)$/;"	f
+saveBmpInfoHeader	./function.c	/^int saveBmpInfoHeader(FILE *fp,BITMAPINFOHEADER *bmih)$/;"	f
+tagBITMAPFILEHEADER	./bmp.h	/^typedef struct tagBITMAPFILEHEADER$/;"	s
+tagBITMAPINFO	./bmp.h	/^typedef struct tagBITMAPINFO$/;"	s
+tagBITMAPINFOHEADER	./bmp.h	/^typedef struct tagBITMAPINFOHEADER$/;"	s
+tagRGBQUAD	./bmp.h	/^typedef struct tagRGBQUAD$/;"	s

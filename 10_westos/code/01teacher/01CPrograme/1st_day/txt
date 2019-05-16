@@ -1,0 +1,16 @@
+
+
+mkdir /shared
+
+server: 
+	vim /etc/exports
+		/shared		*(ro,sync)		
+	service nfs restart  
+client:
+	showmount -e 172.25.254.123
+	/shared  *
+	mount -t nfs 172.25.254.123:/shared/  /mnt/  
+	cp /mnt/**    /root/ 
+
+
+
