@@ -1,7 +1,0 @@
- line from stream, storing the address of the buffer containing the
-ineptr.  The buffer is null-terminated and includes the  newline  character,  if
-one was found.
-eptr  is  NULL,  then  getline()  will allocate a buffer for storing the line, which
-ould be freed by the user program.  (The value in *n is ignored.)
-ternatively, before cal
-djklfjineptr.  The buffer is null-terminated and includes the  newline  character,if
