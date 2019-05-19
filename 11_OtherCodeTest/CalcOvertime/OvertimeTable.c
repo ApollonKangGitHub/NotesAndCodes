@@ -96,13 +96,19 @@ VOID calc_over_time(IN INT32 fdi,OUT INT32 fdo)
 		printf("\nRead file failure!\n");
 		exit(EXIT_FAILURE);
 	}
-
+	/* 获取文件行数，即该月的天数 */
 	overtimeInfo.overtimeDay = get_format_char_number(pOverTime, '#');
 	
+	/* 判断天数是合理的 */
+	if(!((overtimeInfo.overtimeDay >= 0)
+		&& (overtimeInfo.overtimeDay <= 31))){
+		printf("\nError days is %d!", overtimeInfo.overtimeDay);
+	}
+		
 	for(line = 0; line < overtimeInfo.overtimeDay; line++){
 		memset(dayInfoBuff, 0, DAY_INFO_BUFFER);
 		reset_day_info(&dayInfo);
-		/* 获取一天的打卡信息,格式为：#day,week,start-end<,holiday>，获取结果不包括'#' */
+		/* 获取一天的打卡信息,格式为：#day,week,start-end<,adiust><,holiday>，获取结果不包括'#' */
 		pOverTime = get_day_info_from_overtimeTable(pOverTime, dayInfoBuff);
 
 		/* 获取并解析一天的基本信息:dayIndex、week、start、end、flag */
@@ -114,7 +120,7 @@ VOID calc_over_time(IN INT32 fdi,OUT INT32 fdo)
 		/* 保存一天的信息到一月的加班信息中去 */
 		add_dayInfo_to_overtimeInfo(&overtimeInfo, &dayInfo);
 	}
-	/* 计算一个月的加班时间（包括周末，但不包括节假日加班和调休加班） */
+	/* 计算一个月的加班时间（包括周末，但不包括节假日加班） */
 	calc_month_overtime_all_days(&overtimeInfo);
 	/* 保存加班信息到文件中 */
 	save_overtime_info(&overtimeInfo, fdo);
