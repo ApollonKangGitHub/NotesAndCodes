@@ -218,7 +218,7 @@ VOID save_overtime_info(OVERTIEINFO * overtimeInfo, INT32 fd)
 	INT32 i = 0;
 	FILE * fp = fdopen(fd, "w+");
 
-	fprintf(fp, "\nTotal overtime minutes:%d [hours:%lf], exclude hoilday and adjust day", 
+	fprintf(fp, "\nTotal overtime minutes:%d [hours:%lf], exclude hoilday day", 
 			overtimeInfo->totalMinutes, overtimeInfo->totalHours);
 	fprintf(fp, "\nDetails of each day are shown below:\n");
 
