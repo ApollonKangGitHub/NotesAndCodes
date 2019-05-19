@@ -5,7 +5,7 @@ ${FILENAME}.exe:${FILENAME}.c
 	@gcc -S OvertimeTable.i -o ${FILENAME}.s
 	@gcc -c ${FILENAME}.s -o ${FILENAME}.o
 	@gcc ${FILENAME}.o -o ${FILENAME}.exe
-	@echo "Compiled successfully, please see the ".result" file!"
+	@echo "Compiled successfully, Please implement the .exe file first and last see the ".result" file!"
 	
 .PHONY:clean
 clean:

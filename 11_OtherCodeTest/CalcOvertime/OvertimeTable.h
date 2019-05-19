@@ -1,3 +1,11 @@
+/*
+ * FileName:OvertimeTable.h
+ * Author:Kangruojin
+ * Time:2019年5月19日14:16:37
+ * Version:1.0
+ * Description:基于文件の格式化信息计算加班时长
+ */
+
 #ifndef _OVER_TIME_TABLE_CALC_H_
 #define _OVER_TIME_TABLE_CALC_H_
 
