@@ -340,6 +340,7 @@ VOID calc_day_overtime_info_from_base_info(DAYINFO * dayInfo)
 	else{
 		/* 周末（或节假日加班）workTimes为0，即全为加班时间 */
 		workTimes = 0;
+		dayInfo->reboundTime = 0;
 		/* 注：此时已经确保进卡时间小于出卡时间 */
 		if(dayInfo->startTimeStamp >= NOON_SLEEP_BEGIN_TIME){
 			/* 进卡时间和出卡时间同时在中午休息时间 */
