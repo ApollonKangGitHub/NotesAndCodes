@@ -1,7 +1,7 @@
 #include "OvertimeTable.h"
 
-#define ARRAY_TITLE_LENGTH 			11
-#define ARRAY_WEEKSTRING_LENGTH 	9	
+#define ARRAY_TITLE_LENGTH		11
+#define ARRAY_WEEKSTRING_LENGTH	9	
 
 BOOL gInfoDbgFlag = FALSE;
 BOOL gFunDbgFlag = FALSE;
@@ -386,10 +386,9 @@ CHAR * get_day_info_from_overtimeTable(CHAR * src, CHAR * dst)
 
 	/* 
 	 * 以'#'开始以'\n'结束，从src复制到dst中，不包括'\n'
-     * 比如：#1,3,8:17-18:04@1\n\n#2,4,0:00-0:00@1\n    ==> 第一项为"1,3,8:17-18:04@1\n"
-     * 表示第1天,周三,AM 8:17进卡,PM 18:04出卡, 是节假日
+ 	 * 比如：#1,3,8:17-18:04,1\n#2,4,0:00-0:00@,1,1\n    ==> 第一项为"#1,3,8:17-18:04,1\n"
+ 	 * 表示第1天,周三,AM 8:17进卡,PM 18:04出卡, 是节假日
 	 */
-
 	while((*pMonth != '\0') && (*pMonth++ != '#')){
 		continue;
 	}
