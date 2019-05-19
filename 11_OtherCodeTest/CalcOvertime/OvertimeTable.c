@@ -286,6 +286,11 @@ VOID calc_day_overtime_info_from_base_info(DAYINFO * dayInfo)
 {
 	UINT32 workTimes = 0; 
 	UINT32 sleepTimes = 0;
+	/* 
+	 * 正常工作日同一减去8小时、sleep、rebound三个时间
+     * 但是工作的8小时可能和rebound减去的时间重叠而多减
+	 */
+	UINT32 more = 0;
 
 	OVERTIME_FUNCTION_DBG(FUN_DBG_START_STR);
 	
@@ -360,14 +365,22 @@ VOID calc_day_overtime_info_from_base_info(DAYINFO * dayInfo)
 			dayInfo->sleepTime = SLEEP_TIME_NOON;
 		}
 	}
-	
+	more = (dayInfo->reboundTime > 0) ?
+		   (dayInfo->startTimeStamp - MORNING_BEGIN_TIME) : (0);
+
+	/* 
+	 * 或许多余周内来说，只要早上可弹回或正常，只需要计算下班后
+	 * 18:45之后有没有达到加班有效界限并减去弹回时长即可，但是，
+     * 为了和周末统一处理，所以用以下计算方式
+	 */
 	dayInfo->minutes = dayInfo->endTimeStamp 
 						- ((dayInfo->startTimeStamp <= MORNING_BEGIN_TIME)
 						? MORNING_BEGIN_TIME
 						: dayInfo->startTimeStamp)
 						- dayInfo->sleepTime 
 						- dayInfo->reboundTime
-						- workTimes;
+						- workTimes
+						+ more;
 	
 	dayInfo->hours = (DOUBLE)(dayInfo->minutes) / 60;
 
