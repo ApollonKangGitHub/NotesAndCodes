@@ -136,8 +136,11 @@ VOID calc_month_overtime_all_days(OVERTIEINFO * overtimeInfo)
 	pOver->totalMinutes = 0;
 	pOver->totalHours = 0;
 	while(dayIndex < pOver->overtimeDay){
-		if((!pOver->day[dayIndex].holidayFlag) 
-			&& (!pOver->day[dayIndex].adjustFlag)){
+		/* 
+		 * holiday（节假日加班）有计算当天加班时长，但是不计入总的加班时长
+ 		 * adjust（调休加班）和工作日一样
+		 */
+		if(!pOver->day[dayIndex].holidayFlag){
 			pOver->totalMinutes += pOver->day[dayIndex].minutes;
 		}
 		dayIndex++;
@@ -297,8 +300,8 @@ VOID calc_day_overtime_info_from_base_info(DAYINFO * dayInfo)
 		return;
 	}
 
-	if((dayInfo->adjustFlag)/* 周末但是属于节假日调休,即属于正常上班 */
-		|| (!dayInfo->holidayFlag)  
+	if((dayInfo->adjustFlag)		/* 周末但是属于节假日调休,即属于正常上班 */
+		|| (!dayInfo->holidayFlag) 	/* 非节假日且在周内 */ 
 		&& (dayInfo->week >= weekMonday)
 		&& (dayInfo->week <= weekFriday)){
 		/* 正常工作时间 */
@@ -330,7 +333,7 @@ VOID calc_day_overtime_info_from_base_info(DAYINFO * dayInfo)
 		}
 	}
 	else{
-		/* 周末（或节假日加班）workTimes为0，即全为工作时间 */
+		/* 周末（或节假日加班）workTimes为0，即全为加班时间 */
 		workTimes = 0;
 		/* 注：此时已经确保进卡时间小于出卡时间 */
 		if(dayInfo->startTimeStamp >= NOON_SLEEP_BEGIN_TIME){

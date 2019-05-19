@@ -1,16 +1,16 @@
 
-Total overtime minutes:1986 [hours:33.100000], exclude hoilday and adjust day
+Total overtime minutes:2436 [hours:40.600000], exclude hoilday and adjust day
 Details of each day are shown below:
 
 DayIndex      Week      StartStamp    EndStamp     Holiday   SleepTime     Hours     Minutes     Rebound      adjust   Exception
-   1       Wednesday       497          1084           0        94        0.000000       0             0       0          Normal
-   0           Error         0             0           0         0        0.000000       0             0       0          Normal
-   0           Error         0             0           0         0        0.000000       0             0       0          Normal
-   0           Error         0             0           0         0        0.000000       0             0       0          Normal
-   5          Sunday       552          1249           1         0        0.000000       0             0       1       Exception
-   6          Monday       508          1291           0       135        2.766667     166             0       1          Normal
-   7         Tuesday       516          1285           0       135        2.316667     139            15       1          Normal
-   8       Wednesday       505          1270           0       135        2.416667     145             0       1          Normal
+   1       Wednesday       497          1084           1        90        8.066667     484             0       0          Normal
+   2        Thursday         0             0           0         0        0.000000       0             0       0       Exception
+   3          Friday         0             0           0         0        0.000000       0             0       0       Exception
+   4        Saturday         0             0           0         0        0.000000       0             0       0       Exception
+   5          Sunday       552          1249           0         0        0.000000       0             0       1       Exception
+   6          Monday       508          1291           0       135        2.766667     166             0       0          Normal
+   7         Tuesday       516          1285           0       135        2.316667     139            15       0          Normal
+   8       Wednesday       505          1270           0       135        2.416667     145             0       0          Normal
    9        Thursday       503          1297           0       135        2.866667     172             0       0          Normal
   10          Friday       500          1254           0       135        2.150000     129             0       0          Normal
   11        Saturday       590          1309           0        90       10.483333     629             0       0          Normal
@@ -31,4 +31,7 @@ DayIndex      Week      StartStamp    EndStamp     Holiday   SleepTime     Hours
   26          Sunday         0             0           0         0        0.000000       0             0       0       Exception
   27          Monday         0             0           0         0        0.000000       0             0       0       Exception
   28         Tuesday         0             0           0         0        0.000000       0             0       0       Exception
+  29       Wednesday         0             0           0         0        0.000000       0             0       0       Exception
+  30        Thursday         0             0           0         0        0.000000       0             0       0       Exception
+  31          Friday         0             0           0         0        0.000000       0             0       0       Exception
 
