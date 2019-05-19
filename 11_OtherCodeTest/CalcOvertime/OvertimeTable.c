@@ -216,12 +216,12 @@ VOID save_overtime_info(OVERTIEINFO * overtimeInfo, INT32 fd)
 			overtimeInfo->totalMinutes, overtimeInfo->totalHours);
 	fprintf(fp, "\nDetails of each day are shown below:\n");
 
-	fprintf(fp, "\n%8s%10s%16s%12s%12s%12s%10s%12s%12s%12s%12s", \
+	fprintf(fp, "\n%8s%10s%16s%12s%12s%12s%10s%12s%12s%10s%12s", \
 			title[0], title[1], title[2], title[3], title[4], \
 			title[5], title[6], title[7], title[8],title[9], title[10]);
 
 	for(i = 0; i < overtimeInfo->overtimeDay; i++){
-		fprintf(fp, "\n%4d%16s%10d%14d%12d%10d%16lf%8d%14d%8d%16s",
+		fprintf(fp, "\n%4d%16s%10d%14d%12d%10d%16lf%8d%12d%10d%14s",
 			overtimeInfo->day[i].dayIndex,
 			weekString[overtimeInfo->day[i].week],
 			overtimeInfo->day[i].startTimeStamp,
