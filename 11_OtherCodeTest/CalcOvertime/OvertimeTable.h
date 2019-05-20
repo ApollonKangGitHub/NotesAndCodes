@@ -42,13 +42,17 @@
 
 #define ONE_DAY_BEGIN_TIME				(0)
 #define MORNING_BEGIN_TIME				(8*60+30)
-#define MORNING_REBOUND_TIME_15			(MORNING_BEGIN_TIME + 15)
-#define MORNING_REBOUND_TIME_30			(MORNING_BEGIN_TIME + 30)
+#define MORNING_REBOUND_TIME_15_MIN		(15)
+#define MORNING_REBOUND_TIME_30_MIN		(30)
+#define MORNING_REBOUND_TIME_15			(MORNING_BEGIN_TIME + MORNING_REBOUND_TIME_15_MIN)
+#define MORNING_REBOUND_TIME_30			(MORNING_BEGIN_TIME + MORNING_REBOUND_TIME_30_MIN)
 #define MORNING_REBOUND_TIME			(9*60)		/* 考勤可弹回 */
 #define NOON_SLEEP_BEGIN_TIME			(12*60)
 #define NOON_SLEEP_END_TIME				(13*60+30)	
 #define AFTERNOON_SLEEP_BEGIN_TIME		(18*60)
 #define FATERNOON_SLEEP_END_TIME		(18*60+45)	
+#define FATERNOON_SLEEP_END_TIME_15		(FATERNOON_SLEEP_END_TIME + MORNING_REBOUND_TIME_15_MIN)
+#define FATERNOON_SLEEP_END_TIME_30		(FATERNOON_SLEEP_END_TIME + MORNING_REBOUND_TIME_30_MIN)
 #define OVERTIME_EFFECT_BEGIN_TIME		(20*60+30)
 
 #define SLEEP_TIME_NOON			(NOON_SLEEP_END_TIME - NOON_SLEEP_BEGIN_TIME)
@@ -76,6 +80,7 @@ typedef struct day_time_info{
 	UINT32 minutes;				/* 该天加班分钟数 */
 	DOUBLE hours;				/* 该天小时数 */
 	UINT32 reboundTime;			/* 弹回时长 */
+	BOOL leaveFlag;				/* 迟到不可弹回时的请假（调休）标志 */
 	BOOL holidayFlag;			/* 该天是假日标志 */
 	BOOL adjustFlag;			/* 该天是非周内，但是属于节假日调休加班即正常上班 */
 	BOOL exceptionFlag;			/* 异常标志 */

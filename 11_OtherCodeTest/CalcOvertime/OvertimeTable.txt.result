@@ -1,37 +1,37 @@
 
-Total overtime minutes:2449 [hours:40.816667], exclude hoilday and adjust day
+Total overtime minutes:3565 [hours:59.416667], exclude hoilday day
 Details of each day are shown below:
 
-DayIndex      Week      StartStamp    EndStamp     Holiday   SleepTime     Hours     Minutes     Rebound    adjust   Exception
-   1       Wednesday       497          1084           1        90        8.066667     484           0         0        Normal
-   2        Thursday         0             0           0         0        0.000000       0           0         0     Exception
-   3          Friday         0             0           0         0        0.000000       0           0         0     Exception
-   4        Saturday         0             0           0         0        0.000000       0           0         0     Exception
-   5          Sunday       552          1249           0         0        0.000000       0           0         1     Exception
-   6          Monday       508          1291           0       135        2.766667     166           0         0        Normal
-   7         Tuesday       516          1285           0       135        2.416667     145          15         0        Normal
-   8       Wednesday       505          1270           0       135        2.416667     145           0         0        Normal
-   9        Thursday       503          1297           0       135        2.866667     172           0         0        Normal
-  10          Friday       500          1254           0       135        2.150000     129           0         0        Normal
-  11        Saturday       590          1309           0        90       10.483333     629           0         0        Normal
-  12          Sunday       613          1144           0        90        7.350000     441           0         0        Normal
-  13          Monday       506          1310           0       135        3.083333     185           0         0        Normal
-  14         Tuesday       511          1313           0       135        2.883333     173          15         0        Normal
-  15       Wednesday       503          1252           0       135        2.116667     127           0         0        Normal
-  16        Thursday       516          1277           0       135        2.283333     137          15         0        Normal
-  17          Friday         0             0           0         0        0.000000       0           0         0     Exception
-  18        Saturday         0             0           0         0        0.000000       0           0         0     Exception
-  19          Sunday         0             0           0         0        0.000000       0           0         0     Exception
-  20          Monday         0             0           0         0        0.000000       0           0         0     Exception
-  21         Tuesday         0             0           0         0        0.000000       0           0         0     Exception
-  22       Wednesday         0             0           0         0        0.000000       0           0         0     Exception
-  23        Thursday         0             0           0         0        0.000000       0           0         0     Exception
-  24          Friday         0             0           0         0        0.000000       0           0         0     Exception
-  25        Saturday         0             0           0         0        0.000000       0           0         0     Exception
-  26          Sunday         0             0           0         0        0.000000       0           0         0     Exception
-  27          Monday         0             0           0         0        0.000000       0           0         0     Exception
-  28         Tuesday         0             0           0         0        0.000000       0           0         0     Exception
-  29       Wednesday         0             0           0         0        0.000000       0           0         0     Exception
-  30        Thursday         0             0           0         0        0.000000       0           0         0     Exception
-  31          Friday         0             0           0         0        0.000000       0           0         0     Exception
+DayIndex      Week      StartStamp    EndStamp   SleepTime     Hours     Minutes   Rebound   Holiday    adjust   leaveFlag   Exception
+   1       Wednesday       497          1084        90        8.066667     484         0         1         0         0          Normal
+   2        Thursday         0             0         0        0.000000       0         0         0         0         0          Normal
+   3          Friday         0             0         0        0.000000       0         0         0         0         0          Normal
+   4        Saturday         0             0         0        0.000000       0         0         0         0         0          Normal
+   5          Sunday       510          1249       135        2.066667     124         0         0         1         1          Normal
+   6          Monday       508          1291       135        2.766667     166         0         0         0         0          Normal
+   7         Tuesday       516          1285       135        2.416667     145        15         0         0         0          Normal
+   8       Wednesday       505          1270       135        2.416667     145         0         0         0         0          Normal
+   9        Thursday       503          1297       135        2.866667     172         0         0         0         0          Normal
+  10          Friday       500          1254       135        2.150000     129         0         0         0         0          Normal
+  11        Saturday       590          1309        90       10.483333     629         0         0         0         0          Normal
+  12          Sunday       613          1144        90        7.350000     441         0         0         0         0          Normal
+  13          Monday       506          1310       135        3.083333     185         0         0         0         0          Normal
+  14         Tuesday       511          1313       135        2.883333     173        15         0         0         0          Normal
+  15       Wednesday       503          1252       135        2.116667     127         0         0         0         0          Normal
+  16        Thursday       516          1277       135        2.283333     137        15         0         0         0          Normal
+  17          Friday       519          1185         0        0.000000       0         0         0         0         0          Normal
+  18        Saturday       515          1240        90       10.583333     635         0         0         0         0          Normal
+  19          Sunday       801          1167         9        5.950000     357         0         0         0         0          Normal
+  20          Monday       529          1120         0        0.000000       0         0         0         0         0       Exception
+  21         Tuesday         0             0         0        0.000000       0         0         0         0         0          Normal
+  22       Wednesday         0             0         0        0.000000       0         0         0         0         0          Normal
+  23        Thursday         0             0         0        0.000000       0         0         0         0         0          Normal
+  24          Friday         0             0         0        0.000000       0         0         0         0         0          Normal
+  25        Saturday         0             0         0        0.000000       0         0         0         0         0          Normal
+  26          Sunday         0             0         0        0.000000       0         0         0         0         0          Normal
+  27          Monday         0             0         0        0.000000       0         0         0         0         0          Normal
+  28         Tuesday         0             0         0        0.000000       0         0         0         0         0          Normal
+  29       Wednesday         0             0         0        0.000000       0         0         0         0         0          Normal
+  30        Thursday         0             0         0        0.000000       0         0         0         0         0          Normal
+  31          Friday         0             0         0        0.000000       0         0         0         0         0          Normal
 
