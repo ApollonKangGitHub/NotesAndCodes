@@ -229,7 +229,7 @@ VOID save_overtime_info(OVERTIEINFO * overtimeInfo, INT32 fd)
 			title[0], title[1], title[2], title[3], title[4], title[5], \
 			title[6], title[7], title[8],title[9], title[10], title[11]);
 
-	for(i = 0; i < overtimeInfo->overtimeDay; i++){
+	for(i = 0; i < ONE_MONTH_MAX_DAYS; i++){
 		fprintf(fp, "\n%4d%16s%10d%14d%10d%16lf%8d%10d%10d%10d%10d%16s",
 			overtimeInfo->day[i].dayIndex,
 			weekString[overtimeInfo->day[i].week],
