@@ -22,8 +22,9 @@
 #define TRUE 	(1)
 #define ERROR 	(-1)
 #define OK 		(0)
-#define IN
-#define OUT
+#define IN		/* Input */
+#define OUT		/* Output */
+#define IAO		/* Input And Output */
 
 #define BOOL 	int
 #define UINT32 	unsigned int
@@ -115,17 +116,17 @@ typedef struct over_time_ifo{
 	}\
 }
 
-STATIC CHAR * get_str_elements(CHAR *str, CHAR flag);
-STATIC VOID calc_month_overtime_all_days(OVERTIEINFO * overtimeInfo);
-STATIC UINT8 get_format_char_number(CHAR * src, char format);
-STATIC VOID calc_over_time(IN INT32 fdi, OUT INT32 fdo);
-STATIC VOID reset_day_info(DAYINFO * dayInfo);
-STATIC VOID reset_overtime_Info(OVERTIEINFO * overtimeInfo);
-STATIC VOID get_day_info_from_dayInfoBuffer( CHAR * dayInfoStr, DAYINFO * dayInfo);
-STATIC CHAR * get_day_info_from_overtimeTable(CHAR * src, CHAR * dst);
-STATIC INT32 add_dayInfo_to_overtimeInfo(OVERTIEINFO * overtimeInfo, DAYINFO * dayInfo);
-STATIC VOID save_overtime_info(OVERTIEINFO * overtimeInfo, INT32 fd);
-STATIC VOID calc_day_overtime_info_from_base_info(DAYINFO * dayInfo);
+STATIC CHAR * get_str_elements(IN CHAR *str, IN CHAR flag);
+STATIC VOID calc_month_overtime_all_days(IAO OVERTIEINFO * overtimeInfo);
+STATIC UINT8 get_format_char_number(IN CHAR * src, IN char format);
+STATIC VOID calc_over_time(IN INT32 fdi, IN INT32 fdo);
+STATIC VOID reset_day_info(OUT DAYINFO * dayInfo);
+STATIC VOID reset_overtime_Info(IN OVERTIEINFO * overtimeInfo);
+STATIC VOID get_day_info_from_dayInfoBuffer(IN CHAR * dayInfoStr, OUT DAYINFO * dayInfo);
+STATIC CHAR * get_day_info_from_overtimeTable(IN CHAR * src, OUT CHAR * dst);
+STATIC INT32 add_dayInfo_to_overtimeInfo(OUT OVERTIEINFO * overtimeInfo, IN DAYINFO * dayInfo);
+STATIC VOID save_overtime_info(IN OVERTIEINFO * overtimeInfo,IN INT32 fd);
+STATIC VOID calc_day_overtime_info_from_base_info(IAO DAYINFO * dayInfo);
 
 #endif /* _OVER_TIME_TABLE_CALC_H_ */
 

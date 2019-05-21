@@ -76,7 +76,7 @@ int main(int argc, char * argv[])
 	return 0;
 }
 
-VOID calc_over_time(IN INT32 fdi,OUT INT32 fdo)
+VOID calc_over_time(INT32 fdi,INT32 fdo)
 {
 	CHAR overtimeTable[OVER_TIME_TABLE_BUFFER] = {0};
 	CHAR dayInfoBuff[DAY_INFO_BUFFER] = {0};

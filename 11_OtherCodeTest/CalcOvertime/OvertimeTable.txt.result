@@ -23,8 +23,8 @@ DayIndex      Week      StartStamp    EndStamp   SleepTime     Hours     Minutes
   18        Saturday       515          1240        90       10.583333     635         0         0         0         0          Normal
   19          Sunday       801          1167         9        5.950000     357         0         0         0         0          Normal
   20          Monday       529          1120         0        0.000000       0         0         0         0         0       Exception
-  21         Tuesday         0             0         0        0.000000       0         0         0         0         0          Normal
-  22       Wednesday         0             0         0        0.000000       0         0         0         0         0          Normal
+  21         Tuesday       524           877         0        0.000000       0         0         0         0         0       Exception
+  22       Wednesday       500          1040         0        0.000000       0         0         0         0         0       Exception
   23        Thursday         0             0         0        0.000000       0         0         0         0         0          Normal
   24          Friday         0             0         0        0.000000       0         0         0         0         0          Normal
   25        Saturday         0             0         0        0.000000       0         0         0         0         0          Normal
