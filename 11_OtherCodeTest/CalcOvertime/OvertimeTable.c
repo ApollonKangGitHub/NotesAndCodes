@@ -142,7 +142,7 @@ VOID calc_month_overtime_all_days(OVERTIEINFO * overtimeInfo)
 
 	pOver->totalMinutes = 0;
 	pOver->totalHours = 0;
-	while(dayIndex < pOver->overtimeDay){
+	while(dayIndex < ONE_MONTH_MAX_DAYS){
 		/* 
 		 * holiday（节假日加班）有计算当天加班时长，但是不计入总的加班时长
  		 * adjust（调休加班）和工作日一样
@@ -221,8 +221,8 @@ VOID save_overtime_info(OVERTIEINFO * overtimeInfo, INT32 fd)
 	INT32 i = 0;
 	FILE * fp = fdopen(fd, "w+");
 
-	fprintf(fp, "\nTotal overtime minutes:%d [hours:%lf], exclude hoilday day", 
-			overtimeInfo->totalMinutes, overtimeInfo->totalHours);
+	fprintf(fp, "\nTotal overtime days[%d] Total minutes:%d [hours:%lf], exclude hoilday day", 
+			overtimeInfo->overtimeDay, overtimeInfo->totalMinutes, overtimeInfo->totalHours);
 	fprintf(fp, "\nDetails of each day are shown below:\n");
 
 	fprintf(fp, "\n%8s%10s%16s%12s%12s%10s%12s%10s%10s%10s%12s%12s", \
