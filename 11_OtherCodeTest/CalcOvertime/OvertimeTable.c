@@ -88,14 +88,23 @@ VOID calc_over_time(INT32 fdi,INT32 fdo)
 		
 	CHAR * pOverTime = overtimeTable;
 	CHAR * saveptr = NULL;
+	UINT16 fileSize = 0;
 
+	fileSize = lseek(fdi, 0, SEEK_END);
+	lseek(fdi, 0, SEEK_SET);
+	
+	if(fileSize >= sizeof(overtimeTable)){
+		printf("\nError file size = %d is too big!\n", fileSize);
+		goto over;
+	}
+	
 	reset_overtime_Info(&overtimeInfo);
 	
 	/* 一次性将文件读取到缓冲区 */
-	ret = read(fdi, pOverTime, OVER_TIME_TABLE_BUFFER);
+	ret = read(fdi, pOverTime, fileSize);
 	if(ret < 0){
 		printf("\nRead file failure!\n");
-		exit(EXIT_FAILURE);
+		goto over;
 	}
 	/* 获取文件行数，即该月的天数 */
 	overtimeInfo.overtimeDay = get_format_char_number(pOverTime, '#');
@@ -104,6 +113,7 @@ VOID calc_over_time(INT32 fdi,INT32 fdo)
 	if(!((overtimeInfo.overtimeDay >= 0)
 		&& (overtimeInfo.overtimeDay <= 31))){
 		printf("\nError days is %d!", overtimeInfo.overtimeDay);
+		goto over;
 	}
 		
 	for(line = 0; line < overtimeInfo.overtimeDay; line++){
@@ -130,9 +140,10 @@ VOID calc_over_time(INT32 fdi,INT32 fdo)
 		/* 加班信息显示在屏幕上 */
 		save_overtime_info(&overtimeInfo, 1);
 	}
+
+over:	
 	close(fdi);
 	close(fdo);
-	
 }
 
 VOID calc_month_overtime_all_days(OVERTIEINFO * overtimeInfo)
@@ -155,11 +166,12 @@ VOID calc_month_overtime_all_days(OVERTIEINFO * overtimeInfo)
 	pOver->totalHours = (DOUBLE)(pOver->totalMinutes) / 60;
 }
 
-UINT8 get_format_char_number(CHAR * src, char format)
+UINT8 get_format_char_number(CHAR * src, CHAR format)
 {
 	UINT8 num = 0;
-	while(*src){
-		if(*src++ == '#'){
+	CHAR * pSrc = src;
+	while(*pSrc){
+		if(*pSrc++ == '#'){
 			num++;
 		}
 	}
