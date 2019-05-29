@@ -1,11 +1,11 @@
 
-Total overtime days[31] Total minutes:3509 [hours:58.483333], exclude hoilday day
+Total overtime days[20] Total minutes:4078 [hours:67.966667], exclude hoilday day
 Details of each day are shown below:
 
 DayIndex      Week      StartStamp    EndStamp   SleepTime     Hours     Minutes   Rebound   Holiday    adjust   leaveFlag   Exception
    1       Wednesday       497          1084        94        0.000000       0         0         0         0         0          Normal
-   2        Thursday         0             0         0        0.000000       0         0         0         0         0          Normal
-   3          Friday         0             0         0        0.000000       0         0         0         0         0          Normal
+   2        Thursday         0             0         0        0.000000       0         0         1         0         0          Normal
+   3          Friday         0             0         0        0.000000       0         0         1         0         0          Normal
    4        Saturday         0             0         0        0.000000       0         0         0         0         0          Normal
    5          Sunday       510          1249       135        2.066667     124         0         0         1         1          Normal
    6          Monday       508          1291       135        2.766667     166         0         0         0         0          Normal
@@ -26,12 +26,12 @@ DayIndex      Week      StartStamp    EndStamp   SleepTime     Hours     Minutes
   21         Tuesday       524          1270       135        2.166667     130        15         0         0         0          Normal
   22       Wednesday       515          1250       135        1.833333     110        15         0         0         0          Normal
   23        Thursday       510          1240       135        1.916667     115         0         0         0         0          Normal
-  24          Friday       540          1275       135        2.000000     120        30         0         0         0          Normal
+  24          Friday         0             0         0        0.000000       0         0         0         0         0       Exception
   25        Saturday         0             0         0        0.000000       0         0         0         0         0          Normal
-  26          Sunday         0             0         0        0.000000       0         0         0         0         0          Normal
-  27          Monday         0             0         0        0.000000       0         0         0         0         0          Normal
-  28         Tuesday         0             0         0        0.000000       0         0         0         0         0          Normal
-  29       Wednesday         0             0         0        0.000000       0         0         0         0         0          Normal
-  30        Thursday         0             0         0        0.000000       0         0         0         0         0          Normal
-  31          Friday         0             0         0        0.000000       0         0         0         0         0          Normal
+  26          Sunday       598          1050        90        6.033333     362         0         0         0         0          Normal
+  27          Monday       500          1307       135        3.033333     182         0         0         0         0          Normal
+  28         Tuesday       500          1270       135        2.416667     145         0         0         0         0          Normal
+  29       Wednesday       505          1110       120        0.000000       0         0         0         0         0          Normal
+  30        Thursday         0             0         0        0.000000       0         0         0         0         0       Exception
+  31          Friday         0             0         0        0.000000       0         0         0         0         0       Exception
 

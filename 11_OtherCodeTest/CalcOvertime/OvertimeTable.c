@@ -153,6 +153,7 @@ VOID calc_month_overtime_all_days(OVERTIEINFO * overtimeInfo)
 
 	pOver->totalMinutes = 0;
 	pOver->totalHours = 0;
+	pOver->overtimeDay = 0;
 	while(dayIndex < ONE_MONTH_MAX_DAYS){
 		/* 
 		 * holiday（节假日加班）有计算当天加班时长，但是不计入总的加班时长
@@ -160,6 +161,10 @@ VOID calc_month_overtime_all_days(OVERTIEINFO * overtimeInfo)
 		 */
 		if(!pOver->day[dayIndex].holidayFlag){
 			pOver->totalMinutes += pOver->day[dayIndex].minutes;
+			/* 加班时长不为0，则加班天数加1 */
+			if(pOver->day[dayIndex].minutes > 0){
+				pOver->overtimeDay++;
+			}
 		}
 		dayIndex++;
 	}
@@ -317,11 +322,14 @@ VOID calc_day_overtime_info_from_base_info(DAYINFO * dayInfo)
 	OVERTIME_FUNCTION_DBG(FUN_DBG_START_STR);
 	
 	/* 未打卡或打卡记录还未出，或早上/晚上忘记打卡，
-	 * 或进卡时间大于出卡时间，或出卡时间小于早上上班时间，均为异常状态 */
+	 * 或进卡时间大于出卡时间，或出卡时间小于早上上班时间，均直接返回 */
 	if(!(dayInfo->startTimeStamp && dayInfo->endTimeStamp) 
 		|| (dayInfo->endTimeStamp <= dayInfo->startTimeStamp)
 		|| (dayInfo->endTimeStamp <= ONE_DAY_BEGIN_TIME)){
-		if((!dayInfo->holidayFlag) && dayInfo->startTimeStamp && dayInfo->endTimeStamp){
+		if((!dayInfo->holidayFlag) 
+			&& (!dayInfo->adjustFlag) 
+			&& (dayInfo->week <= weekFriday)){
+			/* 周内且非调休和节假日，但是考勤异常 */
 			dayInfo->exceptionFlag = TRUE;
 		}
 		return;
