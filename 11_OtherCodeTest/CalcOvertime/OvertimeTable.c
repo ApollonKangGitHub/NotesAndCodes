@@ -32,8 +32,8 @@ STATIC CHAR * title[ARRAY_TITLE_LENGTH] = {
 	"Rebound",
 	"Holiday", 
 	"adjust",
-	"leaveFlag",
-	"Exception"
+	"leave",
+	"Status"
 };
 
 STATIC CHAR * weekString[ARRAY_WEEKSTRING_LENGTH] = {
@@ -242,12 +242,12 @@ VOID save_overtime_info(OVERTIEINFO * overtimeInfo, INT32 fd)
 			overtimeInfo->overtimeDay, overtimeInfo->totalMinutes, overtimeInfo->totalHours);
 	fprintf(fp, "\nDetails of each day are shown below:\n");
 
-	fprintf(fp, "\n%8s%10s%16s%12s%12s%10s%12s%10s%10s%10s%12s%12s", \
+	fprintf(fp, "\n%8s%10s%16s%12s%12s%10s%12s%10s%10s%10s%8s%10s", \
 			title[0], title[1], title[2], title[3], title[4], title[5], \
 			title[6], title[7], title[8],title[9], title[10], title[11]);
 
 	for(i = 0; i < ONE_MONTH_MAX_DAYS; i++){
-		fprintf(fp, "\n%4d%16s%10d%14d%10d%16lf%8d%10d%10d%10d%10d%16s",
+		fprintf(fp, "\n%4d%16s%10d%14d%10d%16lf%8d%10d%10d%10d%8d%12s",
 			overtimeInfo->day[i].dayIndex,
 			weekString[overtimeInfo->day[i].week],
 			overtimeInfo->day[i].startTimeStamp,
