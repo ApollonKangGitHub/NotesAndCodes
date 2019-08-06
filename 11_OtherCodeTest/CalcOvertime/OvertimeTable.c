@@ -307,7 +307,7 @@ VOID get_day_info_from_dayInfoBuffer(CHAR * dayInfoStr, DAYINFO * dayInfo)
 		(pMove, NULL, ",", &saveptr, dayInfo->holidayFlag, =, 1);
 
 	/* 获取leaveFlag,'\n'前为获取leaveFlag */
-		DAYINFO_ASSIGNMENT_FROM_BUFFER
+	DAYINFO_ASSIGNMENT_FROM_BUFFER
 			(pMove, NULL, "\n", &saveptr, dayInfo->leaveFlag, =, 1);
 
 	OVERTIME_FUNCTION_DBG(FUN_DBG_END_STR);
@@ -379,7 +379,7 @@ VOID calc_day_overtime_info_from_base_info(DAYINFO * dayInfo)
 		}
 		
 		/* 不能达到加班有效的出卡时间时，AFTERNOON_SLEEP_BEGIN_TIME以后均为休息时间 */
-		dayInfo->sleepTime = (dayInfo->endTimeStamp > OVERTIME_EFFECT_BEGIN_TIME) 
+		dayInfo->sleepTime = (dayInfo->endTimeStamp >= OVERTIME_EFFECT_BEGIN_TIME) 
 			? (SLEEP_TIME_TWICE)		/* 能够达到加班有效的出卡时间 */
 			: (SLEEP_TIME_NOON + dayInfo->endTimeStamp - AFTERNOON_SLEEP_BEGIN_TIME);
 
