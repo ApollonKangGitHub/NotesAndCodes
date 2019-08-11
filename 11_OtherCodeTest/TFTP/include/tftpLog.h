@@ -37,6 +37,14 @@ typedef enum tftpDbgSwitch_e
 	tftp_dbgSwitch_max		/* last, Please */
 }tftpDbgSwitch_t;
 	
+/* debug开关 */
+typedef enum tftpDebugControl_e
+{
+	tftp_debugControl_off = 0,
+	tftp_debugControl_on,
+	tftp_debugControl_max
+}tftpDebugControl_t;	
+	
 /******************************************************************************
  * printf()的颜色格式:\033[{attr1};{attr2};...{attrn}m
  * 以\033即Esc的ASCII开始，跟随n个属性，以m结尾
@@ -48,35 +56,31 @@ typedef enum tftpDbgSwitch_e
  * 30	31	32	33	34	35	36	37
  * 40	41	42	43	44	45	46	47
  * ****************************************************************************/
-#define __COLOR_NORMAL_		"\033[0m"
+#define __COLOR_NORMAL_			"\033[0m"
 
-#define __COLOR_RED_		"\033[1;31m"
-#define __COLOR_GREEN_		"\033[1;32m"
-#define __COLOR_YELLOW_		"\033[1;33m"
-#define __COLOR_BLUE_		"\033[1;34m"
-#define __COLOR_PURPLE_		"\033[1;35m"
-#define __COLOR_INDIGO_		"\033[1;36m"
+#define __COLOR_RED_			"\033[1;31m"
+#define __COLOR_GREEN_			"\033[1;32m"
+#define __COLOR_YELLOW_			"\033[1;33m"
+#define __COLOR_BLUE_			"\033[1;34m"
+#define __COLOR_PURPLE_			"\033[1;35m"
+#define __COLOR_INDIGO_			"\033[1;36m"
 
 /* Log信息前缀 */
-#define __TFTP_LOG_DBG_		"%%%% TFTP-DEBUG :"
-#define __TFTP_LOG_NOTE_	"%%%% TFTP-NOTE  :"
-#define __TFTP_LOG_WARN_	"%%%% TFTP-WARN  :"
-#define __TFTP_LOG_ERR_		"%%%% TFTP-ERROR :"
-#define __TFTP_LOG_NOR_		"%%%% TFTP-NORMAL:"
+#define __TFTP_LOG_DBG_			"%%%% TFTP-DEBUG :"
+#define __TFTP_LOG_NOTE_		"%%%% TFTP-NOTE  :"
+#define __TFTP_LOG_WARN_		"%%%% TFTP-WARN  :"
+#define __TFTP_LOG_ERR_			"%%%% TFTP-ERROR :"
+#define __TFTP_LOG_NOR_			"%%%% TFTP-NORMAL:"
 
 #define __TFTP_LOF_FILE_PATH_ 	"./logFile/tftp.log"
 
 /* 标准文件定义 */
-#define __TFTP_STDIN_ (stdin)
-#define __TFTP_STDOUT_ (stdout)
-#define __TFTP_STDERR_ (stderr)
-
-/* debug开关 */
-#define __TFTP_DEBUG_ON_	(TRUE)
-#define __TFTP_DEBUG_OFF_	(FALSE)
+#define __TFTP_STDIN_ 			(stdin)
+#define __TFTP_STDOUT_ 			(stdout)
+#define __TFTP_STDERR_ 			(stderr)
 
 /* print信息格式化字符串最大长度 */
-#define __TFTP_FORMAT_BUF_MAX_ (1024)
+#define __TFTP_FORMAT_BUF_MAX_ 	(1024)
 
 /* 参数格式化，函数调用 */
 #define __TFTP_LOGLEVEL_PRINT(col, lev, rec, fmt, ...) \
@@ -159,5 +163,10 @@ EXTERN INT32 tftp_log_level_print
 );
 
 EXTERN INT32 tftp_log_init(VOID);
+EXTERN VOID tftp_log_debug_control
+(
+	tftpDbgSwitch_t dbgSw,
+	tftpDebugControl_t openFlg
+);
 
 #endif /* TFTP_LOG_H__ */

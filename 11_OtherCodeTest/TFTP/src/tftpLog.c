@@ -9,7 +9,7 @@
 UINT8 gDbgSwitchFlg[TFTP_DBG_SWITCH_NUMBER_MAX];
 
 /* tm_wday, Day of the week (0-6, Sunday = 0) */
-LOCAL CHAR * WeekStr[] = {
+LOCAL CHAR * gWeekStr[] = {
 	"Sunday",
 	"Monday",
 	"Tuesday",
@@ -53,14 +53,14 @@ LOCAL CHAR * tftp_log_time_get(CHAR * date)
     (VOID)localtime_r (&timeStamp, &tmStruct);	/* 时间戳转换为时间结构 */
 
 	/* 1970-01-01 00:00:00 +0000 (UTC). */
-	sprintf(date, "%04d-%02d-%02d %02d:%02d:%02d(UTC)[%s]",
+	tftp_sprint(date, "%04d-%02d-%02d %02d:%02d:%02d(UTC)[%s]",
 		tmStruct.tm_year + 1970, 
 		tmStruct.tm_mon + 1, 
 		tmStruct.tm_mday,
 		tmStruct.tm_hour,
 		tmStruct.tm_min,
 		tmStruct.tm_sec,		
-		WeekStr[tmStruct.tm_wday]);
+		gWeekStr[tmStruct.tm_wday]);
 
 	return date;
 }
@@ -144,6 +144,22 @@ LOCAL INT32 tftp_log_debug_switch_init(VOID)
 	for(;i < TFTP_DBG_SWITCH_NUMBER_MAX; i++){
 		gDbgSwitchFlg[i] &= 0;
 	}
+}
+
+EXTERN VOID tftp_log_debug_control
+(
+	tftpDbgSwitch_t dbgSw,
+	tftpDebugControl_t openFlg
+)
+{
+	if(tftp_debugControl_on == openFlg){
+		__SET_BIT(gDbgSwitchFlg, dbgSw, TRUE);
+	}
+	else if(tftp_debugControl_off == openFlg){
+		__SET_BIT(gDbgSwitchFlg, dbgSw, FALSE);
+	}
+
+	return;
 }
 
 EXTERN INT32 tftp_log_init(VOID)

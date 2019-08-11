@@ -13,5 +13,7 @@ typedef enum tftpErroCode_e
 	tftp_ErrCode_NoSuchUser		= 7,	/* No such user. */
 	tftp_ErrCode_Invalid		= 8		/* last invalid error code, please. */
 }tftpErrCode_t;
+	
+#define __TFTP_FILE_EOF_					(EOF)
 
 #endif /* __TFTP_SERVER_H__ */

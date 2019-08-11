@@ -4,12 +4,13 @@ LD := gcc
 INCLUDE = -I ./include/
 
 CFLAGS = $(INCLUDE) 
+LDFLAGS = -lpthread
 
 OBJS = ./tftpMain.o
 #OBJS += ./src/tftpServer.o
 #OBJS += ./src/tftpClient.o
 OBJS += ./src/tftpLog.o
-#OBJS += ./src/tftpShell.o
+OBJS += ./src/tftpShell.o
 #OBJS += ./src/tftpPack.o
 
 DEP_FILES := $(patsubst %.o,%.d,$(OBJS))
@@ -26,7 +27,7 @@ $(TARGETP_ROJECT):$(OBJS)
 	@echo "DEP_FILES = $(DEP_FILES)" && \
 	echo "OBJS = $(OBJS)" && \
 	echo " commpile project $(TARGETP_ROJECT) is running..." && \
-	$(LD) $(OBJS) -o $(TARDIR) && \
+	$(LD) $(OBJS) $(LDFLAGS) -o $(TARDIR) && \
 	echo "link all files to target file $(TARGETP_ROJECT) succeed!" || \
 	echo "link all files to target file $(TARGETP_ROJECT) failure!"
 	

@@ -1,14 +1,17 @@
 #include <tftpLog.h>
 #include <tftpType.h>
+#include <tftpShell.h>
 #include <stdio.h>
 
 INT32 main(void)
 {
 	tftp_log_init();
+	tftp_shell_init();
 	
-	__SET_BIT(gDbgSwitchFlg, tftp_dbgSwitch_task, __TFTP_DEBUG_ON_);
-	__SET_BIT(gDbgSwitchFlg, tftp_dbgSwitch_Server, __TFTP_DEBUG_OFF_);
+	tftp_log_debug_control(tftp_dbgSwitch_task, tftp_debugControl_on);
+	tftp_log_debug_control(tftp_dbgSwitch_Server, tftp_debugControl_off);
 
+#if 0
 	TFTP_LOGNOR("Log File Start");
 
 	TFTP_LOGNOR("Hello world!%d,%d,%d,%d", 1, 2, 3, 4);
@@ -19,5 +22,9 @@ INT32 main(void)
 	TFTP_LOGERR("Hello world!%d,%d,%d,%d", 111111, 222222, 333333, 444444);
 
 	TFTP_LOGNOR("Log File End\r\n");
+#endif
+	while(TRUE){
+
+	}
 	return 0;
 }
