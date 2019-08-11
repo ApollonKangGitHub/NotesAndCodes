@@ -149,15 +149,10 @@ LOCAL INT32 tftp_log_debug_switch_init(VOID)
 EXTERN VOID tftp_log_debug_control
 (
 	tftpDbgSwitch_t dbgSw,
-	tftpDebugControl_t openFlg
+	BOOL openFlg
 )
 {
-	if(tftp_debugControl_on == openFlg){
-		__SET_BIT(gDbgSwitchFlg, dbgSw, TRUE);
-	}
-	else if(tftp_debugControl_off == openFlg){
-		__SET_BIT(gDbgSwitchFlg, dbgSw, FALSE);
-	}
+	__SET_BIT(gDbgSwitchFlg, dbgSw, openFlg);
 
 	return;
 }

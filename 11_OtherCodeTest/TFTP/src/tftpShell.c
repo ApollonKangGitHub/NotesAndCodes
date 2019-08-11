@@ -74,11 +74,11 @@ VOID tftp_shell_deal_input(CONST CHAR * input)
 	
 	if (0 == strcmp(input, "debug on")){
 		tftp_print("\ndebug switch menu is on!");
-		tftp_log_debug_control(tftp_dbgSwitch_Shell, tftp_debugControl_on);
+		tftp_log_debug_control(tftp_dbgSwitch_Shell, __TFTP_DBG_ON_);
 	}
 	else if (0 == strcmp(input, "debug off")){
 		tftp_print("\ndebug switch menu is off!");
-		tftp_log_debug_control(tftp_dbgSwitch_Shell, tftp_debugControl_off);
+		tftp_log_debug_control(tftp_dbgSwitch_Shell, __TFTP_DBG_OFF_);
 	}
 	else if (0 == strcmp(input, "exit"))
 	{

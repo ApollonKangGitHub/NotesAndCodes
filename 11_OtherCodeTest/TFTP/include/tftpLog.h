@@ -37,14 +37,6 @@ typedef enum tftpDbgSwitch_e
 	tftp_dbgSwitch_max		/* last, Please */
 }tftpDbgSwitch_t;
 	
-/* debug开关 */
-typedef enum tftpDebugControl_e
-{
-	tftp_debugControl_off = 0,
-	tftp_debugControl_on,
-	tftp_debugControl_max
-}tftpDebugControl_t;	
-	
 /******************************************************************************
  * printf()的颜色格式:\033[{attr1};{attr2};...{attrn}m
  * 以\033即Esc的ASCII开始，跟随n个属性，以m结尾
@@ -71,6 +63,9 @@ typedef enum tftpDebugControl_e
 #define __TFTP_LOG_WARN_		"%%%% TFTP-WARN  :"
 #define __TFTP_LOG_ERR_			"%%%% TFTP-ERROR :"
 #define __TFTP_LOG_NOR_			"%%%% TFTP-NORMAL:"
+
+#define __TFTP_DBG_ON_			(TRUE)
+#define __TFTP_DBG_OFF_			(FALSE)
 
 #define __TFTP_LOF_FILE_PATH_ 	"./logFile/tftp.log"
 
@@ -166,7 +161,7 @@ EXTERN INT32 tftp_log_init(VOID);
 EXTERN VOID tftp_log_debug_control
 (
 	tftpDbgSwitch_t dbgSw,
-	tftpDebugControl_t openFlg
+	BOOL openFlg
 );
 
 #endif /* TFTP_LOG_H__ */

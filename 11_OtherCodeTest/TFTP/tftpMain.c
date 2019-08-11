@@ -8,8 +8,8 @@ INT32 main(void)
 	tftp_log_init();
 	tftp_shell_init();
 	
-	tftp_log_debug_control(tftp_dbgSwitch_task, tftp_debugControl_on);
-	tftp_log_debug_control(tftp_dbgSwitch_Server, tftp_debugControl_off);
+	tftp_log_debug_control(tftp_dbgSwitch_task, __TFTP_DBG_ON_);
+	tftp_log_debug_control(tftp_dbgSwitch_Server, __TFTP_DBG_OFF_);
 
 #if 0
 	TFTP_LOGNOR("Log File Start");
