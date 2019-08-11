@@ -4,30 +4,70 @@
 #include <string.h>
 #include <stdarg.h>
 #include <stdlib.h>
+#include <time.h>
 
 UINT8 gDbgSwitchFlg[TFTP_DBG_SWITCH_NUMBER_MAX];
 
+/* tm_wday, Day of the week (0-6, Sunday = 0) */
+LOCAL CHAR * WeekStr[] = {
+	"Sunday",
+	"Monday",
+	"Tuesday",
+	"Wednesday",
+	"Thursday",
+	"Friday",
+	"Saturday"
+};
+	
 LOCAL FILE * gLogFile = NULL;
 LOCAL FILE * gLogShell = (FILE *)(NULL);
 
-#define TFTP_LOGLEVEL_PRINT_TO_FILE(file, flag, fmt) \
-do { \
-	va_list arg;\
-	INT32 ret = tftp_ret_Ok; \
-	va_start (arg, format);\
-	if (flag) { \
-    	ret |= tftp_vfprint (file, format, arg);\
-		if (ret < 0) { \
-			tftp_print ("\r\nTFTP-LOG:log to %s return is error(%d)", \
-				(file == gLogFile) ? "logFile" : "shell", ret); \
-			return tftp_ret_Error; \
-		} \
-	} \
-	va_end (arg);\
-}while(0)
-
-INT32 tftp_log_level_print
+LOCAL INT32 tftp_log_level_print_format
 (
+	FILE * file, 
+	BOOL flag, 
+	CONST CHAR * format, 
+	va_list argv
+) 
+{
+	INT32 ret = tftp_ret_Ok; 
+
+	if (flag) { 
+    	ret |= tftp_vfprint (file, format, argv);
+		if (ret < 0) { 
+			tftp_print ("\r\nTFTP-LOG:log to %s return is error(%d)", 
+				(file == gLogFile) ? "logFile" : "shell", ret); 
+			return tftp_ret_Error; 
+		} 
+	} 
+
+	return ret;
+}
+
+LOCAL CHAR * tftp_log_time_get(CHAR * date)
+{
+    time_t timeStamp;
+    struct tm tmStruct;
+	
+    (VOID)time (&timeStamp);					/* 获取时间戳 */
+    (VOID)localtime_r (&timeStamp, &tmStruct);	/* 时间戳转换为时间结构 */
+
+	/* 1970-01-01 00:00:00 +0000 (UTC). */
+	sprintf(date, "%04d-%02d-%02d %02d:%02d:%02d(UTC)[%s]",
+		tmStruct.tm_year + 1970, 
+		tmStruct.tm_mon + 1, 
+		tmStruct.tm_mday,
+		tmStruct.tm_hour,
+		tmStruct.tm_min,
+		tmStruct.tm_sec,		
+		WeekStr[tmStruct.tm_wday]);
+
+	return date;
+}
+
+EXTERN INT32 tftp_log_level_print
+(
+	IN CHAR * colorStr,
 	IN tftpRecordFlag_t recordFlag,
 	IN CHAR * format,
 	IN ...
@@ -36,8 +76,22 @@ INT32 tftp_log_level_print
 	INT32 ret;
 	BOOL fileFlg = FALSE;
 	BOOL shellFlg = FALSE;
-	va_list pAargv;
-	INT32 val1, val2, val3, val4;
+	va_list argList;
+
+	CHAR * pStart = colorStr;
+	CHAR * pFormat = format;
+	CHAR * pEnd = __COLOR_NORMAL_;
+	CHAR pDateTime[64] = {0};
+	CHAR pFormatAll[__TFTP_FORMAT_BUF_MAX_] = {'\r', '\n', '\0'};
+
+	/* 获取当前时间 */
+	(VOID)tftp_log_time_get(pDateTime);
+
+	/* 格式化 */
+	(VOID)strncat(pFormatAll, pStart, strlen(pStart));			/* 格式化输出颜色指定 */
+	(VOID)strncat(pFormatAll, pDateTime, strlen(pDateTime));	/* 格式化输出日期时间获取 */
+	(VOID)strncat(pFormatAll, pFormat, strlen(pFormat));		/* 格式化输出level + 原始format */
+	(VOID)strncat(pFormatAll, pEnd, strlen(pEnd));				/* 格式化输出颜色reset */
 	
 	switch (recordFlag) {
 		case tftp_recordPos_toLogFile:
@@ -54,8 +108,15 @@ INT32 tftp_log_level_print
 			break;
 	}
 
-	TFTP_LOGLEVEL_PRINT_TO_FILE(gLogFile, fileFlg, format);
-	TFTP_LOGLEVEL_PRINT_TO_FILE(gLogShell, shellFlg, format);
+	/* 打印到文件 */
+	va_start (argList, format);
+	(VOID)tftp_log_level_print_format(gLogFile, fileFlg, pFormatAll, argList);
+	va_end (argList);
+
+	/* 打印到shell */
+	va_start (argList, format);
+	(VOID)tftp_log_level_print_format(gLogShell, shellFlg, pFormatAll, argList);
+	va_end (argList);
 	
    	return tftp_ret_Ok;
 }
@@ -96,3 +157,5 @@ EXTERN INT32 tftp_log_init(VOID)
 	/* 初始化debug打印开关 */
 	tftp_log_debug_switch_init();
 }
+
+

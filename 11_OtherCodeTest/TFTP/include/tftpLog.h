@@ -75,10 +75,13 @@ typedef enum tftpDbgSwitch_e
 #define __TFTP_DEBUG_ON_	(TRUE)
 #define __TFTP_DEBUG_OFF_	(FALSE)
 
+/* print信息格式化字符串最大长度 */
+#define __TFTP_FORMAT_BUF_MAX_ (1024)
+
 /* 参数格式化，函数调用 */
 #define __TFTP_LOGLEVEL_PRINT(col, lev, rec, fmt, ...) \
 	do{ \
-		tftp_log_level_print(rec, "\r\n"col""lev""fmt""__COLOR_NORMAL_, ##__VA_ARGS__); \
+		tftp_log_level_print(col, rec, lev""fmt, ##__VA_ARGS__); \
 	}while(0)
 
 /* Log打印宏函数级别区分与参数指定 */
@@ -147,8 +150,9 @@ typedef enum tftpDbgSwitch_e
 #define TFTP_DBG_SWITCH_NUMBER_MAX (tftp_dbgSwitch_max / 8) 
 EXTERN UINT8 gDbgSwitchFlg[TFTP_DBG_SWITCH_NUMBER_MAX];
 
-INT32 tftp_log_level_print
+EXTERN INT32 tftp_log_level_print
 (
+	IN CHAR * colorStr,
 	IN tftpRecordFlag_t recordFlag,
 	IN CHAR * format,
 	IN ...
