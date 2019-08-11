@@ -12,13 +12,8 @@ OBJS += ./src/tftpLog.o
 #OBJS += ./src/tftpShell.o
 #OBJS += ./src/tftpPack.o
 
-DEP_FILES := $(patsubst %.c,%.d,$(OBJS))
-
-$(warning"DEP_FILES = $(DEP_FILES)")
-
+DEP_FILES := $(patsubst %.o,%.d,$(OBJS))
 DEP_FILES := $(wildcard $(DEP_FILES))
-
-$(warning"DEP_FILES = $(DEP_FILES)")
 
 TARDIR := ./out/TFTP.exe
 TARGETP_ROJECT := TFTP.exe
@@ -28,7 +23,9 @@ include $(DEP_FILES)
 endif
 
 $(TARGETP_ROJECT):$(OBJS)
-	@echo "OBJS = $(OBJS), commpile project $(TARGETP_ROJECT) is running..." && \
+	@echo "DEP_FILES = $(DEP_FILES)" && \
+	echo "OBJS = $(OBJS)" && \
+	echo " commpile project $(TARGETP_ROJECT) is running..." && \
 	$(LD) $(OBJS) -o $(TARDIR) && \
 	echo "link all files to target file $(TARGETP_ROJECT) succeed!" || \
 	echo "link all files to target file $(TARGETP_ROJECT) failure!"
@@ -43,9 +40,9 @@ $(TARGETP_ROJECT):$(OBJS)
 clean:
 	@rm -f $(OBJS) && \
 	rm -f $(TARDIR) && \
-	rm -f $(patsubst %.c,%.o,$(OBJS)) && \
+	rm -f $(OBJS) && \
 	echo "delete module files and target file succeed!"
 	
 .PHONY:cleanDepend
 cleanDepend:
-	@rm -f $(patsubst %.c,%.d,$(OBJS)) && echo "delete depend files succeed!"
+	@rm -f $(patsubst %.o,%.d,$(OBJS)) && echo "delete depend files succeed!"
