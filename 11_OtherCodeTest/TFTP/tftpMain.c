@@ -1,28 +1,23 @@
 #include <tftpLog.h>
 #include <tftpType.h>
 #include <tftpShell.h>
-#include <stdio.h>
+#include <tftpPublic.h>
 
 INT32 main(void)
 {
-	tftp_log_init();
-	tftp_shell_init();
-	
-	tftp_log_debug_control(tftp_dbgSwitch_task, __TFTP_DBG_ON_);
-	tftp_log_debug_control(tftp_dbgSwitch_Server, __TFTP_DBG_OFF_);
+	tftp_log_module_init();
+	/* 调试相关模块时打开对应debug开关 */
+	//tftp_log_debug_control(tftp_dbgSwitch_task, __TFTP_DBG_ON_);
+	//tftp_log_debug_control(tftp_dbgSwitch_shell, __TFTP_DBG_ON_);
+	//tftp_log_debug_control(tftp_dbgSwitch_server, __TFTP_DBG_ON_);
+	//tftp_log_debug_control(tftp_dbgSwitch_client, __TFTP_DBG_ON_);
+	//tftp_log_debug_control(tftp_dbgSwitch_sem, __TFTP_DBG_ON_);
+	//tftp_log_debug_control(tftp_dbgSwitch_send, __TFTP_DBG_ON_);
+	//tftp_log_debug_control(tftp_dbgSwitch_recv, __TFTP_DBG_ON_);
+	//tftp_log_debug_control(tftp_dbgSwitch_other, __TFTP_DBG_ON_);
+	tftp_task_module_init();
+	tftp_shell_module_init();
 
-#if 0
-	TFTP_LOGNOR("Log File Start");
-
-	TFTP_LOGNOR("Hello world!%d,%d,%d,%d", 1, 2, 3, 4);
-	TFTP_LOGDBG(tftp_dbgSwitch_task, "Hello world!%d,%d,%d,%d", 11, 22, 33, 44);
-	TFTP_LOGDBG(tftp_dbgSwitch_Server, "Hello world!%d,%d,%d,%d", 111, 222, 333, 444);
-	TFTP_LOGWARN("Hello world!%d,%d,%d,%d", 1111, 2222, 3333, 4444);
-	TFTP_LOGNOTE("Hello world!%d,%d,%d,%d", 11111, 22222, 33333, 44444);
-	TFTP_LOGERR("Hello world!%d,%d,%d,%d", 111111, 222222, 333333, 444444);
-
-	TFTP_LOGNOR("Log File End\r\n");
-#endif
 	while(TRUE){
 
 	}

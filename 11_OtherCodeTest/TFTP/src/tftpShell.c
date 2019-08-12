@@ -1,14 +1,9 @@
 #include <tftpShell.h>
 #include <tftpType.h>
 #include <tftpLog.h>
+#include <tftpTask.h>
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <string.h>
-
-#include <unistd.h>
-#include <pthread.h>
+#include <tftpPublic.h>
 
 LOCAL VOID ttp_shell_normal_menu(VOID);
 LOCAL VOID ttp_shell_debug_menu(VOID);
@@ -70,15 +65,15 @@ INT32 tftp_shell_line(CHAR * str, INT32 strLen)
 
 VOID tftp_shell_deal_input(CONST CHAR * input)
 {
-	TFTP_LOGDBG(tftp_dbgSwitch_Shell, "input=%s, len=%d", input, strlen(input));
+	TFTP_LOGDBG(tftp_dbgSwitch_shell, "input=%s, len=%d", input, strlen(input));
 	
 	if (0 == strcmp(input, "debug on")){
 		tftp_print("\ndebug switch menu is on!");
-		tftp_log_debug_control(tftp_dbgSwitch_Shell, __TFTP_DBG_ON_);
+		tftp_log_debug_control(tftp_dbgSwitch_shell, __TFTP_DBG_ON_);
 	}
 	else if (0 == strcmp(input, "debug off")){
 		tftp_print("\ndebug switch menu is off!");
-		tftp_log_debug_control(tftp_dbgSwitch_Shell, __TFTP_DBG_OFF_);
+		tftp_log_debug_control(tftp_dbgSwitch_shell, __TFTP_DBG_OFF_);
 	}
 	else if (0 == strcmp(input, "exit"))
 	{
@@ -118,27 +113,23 @@ VOID * tftp_shell_thread_deal(VOID * argv)
 }
 LOCAL INT32 tftp_shell_thread_create(VOID)
 {
-	pthread_t tid;
-	pthread_attr_t attr;
-	
-	pthread_attr_init(&attr);
-	
-	/* 设置分离态 */
-	pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
+	tftpTaskInfo_t shellTask;
 
-	/* 设置线程栈大小 */
-	pthread_attr_setstacksize(&attr, __TFTP_SHELL_THREAD_STACK_SIZE_);
+	memset(&shellTask, 0, sizeof(tftpTaskInfo_t));
 
-	/* 创建线程 */
-	pthread_create(&tid, &attr, tftp_shell_thread_deal, NULL);
+	shellTask._id = -1;
+	shellTask._deal_function = tftp_shell_thread_deal;
+	shellTask._stackSize = __TFTP_SHELL_THREAD_STACK_SIZE_;
+	shellTask._detachState = __TFTP_TASK_CREATE_DETACHED_;
+	strncpy(shellTask._name, "tftpShellTask", strlen("tftpShellTask"));
 
-	/* 线程资源使用完后释放资源 */
-	pthread_attr_destroy(&attr);
+	/* 初始化shell线程 */
+	tftp_task_create_init(&shellTask);
 
 	return tftp_ret_Ok;
 }
 
-EXTERN INT32 tftp_shell_init(VOID)
+EXTERN INT32 tftp_shell_module_init(VOID)
 {
 	/* 创建shell线程 */
 	tftp_shell_thread_create();

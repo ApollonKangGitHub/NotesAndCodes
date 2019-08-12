@@ -1,10 +1,7 @@
 #include <tftpLog.h>
 #include <tftpType.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdarg.h>
-#include <stdlib.h>
-#include <time.h>
+
+#include <tftpPublic.h>
 
 UINT8 gDbgSwitchFlg[TFTP_DBG_SWITCH_NUMBER_MAX];
 
@@ -157,10 +154,11 @@ EXTERN VOID tftp_log_debug_control
 	return;
 }
 
-EXTERN INT32 tftp_log_init(VOID)
+EXTERN INT32 tftp_log_module_init(VOID)
 {
 	/* 初始化Shell文件描述符 */
 	gLogShell = __TFTP_STDOUT_;
+	tftp_print("-------%s-%d-------", __FUNCTION__, __LINE__);
 
 	/* 初始化日志文件描述符 */
 	tftp_log_to_file_init(&gLogFile, __TFTP_LOF_FILE_PATH_);

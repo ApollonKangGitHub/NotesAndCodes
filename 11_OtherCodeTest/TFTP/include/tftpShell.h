@@ -11,6 +11,6 @@
 /* shell输入输出缓冲区大小 */
 #define __TFTP_SHELL_BUFFER_LEN_MAX_		(128)
 
-EXTERN INT32 tftp_shell_init(VOID);
+EXTERN INT32 tftp_shell_module_init(VOID);
 
 #endif /* __TFTP_SHELL_H_ */

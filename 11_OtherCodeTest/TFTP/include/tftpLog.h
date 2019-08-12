@@ -2,7 +2,9 @@
 #define __TFTP_LOG_H__
 
 #include <tftpType.h>
-#include <stdarg.h>
+#include <tftpSem.h>
+#include <tftpTask.h>
+#include <tftpPublic.h>
 
 /* Log级别 */
 typedef enum tftpLogLevel_e
@@ -28,15 +30,25 @@ typedef enum tftpRecordPos_e
 typedef enum tftpDbgSwitch_e
 {
 	tftp_dbgSwitch_task = 0,
-	tftp_dbgSwitch_Server,
-	tftp_dbgSwitch_Client,
-	tftp_dbgSwitch_Shell,
+	tftp_dbgSwitch_server,
+	tftp_dbgSwitch_client,
+	tftp_dbgSwitch_shell,
+	tftp_dbgSwitch_sem,
 	tftp_dbgSwitch_send,
 	tftp_dbgSwitch_recv,
-	tftp_dbgSwitch_Other,
+	tftp_dbgSwitch_other,
 	tftp_dbgSwitch_max		/* last, Please */
 }tftpDbgSwitch_t;
-	
+
+typedef struct tftpDbgFileInfo_s{
+	FILE * _fp;					/* 日志文件指针，包含文件读写的信息 */
+	CHAR _filePath[64];			/* 文件路径 */
+	UINT32 _curSize;			/* 文件大小 */
+	UINT32 _limitSize;			/* 存储容量 */
+	tftpOperatorSem_t _sem;		/* 文件操作二值信号量 */
+	tftpTaskInfo_t _fileTask;	/* 操作文件的任务信息 */
+}tftpDbgFileInfo_t;
+
 /******************************************************************************
  * printf()的颜色格式:\033[{attr1};{attr2};...{attrn}m
  * 以\033即Esc的ASCII开始，跟随n个属性，以m结尾
@@ -157,7 +169,7 @@ EXTERN INT32 tftp_log_level_print
 	IN ...
 );
 
-EXTERN INT32 tftp_log_init(VOID);
+EXTERN INT32 tftp_log_module_init(VOID);
 EXTERN VOID tftp_log_debug_control
 (
 	tftpDbgSwitch_t dbgSw,
