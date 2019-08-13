@@ -53,5 +53,6 @@ typedef enum tftpReturnValue_e
 #define tftp_vfprint vfprintf
 #define tftp_sprint sprintf
 #define tftp_gets fgets
+#define tftp_perror perror
 
 #endif /* __TFTP_TYPE_H */

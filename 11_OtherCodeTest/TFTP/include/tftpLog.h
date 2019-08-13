@@ -92,7 +92,8 @@ typedef struct tftpDbgFileInfo_s{
 /* 参数格式化，函数调用 */
 #define __TFTP_LOGLEVEL_PRINT(col, lev, rec, fmt, ...) \
 	do{ \
-		tftp_log_level_print(col, rec, lev""fmt, ##__VA_ARGS__); \
+		tftp_log_level_print(col, rec, lev"[%s-%d]"fmt, \
+			__FUNCTION__, __LINE__, ##__VA_ARGS__); \
 	}while(0)
 
 /* Log打印宏函数级别区分与参数指定 */

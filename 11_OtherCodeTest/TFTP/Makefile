@@ -1,5 +1,9 @@
 CC := gcc
 LD := gcc
+ECHO := echo
+RM := rm
+MAKE := make
+DEV_NULL := /dev/null
 
 INCLUDE = -I ./include/
 
@@ -27,25 +31,33 @@ include $(DEP_FILES)
 endif
 
 $(TARGETP_ROJECT):$(OBJS)
-	@echo "DEP_FILES = $(DEP_FILES)" >> $(COMPILE_LOG) && \
-	echo "OBJS = $(OBJS)"  >> $(COMPILE_LOG) && \
-	echo " commpile project $(TARGETP_ROJECT) is running..."  >> $(COMPILE_LOG) && \
+	@$(ECHO) "DEP_FILES = $(DEP_FILES)"  >> $(COMPILE_LOG) && \
+	$(ECHO) "OBJS = $(OBJS)"  >> $(COMPILE_LOG) && \
+	$(ECHO) " commpile project $(TARGETP_ROJECT) is running..." | tee -a $(COMPILE_LOG) && \
 	$(LD) $(OBJS) $(LDFLAGS) -o $(TARDIR) && \
-	echo "link all files to target file $(TARGETP_ROJECT) succeed!"  >> $(COMPILE_LOG) || \
-	echo "link all files to target file $(TARGETP_ROJECT) failure!"  >> $(COMPILE_LOG) 
+	$(ECHO) "link all files to target file $(TARGETP_ROJECT) succeed!" | tee -a $(COMPILE_LOG) || \
+	$(ECHO) "link all files to target file $(TARGETP_ROJECT) failure!" | tee -a $(COMPILE_LOG) 
 	
 %.o:%.c
-	@echo "$< compile running..."  >> $(COMPILE_LOG) && \
+	@$(ECHO) "$< compile running..." | tee -a $(COMPILE_LOG) && \
 	$(CC) -c $< $(CFLAGS) -o $@ -MD -MF $(patsubst %.c,%.d,$<) && \
-	echo "$< compile succeed!"  >> $(COMPILE_LOG) || \
-	echo "$< compile failure!"  >> $(COMPILE_LOG) 
+	$(ECHO) "$< compile succeed!" | tee -a $(COMPILE_LOG) || \
+	$(ECHO) "$< compile failure!" | tee -a $(COMPILE_LOG) 
 	
 .PHONY:clean
 clean:
-	@rm -f $(OBJS) && \
-	rm -f $(TARDIR) && \
-	echo "delete module files and target file succeed!" >> $(COMPILE_LOG) 
+	@$(RM) -f $(OBJS) && \
+	$(RM) -f $(TARDIR) && \
+	$(ECHO) "delete module files and target file succeed!" | tee -a $(COMPILE_LOG) 
 	
 .PHONY:cleanDepend
 cleanDepend:
-	@rm -f $(patsubst %.o,%.d,$(OBJS)) && echo "delete depend files succeed!" >> $(COMPILE_LOG) 
+	@$(RM) -f $(patsubst %.o,%.d,$(OBJS)) && \
+	$(ECHO) "delete depend files succeed!" | tee $(COMPILE_LOG) 
+
+.PHONY:cleanAll
+cleanAll:
+	@$(MAKE) clean >> $(DEV_NULL) && \
+	$(MAKE) cleanDepend  >> $(DEV_NULL) && \
+	$(ECHO) "delete target files and denpend files success!" || \
+	$(ECHO) "delete target files and denpend files failed!"

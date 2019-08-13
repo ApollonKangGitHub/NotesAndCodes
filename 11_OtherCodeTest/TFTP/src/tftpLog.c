@@ -120,14 +120,13 @@ EXTERN INT32 tftp_log_level_print
 
 LOCAL INT32 tftp_log_to_file_init(FILE ** fp, CONST CHAR * path)
 {
-	if((NULL == fp) || (NULL == path)){
+	if ((NULL == fp) || (NULL == path)) {
 		tftp_print("\r\nError pointer for fp[%p], path:[%p]!", fp, path);
 		exit(EXIT_FAILURE);
 	}
 	
 	*fp = fopen(path, "ab+");
-	if(NULL == *fp)
-	{
+	if (NULL == *fp) {
 		tftp_print("\r\nError to open file:%s!", path);
 		exit(EXIT_FAILURE);
 	}
@@ -138,7 +137,7 @@ LOCAL INT32 tftp_log_to_file_init(FILE ** fp, CONST CHAR * path)
 LOCAL INT32 tftp_log_debug_switch_init(VOID)
 {
 	INT32 i = 0;
-	for(;i < TFTP_DBG_SWITCH_NUMBER_MAX; i++){
+	for (;i < TFTP_DBG_SWITCH_NUMBER_MAX; i++) {
 		gDbgSwitchFlg[i] &= 0;
 	}
 }
