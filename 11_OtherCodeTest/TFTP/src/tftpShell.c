@@ -126,6 +126,10 @@ VOID tftp_shell_deal_input(CONST CHAR * input)
 VOID * tftp_shell_thread_deal(VOID * argv)
 {
 	CHAR shellStr[__TFTP_SHELL_BUFFER_LEN_MAX_] = {0};
+
+	/* 设置shell线程名字 */
+	tftp_task_set_name(__TFTP_TASK_NAME_SHELL_);
+
 	ttp_shell_normal_menu();
 	while (TRUE) {
 		memset(shellStr, 0, sizeof(shellStr));

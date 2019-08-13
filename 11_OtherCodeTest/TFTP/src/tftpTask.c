@@ -3,6 +3,12 @@
 #include <tftpLog.h>
 #include <tftpPublic.h>
 
+/*
+ * Linux查看系统中某进程正在运行的线程:
+ * 以TFTP.exe为例：
+ * ps -aux | grep TFTP.exe获取到<pid>
+ * ps -T -p <pid>即可查看对应进程的线程
+ */
 
 tftpTaskInfoList_t * gTaskInfoHead = NULL;
 tftpTaskInfoList_t * gTaskInfoTail = NULL;
@@ -193,7 +199,10 @@ EXTERN tftpReturnValue_t tftp_task_module_init(VOID)
 	TFTP_LOGDBG(tftp_dbgSwitch_task, "tftp task module init");
 
 	memset(&mainTask, 0, sizeof(mainTask));
-	
+
+	/* 设置主线程名字 */
+	tftp_task_set_name(__TFTP_TASK_NAME_MAIN_);
+
 	ret = pthread_attr_init(&attr);
 	if (ret != 0) {
 		TFTP_LOGERR("Error task attr init, ret = %d!", ret);
