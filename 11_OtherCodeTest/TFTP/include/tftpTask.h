@@ -21,35 +21,52 @@
 #define __TFTP_TASK_NAME_MAIN_		"tftpMainTask"
 #define __TFTP_TASK_NAME_SERVER_	"tftpServerTask"
 
-typedef INT64 tftpTid_t;
+typedef pthread_t tftpTaskStruct_t;
+typedef pid_t tftpPid_t;
+typedef pid_t tftpTaskId_t;
 
 typedef struct tftpTaskInfo_s{
 	CHAR _name[__TFTP_TASK_NAME_LENGTH_];		/* 任务名 */
-	INT64 _tid;			/* 任务ID */
-	INT32 _stackSize;	/* 任务栈大小 */
-	INT32 _detachState;	/* 分离属性 */
+	tftpTaskStruct_t _taskStructid;	/* 任务结构体地址 */
+	tftpPid_t _pid;			/* pid */
+	tftpPid_t _tid;			/* tid */
+	INT32 _stackSize;		/* 任务栈大小 */
+	INT32 _detachState;		/* 分离属性 */
 	VOID * (*_deal_function)(VOID *);	/* 任务处理函数 */
 }tftpTaskInfo_t;
 
+/* pthread_t * 指向的结构体 */
+typedef struct tftpTaskFake_s{
+	void * nothing[90];
+	tftpPid_t _tid;
+	tftpPid_t _pid;
+}tftpTaskFake_t;
+
+/* 任务信息保存链表结构节点 */
 typedef struct tftpTaskInfoList_s{
 	INT32 _taskNum;						/* 线程链表的任务个数 */
-	INT32 _taskId;						/* 链表中的任务编号 */
+	tftpTaskId_t _taskId;				/* 链表中的任务编号 */
 	tftpTaskInfo_t _taskInfo;			/* 存放任务信息 */
 	struct tftpTaskInfoList_s * _next;	/* 指向下一个节点 */
 	struct tftpTaskInfoList_s * _pre;	/* 指向上一个节点 */
 }tftpTaskInfoList_t;
- 
-/* 名字的长度最大为15字节，且应该以'\0'结尾 */
-#define tftp_task_set_name(name)   prctl(PR_SET_NAME, name, 0, 0, 0)
 
-//char tname[16];
-#define tftp_task_get_name(name)   prctl(PR_GET_NAME, name)
+/* extern声明，解决编译告警 */
+extern int pthread_setname_np(pthread_t thread, const char *name);
+extern int pthread_getname_np(pthread_t thread, char *name, size_t len);
+
+#define tftp_task_set_name(tid,name) 			pthread_setname_np(tid,name)
+#define tftp_task_get_name(tid,pName,len)		pthread_getname_np(tid,pName,len)
+#define tftp_task_get_pid()   					syscall(SYS_gettid)
+#define tftp_task_get_structId()				pthread_self()
 
 EXTERN tftpReturnValue_t tftp_task_module_init(VOID);
+EXTERN INT32 tftp_task_get_task_num(VOID);
 EXTERN tftpReturnValue_t tftp_task_create_init(tftpTaskInfo_t * taskInfo);
-EXTERN tftpReturnValue_t tftp_task_destroy(tftpTid_t tid);
-EXTERN tftpTid_t tftp_task_get_tid(VOID);
-EXTERN INT32 tftp_task_get_info(INT32 taskId,tftpTaskInfo_t * taskInfo);
-EXTERN INT32 tftp_task_get_info_by_tid(tftpTid_t tid, tftpTaskInfo_t * taskInfo);
-EXTERN INT32 tftp_task_get_info_by_name(CHAR * taskName, tftpTaskInfo_t * taskInfo);
+EXTERN tftpReturnValue_t tftp_task_destroy(tftpTaskStruct_t tid);
+EXTERN tftpPid_t tftp_task_get_pid_by_structId(tftpTaskStruct_t tid);
+EXTERN tftpPid_t tftp_task_get_tid_by_structId(tftpTaskStruct_t tstructId);
+EXTERN tftpTaskId_t tftp_task_get_info(tftpTaskId_t taskId,tftpTaskInfo_t * taskInfo);
+EXTERN tftpTaskId_t tftp_task_get_info_by_structId(tftpTaskStruct_t tid, tftpTaskInfo_t * taskInfo);
+EXTERN tftpTaskId_t tftp_task_get_info_by_name(CHAR * taskName, tftpTaskInfo_t * taskInfo);
 #endif

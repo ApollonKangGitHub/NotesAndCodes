@@ -24,11 +24,13 @@ tftpTaskInfoList_t * gTaskInfoTail = NULL;
 LOCAL tftpReturnValue_t tftp_task_info_insert(tftpTaskInfoList_t * taskInfoCode)
 {
 	tftpTaskInfoList_t * pInfoTemp = NULL;
+	tftpPid_t pid = 0;
+	tftpPid_t tid = 0;
 	UINT8 taskNum = 0;
 	
 	TFTP_LOGDBG(tftp_dbgSwitch_task, \
-		"tftp task info code insert, taskInfoCode=%p, taskName:%s, tid:%lld", 
-			taskInfoCode, taskInfoCode->_taskInfo._name, taskInfoCode->_taskInfo._tid);
+		"tftp task info code insert, taskInfoCode=%p, taskName:%s, taskStructid:%lld", 
+			taskInfoCode, taskInfoCode->_taskInfo._name, taskInfoCode->_taskInfo._taskStructid);
 
 	if (NULL == taskInfoCode) {
 		TFTP_LOGERR("Error tftp task info insert, taskInfo=%p!", taskInfoCode);
@@ -67,6 +69,11 @@ LOCAL tftpReturnValue_t tftp_task_info_insert(tftpTaskInfoList_t * taskInfoCode)
 		pInfoTemp->_taskNum = taskNum;
 		pInfoTemp = pInfoTemp->_next;
 	}
+	
+	pid = tftp_task_get_pid_by_structId(gTaskInfoTail->_taskInfo._taskStructid);
+	tid = tftp_task_get_tid_by_structId(gTaskInfoTail->_taskInfo._taskStructid);
+	gTaskInfoTail->_taskInfo._pid = pid;
+	gTaskInfoTail->_taskInfo._tid = tid;
 
 	return tftp_ret_Ok;
 }
@@ -121,7 +128,7 @@ LOCAL tftpTaskInfoList_t * tftp_task_info_create(tftpTaskInfo_t * taskInfo)
 EXTERN tftpReturnValue_t tftp_task_create_init(tftpTaskInfo_t * taskInfo)
 {
 	INT32 ret = 0;
-	pthread_t tid;
+	tftpTaskStruct_t structId;
 	pthread_attr_t attr;
 	tftpTaskInfoList_t * pTaskInfoCode = NULL;
 	
@@ -154,14 +161,17 @@ EXTERN tftpReturnValue_t tftp_task_create_init(tftpTaskInfo_t * taskInfo)
 	}
 
 	/* 创建线程 */
-	ret = pthread_create(&tid, &attr, taskInfo->_deal_function, NULL);
+	ret = pthread_create(&structId, &attr, taskInfo->_deal_function, NULL);
 	if (ret != 0) {
 		TFTP_LOGERR("Error create task, ret = %d!", ret);
 		return tftp_ret_Error;
 	}
 
-	/* 保存线程ID */
-	taskInfo->_tid = tid;
+	/* 保存线程pthread_t地址 */
+	taskInfo->_taskStructid = structId;
+
+	/* 设置线程名字 */
+	tftp_task_set_name(structId, taskInfo->_name);
 	
 	/* 销毁线程属性结构,重新初始化之前不能使用 */
 	ret = pthread_attr_destroy(&attr);
@@ -189,19 +199,15 @@ EXTERN tftpReturnValue_t tftp_task_module_init(VOID)
 {
 	INT32 stackSize;
 	INT32 detachState;
-	pthread_t tid;
+	tftpTaskStruct_t structId;
 	pthread_attr_t attr;
 	tftpTaskInfo_t mainTask;
 	tftpTaskInfoList_t * pTaskInfo = NULL;	
 	tftpReturnValue_t ret = tftp_ret_Error;
-	CHAR taskName[__TFTP_TASK_NAME_LENGTH_] = {__TFTP_TASK_NAME_MAIN_};
 
 	TFTP_LOGDBG(tftp_dbgSwitch_task, "tftp task module init");
 
 	memset(&mainTask, 0, sizeof(mainTask));
-
-	/* 设置主线程名字 */
-	tftp_task_set_name(__TFTP_TASK_NAME_MAIN_);
 
 	ret = pthread_attr_init(&attr);
 	if (ret != 0) {
@@ -223,13 +229,17 @@ EXTERN tftpReturnValue_t tftp_task_module_init(VOID)
 		return tftp_ret_Error;
 	}
 
-	/* 获取主线程ID, always succeeds. */
-	tid = pthread_self();
+	/* 获取主线程ptherad_t地址, always succeeds. */
+	structId = tftp_task_get_structId();
+	
+	/* 设置主线程名字 */
+	tftp_task_set_name(structId, __TFTP_TASK_NAME_MAIN_);
 
-	mainTask._tid = tid;
+	/* 保存主线程信息 */
+	mainTask._taskStructid = structId;
 	mainTask._stackSize = stackSize;
 	mainTask._detachState = detachState;
-	(VOID)strncpy(mainTask._name, taskName, __TFTP_TASK_NAME_LENGTH_);
+	(VOID)strncpy(mainTask._name, __TFTP_TASK_NAME_MAIN_, __TFTP_TASK_NAME_LENGTH_);
 
 	ret = pthread_attr_destroy(&attr);
 	if (ret != 0) {
@@ -257,22 +267,7 @@ EXTERN tftpReturnValue_t tftp_task_module_init(VOID)
  * Notes:
  *     
  */
-EXTERN INT64 tftp_task_get_tid(VOID)
-{
-	TFTP_LOGDBG(tftp_dbgSwitch_task, "tftp task get tid");
-	
-	return pthread_self();\
-}
-
-/*
- * FunctionName:
- *     tftp_task_destroy
- * Description:
- *     
- * Notes:
- *     
- */
-EXTERN tftpReturnValue_t tftp_task_destroy(tftpTid_t tid)
+EXTERN tftpReturnValue_t tftp_task_destroy(tftpTaskStruct_t structId)
 {
 	UINT8 retTask[128] = {0};
 	INT32 ret = -1;
@@ -281,19 +276,37 @@ EXTERN tftpReturnValue_t tftp_task_destroy(tftpTid_t tid)
 	memset(&taskInfo, 0, sizeof(tftpTaskInfo_t));
 	
 	TFTP_LOGDBG(tftp_dbgSwitch_task, \
-		"tftp task destroy, tid=%lld", tid);
+		"tftp task destroy, task struct structId=0x%x", structId);
 	
-	ret = tftp_task_get_info_by_tid(tid, &taskInfo);
+	ret = tftp_task_get_info_by_structId(structId, &taskInfo);
 	if (ret != -1) {
 		//TFTP_LOGWARN("Task:%s[%lld] was destroy success!", taskInfo._name, taskInfo._tid);
 		/* 此处应该是直接结束，由主线程监听子线程销毁并清空对应数据结构 */
 		//(VOID)pthread_exit((VOID*)&retTask);
 	}
 	else {
-		TFTP_LOGWARN("Task is %lld want to destroy, But not success!", tid);
+		TFTP_LOGWARN("Task is structId 0x%x want to destroy, But not success!", structId);
 	}
 	
 	return tftp_ret_Ok;
+}
+
+/*
+ * FunctionName:
+ *     tftp_task_get_task_num
+ * Description:
+ *     获取当前进程有的任务数
+ * Notes:
+ *     
+ */
+EXTERN INT32 tftp_task_get_task_num(VOID)
+{
+	if (gTaskInfoHead) {
+		return gTaskInfoHead->_taskNum;
+	}
+	else {
+		return 0;
+	}
 }
 
 /*
@@ -304,7 +317,7 @@ EXTERN tftpReturnValue_t tftp_task_destroy(tftpTid_t tid)
  * Notes:
  *     
  */
-EXTERN INT32 tftp_task_get_info
+EXTERN tftpTaskId_t tftp_task_get_info
 (
 	INT32 taskId,
 	tftpTaskInfo_t * taskInfo
@@ -326,7 +339,7 @@ EXTERN INT32 tftp_task_get_info
 				taskId, pTaskInfo->_taskId, pTaskInfo->_taskNum);
 			
 		 	memcpy(taskInfo, &pTaskInfo->_taskInfo, sizeof(tftpTaskInfo_t));
-			return pTaskInfo->_taskNum;
+			return pTaskInfo->_taskId;
 		}
 	}
 
@@ -335,22 +348,22 @@ EXTERN INT32 tftp_task_get_info
 
 /*
  * FunctionName:
- *     tftp_task_get_info_by_tid
+ *     tftp_task_get_info_by_structId
  * Description:
  *     获取指定tid的任务信息
  * Notes:
  *     
  */
-EXTERN INT32 tftp_task_get_info_by_tid
+EXTERN tftpTaskId_t tftp_task_get_info_by_structId
 (
-	tftpTid_t tid, 
+	tftpTaskStruct_t structId, 
 	tftpTaskInfo_t * taskInfo
 )
 {
 	tftpTaskInfoList_t * pTaskInfo = NULL;
 
 	TFTP_LOGDBG(tftp_dbgSwitch_task, \
-		"tftp task get info by task tid, tid=%p", tid);
+		"tftp task get info by task tid, structId=%p", structId);
 	
 	if (NULL == taskInfo) {
 		TFTP_LOGERR("Error argument taskInfo:%p!", taskInfo);
@@ -358,7 +371,7 @@ EXTERN INT32 tftp_task_get_info_by_tid
 	}	
 	
 	for (pTaskInfo = gTaskInfoHead; pTaskInfo; pTaskInfo = pTaskInfo->_next) {
-		if (tid == pTaskInfo->_taskInfo._tid) {
+		if (structId == pTaskInfo->_taskInfo._taskStructid) {
 		 	memcpy(taskInfo, &pTaskInfo->_taskInfo, sizeof(tftpTaskInfo_t));
 			return pTaskInfo->_taskId;;
 		}
@@ -375,7 +388,7 @@ EXTERN INT32 tftp_task_get_info_by_tid
  * Notes:
  *     
  */
-EXTERN INT32 tftp_task_get_info_by_name
+EXTERN tftpTaskId_t tftp_task_get_info_by_name
 (
 	CHAR * taskName, 
 	tftpTaskInfo_t * taskInfo
@@ -400,6 +413,40 @@ EXTERN INT32 tftp_task_get_info_by_name
 
 	return -1;
 }
+/*
+ * FunctionName:
+ *     tftp_task_get_pid_by_structId
+ * Description:
+ *     
+ * Notes:
+ *     
+ */
+EXTERN tftpPid_t tftp_task_get_pid_by_structId(tftpTaskStruct_t structId)
+{
+	tftpTaskFake_t * fake= (tftpTaskFake_t *)structId;
+	
+	tftpPid_t pid = 0;
+	
+	pid = fake->_pid;
 
+	return pid;
+}
+/*
+ * FunctionName:
+ *     tftp_task_get_tid_by_structId
+ * Description:
+ *     
+ * Notes:
+ *     
+ */
+EXTERN tftpPid_t tftp_task_get_tid_by_structId(tftpTaskStruct_t structId)
+{
+	tftpTaskFake_t * fake= (tftpTaskFake_t *)structId;
+	
+	tftpPid_t pid = 0;
+	
+	pid = fake->_tid;
 
+	return pid;
+}
 

@@ -13,5 +13,8 @@
 #include <signal.h>
 #include <pthread.h>
 #include <sys/prctl.h>
+#include <sys/types.h>
+#include <sys/syscall.h>
+#include <linux/unistd.h>
 
 #endif
