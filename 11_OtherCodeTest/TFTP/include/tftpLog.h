@@ -45,7 +45,7 @@ typedef struct tftpDbgFileInfo_s{
 	CHAR _filePath[64];			/* 文件路径 */
 	UINT32 _curSize;			/* 文件大小 */
 	UINT32 _limitSize;			/* 存储容量 */
-	tftpOperatorSem_t _sem;		/* 文件操作二值信号量 */
+	tftpSemInfo_t _sem;			/* 文件操作信号量信息 */
 	tftpTaskInfo_t _fileTask;	/* 操作文件的任务信息 */
 }tftpDbgFileInfo_t;
 

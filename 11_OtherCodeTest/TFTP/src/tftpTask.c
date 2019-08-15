@@ -10,8 +10,11 @@
  * ps -T -p <pid>即可查看对应进程的线程
  */
 
-tftpTaskInfoList_t * gTaskInfoHead = NULL;
-tftpTaskInfoList_t * gTaskInfoTail = NULL;
+LOCAL tftpTaskInfoList_t * gTaskInfoHead = NULL;
+
+LOCAL tftpTaskInfoList_t * gTaskInfoTail = NULL;
+
+tftpSem_t gSemTaskInfoId;
 
 /*
  * FunctionName:
@@ -183,78 +186,6 @@ EXTERN tftpReturnValue_t tftp_task_create_init(tftpTaskInfo_t * taskInfo)
 	/* 线程创建成功，保存线程信息 */
 	pTaskInfoCode = tftp_task_info_create(taskInfo);
 	tftp_task_info_insert(pTaskInfoCode);
-	
-	return tftp_ret_Ok;
-}
-
-/*
- * FunctionName:
- *     tftp_task_module_init
- * Description:
- *     任务模块初始化，主要创建保存任务结构体的链表，第一个任务为主线程
- * Notes:
- *     
- */
-EXTERN tftpReturnValue_t tftp_task_module_init(VOID)
-{
-	INT32 stackSize;
-	INT32 detachState;
-	tftpTaskStruct_t structId;
-	pthread_attr_t attr;
-	tftpTaskInfo_t mainTask;
-	tftpTaskInfoList_t * pTaskInfo = NULL;	
-	tftpReturnValue_t ret = tftp_ret_Error;
-
-	TFTP_LOGDBG(tftp_dbgSwitch_task, "tftp task module init");
-
-	memset(&mainTask, 0, sizeof(mainTask));
-
-	ret = pthread_attr_init(&attr);
-	if (ret != 0) {
-		TFTP_LOGERR("Error task attr init, ret = %d!", ret);
-		return tftp_ret_Error;
-	}	
-
-	/* 获取主任务线程栈大小 */
-	ret = pthread_attr_getstacksize(&attr, (size_t*)&stackSize);
-	if (ret != 0) {
-		TFTP_LOGERR("Error get task attr stack size, ret = %d!", ret);
-		return tftp_ret_Error;
-	}
-	
-	/* 获取主任务分离属性 */
-	ret = pthread_attr_getdetachstate(&attr, &detachState);
-	if (ret != 0) {
-		TFTP_LOGERR("Error get task attr detach state, ret = %d!", ret);
-		return tftp_ret_Error;
-	}
-
-	/* 获取主线程ptherad_t地址, always succeeds. */
-	structId = tftp_task_get_structId();
-	
-	/* 设置主线程名字 */
-	tftp_task_set_name(structId, __TFTP_TASK_NAME_MAIN_);
-
-	/* 保存主线程信息 */
-	mainTask._taskStructid = structId;
-	mainTask._stackSize = stackSize;
-	mainTask._detachState = detachState;
-	(VOID)strncpy(mainTask._name, __TFTP_TASK_NAME_MAIN_, __TFTP_TASK_NAME_LENGTH_);
-
-	ret = pthread_attr_destroy(&attr);
-	if (ret != 0) {
-		TFTP_LOGERR("Error destroy task attr, ret = %d!", ret);
-		return tftp_ret_Error;
-	}
-
-	/* 创建信息保存节点 */
-	pTaskInfo = tftp_task_info_create(&mainTask);
-	if (NULL == pTaskInfo) {
-		TFTP_LOGERR("Error create task info, pTaskHead = %d!", pTaskInfo);
-		return tftp_ret_Error;
-	}
-
-	tftp_task_info_insert(pTaskInfo);
 	
 	return tftp_ret_Ok;
 }
@@ -448,5 +379,126 @@ EXTERN tftpPid_t tftp_task_get_tid_by_structId(tftpTaskStruct_t structId)
 	pid = fake->_tid;
 
 	return pid;
+}
+
+/*
+ * FunctionName:
+ *     tftp_task_sem_init
+ * Description:
+ *     任务模块信号量初始化
+ * Notes:
+ *     
+ */
+LOCAL tftpReturnValue_t tftp_task_sem_init(VOID)
+{
+	tftpSem_t semId;
+	INT32 ret = 0;
+	tftpSemInfo_t semInfo;
+	memset(&semInfo, 0, sizeof(tftpSem_t));
+
+	semInfo._semTask = 0;
+	semInfo._waitForever = TRUE;
+	semInfo._status = tftp_semStatus_post;
+	semInfo._pshared = tftp_semShared_thread;
+	memcpy(semInfo._semName, __TFTP_SEM_NAME_TASK_, __TFTP_SEM_NAME_LENGTH_);
+
+	ret = tftp_sem_create(&semInfo);
+	if (-1 == ret) {
+		TFTP_LOGERR("create sem for task info list fail!");
+		return tftp_ret_Error;
+	}
+	else{
+		gSemTaskInfoId = semInfo._semId;
+	}
+	return tftp_ret_Ok;
+}
+
+/*
+ * FunctionName:
+ *     tftp_task_info_init
+ * Description:
+ *     主要创建保存任务结构体的链表，第一个任务为主线程
+ * Notes:
+ *     
+ */
+LOCAL tftpReturnValue_t tftp_task_info_init(VOID)
+{
+	INT32 stackSize;
+	INT32 detachState;
+	tftpTaskStruct_t structId;
+	pthread_attr_t attr;
+	tftpTaskInfo_t mainTask;
+	tftpTaskInfoList_t * pTaskInfo = NULL;	
+	tftpReturnValue_t ret = tftp_ret_Error;
+
+	TFTP_LOGDBG(tftp_dbgSwitch_task, "tftp task module init");
+
+	(VOID)memset(&mainTask, 0, sizeof(mainTask));
+
+	ret = pthread_attr_init(&attr);
+	if (ret != 0) {
+		TFTP_LOGERR("Error task attr init, ret = %d!", ret);
+		return tftp_ret_Error;
+	}	
+
+	/* 获取主任务线程栈大小 */
+	ret = pthread_attr_getstacksize(&attr, (size_t*)&stackSize);
+	if (ret != 0) {
+		TFTP_LOGERR("Error get task attr stack size, ret = %d!", ret);
+		return tftp_ret_Error;
+	}
+	
+	/* 获取主任务分离属性 */
+	ret = pthread_attr_getdetachstate(&attr, &detachState);
+	if (ret != 0) {
+		TFTP_LOGERR("Error get task attr detach state, ret = %d!", ret);
+		return tftp_ret_Error;
+	}
+
+	/* 获取主线程ptherad_t地址, always succeeds. */
+	structId = tftp_task_get_structId();
+	
+	/* 设置主线程名字 */
+	tftp_task_set_name(structId, __TFTP_TASK_NAME_MAIN_);
+
+	/* 保存主线程信息 */
+	mainTask._taskStructid = structId;
+	mainTask._stackSize = stackSize;
+	mainTask._detachState = detachState;
+	(VOID)strncpy(mainTask._name, __TFTP_TASK_NAME_MAIN_, __TFTP_TASK_NAME_LENGTH_);
+
+	ret = pthread_attr_destroy(&attr);
+	if (ret != 0) {
+		TFTP_LOGERR("Error destroy task attr, ret = %d!", ret);
+		return tftp_ret_Error;
+	}
+
+	/* 创建信息保存节点 */
+	pTaskInfo = tftp_task_info_create(&mainTask);
+	if (NULL == pTaskInfo) {
+		TFTP_LOGERR("Error create task info, pTaskHead = %d!", pTaskInfo);
+		return tftp_ret_Error;
+	}
+
+	tftp_task_info_insert(pTaskInfo);
+	
+	return tftp_ret_Ok;
+}
+
+/*
+ * FunctionName:
+ *     tftp_task_module_init
+ * Description:
+ *     任务模块初始化
+ * Notes:
+ *     
+ */
+EXTERN tftpReturnValue_t tftp_task_module_init(VOID)
+{
+	/* 初始化任务模块的信息链表，并添加第一条信息：主线程信息 */
+	tftp_task_info_init();
+
+	/* 创建访问模块链表的信号量 */
+	tftp_task_sem_init();
 }
 

@@ -17,7 +17,7 @@ OBJS += ./src/tftpLog.o
 OBJS += ./src/tftpShell.o
 #OBJS += ./src/tftpPack.o
 OBJS += ./src/tftpTask.o
-#OBJS += ./src/tftpSem.o
+OBJS += ./src/tftpSem.o
 
 DEP_FILES := $(patsubst %.o,%.d,$(OBJS))
 DEP_FILES := $(wildcard $(DEP_FILES))
