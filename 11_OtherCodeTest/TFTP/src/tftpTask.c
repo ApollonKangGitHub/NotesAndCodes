@@ -395,6 +395,8 @@ LOCAL tftpReturnValue_t tftp_task_sem_init(VOID)
 	INT32 ret = 0;
 	tftpSemInfo_t semInfo;
 	memset(&semInfo, 0, sizeof(tftpSem_t));
+	
+	TFTP_LOGDBG(tftp_dbgSwitch_task, "tftp task sem init");
 
 	semInfo._semTask = 0;
 	semInfo._waitForever = TRUE;
@@ -495,6 +497,8 @@ LOCAL tftpReturnValue_t tftp_task_info_init(VOID)
  */
 EXTERN tftpReturnValue_t tftp_task_module_init(VOID)
 {
+	TFTP_LOGDBG(tftp_dbgSwitch_task, "tftp task module init");
+
 	/* 初始化任务模块的信息链表，并添加第一条信息：主线程信息 */
 	tftp_task_info_init();
 

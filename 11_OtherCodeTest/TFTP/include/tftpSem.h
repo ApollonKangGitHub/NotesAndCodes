@@ -6,6 +6,7 @@
 #include <tftpPublic.h>
 
 #define __TFTP_SEM_NAME_TASK_ 	"semTaskInfoList"
+#define __TFTP_SEM_NAME_SLEF_ 	"semSelfInfoList"
 
 #define __TFTP_SEM_NAME_LENGTH_ (32)
 
@@ -56,5 +57,6 @@ EXTERN tftpReturnValue_t tftp_sem_create(tftpSemInfo_t * semInfo);
 EXTERN INT32 tftp_sem_destroy(tftpSem_t semId);
 EXTERN INT32 tftp_sem_wait(tftpSemInfo_t * semInfo);
 EXTERN INT32 tftp_sem_post(tftpSem_t semId);
+EXTERN tftpReturnValue_t tftp_sem_module_init(VOID);
 
 #endif
