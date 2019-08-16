@@ -57,16 +57,16 @@ extern int pthread_getname_np(pthread_t thread, char *name, size_t len);
 
 #define tftp_task_set_name(tid,name) 			pthread_setname_np(tid,name)
 #define tftp_task_get_name(tid,pName,len)		pthread_getname_np(tid,pName,len)
-#define tftp_task_get_pid()   					syscall(SYS_gettid)
+#define tftp_task_get_tid()   					syscall(SYS_gettid)
+#define tftp_task_get_pid()						getpid()
 #define tftp_task_get_structId()				pthread_self()
 
+EXTERN VOID tftp_task_list_display(VOID);
 EXTERN tftpReturnValue_t tftp_task_module_init(VOID);
-EXTERN INT32 tftp_task_get_task_num(VOID);
 EXTERN tftpReturnValue_t tftp_task_create_init(tftpTaskInfo_t * taskInfo);
 EXTERN tftpReturnValue_t tftp_task_destroy(tftpTaskStruct_t tid);
 EXTERN tftpPid_t tftp_task_get_pid_by_structId(tftpTaskStruct_t tid);
 EXTERN tftpPid_t tftp_task_get_tid_by_structId(tftpTaskStruct_t tstructId);
-EXTERN tftpTaskId_t tftp_task_get_info(tftpTaskId_t taskId,tftpTaskInfo_t * taskInfo);
 EXTERN tftpTaskId_t tftp_task_get_info_by_structId(tftpTaskStruct_t tid, tftpTaskInfo_t * taskInfo);
 EXTERN tftpTaskId_t tftp_task_get_info_by_name(CHAR * taskName, tftpTaskInfo_t * taskInfo);
 #endif

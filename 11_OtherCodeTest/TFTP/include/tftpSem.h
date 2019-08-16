@@ -5,8 +5,8 @@
 #include <tftpTask.h>
 #include <tftpPublic.h>
 
-#define __TFTP_SEM_NAME_TASK_ 	"semTaskInfoList"
-#define __TFTP_SEM_NAME_SLEF_ 	"semSelfInfoList"
+#define __TFTP_SEM_NAME_TASK_ 	"semTaskInfo"
+#define __TFTP_SEM_NAME_SLEF_ 	"semSelfInfo"
 
 #define __TFTP_SEM_NAME_LENGTH_ (32)
 
@@ -42,7 +42,7 @@ typedef struct tftpSemInfo_s{
 	tftpSem_t _semId;			/* 创建的信号量ID */
 	tftpPid_t _semTask;			/* 信号量占用者tid */
 	tftpSemStatus_t _status;	/* 信号量状态 */
-	BOOL _waitForever;			/* 是否等待，TRUE时_timeout才有效 */
+	BOOL _waitForever;			/* 是否等待超时，TRUE时_timeout才有效，FALSE时为一直等 */
 	tftpSemTimeout_t _timeout;	/* 信号量wait时间 */
 }tftpSemInfo_t;
 
@@ -58,5 +58,7 @@ EXTERN INT32 tftp_sem_destroy(tftpSem_t semId);
 EXTERN INT32 tftp_sem_wait(tftpSemInfo_t * semInfo);
 EXTERN INT32 tftp_sem_post(tftpSem_t semId);
 EXTERN tftpReturnValue_t tftp_sem_module_init(VOID);
+EXTERN VOID tftp_sem_list_display(VOID);
+EXTERN tftpReturnValue_t tftp_sem_create_init(IN OUT tftpSemInfo_t * pSemInfo);
 
 #endif

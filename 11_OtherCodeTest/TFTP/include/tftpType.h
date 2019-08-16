@@ -46,8 +46,15 @@ typedef enum tftpReturnValue_e
 	tftp_ret_NotFound,
 	tftp_ret_NotSupport,
 	tftp_ret_Null,
-	tftp_ret_Max,
+	tftp_ret_Max
 }tftpReturnValue_t;
+
+EXTERN CHAR * tftp_err_code_msg[tftp_ret_Max + 1];
+
+#define tftp_err_msg(index) \
+		((index >= tftp_ret_Ok && index < tftp_ret_Max) ? \
+		tftp_err_code_msg[index] : \
+		tftp_err_code_msg[tftp_ret_Max])
 
 #define tftp_print printf
 #define tftp_vfprint vfprintf

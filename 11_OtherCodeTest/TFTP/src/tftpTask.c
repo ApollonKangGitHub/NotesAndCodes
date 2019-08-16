@@ -14,7 +14,7 @@ LOCAL tftpTaskInfoList_t * gTaskInfoHead = NULL;
 
 LOCAL tftpTaskInfoList_t * gTaskInfoTail = NULL;
 
-tftpSem_t gSemTaskInfoId;
+tftpSem_t gSemTask;
 
 /*
  * FunctionName:
@@ -230,7 +230,7 @@ EXTERN tftpReturnValue_t tftp_task_destroy(tftpTaskStruct_t structId)
  * Notes:
  *     
  */
-EXTERN INT32 tftp_task_get_task_num(VOID)
+LOCAL INT32 tftp_task_get_task_num(VOID)
 {
 	if (gTaskInfoHead) {
 		return gTaskInfoHead->_taskNum;
@@ -248,7 +248,7 @@ EXTERN INT32 tftp_task_get_task_num(VOID)
  * Notes:
  *     
  */
-EXTERN tftpTaskId_t tftp_task_get_info
+LOCAL tftpTaskId_t tftp_task_get_info
 (
 	INT32 taskId,
 	tftpTaskInfo_t * taskInfo
@@ -383,6 +383,42 @@ EXTERN tftpPid_t tftp_task_get_tid_by_structId(tftpTaskStruct_t structId)
 
 /*
  * FunctionName:
+ *     tftp_task_list_display
+ * Description:
+ *     
+ * Notes:
+ *     
+ */
+EXTERN VOID tftp_task_list_display(VOID)
+{
+	INT32 taskIndex = 0;
+	INT32 taskNum = 0;
+	tftpTaskId_t taskId = 0;
+	tftpTaskId_t taskIdRet = 0;
+	tftpTaskInfo_t taskInfo;
+	INT32 taskStart = __TFTP_TASK_ID_START_;
+	
+	memset(&taskInfo, 0, sizeof(tftpTaskInfo_t));
+
+	taskNum = tftp_task_get_task_num();
+
+	/* 各个条目信息 */
+	tftp_print("\r\n%-16s%-16s%-20s%-10s%-10s%-16s", 
+		"taskName", "stackSize(B)", "structId", "taskPid", "taskTid", "detachStatus");
+	
+	for (taskIndex = 0; taskIndex < taskNum; taskIndex++) {
+		taskId = taskIndex + taskStart;
+		taskIdRet = tftp_task_get_info(taskId, &taskInfo);
+		if(taskId == taskIdRet) {
+			tftp_print("\r\n%-16s%-16d%-20ld%-10d%-10d%-16s", taskInfo._name, 
+				taskInfo._stackSize, taskInfo._taskStructid, taskInfo._pid, taskInfo._tid,
+					(taskInfo._detachState == __TFTP_TASK_DETACHED_) ? "detach" : "attach");
+		}
+	}
+}
+
+/*
+ * FunctionName:
  *     tftp_task_sem_init
  * Description:
  *     任务模块信号量初始化
@@ -391,8 +427,7 @@ EXTERN tftpPid_t tftp_task_get_tid_by_structId(tftpTaskStruct_t structId)
  */
 LOCAL tftpReturnValue_t tftp_task_sem_init(VOID)
 {
-	tftpSem_t semId;
-	INT32 ret = 0;
+	tftpReturnValue_t ret = tftp_ret_Error;
 	tftpSemInfo_t semInfo;
 	memset(&semInfo, 0, sizeof(tftpSem_t));
 	
@@ -404,13 +439,13 @@ LOCAL tftpReturnValue_t tftp_task_sem_init(VOID)
 	semInfo._pshared = tftp_semShared_thread;
 	memcpy(semInfo._semName, __TFTP_SEM_NAME_TASK_, __TFTP_SEM_NAME_LENGTH_);
 
-	ret = tftp_sem_create(&semInfo);
-	if (-1 == ret) {
-		TFTP_LOGERR("create sem for task info list fail!");
+	ret = tftp_sem_create_init(&semInfo);
+	if (tftp_ret_Ok != ret) {
+		TFTP_LOGERR("create sem for task info list fail, return %s(%d)!", tftp_err_msg(ret), ret);
 		return tftp_ret_Error;
 	}
 	else{
-		gSemTaskInfoId = semInfo._semId;
+		gSemTask = semInfo._semId;
 	}
 	return tftp_ret_Ok;
 }
@@ -497,7 +532,7 @@ LOCAL tftpReturnValue_t tftp_task_info_init(VOID)
  */
 EXTERN tftpReturnValue_t tftp_task_module_init(VOID)
 {
-	TFTP_LOGDBG(tftp_dbgSwitch_task, "tftp task module init");
+	TFTP_LOGNOR("tftp task module init......");
 
 	/* 初始化任务模块的信息链表，并添加第一条信息：主线程信息 */
 	tftp_task_info_init();

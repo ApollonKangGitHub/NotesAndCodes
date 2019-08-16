@@ -9,22 +9,14 @@
 /* Log级别 */
 typedef enum tftpLogLevel_e
 {
-	tftp_logLevel_Normal = 0,
+	tftp_logLevel_Shell = 0,
+	tftp_logLevel_Normal,
 	tftp_logLevel_Debug,	
 	tftp_logLevel_Note,
 	tftp_logLevel_Warning,
 	tftp_logLevel_Error,
 	tftp_logLevel_Max		/* last, Please */
 }tftpLogLevel_t;
-
-/* Log输出位置 */
-typedef enum tftpRecordPos_e
-{
-	tftp_recordPos_toLogFile = 0,
-	tftp_recordPos_toShell,
-	tftp_recordPos_toAll,
-	tftp_recordPos_Max		/* last, Please */
-}tftpRecordFlag_t;
 
 /* debug开关类型 */
 typedef enum tftpDbgSwitch_e
@@ -90,37 +82,37 @@ typedef struct tftpDbgFileInfo_s{
 #define __TFTP_FORMAT_BUF_MAX_ 	(1024)
 
 /* 参数格式化，函数调用 */
-#define __TFTP_LOGLEVEL_PRINT(col, lev, rec, fmt, ...) \
+#define __TFTP_LOGLEVEL_PRINT(col, lev, abil, fmt, ...) \
 	do{ \
-		tftp_log_level_print(col, rec, lev"[%s-%d]"fmt, \
+		tftp_log_level_print(col, abil, lev"[%s-%d]"fmt, \
 			__FUNCTION__, __LINE__, ##__VA_ARGS__); \
 	}while(0)
 
 /* Log打印宏函数级别区分与参数指定 */
-#define _TFTP_LOGLEVEL(level, recordFlag, format, ...) \
+#define _TFTP_LOGLEVEL(level, ability, format, ...) \
 	do{ \
 		switch(level){ \
 			case tftp_logLevel_Debug: \
 				__TFTP_LOGLEVEL_PRINT(__COLOR_INDIGO_, __TFTP_LOG_DBG_, \
-					recordFlag, format, ##__VA_ARGS__); \
+					ability, format, ##__VA_ARGS__); \
 					break; \
 			case tftp_logLevel_Note: \
 				__TFTP_LOGLEVEL_PRINT(__COLOR_GREEN_, __TFTP_LOG_NOTE_, \
-					recordFlag, format, ##__VA_ARGS__); \
+					ability, format, ##__VA_ARGS__); \
 				break; \
 			case tftp_logLevel_Warning: \
 				__TFTP_LOGLEVEL_PRINT(__COLOR_YELLOW_, __TFTP_LOG_WARN_, \
-					recordFlag, format, ##__VA_ARGS__); \
+					ability, format, ##__VA_ARGS__); \
 				break; \
 			case tftp_logLevel_Error: \
 				__TFTP_LOGLEVEL_PRINT(__COLOR_RED_, __TFTP_LOG_ERR_, \
-					recordFlag, format, ##__VA_ARGS__); \
+					ability, format, ##__VA_ARGS__); \
 				break; \
 			case tftp_logLevel_Normal: \
 			case tftp_logLevel_Max: \
 			default: \
 				__TFTP_LOGLEVEL_PRINT(__COLOR_NORMAL_, __TFTP_LOG_NOR_, \
-					recordFlag, format, ##__VA_ARGS__); \
+					ability, format, ##__VA_ARGS__); \
 				break; \
 		} \
 	}while(0)
@@ -129,7 +121,7 @@ typedef struct tftpDbgFileInfo_s{
 #define TFTP_LOGNOR(format, ...) \
 	do{\
 		_TFTP_LOGLEVEL(tftp_logLevel_Normal, \
-			tftp_recordPos_toShell, format, ##__VA_ARGS__); \
+			__TFTP_LOG_ABIL_SHELL_ | __TFTP_LOG_ABIL_NOR_, format, ##__VA_ARGS__); \
 	}while(0)
 
 /* 打印Debug信息，直接调用该宏 */	
@@ -137,35 +129,45 @@ typedef struct tftpDbgFileInfo_s{
 	do{\
 		if(_TEST_TRUE(gDbgSwitchFlg, switch)){\
 			_TFTP_LOGLEVEL(tftp_logLevel_Debug, \
-				tftp_recordPos_toShell, format, ##__VA_ARGS__); \
+				__TFTP_LOG_ABIL_SHELL_ | __TFTP_LOG_ABIL_DBG_, format, ##__VA_ARGS__); \
 		}\
 	}while(0)
 /* 打印Notes信息，直接调用该宏 */			
 #define TFTP_LOGNOTE(format, ...) \
 	do{\
 		_TFTP_LOGLEVEL(tftp_logLevel_Note, \
-			tftp_recordPos_toAll, format, ##__VA_ARGS__); \
+			__TFTP_LOG_ABIL_SHELL_ | __TFTP_LOG_ABIL_NOTE_, format, ##__VA_ARGS__); \
 	}while(0)
 /* 打印Warning信息，直接调用该宏 */			
 #define TFTP_LOGWARN(format, ...) \
 	do{\
 		_TFTP_LOGLEVEL(tftp_logLevel_Warning, \
-			tftp_recordPos_toAll, format, ##__VA_ARGS__); \
+			__TFTP_LOG_ABIL_SHELL_ | __TFTP_LOG_ABIL_WARN_, format, ##__VA_ARGS__); \
 	}while(0)
 /* 打印Error信息，直接调用该宏 */				
 #define TFTP_LOGERR(format, ...) \
 	do{\
 		_TFTP_LOGLEVEL(tftp_logLevel_Error, \
-			tftp_recordPos_toAll, format, ##__VA_ARGS__); \
+			__TFTP_LOG_ABIL_SHELL_ | __TFTP_LOG_ABIL_ERR_, format, ##__VA_ARGS__); \
 	}while(0)
 
 #define TFTP_DBG_SWITCH_NUMBER_MAX (tftp_dbgSwitch_max / 8) 
 EXTERN UINT8 gDbgSwitchFlg[TFTP_DBG_SWITCH_NUMBER_MAX];
 
+/* 指示log打印目标文件，可一个可多个 */
+typedef UINT32 tftpLogAbil;
+/* 打印目标文件标志位 */
+#define __TFTP_LOG_ABIL_SHELL_	(1U << tftp_logLevel_Shell)
+#define __TFTP_LOG_ABIL_NOR_	(1U << tftp_logLevel_Normal)
+#define __TFTP_LOG_ABIL_DBG_	(1U << tftp_logLevel_Debug)
+#define __TFTP_LOG_ABIL_NOTE_	(1U << tftp_logLevel_Note)
+#define __TFTP_LOG_ABIL_WARN_	(1U << tftp_logLevel_Warning)
+#define __TFTP_LOG_ABIL_ERR_	(1U << tftp_logLevel_Error)
+
 EXTERN INT32 tftp_log_level_print
 (
 	IN CHAR * colorStr,
-	IN tftpRecordFlag_t recordFlag,
+	IN tftpLogAbil ability,
 	IN CHAR * format,
 	IN ...
 );

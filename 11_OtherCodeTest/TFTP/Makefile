@@ -6,6 +6,7 @@ MAKE := make
 DEV_NULL := /dev/null
 
 INCLUDE = -I ./include/
+#INCLUDE += -I ./tools/
 
 CFLAGS = $(INCLUDE) 
 LDFLAGS = -lpthread
@@ -18,6 +19,8 @@ OBJS += ./src/tftpShell.o
 #OBJS += ./src/tftpPack.o
 OBJS += ./src/tftpTask.o
 OBJS += ./src/tftpSem.o
+
+#OBJS += ./tools/tools.o
 
 DEP_FILES := $(patsubst %.o,%.d,$(OBJS))
 DEP_FILES := $(wildcard $(DEP_FILES))

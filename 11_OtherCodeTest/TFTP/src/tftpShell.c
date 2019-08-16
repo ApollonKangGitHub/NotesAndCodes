@@ -5,11 +5,6 @@
 
 #include <tftpPublic.h>
 
-LOCAL VOID ttp_shell_normal_menu(VOID);
-LOCAL VOID ttp_shell_debug_menu(VOID);
-LOCAL VOID * tftp_shell_thread_deal(VOID * argv);
-LOCAL INT32 tftp_shell_thread_create(VOID);
-
 VOID ttp_shell_normal_menu(VOID)
 {
 	tftp_print("\n------------------------%s MENU-------------------------", 
@@ -17,7 +12,8 @@ VOID ttp_shell_normal_menu(VOID)
 	tftp_print("\nquit   :   Quit the TFTP server");
 	tftp_print("\nclient :   Download target file with argument");
 	tftp_print("\nserver :   Start the TFTP server or close server");
-	tftp_print("\nthread :   Display the thread info");
+	tftp_print("\nthread :   Display the thread list info");
+	tftp_print("\nsem    :   Display the sem list info");
 	tftp_print("\n--------------------------------------------------------"); 
 }
 
@@ -78,11 +74,10 @@ VOID tftp_shell_deal_input(CONST CHAR * input)
 	else if (0 == strcmp(input, "quit")) {
 		tftpTaskStruct_t tstructId = 0;
 		tstructId = tftp_task_get_structId();
-		/* 如果服务器还在运行，需要将主线程放到后台执行... */
-
-		/* do something, last to destroy task */
+		exit(EXIT_SUCCESS);
+		/* do something, last to destroy all task */
 		
-		(VOID)tftp_task_destroy(tstructId);
+		//(VOID)tftp_task_destroy(tstructId);
 	}
 	else if (0 == strcmp(input, "client")) {
 
@@ -91,30 +86,10 @@ VOID tftp_shell_deal_input(CONST CHAR * input)
 
 	}
 	else if (0 == strcmp(input, "thread")) {
-		INT32 taskIndex = 0;
-		INT32 taskNum = 0;
-		tftpTaskId_t taskId = 0;
-		tftpTaskId_t taskIdRet = 0;
-		tftpTaskInfo_t taskInfo;
-		INT32 taskStart = __TFTP_TASK_ID_START_;
-		
-		memset(&taskInfo, 0, sizeof(tftpTaskInfo_t));
-
-		taskNum = tftp_task_get_task_num();
-
-		/* 各个条目信息 */
-		tftp_print("\r\n%-16s%-16s%-20s%-10s%-10s%-16s", 
-			"taskName", "stackSize(B)", "structId", "taskPid", "taskTid", "detachStatus");
-		
-		for (taskIndex = 0; taskIndex < taskNum; taskIndex++) {
-			taskId = taskIndex + taskStart;
-			taskIdRet = tftp_task_get_info(taskId, &taskInfo);
-			if(taskId == taskIdRet) {
-				tftp_print("\r\n%-16s%-16d%-20ld%-10d%-10d%-16s", taskInfo._name, 
-					taskInfo._stackSize, taskInfo._taskStructid, taskInfo._pid, taskInfo._tid,
-						(taskInfo._detachState == __TFTP_TASK_DETACHED_) ? "detach" : "attach");
-			}
-		}
+		tftp_task_list_display();
+	}
+	else if (0 == strcmp(input, "sem")) {
+		tftp_sem_list_display();
 	}
 	else {
 		if (0 != strlen(input)) {
@@ -160,6 +135,8 @@ LOCAL INT32 tftp_shell_thread_create(VOID)
 
 EXTERN INT32 tftp_shell_module_init(VOID)
 {
+	TFTP_LOGNOR("tftp shell module init......");
+
 	/* 创建shell线程 */
 	tftp_shell_thread_create();
 
@@ -167,4 +144,5 @@ EXTERN INT32 tftp_shell_module_init(VOID)
 
 	/* 释放信号量，启动shell线程 */
 }
+
 

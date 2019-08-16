@@ -15,27 +15,31 @@ LOCAL CHAR * gWeekStr[] = {
 	"Friday",
 	"Saturday"
 };
-	
-LOCAL FILE * gLogFile = NULL;
-LOCAL FILE * gLogShell = (FILE *)(NULL);
 
+LOCAL FILE * gLogFile[tftp_logLevel_Max] = {NULL};
+LOCAL CHAR * gLogFilePath[tftp_logLevel_Max] = {
+	"/dev/stdin",
+	"./logFile/tftpNormal.log",
+	"./logFile/tftpDebug.log",
+	"./logFile/tftpNote.log",
+	"./logFile/tftpWarn.log",
+	"./logFile/tftpError.log",
+};
+	
 LOCAL INT32 tftp_log_level_print_format
 (
 	FILE * file, 
-	BOOL flag, 
+	CONST CHAR * filePath, 
 	CONST CHAR * format, 
 	va_list argv
 ) 
 {
 	INT32 ret = tftp_ret_Ok; 
 
-	if (flag) { 
-    	ret |= tftp_vfprint (file, format, argv);
-		if (ret < 0) { 
-			tftp_print ("\r\nTFTP-LOG:log to %s return is error(%d)", 
-				(file == gLogFile) ? "logFile" : "shell", ret); 
-			return tftp_ret_Error; 
-		} 
+	ret |= tftp_vfprint (file, format, argv);
+	if (ret < 0) { 
+		tftp_print ("\r\nTFTP-LOG:log to %s return is error(%d)", filePath, ret); 
+		return tftp_ret_Error; 
 	} 
 
 	return ret;
@@ -65,12 +69,13 @@ LOCAL CHAR * tftp_log_time_get(CHAR * date)
 EXTERN INT32 tftp_log_level_print
 (
 	IN CHAR * colorStr,
-	IN tftpRecordFlag_t recordFlag,
+	IN tftpLogAbil ability,
 	IN CHAR * format,
 	IN ...
 )
 {
 	INT32 ret;
+	tftpLogLevel_t level = tftp_logLevel_Shell;
 	BOOL fileFlg = FALSE;
 	BOOL shellFlg = FALSE;
 	va_list argList;
@@ -89,57 +94,43 @@ EXTERN INT32 tftp_log_level_print
 	(VOID)strncat(pFormatAll, pDateTime, strlen(pDateTime));	/* 格式化输出日期时间获取 */
 	(VOID)strncat(pFormatAll, pFormat, strlen(pFormat));		/* 格式化输出level + 原始format */
 	(VOID)strncat(pFormatAll, pEnd, strlen(pEnd));				/* 格式化输出颜色reset */
-	
-	switch (recordFlag) {
-		case tftp_recordPos_toLogFile:
-			fileFlg = TRUE;
-			break;
-		case tftp_recordPos_toShell:
-			shellFlg = TRUE;
-			break;
-		case tftp_recordPos_toAll:
-			fileFlg = TRUE;
-			shellFlg = TRUE;
-			break;
-		default:
-			break;
+
+	for (level = tftp_logLevel_Shell; level < tftp_logLevel_Max; level++) {
+		if (_TEST_TRUE(&ability, level)) {
+			if (gLogFile[level]) {
+				/* 打印到对应文件 */
+				va_start (argList, format);
+				(VOID)tftp_log_level_print_format(gLogFile[level],\
+							gLogFilePath[level], pFormatAll, argList);
+				va_end (argList);
+			}
+			else {
+				tftp_print("\r\nlog file %s is not open or not exist, file pointer=%p!", 
+					gLogFilePath[level], gLogFile[level]);
+			}
+		}
 	}
-
-	/* 打印到文件 */
-	va_start (argList, format);
-	(VOID)tftp_log_level_print_format(gLogFile, fileFlg, pFormatAll, argList);
-	va_end (argList);
-
-	/* 打印到shell */
-	va_start (argList, format);
-	(VOID)tftp_log_level_print_format(gLogShell, shellFlg, pFormatAll, argList);
-	va_end (argList);
 	
    	return tftp_ret_Ok;
 }
 
-LOCAL INT32 tftp_log_to_file_init(FILE ** fp, CONST CHAR * path)
-{
-	if ((NULL == fp) || (NULL == path)) {
-		tftp_print("\r\nError pointer for fp[%p], path:[%p]!", fp, path);
-		exit(EXIT_FAILURE);
-	}
-	
-	*fp = fopen(path, "ab+");
-	if (NULL == *fp) {
-		tftp_print("\r\nError to open file:%s!", path);
-		exit(EXIT_FAILURE);
-	}
-	
-	return tftp_ret_Ok;
-}
-
-LOCAL INT32 tftp_log_debug_switch_init(VOID)
+LOCAL INT32 tftp_log_to_file_init()
 {
 	INT32 i = 0;
-	for (;i < TFTP_DBG_SWITCH_NUMBER_MAX; i++) {
-		gDbgSwitchFlg[i] &= 0;
+	FILE * fp = NULL;
+
+	gLogFile[tftp_logLevel_Shell] = __TFTP_STDOUT_;
+	for (i = tftp_logLevel_Normal; i < tftp_logLevel_Max; i++) {
+		fp = fopen(gLogFilePath[i], "ab+");
+		if (NULL == fp) {
+			tftp_print("\r\nError to open file:%s!", gLogFilePath[i]);
+			exit(EXIT_FAILURE);
+		}
+
+		gLogFile[i] = fp;
 	}
+
+	return tftp_ret_Ok;
 }
 
 EXTERN VOID tftp_log_debug_control
@@ -149,18 +140,25 @@ EXTERN VOID tftp_log_debug_control
 )
 {
 	__SET_BIT(gDbgSwitchFlg, dbgSw, openFlg);
-
 	return;
+}
+
+LOCAL INT32 tftp_log_debug_switch_init(VOID)
+{
+	__SET_BIT(gDbgSwitchFlg, tftp_dbgSwitch_task, FALSE);
+	__SET_BIT(gDbgSwitchFlg, tftp_dbgSwitch_server, FALSE);
+	__SET_BIT(gDbgSwitchFlg, tftp_dbgSwitch_client, FALSE);
+	__SET_BIT(gDbgSwitchFlg, tftp_dbgSwitch_shell, FALSE);
+	__SET_BIT(gDbgSwitchFlg, tftp_dbgSwitch_sem, FALSE);
+	__SET_BIT(gDbgSwitchFlg, tftp_dbgSwitch_send, FALSE);
+	__SET_BIT(gDbgSwitchFlg, tftp_dbgSwitch_recv, FALSE);
+	__SET_BIT(gDbgSwitchFlg, tftp_dbgSwitch_other, FALSE);
 }
 
 EXTERN INT32 tftp_log_module_init(VOID)
 {
-	/* 初始化Shell文件描述符 */
-	gLogShell = __TFTP_STDOUT_;
-	tftp_print("-------%s-%d-------", __FUNCTION__, __LINE__);
-
 	/* 初始化日志文件描述符 */
-	tftp_log_to_file_init(&gLogFile, __TFTP_LOF_FILE_PATH_);
+	tftp_log_to_file_init();
 	
 	/* 初始化debug打印开关 */
 	tftp_log_debug_switch_init();

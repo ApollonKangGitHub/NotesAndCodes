@@ -1,0 +1,56 @@
+
+[1;36m2089-08-16 23:47:03(UTC)[Friday]%% TFTP-DEBUG :[tftp_task_module_init-535]tftp task module init[0m
+[1;36m2089-08-16 23:47:03(UTC)[Friday]%% TFTP-DEBUG :[tftp_task_info_init-471]tftp task module init[0m
+[1;36m2089-08-16 23:47:03(UTC)[Friday]%% TFTP-DEBUG :[tftp_task_info_create-99]tftp task info memory create, taskInfo=0x7ffd7a1aaaa0[0m
+[1;36m2089-08-16 23:47:03(UTC)[Friday]%% TFTP-DEBUG :[tftp_task_info_insert-36]tftp task info code insert, taskInfoCode=0x192b420, taskName:tftpMainTask, taskStructid:140143522346752[0m
+[1;36m2089-08-16 23:47:03(UTC)[Friday]%% TFTP-DEBUG :[tftp_task_info_insert-67]taskId:1, taskNum:1, taskName:tftpMainTask![0m
+[1;36m2089-08-16 23:47:03(UTC)[Friday]%% TFTP-DEBUG :[tftp_task_sem_init-434]tftp task sem init[0m
+[1;36m2089-08-16 23:47:03(UTC)[Friday]%% TFTP-DEBUG :[tftp_sem_create_init-243]tftp sem create and init, semInfo=0x66[0m
+[1;36m2089-08-16 23:47:03(UTC)[Friday]%% TFTP-DEBUG :[tftp_sem_create-51]tftp sem create, semInfo=0x7ffd7a1aaa10[0m
+[1;36m2089-08-16 23:47:03(UTC)[Friday]%% TFTP-DEBUG :[tftp_sem_info_node_create-172]tftp sem info node memory create, pSemInfo=0x7ffd7a1aaa10[0m
+[1;36m2089-08-16 23:47:03(UTC)[Friday]%% TFTP-DEBUG :[tftp_sem_info_node_insert-202]tftp sem info node insert info list, PsemInfoCode:0x192b470[0m
+[1;36m2089-08-16 23:47:03(UTC)[Friday]%% TFTP-DEBUG :[tftp_sem_wait-96]tftp sem wait, semInfo=0x192ab00[0m
+[1;36m2089-08-16 23:47:03(UTC)[Friday]%% TFTP-DEBUG :[tftp_sem_post-122]tftp sem post, semId=2048567648[0m
+[1;36m2089-08-16 23:47:03(UTC)[Friday]%% TFTP-DEBUG :[tftp_task_create_init-139]tftp task create init, taskInfo=0x7ffd7a1aaad0[0m
+[1;36m2089-08-16 23:47:03(UTC)[Friday]%% TFTP-DEBUG :[tftp_task_info_create-99]tftp task info memory create, taskInfo=0x7ffd7a1aaad0[0m
+[1;36m2089-08-16 23:47:03(UTC)[Friday]%% TFTP-DEBUG :[tftp_task_info_insert-36]tftp task info code insert, taskInfoCode=0x192b610, taskName:tftpShellTask, taskStructid:140143522338560[0m
+[1;36m2089-08-16 23:47:03(UTC)[Friday]%% TFTP-DEBUG :[tftp_task_info_insert-67]taskId:2, taskNum:2, taskName:tftpShellTask![0m
+[1;36m2089-08-16 23:47:03(UTC)[Friday]%% TFTP-DEBUG :[tftp_shell_thread_deal-104]shell deal thread, argv=(nil)[0m
+[1;36m2089-08-16 23:47:04(UTC)[Friday]%% TFTP-DEBUG :[tftp_shell_deal_input-64]input=, len=0[0m
+[1;36m2089-08-16 23:47:05(UTC)[Friday]%% TFTP-DEBUG :[tftp_shell_deal_input-64]input=, len=0[0m
+[1;36m2089-08-16 23:47:07(UTC)[Friday]%% TFTP-DEBUG :[tftp_shell_deal_input-64]input=thread, len=6[0m
+[1;36m2089-08-16 23:47:07(UTC)[Friday]%% TFTP-DEBUG :[tftp_task_get_info-260]tftp task get info by taskId, taskId=1[0m
+[1;36m2089-08-16 23:47:07(UTC)[Friday]%% TFTP-DEBUG :[tftp_task_get_info-270]taskId:1, _taskId:1, _taskNum:2![0m
+[1;36m2089-08-16 23:47:07(UTC)[Friday]%% TFTP-DEBUG :[tftp_task_get_info-260]tftp task get info by taskId, taskId=2[0m
+[1;36m2089-08-16 23:47:07(UTC)[Friday]%% TFTP-DEBUG :[tftp_task_get_info-270]taskId:2, _taskId:2, _taskNum:2![0m
+[1;36m2089-08-16 23:47:20(UTC)[Friday]%% TFTP-DEBUG :[tftp_shell_deal_input-64]input=sem, len=3[0m
+[1;36m2089-08-16 23:47:22(UTC)[Friday]%% TFTP-DEBUG :[tftp_shell_deal_input-64]input=quit, len=4[0m
+[1;36m2089-08-16 23:50:20(UTC)[Friday]%% TFTP-DEBUG :[tftp_task_info_init-471]tftp task module init[0m
+[1;36m2089-08-16 23:50:20(UTC)[Friday]%% TFTP-DEBUG :[tftp_task_info_create-99]tftp task info memory create, taskInfo=0x7ffd157954d0[0m
+[1;36m2089-08-16 23:50:20(UTC)[Friday]%% TFTP-DEBUG :[tftp_task_info_insert-36]tftp task info code insert, taskInfoCode=0x1581830, taskName:tftpMainTask, taskStructid:139953448269568[0m
+[1;36m2089-08-16 23:50:20(UTC)[Friday]%% TFTP-DEBUG :[tftp_task_info_insert-67]taskId:1, taskNum:1, taskName:tftpMainTask![0m
+[1;36m2089-08-16 23:50:20(UTC)[Friday]%% TFTP-DEBUG :[tftp_task_sem_init-434]tftp task sem init[0m
+[1;36m2089-08-16 23:50:20(UTC)[Friday]%% TFTP-DEBUG :[tftp_sem_create_init-243]tftp sem create and init, semInfo=0x66[0m
+[1;36m2089-08-16 23:50:20(UTC)[Friday]%% TFTP-DEBUG :[tftp_sem_create-51]tftp sem create, semInfo=0x7ffd15795440[0m
+[1;36m2089-08-16 23:50:20(UTC)[Friday]%% TFTP-DEBUG :[tftp_sem_info_node_create-172]tftp sem info node memory create, pSemInfo=0x7ffd15795440[0m
+[1;36m2089-08-16 23:50:20(UTC)[Friday]%% TFTP-DEBUG :[tftp_sem_info_node_insert-202]tftp sem info node insert info list, PsemInfoCode:0x1581880[0m
+[1;36m2089-08-16 23:50:20(UTC)[Friday]%% TFTP-DEBUG :[tftp_sem_wait-96]tftp sem wait, semInfo=0x15813a0[0m
+[1;36m2089-08-16 23:50:20(UTC)[Friday]%% TFTP-DEBUG :[tftp_sem_post-122]tftp sem post, semId=360272784[0m
+[1;36m2089-08-16 23:50:20(UTC)[Friday]%% TFTP-DEBUG :[tftp_task_create_init-139]tftp task create init, taskInfo=0x7ffd15795500[0m
+[1;36m2089-08-16 23:50:20(UTC)[Friday]%% TFTP-DEBUG :[tftp_task_info_create-99]tftp task info memory create, taskInfo=0x7ffd15795500[0m
+[1;36m2089-08-16 23:50:20(UTC)[Friday]%% TFTP-DEBUG :[tftp_task_info_insert-36]tftp task info code insert, taskInfoCode=0x1581a20, taskName:tftpShellTask, taskStructid:139953448261376[0m
+[1;36m2089-08-16 23:50:20(UTC)[Friday]%% TFTP-DEBUG :[tftp_task_info_insert-67]taskId:2, taskNum:2, taskName:tftpShellTask![0m
+[1;36m2089-08-16 23:50:20(UTC)[Friday]%% TFTP-DEBUG :[tftp_shell_thread_deal-104]shell deal thread, argv=(nil)[0m
+[1;36m2089-08-16 23:50:51(UTC)[Friday]%% TFTP-DEBUG :[tftp_shell_deal_input-64]input=, len=0[0m
+[1;36m2089-08-16 23:50:53(UTC)[Friday]%% TFTP-DEBUG :[tftp_shell_deal_input-64]input=, len=0[0m
+[1;36m2089-08-16 23:50:53(UTC)[Friday]%% TFTP-DEBUG :[tftp_shell_deal_input-64]input=, len=0[0m
+[1;36m2089-08-16 23:50:53(UTC)[Friday]%% TFTP-DEBUG :[tftp_shell_deal_input-64]input=, len=0[0m
+[1;36m2089-08-16 23:50:53(UTC)[Friday]%% TFTP-DEBUG :[tftp_shell_deal_input-64]input=, len=0[0m
+[1;36m2089-08-16 23:50:54(UTC)[Friday]%% TFTP-DEBUG :[tftp_shell_deal_input-64]input=, len=0[0m
+[1;36m2089-08-16 23:50:56(UTC)[Friday]%% TFTP-DEBUG :[tftp_shell_deal_input-64]input=thread, len=6[0m
+[1;36m2089-08-16 23:50:56(UTC)[Friday]%% TFTP-DEBUG :[tftp_task_get_info-260]tftp task get info by taskId, taskId=1[0m
+[1;36m2089-08-16 23:50:56(UTC)[Friday]%% TFTP-DEBUG :[tftp_task_get_info-270]taskId:1, _taskId:1, _taskNum:2![0m
+[1;36m2089-08-16 23:50:56(UTC)[Friday]%% TFTP-DEBUG :[tftp_task_get_info-260]tftp task get info by taskId, taskId=2[0m
+[1;36m2089-08-16 23:50:56(UTC)[Friday]%% TFTP-DEBUG :[tftp_task_get_info-270]taskId:2, _taskId:2, _taskNum:2![0m
+[1;36m2089-08-16 23:51:00(UTC)[Friday]%% TFTP-DEBUG :[tftp_shell_deal_input-64]input=sem, len=3[0m
+[1;36m2089-08-16 23:51:03(UTC)[Friday]%% TFTP-DEBUG :[tftp_shell_deal_input-64]input=quit, len=4[0m
