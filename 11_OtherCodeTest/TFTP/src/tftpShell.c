@@ -133,6 +133,87 @@ LOCAL INT32 tftp_shell_thread_create(VOID)
 	return tftp_ret_Ok;
 }
 
+/*
+ * FunctionName:
+ *     tftp_command_register
+ * Description:
+ *     命令shell格式解析注册函数
+ * Notes:
+ *     命令注册格式:分为两部分参数，
+ *     命令执行函数和命令注册格式化字符串，具体如：
+ * 	   tftp_command_register(tftp_cmd_del_task_info, 
+ *         __TFTP_CMD_HIDE_ | __TFTP_CMD_DYN_,
+ *         "tftpThread(1, 'destription for tftpThread'){"
+ *	          "display(2, 'display some information'){"
+ *		          "__STRING__(0, 'string for thread name'),"
+ *		          "__NUMBER__(0, 'thread id type is tid'),"
+ *		          "__OVER__(0, 'flag over for cmd register')"
+ *		      "}"
+ *         "}"
+ *     );
+ *
+ */
+EXTERN tftpReturnValue_t tftp_command_register
+(
+	tftp_cmd_deal_fun function, 
+	CONST CHAR * cmd_str
+)
+{
+	/* 解析注册信息 */
+
+	/* 构建命令注册链表节点 */
+
+	/* 挂载节点 */
+}
+
+/*
+ * FunctionName:
+ *     tftp_shell_command_help_deal
+ * Description:
+ *     帮助命令执行函数
+ * Notes:
+ *     
+ */
+LOCAL VOID tftp_shell_command_help_deal
+(
+	INT32 argc, 
+	CONST CHAR * argv
+)
+{
+	
+}
+
+/*
+ * FunctionName:
+ *     tftp_shell_command_dynmaic_deal
+ * Description:
+ *     动态命令注册执行函数
+ * Notes:
+ *     
+ */
+LOCAL VOID tftp_shell_command_dynmaic_deal
+(
+	INT32 argc, 
+	CONST CHAR * argv
+)
+{
+
+}
+
+
+/*
+ * FunctionName:
+ *     tftp_shell_cmd_init
+ * Description:
+ *     
+ * Notes:
+ *     
+ */
+LOCAL VOID tftp_shell_command_init(VOID)
+{
+	//tftp_command_register(tftp_shell_command_help_deal, "");
+	//tftp_command_register(tftp_shell_command_dynmaic_deal, "");
+}
 EXTERN INT32 tftp_shell_module_init(VOID)
 {
 	TFTP_LOGNOR("tftp shell module init......");

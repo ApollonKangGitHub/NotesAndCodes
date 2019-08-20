@@ -186,6 +186,9 @@ EXTERN tftpReturnValue_t tftp_task_create_init(tftpTaskInfo_t * taskInfo)
 	/* 线程创建成功，保存线程信息 */
 	pTaskInfoCode = tftp_task_info_create(taskInfo);
 	tftp_task_info_insert(pTaskInfoCode);
+
+	TFTP_LOGNOTE("create task %s[pid:%d] and save info was succeed!", \
+		taskInfo->_name, taskInfo->_tid);
 	
 	return tftp_ret_Ok;
 }

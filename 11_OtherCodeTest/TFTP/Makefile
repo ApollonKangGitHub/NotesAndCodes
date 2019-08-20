@@ -12,7 +12,8 @@ CFLAGS = $(INCLUDE)
 LDFLAGS = -lpthread
 
 OBJS = ./tftpMain.o
-#OBJS += ./src/tftpServer.o
+OBJS += ./src/tftpSocket.o
+OBJS += ./src/tftpServer.o
 #OBJS += ./src/tftpClient.o
 OBJS += ./src/tftpLog.o
 OBJS += ./src/tftpShell.o

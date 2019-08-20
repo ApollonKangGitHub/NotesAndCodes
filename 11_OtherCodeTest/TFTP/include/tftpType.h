@@ -12,7 +12,7 @@
 #define LOCAL 	static
 #define EXTERN 	extern
 #define CONST  	const
-
+#define VOLATILE volatile 
 #define BOOL 	int
 #define VOID 	void 
 #define CHAR 	char

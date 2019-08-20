@@ -16,6 +16,7 @@ LOCAL CHAR * gWeekStr[] = {
 	"Saturday"
 };
 
+/* 日志文件描述符以及对应的文件路径 */
 LOCAL FILE * gLogFile[tftp_logLevel_Max] = {NULL};
 LOCAL CHAR * gLogFilePath[tftp_logLevel_Max] = {
 	"/dev/stdin",
@@ -25,13 +26,21 @@ LOCAL CHAR * gLogFilePath[tftp_logLevel_Max] = {
 	"./logFile/tftpWarn.log",
 	"./logFile/tftpError.log",
 };
-	
+
+/*
+ * FunctionName:
+ *     tftp_log_level_print_format
+ * Description:
+ *     日志打印时，传入具体的文件描述符格和format格式，进行写文件操作
+ * Notes:
+ *     
+ */
 LOCAL INT32 tftp_log_level_print_format
 (
-	FILE * file, 
-	CONST CHAR * filePath, 
-	CONST CHAR * format, 
-	va_list argv
+	IN FILE * file, 
+	IN CONST CHAR * filePath, 
+	IN CONST CHAR * format, 
+	IN va_list argv
 ) 
 {
 	INT32 ret = tftp_ret_Ok; 
@@ -45,7 +54,15 @@ LOCAL INT32 tftp_log_level_print_format
 	return ret;
 }
 
-LOCAL CHAR * tftp_log_time_get(CHAR * date)
+/*
+ * FunctionName:
+ *     tftp_log_time_get
+ * Description:
+ *     获取打印某条日志时的时间并转换为传出字符串
+ * Notes:
+ *     
+ */
+LOCAL CHAR * tftp_log_time_get(OUT CHAR * date)
 {
     time_t timeStamp;
     struct tm tmStruct;
@@ -66,6 +83,14 @@ LOCAL CHAR * tftp_log_time_get(CHAR * date)
 	return date;
 }
 
+/*
+ * FunctionName:
+ *     tftp_log_level_print
+ * Description:
+ *     日志打印格式化函数，包括打印级别确定到目标文件确定
+ * Notes:
+ *     
+ */
 EXTERN INT32 tftp_log_level_print
 (
 	IN CHAR * colorStr,
@@ -114,7 +139,15 @@ EXTERN INT32 tftp_log_level_print
    	return tftp_ret_Ok;
 }
 
-LOCAL INT32 tftp_log_to_file_init()
+/*
+ * FunctionName:
+ *     tftp_log_to_file_init
+ * Description:
+ *     初始化时，由模块初始化流程调用，打开所有模块日志文件
+ * Notes:
+ *     shell输出，直接使用已经打开的stdout无需再次open
+ */
+LOCAL INT32 tftp_log_to_file_init(VOID)
 {
 	INT32 i = 0;
 	FILE * fp = NULL;
@@ -133,16 +166,33 @@ LOCAL INT32 tftp_log_to_file_init()
 	return tftp_ret_Ok;
 }
 
+/*
+ * FunctionName:
+ *     tftp_log_debug_control
+ * Description:
+ *     tftp日志模块对外提供debug开关控制接口，TRUE为打开相应
+ *     debug开关，FALSE为关闭相应dbgSw开关
+ * Notes:
+ *     
+ */
 EXTERN VOID tftp_log_debug_control
 (
-	tftpDbgSwitch_t dbgSw,
-	BOOL openFlg
+	IN tftpDbgSwitch_t dbgSw,
+	IN BOOL openFlg
 )
 {
 	__SET_BIT(gDbgSwitchFlg, dbgSw, openFlg);
 	return;
 }
 
+/*
+ * FunctionName:
+ *     tftp_log_debug_switch_init
+ * Description:
+ *     tftp日志模块debug开关初始化设置，默认全部关闭
+ * Notes:
+ *     
+ */
 LOCAL INT32 tftp_log_debug_switch_init(VOID)
 {
 	__SET_BIT(gDbgSwitchFlg, tftp_dbgSwitch_task, FALSE);
@@ -155,6 +205,14 @@ LOCAL INT32 tftp_log_debug_switch_init(VOID)
 	__SET_BIT(gDbgSwitchFlg, tftp_dbgSwitch_other, FALSE);
 }
 
+/*
+ * FunctionName:
+ *     tftp_log_module_init
+ * Description:
+ *     tftp日志模块初始化函数，由主线程初始化时统一调用
+ * Notes:
+ *     
+ */
 EXTERN INT32 tftp_log_module_init(VOID)
 {
 	/* 初始化日志文件描述符 */
