@@ -48,14 +48,13 @@ VOID * tftp_client_connect_handle(VOID * arg)
  */
 LOCAL tftpReturnValue_t tftp_task_pool_init(VOID)
 {
-	gTaskPoolHead = gTaskPoolTail = NULL;
 	INT32 taskIndex = 0;
 	CHAR strClientName[__TFTP_TASK_NAME_LENGTH_] = {0};
 	CHAR strCliIndex[3] = {0};
+	tftpTaskInfo_t clientTask;
 	
 	/* 先创建线程池最小保证线程个数 */
 	for (taskIndex = 0; taskIndex < __TFTP_TASK_POOL_MIN_; taskIndex++) {
-		tftpTaskInfo_t clientTask;
 		memset(&clientTask, 0, sizeof(tftpTaskInfo_t));
 		memset(strClientName, 0, sizeof(strClientName));
 		memset(strCliIndex, 0, sizeof(strCliIndex));
@@ -66,6 +65,7 @@ LOCAL tftpReturnValue_t tftp_task_pool_init(VOID)
 		clientTask._deal_function = tftp_client_connect_handle;
 		clientTask._stackSize = __TFTP_CLIENT_TASK_STACK_SIZE_;
 		clientTask._detachState = __TFTP_TASK_DETACHED_;
+
 		strcat(strClientName, __TFTP_TASK_NAME_CLIENT_);
 		strcat(strClientName, uitoa(taskIndex + 1, strCliIndex));
 		strncpy(clientTask._name, strClientName, __TFTP_TASK_NAME_LENGTH_);
