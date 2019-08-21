@@ -19,7 +19,8 @@
 
 #define __TFTP_TASK_NAME_SHELL_		"tftpShellTask"
 #define __TFTP_TASK_NAME_MAIN_		"tftpMainTask"
-#define __TFTP_TASK_NAME_SERVER_	"tftpServerTask"
+#define __TFTP_TASK_NAME_SERVER_	"tftpSerTask"
+#define __TFTP_TASK_NAME_CLIENT_	"tftpCliTask"
 
 typedef pthread_t tftpTaskStruct_t;
 typedef pid_t tftpPid_t;

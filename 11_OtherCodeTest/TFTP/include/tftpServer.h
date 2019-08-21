@@ -7,6 +7,7 @@
 
 #define __TFTP_FILE_EOF_					(EOF)
 #define __TFTP_SERVER_TASK_STACK_SIZE_		(0x400000)
+#define __TFTP_CLIENT_TASK_STACK_SIZE_		(0x100000)
 #define __TFTP_SERVER_SOCKET_UDP_PORT_		(69)
 #define __TFTP_SERVER_IP_ADDR_				(INADDR_ANY)
 /* 
@@ -15,6 +16,8 @@
  * Linux 32768~61000
  * Windows 1025~5000
  */
+#define __TFTP_CLIENT_SOCKET_UDP_PORT_MIN_	(55555)
+#define __TFTP_CLIENT_SOCKET_UDP_PORT_MAX_	(59999)
 
 typedef enum tftpErroCode_e
 {
@@ -30,7 +33,7 @@ typedef enum tftpErroCode_e
 }tftpErrCode_t;
 
 #define __TFTP_FILENAME_STR_LEN_  	(64)	
-#define __TFTP_TASK_POOL_MIN_		(3)		/* 线程池最少线程数目 */
+#define __TFTP_TASK_POOL_MIN_		(5)		/* 线程池最少线程数目 */
 #define __TFTP_TASK_POOL_MAX_		(20)	/* 线程池最多线程数目 */
 
 typedef struct tftpSocketInfo_s
