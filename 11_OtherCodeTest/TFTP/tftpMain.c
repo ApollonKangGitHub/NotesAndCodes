@@ -1,6 +1,7 @@
 #include <tftpLog.h>
 #include <tftpType.h>
 #include <tftpShell.h>
+#include <tftpServer.h>
 #include <tftpPublic.h>
 
 CHAR * tftp_err_code_msg[tftp_ret_Max + 1] = {
@@ -30,7 +31,7 @@ INT32 main(void)
 	#endif
 	tftp_task_module_init();
 	tftp_shell_module_init();
-	//tftp_server_module_init();
+	tftp_server_module_init();
 	
 	while(TRUE){
 

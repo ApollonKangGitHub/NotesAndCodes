@@ -6,6 +6,15 @@
 #include <tftpPublic.h>
 
 #define __TFTP_FILE_EOF_					(EOF)
+#define __TFTP_SERVER_TASK_STACK_SIZE_		(0x400000)
+#define __TFTP_SERVER_SOCKET_UDP_PORT_		(69)
+#define __TFTP_SERVER_IP_ADDR_				(INADDR_ANY)
+/* 
+ * 通信端口建议：
+ * 美国IANA建议使用49152~65535
+ * Linux 32768~61000
+ * Windows 1025~5000
+ */
 
 typedef enum tftpErroCode_e
 {
@@ -37,7 +46,7 @@ typedef struct tftpSocketInfo_s
 	struct sockaddr_in _cliAddr;				/* 客户端相关连接信息 */
 }tftpSocketInfo_t;
 
-/* 线程池单元结构体，可构建静态/动态线程池，选择复合结构线程池 */
+/* 线程池节点结构，可构建静态/动态线程池，选择复合结构线程池 */
 typedef struct tftpTaskPool_s
 {
 	 VOLATILE INT32 _state;			/* 标志线程是否空闲 */
@@ -47,6 +56,13 @@ typedef struct tftpTaskPool_s
 	 tftpSocketInfo_t _cliInfo;		/* 客户端相关通信信息 */
 }tftpTaskPool_t;
 
+/* 线程池结构 */
+typedef struct tftpTaskPoolList_s
+{
+	tftpTaskPool_t _taskNode;
+	struct tftpTaskPoolList_s * _next;
+	struct tftpTaskPoolList_s * _pre;
+}tftpTaskPoolList_t;
 EXTERN tftpReturnValue_t tftp_server_module_init(VOID);
 
 #endif /* __TFTP_SERVER_H__ */

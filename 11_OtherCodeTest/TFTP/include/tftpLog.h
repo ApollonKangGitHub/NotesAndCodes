@@ -71,8 +71,6 @@ typedef struct tftpDbgFileInfo_s{
 #define __TFTP_DBG_ON_			(TRUE)
 #define __TFTP_DBG_OFF_			(FALSE)
 
-#define __TFTP_LOF_FILE_PATH_ 	"./logFile/tftp.log"
-
 /* 标准文件定义 */
 #define __TFTP_STDIN_ 			(stdin)
 #define __TFTP_STDOUT_ 			(stdout)
@@ -151,6 +149,13 @@ typedef struct tftpDbgFileInfo_s{
 			__TFTP_LOG_ABIL_SHELL_ | __TFTP_LOG_ABIL_ERR_, format, ##__VA_ARGS__); \
 	}while(0)
 
+#define TFTP_IF_ERROR_RET(ret) \
+	do{\
+		if(ret != tftp_ret_Ok) { \
+			TFTP_LOGERR("tftp operator failure, ret=%d", ret);\
+		}\
+	}while(0)
+	
 #define TFTP_DBG_SWITCH_NUMBER_MAX (tftp_dbgSwitch_max / 8) 
 EXTERN UINT8 gDbgSwitchFlg[TFTP_DBG_SWITCH_NUMBER_MAX];
 

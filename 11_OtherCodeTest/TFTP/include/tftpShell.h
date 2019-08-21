@@ -6,7 +6,7 @@
 #define __TFTP_SHELL_VERSION_	"tftp Shell1.0"
 
 /* shell线程资源栈大小 */
-#define __TFTP_SHELL_THREAD_STACK_SIZE_		(0x100000)	
+#define __TFTP_SHELL_TASK_STACK_SIZE_		(0x100000)	
 
 /* shell输入输出缓冲区大小 */
 #define __TFTP_SHELL_BUFFER_LEN_MAX_		(128)

@@ -157,6 +157,7 @@ LOCAL INT32 tftp_log_to_file_init(VOID)
 		fp = fopen(gLogFilePath[i], "ab+");
 		if (NULL == fp) {
 			tftp_print("\r\nError to open file:%s!", gLogFilePath[i]);
+			tftp_perror("open fail reason is");
 			exit(EXIT_FAILURE);
 		}
 

@@ -98,7 +98,7 @@ VOID tftp_shell_deal_input(CONST CHAR * input)
 	}
 }
 
-VOID * tftp_shell_thread_deal(VOID * argv)
+VOID * tftp_shell_task_deal(VOID * argv)
 {
 	CHAR shellStr[__TFTP_SHELL_BUFFER_LEN_MAX_] = {0};
 	TFTP_LOGDBG(tftp_dbgSwitch_shell, "shell deal thread, argv=%p", argv);
@@ -122,8 +122,8 @@ LOCAL INT32 tftp_shell_thread_create(VOID)
 	shellTask._pid = 0;
 	shellTask._tid = 0;
 	shellTask._taskStructid = 0;
-	shellTask._deal_function = tftp_shell_thread_deal;
-	shellTask._stackSize = __TFTP_SHELL_THREAD_STACK_SIZE_;
+	shellTask._deal_function = tftp_shell_task_deal;
+	shellTask._stackSize = __TFTP_SHELL_TASK_STACK_SIZE_;
 	shellTask._detachState = __TFTP_TASK_DETACHED_;
 	strncpy(shellTask._name, __TFTP_TASK_NAME_SHELL_, __TFTP_TASK_NAME_LENGTH_);
 

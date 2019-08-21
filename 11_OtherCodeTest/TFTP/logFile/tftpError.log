@@ -1,0 +1,16 @@
+
+[1;31m2089-08-21 23:06:35(UTC)[Wednesday]%% TFTP-ERROR :[tftp_socket_create-31]bind socket fd fail, sockfd=8[0m
+[1;31m2089-08-21 23:06:35(UTC)[Wednesday]%% TFTP-ERROR :[tftp_server_listen_socket_init-87]create server socket fail![0m
+[1;31m2089-08-21 23:09:52(UTC)[Wednesday]%% TFTP-ERROR :[tftp_socket_create-31]bind socket fd fail, sockfd=8, port=17664[0m
+[1;31m2089-08-21 23:09:52(UTC)[Wednesday]%% TFTP-ERROR :[tftp_server_listen_socket_init-87]create server socket fail![0m
+[1;31m2089-08-21 23:10:15(UTC)[Wednesday]%% TFTP-ERROR :[tftp_socket_create-31]bind socket fd fail, sockfd=8, port=17664[0m
+[1;31m2089-08-21 23:10:15(UTC)[Wednesday]%% TFTP-ERROR :[tftp_server_listen_socket_init-87]create server socket fail![0m
+[1;31m2089-08-21 23:11:36(UTC)[Wednesday]%% TFTP-ERROR :[tftp_socket_create-31]bind socket fd fail, sockfd=8, port=69[0m
+[1;31m2089-08-21 23:11:36(UTC)[Wednesday]%% TFTP-ERROR :[tftp_server_listen_socket_init-87]create server socket fail![0m
+[1;31m2089-08-21 23:12:27(UTC)[Wednesday]%% TFTP-ERROR :[tftp_socket_create-31]bind socket fd fail, sockfd=8, port=69[0m
+[1;31m2089-08-21 23:12:27(UTC)[Wednesday]%% TFTP-ERROR :[tftp_server_listen_socket_init-87]create server socket fail![0m
+[1;31m2089-08-21 23:22:05(UTC)[Wednesday]%% TFTP-ERROR :[tftp_socket_create-32]bind socket fd fail, sockfd=8, port=69[0m
+[1;31m2089-08-21 23:22:05(UTC)[Wednesday]%% TFTP-ERROR :[tftp_server_listen_socket_init-87]create server socket fail![0m
+[1;31m2089-08-21 23:22:05(UTC)[Wednesday]%% TFTP-ERROR :[tftp_socket_create-32]bind socket fd fail, sockfd=8, port=69[0m
+[1;31m2089-08-21 23:22:05(UTC)[Wednesday]%% TFTP-ERROR :[tftp_server_listen_socket_init-87]create server socket fail![0m
+[1;31m2089-08-21 23:22:05(UTC)[Wednesday]%% TFTP-ERROR :[tftp_server_module_init-156]tftp operator failure, ret=1[0m
