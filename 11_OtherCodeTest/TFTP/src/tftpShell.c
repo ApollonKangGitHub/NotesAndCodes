@@ -7,14 +7,14 @@
 
 VOID ttp_shell_normal_menu(VOID)
 {
-	tftp_print("\n------------------------%s MENU-------------------------", 
-		__TFTP_SHELL_VERSION_);
-	tftp_print("\nquit   :   Quit the TFTP server");
-	tftp_print("\nclient :   Download target file with argument");
-	tftp_print("\nserver :   Start the TFTP server or close server");
-	tftp_print("\nthread :   Display the thread list info");
-	tftp_print("\nsem    :   Display the sem list info");
-	tftp_print("\n--------------------------------------------------------"); 
+	tftp_print("\n------------------------%s MENU-------------------------", __TFTP_SHELL_VERSION_);
+	tftp_print("\nsem           :   Display the sem list info");
+	tftp_print("\nquit          :   Quit the TFTP server");
+	tftp_print("\nclient        :   Download target file with argument");
+	tftp_print("\nserver        :   Start the TFTP server or close server");
+	tftp_print("\nthread        :   Display the thread list info");
+	tftp_print("\nclientInfo    :   Display the sem list info");
+	tftp_print("\n-------------------------------------------------------------------"); 
 }
 
 VOID ttp_shell_debug_menu(VOID)

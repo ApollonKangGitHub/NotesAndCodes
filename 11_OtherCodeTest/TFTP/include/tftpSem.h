@@ -5,8 +5,10 @@
 #include <tftpTask.h>
 #include <tftpPublic.h>
 
-#define __TFTP_SEM_NAME_TASK_ 	"semTaskInfo"
-#define __TFTP_SEM_NAME_SLEF_ 	"semSelfInfo"
+#define __TFTP_SEM_NAME_TASK_ 		"semTaskInfo"
+#define __TFTP_SEM_NAME_SLEF_ 		"semSelfInfo"
+#define __TFTP_SEM_NAME_POOL_		"semPool"
+#define __TFTP_SEM_NAME_CHILD_		"semChild"
 
 #define __TFTP_SEM_NAME_LENGTH_ (32)
 
@@ -37,7 +39,7 @@ typedef enum tftpSemShare_e
 #endif
 
 typedef struct tftpSemInfo_s{
-	CHAR  _semName[__TFTP_SEM_NAME_LENGTH_];	/* 信号量名字 */
+	CHAR _semName[__TFTP_SEM_NAME_LENGTH_];	/* 信号量名字 */
 	tftpSemShare_t _pshared;	/* 共享范围 */
 	tftpSem_t _semId;			/* 创建的信号量ID */
 	tftpPid_t _semTask;			/* 信号量占用者tid */

@@ -52,9 +52,9 @@ typedef struct tftpSocketInfo_s
 /* 线程池节点结构，可构建静态/动态线程池，选择复合结构线程池 */
 typedef struct tftpTaskPool_s
 {
-	 VOLATILE INT32 _state;			/* 标志线程是否空闲 */
+	 VOLATILE BOOL _busy;			/* 标志线程是否空闲 */
 	 tftpPid_t _tid;				/* 线程tid */
-	 tftpSemInfo_t _syncLock;		/* 主线程与通信线程之间的同步信号量 */
+	 tftpSem_t _syncLock;			/* 主线程与通信线程之间的同步信号量 */
 	 UINT32 _port;					/* 线程任务通信端口号 */
 	 tftpSocketInfo_t _cliInfo;		/* 客户端相关通信信息 */
 }tftpTaskPool_t;

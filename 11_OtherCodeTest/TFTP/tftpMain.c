@@ -32,7 +32,7 @@ INT32 main(void)
 	tftp_task_module_init();
 	tftp_shell_module_init();
 	tftp_server_module_init();
-	
+
 	while(TRUE){
 
 	}

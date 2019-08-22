@@ -45,7 +45,7 @@ EXTERN tftpReturnValue_t tftp_sem_create(tftpSemInfo_t * semInfo)
 {
 	INT32 ret = 0;
 	tftpSem_t semId;
-	tftpSemStatus_t status = tftp_semStatus_post;	/* 默认空闲 */
+	tftpSemStatus_t status = tftp_semStatus_post;			/* 默认空闲 */
 	tftpSemShare_t shared = tftp_semShared_thread;			/* 默认线程间共享 */
 
 	TFTP_LOGDBG(tftp_dbgSwitch_sem, "tftp sem create, semInfo=%p", semInfo);
@@ -53,6 +53,10 @@ EXTERN tftpReturnValue_t tftp_sem_create(tftpSemInfo_t * semInfo)
 		TFTP_LOGERR("semInfo is NULL, please check it!");
 		return tftp_ret_Null;
 	}
+
+	/* 根据传参确定具体的信号量初始化状态和共享 */
+	status = semInfo->_status;
+	shared = semInfo->_pshared;
 	
 	ret = sem_init(&semId, shared, status);
 	if (tftp_ret_Ok != ret) {
