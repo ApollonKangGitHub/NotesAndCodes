@@ -14,7 +14,7 @@ LOCAL tftpTaskInfoList_t * gTaskInfoHead = NULL;
 
 LOCAL tftpTaskInfoList_t * gTaskInfoTail = NULL;
 
-tftpSem_t gSemTask;
+tftpSem_t * gSemTask;
 
 /*
  * FunctionName:
@@ -413,7 +413,7 @@ EXTERN VOID tftp_task_list_display(VOID)
 		taskId = taskIndex + taskStart;
 		taskIdRet = tftp_task_get_info(taskId, &taskInfo);
 		if(taskId == taskIdRet) {
-			tftp_print("\r\n%-16s%-16d%-20ld%-10d%-10d%-16s", taskInfo._name, 
+			tftp_print("\r\n%-16s%-16d0x%-18lx%-10d%-10d%-16s", taskInfo._name, 
 				taskInfo._stackSize, taskInfo._taskStructid, taskInfo._pid, taskInfo._tid,
 					(taskInfo._detachState == __TFTP_TASK_DETACHED_) ? "detach" : "attach");
 		}

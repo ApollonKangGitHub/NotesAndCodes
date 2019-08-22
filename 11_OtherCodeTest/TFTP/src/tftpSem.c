@@ -3,7 +3,7 @@
 #include <tftpPublic.h>
 
 /* 信号量管理结构链表保护信号量 */
-LOCAL tftpSem_t gSemSelf;
+LOCAL tftpSem_t * gSemSelf;
 
 tftpSemInfo_t * gSelfNode = NULL;
 
@@ -13,19 +13,16 @@ tftpSemInfoList_t * gSemListTail = NULL;
 
 EXTERN VOID tftp_sem_list_display(VOID)
 {
-	INT32 semId = 0;
 	tftpSemInfoList_t * pSemInfo;
 
-	tftp_print("\r\n%-16s%-8s%-8s%-8s%-16s%-16s", 
+	tftp_print("\r\n%-16s%-16s%-16s%-16s%-16s%-16s", 
 		"semName", "shared", "semId", "curTask", "timeout(s:ms)", "waitForever");
 	
 	for (pSemInfo = gSemListHead; pSemInfo; pSemInfo = pSemInfo->_next) {
-		memcpy(&semId, &pSemInfo->_semInfo._semId, sizeof(semId));
-
-		tftp_print("\r\n%-16s%-8s%-8d%-8d%-7ld:%-8ld%-16s", 
+		tftp_print("\r\n%-16s%-16s%-16p%-16d%-7ld:%-8ld%-16s", 
 			pSemInfo->_semInfo._semName,
 			pSemInfo->_semInfo._pshared ? "process" : "thread", 
-			semId,
+			pSemInfo->_semInfo._semId,
 			pSemInfo->_semInfo._semTask,
 			pSemInfo->_semInfo._timeout._sec, 
 			pSemInfo->_semInfo._timeout._nsec * 1000,
@@ -44,7 +41,7 @@ EXTERN VOID tftp_sem_list_display(VOID)
 EXTERN tftpReturnValue_t tftp_sem_create(tftpSemInfo_t * semInfo)
 {
 	INT32 ret = 0;
-	tftpSem_t semId;
+	tftpSem_t * semId;
 	tftpSemStatus_t status = tftp_semStatus_post;			/* 默认空闲 */
 	tftpSemShare_t shared = tftp_semShared_thread;			/* 默认线程间共享 */
 
@@ -57,10 +54,14 @@ EXTERN tftpReturnValue_t tftp_sem_create(tftpSemInfo_t * semInfo)
 	/* 根据传参确定具体的信号量初始化状态和共享 */
 	status = semInfo->_status;
 	shared = semInfo->_pshared;
+
+	/* 信号量的空间必须是全局变量或者堆上动态申请的 */
+	semId = malloc(sizeof(tftpSem_t));
 	
-	ret = sem_init(&semId, shared, status);
-	if (tftp_ret_Ok != ret) {
-		TFTP_LOGERR("create sem fail, return %s(%d)!", tftp_err_msg(ret), ret);
+	ret = sem_init(semId, shared, status);
+	if (-1 == ret) {
+		TFTP_LOGERR("create sem fail, semId=%p, shared=%d, status=%d",
+				semId, shared, status);
 		return tftp_ret_Error;
 	}
 
@@ -75,12 +76,12 @@ EXTERN tftpReturnValue_t tftp_sem_create(tftpSemInfo_t * semInfo)
  * Notes:
  *     
  */
-EXTERN INT32 tftp_sem_destroy(tftpSem_t semId)
+EXTERN INT32 tftp_sem_destroy(tftpSem_t * semId)
 {
-	TFTP_LOGDBG(tftp_dbgSwitch_sem, "tftp sem destroy, semId=%d", semId);
+	TFTP_LOGDBG(tftp_dbgSwitch_sem, "tftp sem destroy, semId=%p", semId);
 	/* 销毁前销毁结构 */
 	
-	return sem_destroy(&semId);
+	return sem_destroy(semId);
 }
 /*
  * FunctionName:
@@ -92,7 +93,7 @@ EXTERN INT32 tftp_sem_destroy(tftpSem_t semId)
  */
 EXTERN INT32 tftp_sem_wait(tftpSemInfo_t * semInfo)
 {
-	tftpSem_t semId;
+	tftpSem_t * semId;
 	BOOL waitForever = FALSE;
 	struct timeval time;
 	tftpSemTimeout_t _timeout;
@@ -107,10 +108,10 @@ EXTERN INT32 tftp_sem_wait(tftpSemInfo_t * semInfo)
     _timeout._nsec = time.tv_usec + (semInfo->_timeout._nsec * 1000);
 	
 	if (waitForever) {
-		return sem_wait(&semId);
+		return sem_wait(semId);
 	}
 	else {
-		return sem_timedwait(&semId, (struct timespec *)&_timeout);
+		return sem_timedwait(semId, (struct timespec *)&_timeout);
 	}
 }
 /*
@@ -121,10 +122,10 @@ EXTERN INT32 tftp_sem_wait(tftpSemInfo_t * semInfo)
  * Notes:
  *     
  */
-EXTERN INT32 tftp_sem_post(tftpSem_t semId)
+EXTERN INT32 tftp_sem_post(tftpSem_t * semId)
 {
-	TFTP_LOGDBG(tftp_dbgSwitch_sem, "tftp sem post, semId=%d", semId);
-	return sem_post(&semId);
+	TFTP_LOGDBG(tftp_dbgSwitch_sem, "tftp sem post, semId=%p", semId);
+	return sem_post(semId);
 }
 
 /*
@@ -137,12 +138,12 @@ EXTERN INT32 tftp_sem_post(tftpSem_t semId)
  */
 LOCAL tftpReturnValue_t tftp_sem_info_node_find
 (
-	IN tftpSem_t semId, 
+	IN tftpSem_t * semId, 
 	OUT tftpSemInfo_t * pSemInfo
 )
 {
 	TFTP_LOGDBG(tftp_dbgSwitch_task, \
-		"tftp sem info node find, semId=%d pSemInfo=%p", semId, pSemInfo);
+		"tftp sem info node find, semId=%p pSemInfo=%p", semId, pSemInfo);
 
 	if (NULL == pSemInfo) {
 		TFTP_LOGERR("Error tftp info node find for agrument, pSemInfo=%p!", pSemInfo);
@@ -152,7 +153,7 @@ LOCAL tftpReturnValue_t tftp_sem_info_node_find
 	/* 遍历信号量信息链表，根据semId匹配信号量节点 */
 	tftpSemInfoList_t * pHeadTemp = gSemListHead;
 	for (; pHeadTemp; pHeadTemp = pHeadTemp->_next) {
-		if (0 == memcmp(&pHeadTemp->_semInfo._semId, &semId, sizeof(tftpSem_t))) {
+		if (pHeadTemp->_semInfo._semId == semId) {
 			memcpy(pSemInfo, &pHeadTemp->_semInfo, sizeof(tftpSemInfo_t));
 			return tftp_ret_Ok;
 		}
@@ -239,7 +240,6 @@ EXTERN tftpReturnValue_t tftp_sem_create_init
 	IN OUT tftpSemInfo_t * pSemInfo
 )
 {
-	tftpSem_t semId;
 	INT32 ret = 0;
 	tftpSemInfo_t semInfo;
 	tftpSemInfoList_t * pSelfNode;

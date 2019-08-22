@@ -41,7 +41,7 @@ typedef enum tftpSemShare_e
 typedef struct tftpSemInfo_s{
 	CHAR _semName[__TFTP_SEM_NAME_LENGTH_];	/* 信号量名字 */
 	tftpSemShare_t _pshared;	/* 共享范围 */
-	tftpSem_t _semId;			/* 创建的信号量ID */
+	tftpSem_t * _semId;			/* 创建的信号量ID */
 	tftpPid_t _semTask;			/* 信号量占用者tid */
 	tftpSemStatus_t _status;	/* 信号量状态 */
 	BOOL _waitForever;			/* 是否等待超时，TRUE时_timeout才有效，FALSE时为一直等 */
@@ -56,9 +56,9 @@ typedef struct tftpSemInfoList_s
 }tftpSemInfoList_t;
 
 EXTERN tftpReturnValue_t tftp_sem_create(tftpSemInfo_t * semInfo);
-EXTERN INT32 tftp_sem_destroy(tftpSem_t semId);
+EXTERN INT32 tftp_sem_destroy(tftpSem_t * semId);
 EXTERN INT32 tftp_sem_wait(tftpSemInfo_t * semInfo);
-EXTERN INT32 tftp_sem_post(tftpSem_t semId);
+EXTERN INT32 tftp_sem_post(tftpSem_t * semId);
 EXTERN tftpReturnValue_t tftp_sem_module_init(VOID);
 EXTERN VOID tftp_sem_list_display(VOID);
 EXTERN tftpReturnValue_t tftp_sem_create_init(IN OUT tftpSemInfo_t * pSemInfo);
