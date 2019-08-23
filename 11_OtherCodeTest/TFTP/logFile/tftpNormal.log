@@ -161,3 +161,11 @@
 [0m2089-08-24 03:01:46(UTC)[Saturday]%% TFTP-NORMAL:[tftp_task_module_init-582]tftp task module init......[0m
 [0m2089-08-24 03:01:46(UTC)[Saturday]%% TFTP-NORMAL:[tftp_shell_module_init-218]tftp shell module init......[0m
 [0m2089-08-24 03:01:46(UTC)[Saturday]%% TFTP-NORMAL:[tftp_server_module_init-403]tftp server module init......[0m
+[0m2089-08-24 03:05:56(UTC)[Saturday]%% TFTP-NORMAL:[tftp_sem_module_init-341]tftp semaphore module init......[0m
+[0m2089-08-24 03:05:56(UTC)[Saturday]%% TFTP-NORMAL:[tftp_task_module_init-582]tftp task module init......[0m
+[0m2089-08-24 03:05:56(UTC)[Saturday]%% TFTP-NORMAL:[tftp_shell_module_init-218]tftp shell module init......[0m
+[0m2089-08-24 03:05:56(UTC)[Saturday]%% TFTP-NORMAL:[tftp_server_module_init-403]tftp server module init......[0m
+[0m2089-08-24 03:07:00(UTC)[Saturday]%% TFTP-NORMAL:[tftp_sem_module_init-341]tftp semaphore module init......[0m
+[0m2089-08-24 03:07:00(UTC)[Saturday]%% TFTP-NORMAL:[tftp_task_module_init-582]tftp task module init......[0m
+[0m2089-08-24 03:07:00(UTC)[Saturday]%% TFTP-NORMAL:[tftp_shell_module_init-218]tftp shell module init......[0m
+[0m2089-08-24 03:07:00(UTC)[Saturday]%% TFTP-NORMAL:[tftp_server_module_init-399]tftp server module init......[0m

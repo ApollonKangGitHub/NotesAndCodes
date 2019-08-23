@@ -19,13 +19,11 @@ EXTERN VOID tftp_task_pool_display(VOID)
 	tftpTaskPool_t * pTaskNode = NULL;
 	tftpTaskInfo_t taskInfo;
 	tftpTaskId_t taskId = 0;
-	CHAR poolTaskName[__TFTP_TASK_NAME_LENGTH_] = {0};
-	
+	tftp_print("\r\n-----------------------------------------------------------------");
 	tftp_print("\r\n---------------------- TFTP TASK POOL INFO ----------------------");
 	while (pTemp) {
 		pTaskNode = &pTemp->_taskNode;
 		memset(&taskInfo, 0, sizeof(taskInfo));
-		memset(&poolTaskName[0], 0, __TFTP_TASK_NAME_LENGTH_);
 
 		/* 获取线程taskInfo信息 */
 		taskId = tftp_task_get_info_by_tid(pTaskNode->_tid, &taskInfo);
@@ -33,10 +31,8 @@ EXTERN VOID tftp_task_pool_display(VOID)
 			TFTP_LOGERR("tftp get task info fail, tid=%d, return taskId=%d", pTaskNode->_tid, taskId);
 			return;
 		}
-		/* 根据taskInfo信息的pthread_t地址获取线程名字 */
-		tftp_task_get_name(taskInfo._taskStructid, &poolTaskName[0], __TFTP_TASK_NAME_LENGTH_);
 
-		tftp_print("\r\n####----commucation child task name:%s----", poolTaskName);
+		tftp_print("\r\n----commucation child task name:%s----", taskInfo._name);
 		tftp_print("\r\n\t%-16s:%u", "client IP", ntohl(pTaskNode->_cliInfo._cliAddr.sin_addr.s_addr));
 		tftp_print("\r\n\t%-16s:%d", "client UDP port", ntohs(pTaskNode->_cliInfo._cliAddr.sin_port));
 		tftp_print("\r\n\t%-16s:%d", "socket fd", pTaskNode->_cliInfo._sockId);
@@ -54,6 +50,7 @@ EXTERN VOID tftp_task_pool_display(VOID)
 		
 		pTemp = pTemp->_next;
 	}
+	tftp_print("\r\n-----------------------------------------------------------------");
 }
 
 /*
