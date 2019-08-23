@@ -67,5 +67,6 @@ typedef struct tftpTaskPoolList_s
 	struct tftpTaskPoolList_s * _pre;
 }tftpTaskPoolList_t;
 EXTERN tftpReturnValue_t tftp_server_module_init(VOID);
+EXTERN VOID tftp_task_pool_display(VOID);
 
 #endif /* __TFTP_SERVER_H__ */

@@ -72,12 +72,12 @@ LOCAL tftpReturnValue_t tftp_task_info_insert(tftpTaskInfoList_t * taskInfoCode)
 		pInfoTemp->_taskNum = taskNum;
 		pInfoTemp = pInfoTemp->_next;
 	}
-	
+	#if 0
 	pid = tftp_task_get_pid_by_structId(gTaskInfoTail->_taskInfo._taskStructid);
 	tid = tftp_task_get_tid_by_structId(gTaskInfoTail->_taskInfo._taskStructid);
 	gTaskInfoTail->_taskInfo._pid = pid;
 	gTaskInfoTail->_taskInfo._tid = tid;
-
+	#endif
 	return tftp_ret_Ok;
 }
 
@@ -175,6 +175,10 @@ EXTERN tftpReturnValue_t tftp_task_create_init(tftpTaskInfo_t * taskInfo)
 
 	/* 设置线程名字 */
 	tftp_task_set_name(structId, taskInfo->_name);
+
+	/* 根据pthread_t指针获取pid和tid */
+	taskInfo->_pid = tftp_task_get_pid_by_structId(structId);
+	taskInfo->_tid = tftp_task_get_tid_by_structId(structId);
 	
 	/* 销毁线程属性结构,重新初始化之前不能使用 */
 	ret = pthread_attr_destroy(&attr);
@@ -347,6 +351,42 @@ EXTERN tftpTaskId_t tftp_task_get_info_by_name
 
 	return -1;
 }
+
+/*
+ * FunctionName:
+ *     tftp_task_get_info_by_tid
+ * Description:
+ *     根据tid获取线程信息
+ * Notes:
+ *     
+ */
+EXTERN tftpTaskId_t tftp_task_get_info_by_tid
+(
+	tftpPid_t tid, 
+	tftpTaskInfo_t * taskInfo
+)
+{
+	tftpTaskInfoList_t * pTaskInfo = NULL;
+
+	TFTP_LOGDBG(tftp_dbgSwitch_task, \
+		"tftp task get info by task tid, tid=%d", tid);
+	
+	if (NULL == taskInfo) {
+		TFTP_LOGERR("Error argument taskInfo:%p!", taskInfo);
+		return -1;		
+	}	
+	
+	for (pTaskInfo = gTaskInfoHead; pTaskInfo; pTaskInfo = pTaskInfo->_next) {
+		if (tid == pTaskInfo->_taskInfo._tid) {
+		 	memcpy(taskInfo, &pTaskInfo->_taskInfo, sizeof(tftpTaskInfo_t));
+			return pTaskInfo->_taskId;
+		}
+	}
+
+	return -1;
+}
+
+
 /*
  * FunctionName:
  *     tftp_task_get_pid_by_structId
@@ -506,6 +546,10 @@ LOCAL tftpReturnValue_t tftp_task_info_init(VOID)
 	mainTask._stackSize = stackSize;
 	mainTask._detachState = detachState;
 	(VOID)strncpy(mainTask._name, __TFTP_TASK_NAME_MAIN_, __TFTP_TASK_NAME_LENGTH_);
+
+	/* 根据pthread_t指针获取pid和tid */
+	mainTask._pid = tftp_task_get_pid_by_structId(structId);
+	mainTask._tid = tftp_task_get_tid_by_structId(structId);
 
 	ret = pthread_attr_destroy(&attr);
 	if (ret != 0) {

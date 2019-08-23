@@ -13,6 +13,49 @@ tftpTaskPoolList_t * gTaskPoolTail = NULL;
 INT32 gListenSocket = 0;
 LOCAL tftpSem_t * gSemPool;
 
+EXTERN VOID tftp_task_pool_display(VOID)
+{
+	tftpTaskPoolList_t * pTemp = gTaskPoolHead;
+	tftpTaskPool_t * pTaskNode = NULL;
+	tftpTaskInfo_t taskInfo;
+	tftpTaskId_t taskId = 0;
+	CHAR poolTaskName[__TFTP_TASK_NAME_LENGTH_] = {0};
+	
+	tftp_print("\r\n---------------------- TFTP TASK POOL INFO ----------------------");
+	while (pTemp) {
+		pTaskNode = &pTemp->_taskNode;
+		memset(&taskInfo, 0, sizeof(taskInfo));
+		memset(&poolTaskName[0], 0, __TFTP_TASK_NAME_LENGTH_);
+
+		/* 获取线程taskInfo信息 */
+		taskId = tftp_task_get_info_by_tid(pTaskNode->_tid, &taskInfo);
+		if (taskId < 0) {
+			TFTP_LOGERR("tftp get task info fail, tid=%d, return taskId=%d", pTaskNode->_tid, taskId);
+			return;
+		}
+		/* 根据taskInfo信息的pthread_t地址获取线程名字 */
+		tftp_task_get_name(taskInfo._taskStructid, &poolTaskName[0], __TFTP_TASK_NAME_LENGTH_);
+
+		tftp_print("\r\n####----commucation child task name:%s----", poolTaskName);
+		tftp_print("\r\n\t%-16s:%u", "client IP", ntohl(pTaskNode->_cliInfo._cliAddr.sin_addr.s_addr));
+		tftp_print("\r\n\t%-16s:%d", "client UDP port", ntohs(pTaskNode->_cliInfo._cliAddr.sin_port));
+		tftp_print("\r\n\t%-16s:%d", "socket fd", pTaskNode->_cliInfo._sockId);
+		tftp_print("\r\n\t%-16s:%s", "file Name", pTaskNode->_cliInfo._fileName);
+		tftp_print("\r\n\t%-16s:%d", "file fd", pTaskNode->_cliInfo._fileFd);
+		tftp_print("\r\n\t%-16s:%u", "file size", pTaskNode->_cliInfo._tSize);
+		tftp_print("\r\n\t%-16s:%u", "block size", pTaskNode->_cliInfo._blkSize);
+		tftp_print("\r\n\t%-16s:%u", "break point id", pTaskNode->_cliInfo._bpId);
+		tftp_print("\r\n\t%-16s:%u", "timout", pTaskNode->_cliInfo._timeout);
+		tftp_print("\r\n\t%-16s:%u", "opcode", pTaskNode->_cliInfo._opcode);
+		tftp_print("\r\n\t%-16s:%u", "task bind port", pTaskNode->_port);
+		tftp_print("\r\n\t%-16s:%u", "task tid", pTaskNode->_tid);
+		tftp_print("\r\n\t%-16s:%s", "task busy status", pTaskNode->_busy ? "BUSY" : "FREE");
+		tftp_print("\r\n\t%-16s:%p", "sync lock", pTaskNode->_syncLock);
+		
+		pTemp = pTemp->_next;
+	}
+}
+
 /*
  * FunctionName:
  *     tftp_server_task_pool_node_create
@@ -60,7 +103,21 @@ LOCAL tftpReturnValue_t tftp_server_task_pool_node_insert
 	tftpTaskPoolList_t * pNode
 )
 {
+	if (NULL == pNode) {
+		return tftp_ret_Null;
+	}
 
+	if(NULL == gTaskPoolHead) {
+		pNode->_pre = pNode->_next = NULL;
+		gTaskPoolHead = gTaskPoolTail = pNode;
+	}
+	else {
+		gTaskPoolTail->_next = pNode;
+		pNode->_pre = gTaskPoolTail;
+		pNode->_next = NULL;
+		gTaskPoolTail = pNode;
+	}
+	
 	return tftp_ret_Ok;
 }
 
@@ -78,6 +135,115 @@ VOID * tftp_client_connect_handle(VOID * arg)
 		sleep(1);
 	}
 
+}
+
+/*
+ * FunctionName:
+ *     tftp_server_task_handle
+ * Description:
+ *     server主任务处理函数
+ * Notes:
+ *     
+ */
+VOID * tftp_server_task_handle(VOID * argv)
+{
+	while (gServerRun) {
+		sleep(1);
+	}
+}
+
+/*
+ * FunctionName:
+ *     tftp_server_listen_socket_init
+ * Description:
+ *     监听套接字创建初始化接口
+ * Notes:
+ *     
+ */
+LOCAL tftpReturnValue_t tftp_server_listen_socket_init(VOID)
+{
+	struct sockaddr_in addr;
+
+	TFTP_LOGDBG(tftp_dbgSwitch_server, "tftp server task listen socket create");
+	
+	memset(&addr, 0, sizeof(addr));
+	
+	addr.sin_family = AF_INET;
+	addr.sin_port = htons(__TFTP_SERVER_SOCKET_UDP_PORT_);
+	addr.sin_addr.s_addr = __TFTP_SERVER_IP_ADDR_;
+	
+	gListenSocket = tftp_socket_create(&addr);
+	if (gListenSocket < 0) {
+		TFTP_LOGERR("create server socket fail!");
+		return tftp_ret_Error;
+	}
+
+	return tftp_ret_Ok;
+}
+
+/*
+ * FunctionName:
+ *     tftp_server_pool_operator_sem
+ * Description:
+ *     线程池操作信号量创建
+ * Notes:
+ *     
+ */
+LOCAL tftpReturnValue_t tftp_server_pool_operator_sem(VOID)
+{
+	tftpReturnValue_t ret = tftp_ret_Error;
+	tftpSemInfo_t semInfo;
+		
+	TFTP_LOGDBG(tftp_dbgSwitch_server, "tftp server task pool operator sem init");
+	
+	memset(&semInfo, 0, sizeof(tftpSemInfo_t));
+
+	semInfo._semTask = 0;
+	semInfo._waitForever = TRUE;
+	semInfo._status = tftp_semStatus_post;		
+	semInfo._pshared = tftp_semShared_thread;
+	memcpy(semInfo._semName, __TFTP_SEM_NAME_POOL_, __TFTP_SEM_NAME_LENGTH_);
+
+	ret = tftp_sem_create_init(&semInfo);
+	if (tftp_ret_Ok != ret) {
+		TFTP_LOGERR("create sem for task pool operator fail, return %s(%d)!", tftp_err_msg(ret), ret);
+		return tftp_ret_Error;
+	}
+	else{
+		gSemPool = semInfo._semId;
+	}
+	return tftp_ret_Ok;
+}
+
+/*
+ * FunctionName:
+ *     tftp_server_task_init
+ * Description:
+ *     server主任务创建，负责监听套接字、管理线程池、处理通信等
+ * Notes:
+ *     
+ */
+LOCAL tftpReturnValue_t tftp_server_task_init(VOID)
+{
+	tftpTaskInfo_t serverTask;
+	memset(&serverTask, 0, sizeof(tftpTaskInfo_t));
+	
+	TFTP_LOGDBG(tftp_dbgSwitch_server, "tftp server task create init");
+
+	serverTask._pid = 0;
+	serverTask._tid = 0;
+	serverTask._taskStructid = 0;
+	serverTask._deal_function = tftp_server_task_handle;
+	serverTask._stackSize = __TFTP_SERVER_TASK_STACK_SIZE_;
+	serverTask._detachState = __TFTP_TASK_DETACHED_;
+	memcpy(serverTask._name, __TFTP_TASK_NAME_SERVER_, __TFTP_TASK_NAME_LENGTH_);
+
+	gServerRun = TRUE;
+
+	/* 初始化server任务 */
+	tftp_task_create_init(&serverTask);
+
+	return tftp_ret_Ok;
 }
 
 /*
@@ -223,99 +389,6 @@ LOCAL tftpReturnValue_t tftp_task_pool_init(VOID)
 	return tftp_ret_Ok;
 }
 
-
-/*
- * FunctionName:
- *     tftp_server_listen_socket_init
- * Description:
- *     监听套接字创建初始化接口
- * Notes:
- *     
- */
-LOCAL tftpReturnValue_t tftp_server_listen_socket_init(VOID)
-{
-	struct sockaddr_in addr;
-
-	TFTP_LOGDBG(tftp_dbgSwitch_server, "tftp server task listen socket create");
-	
-	memset(&addr, 0, sizeof(addr));
-	
-	addr.sin_family = AF_INET;
-	addr.sin_port = htons(__TFTP_SERVER_SOCKET_UDP_PORT_);
-	addr.sin_addr.s_addr = __TFTP_SERVER_IP_ADDR_;
-	
-	gListenSocket = tftp_socket_create(&addr);
-	if (gListenSocket < 0) {
-		TFTP_LOGERR("create server socket fail!");
-		return tftp_ret_Error;
-	}
-
-	return tftp_ret_Ok;
-}
-
-VOID * tftp_server_task_deal(VOID * argv)
-{
-	while (gServerRun) {
-		sleep(1);
-	}
-}
-
-/*
- * FunctionName:
- *     tftp_server_task_init
- * Description:
- *     server主任务创建，负责监听套接字、管理线程池、处理通信等
- * Notes:
- *     
- */
-LOCAL tftpReturnValue_t tftp_server_task_init(VOID)
-{
-	tftpTaskInfo_t serverTask;
-	memset(&serverTask, 0, sizeof(tftpTaskInfo_t));
-	
-	TFTP_LOGDBG(tftp_dbgSwitch_server, "tftp server task create init");
-
-	serverTask._pid = 0;
-	serverTask._tid = 0;
-	serverTask._taskStructid = 0;
-	serverTask._deal_function = tftp_server_task_deal;
-	serverTask._stackSize = __TFTP_SERVER_TASK_STACK_SIZE_;
-	serverTask._detachState = __TFTP_TASK_DETACHED_;
-	memcpy(serverTask._name, __TFTP_TASK_NAME_SERVER_, __TFTP_TASK_NAME_LENGTH_);
-
-	gServerRun = TRUE;
-
-	/* 初始化server任务 */
-	tftp_task_create_init(&serverTask);
-
-	return tftp_ret_Ok;
-}
-
-LOCAL tftpReturnValue_t tftp_server_pool_operator_sem(VOID)
-{
-	tftpReturnValue_t ret = tftp_ret_Error;
-	tftpSemInfo_t semInfo;
-		
-	TFTP_LOGDBG(tftp_dbgSwitch_server, "tftp server task pool operator sem init");
-	
-	memset(&semInfo, 0, sizeof(tftpSemInfo_t));
-
-	semInfo._semTask = 0;
-	semInfo._waitForever = TRUE;
-	semInfo._status = tftp_semStatus_post;		
-	semInfo._pshared = tftp_semShared_thread;
-	memcpy(semInfo._semName, __TFTP_SEM_NAME_POOL_, __TFTP_SEM_NAME_LENGTH_);
-
-	ret = tftp_sem_create_init(&semInfo);
-	if (tftp_ret_Ok != ret) {
-		TFTP_LOGERR("create sem for task pool operator fail, return %s(%d)!", tftp_err_msg(ret), ret);
-		return tftp_ret_Error;
-	}
-	else{
-		gSemPool = semInfo._semId;
-	}
-	return tftp_ret_Ok;
-}
 
 /*
  * FunctionName:

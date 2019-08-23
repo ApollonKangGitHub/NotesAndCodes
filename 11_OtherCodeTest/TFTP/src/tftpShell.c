@@ -2,6 +2,7 @@
 #include <tftpType.h>
 #include <tftpLog.h>
 #include <tftpTask.h>
+#include <tftpServer.h>
 
 #include <tftpPublic.h>
 
@@ -13,13 +14,8 @@ VOID ttp_shell_normal_menu(VOID)
 	tftp_print("\nclient        :   Download target file with argument");
 	tftp_print("\nserver        :   Start the TFTP server or close server");
 	tftp_print("\nthread        :   Display the thread list info");
-	tftp_print("\nclientInfo    :   Display the sem list info");
+	tftp_print("\ntaskPool      :   Display the sem list info");
 	tftp_print("\n-------------------------------------------------------------------"); 
-}
-
-VOID ttp_shell_debug_menu(VOID)
-{
-	
 }
 
 INT32 tftp_shell_wait_for_string(CHAR * str, INT32 strLen)
@@ -91,6 +87,9 @@ VOID tftp_shell_deal_input(CONST CHAR * input)
 	else if (0 == strcmp(input, "sem")) {
 		tftp_sem_list_display();
 	}
+	else if (0 == strcmp(input, "taskPool")) {
+		tftp_task_pool_display();
+	}
 	else {
 		if (0 != strlen(input)) {
 			tftp_print("\nInvalid input, please Re-input!");
@@ -103,8 +102,8 @@ VOID * tftp_shell_task_deal(VOID * argv)
 	CHAR shellStr[__TFTP_SHELL_BUFFER_LEN_MAX_] = {0};
 	TFTP_LOGDBG(tftp_dbgSwitch_shell, "shell deal thread, argv=%p", argv);
 
-	ttp_shell_normal_menu();
 	while (TRUE) {
+		ttp_shell_normal_menu();
 		memset(shellStr, 0, sizeof(shellStr));
 		tftp_shell_line(shellStr, sizeof(shellStr));
 		

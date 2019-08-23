@@ -78,3 +78,41 @@
 [1;36m2089-08-23 01:19:28(UTC)[Friday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-153]tftp server task pool task init[0m
 [1;36m2089-08-23 01:19:28(UTC)[Friday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-102]tftp server task pool sem init[0m
 [1;36m2089-08-23 01:19:28(UTC)[Friday]%% TFTP-DEBUG :[tftp_server_task_pool_node_create-33]tftp server task pool 
+[1;36m2089-08-24 02:03:06(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_listen_socket_init-239]tftp server task listen socket create[0m
+[1;36m2089-08-24 02:03:06(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_pool_operator_sem-299]tftp server task pool operator sem init[0m
+[1;36m2089-08-24 02:03:06(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_init-276]tftp server task create init[0m
+[1;36m2089-08-24 02:03:06(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_init-198]tftp server task pool init[0m
+[1;36m2089-08-24 02:03:06(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-153]tftp server task pool task init[0m
+[1;36m2089-08-24 02:03:06(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-102]tftp server task pool sem init[0m
+[1;36m2089-08-24 02:03:06(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool_node_create-33]tftp server task pool create node, tid=10791[0m
+[1;36m2089-08-24 02:03:06(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-153]tftp server task pool task init[0m
+[1;36m2089-08-24 02:03:06(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-102]tftp server task pool sem init[0m
+[1;36m2089-08-24 02:03:06(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool_node_create-33]tftp server task pool create node, tid=10792[0m
+[1;36m2089-08-24 02:03:06(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-153]tftp server task pool task init[0m
+[1;36m2089-08-24 02:03:06(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-102]tftp server task pool sem init[0m
+[1;36m2089-08-24 02:03:06(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool_node_create-33]tftp server task pool create node, tid=10793[0m
+[1;36m2089-08-24 02:03:06(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-153]tftp server task pool task init[0m
+[1;36m2089-08-24 02:03:06(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-102]tftp server task pool sem init[0m
+[1;36m2089-08-24 02:03:06(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool_node_create-33]tftp server task pool create node, tid=10794[0m
+[1;36m2089-08-24 02:03:06(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-153]tftp server task pool task init[0m
+[1;36m2089-08-24 02:03:06(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-102]tftp server task pool sem init[0m
+[1;36m2089-08-24 02:03:06(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool_node_create-33]tftp server task pool create node, tid=10795[0m
+[1;36m2089-08-24 02:05:36(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_listen_socket_init-239]tftp server task listen socket create[0m
+[1;36m2089-08-24 02:05:36(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_pool_operator_sem-299]tftp server task pool operator sem init[0m
+[1;36m2089-08-24 02:05:36(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_init-276]tftp server task create init[0m
+[1;36m2089-08-24 02:05:36(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_init-198]tftp server task pool init[0m
+[1;36m2089-08-24 02:05:36(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-153]tftp server task pool task init[0m
+[1;36m2089-08-24 02:05:36(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-102]tftp server task pool sem init[0m
+[1;36m2089-08-24 02:05:36(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool_node_create-33]tftp server task pool create node, tid=10932[0m
+[1;36m2089-08-24 02:05:36(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-153]tftp server task pool task init[0m
+[1;36m2089-08-24 02:05:36(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-102]tftp server task pool sem init[0m
+[1;36m2089-08-24 02:05:36(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool_node_create-33]tftp server task pool create node, tid=10933[0m
+[1;36m2089-08-24 02:05:36(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-153]tftp server task pool task init[0m
+[1;36m2089-08-24 02:05:36(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-102]tftp server task pool sem init[0m
+[1;36m2089-08-24 02:05:36(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool_node_create-33]tftp server task pool create node, tid=10934[0m
+[1;36m2089-08-24 02:05:36(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-153]tftp server task pool task init[0m
+[1;36m2089-08-24 02:05:36(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-102]tftp server task pool sem init[0m
+[1;36m2089-08-24 02:05:36(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool_node_create-33]tftp server task pool create node, tid=10935[0m
+[1;36m2089-08-24 02:05:36(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-153]tftp server task pool task init[0m
+[1;36m2089-08-24 02:05:36(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-102]tftp server task pool sem init[0m
+[1;36m2089-08-24 02:05:36(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool_node_create-33]tftp server task pool create node, tid=10936[0m

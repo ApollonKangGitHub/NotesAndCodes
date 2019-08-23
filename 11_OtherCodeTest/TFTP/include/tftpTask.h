@@ -70,4 +70,5 @@ EXTERN tftpPid_t tftp_task_get_pid_by_structId(tftpTaskStruct_t tid);
 EXTERN tftpPid_t tftp_task_get_tid_by_structId(tftpTaskStruct_t tstructId);
 EXTERN tftpTaskId_t tftp_task_get_info_by_structId(tftpTaskStruct_t tid, tftpTaskInfo_t * taskInfo);
 EXTERN tftpTaskId_t tftp_task_get_info_by_name(CHAR * taskName, tftpTaskInfo_t * taskInfo);
+EXTERN tftpTaskId_t tftp_task_get_info_by_tid(tftpPid_t tid, tftpTaskInfo_t * taskInfo);
 #endif
