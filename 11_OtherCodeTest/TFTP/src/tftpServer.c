@@ -14,6 +14,14 @@ tftpTaskPoolList_t * gTaskPoolTail = NULL;
 INT32 gListenSocket = 0;
 LOCAL tftpSem_t * gSemPool;
 
+/*
+ * FunctionName:
+ *     tftp_cmd_display_task_pool
+ * Description:
+ *     显示task pool信息，可全部显示或显示指定tid的task信息
+ * Notes:
+ *     
+ */
 EXTERN tftpReturnValue_t tftp_cmd_display_task_pool(INT32 argc, CHAR * argv[])
 {
 	tftpTaskPoolList_t * pTemp = gTaskPoolHead;
@@ -23,15 +31,6 @@ EXTERN tftpReturnValue_t tftp_cmd_display_task_pool(INT32 argc, CHAR * argv[])
 	tftpPid_t tid = 0;
 		
 	TFTP_LOGDBG(tftp_dbgSwitch_server, "tftp task pool display, argc=%d", argc);
-
-	if (NULL == argv) {
-		return tftp_ret_Null;
-	}
-
-	if (argc != 4) {
-		tftp_print("\r\nPlease running shellcmd command to display detail information with %s", argv[0]);
-		return tftp_ret_Invalid;
-	}
 
 	tid = atoi(argv[3]);
 	
@@ -66,7 +65,9 @@ EXTERN tftpReturnValue_t tftp_cmd_display_task_pool(INT32 argc, CHAR * argv[])
 			tftp_print("\r\n\t%-16s:%s", "task busy status", pTaskNode->_busy ? "BUSY" : "FREE");
 			tftp_print("\r\n\t%-16s:%p", "sync lock", pTaskNode->_syncLock);
 		}
-		
+		if (tid == pTaskNode->_tid) {
+			break;
+		}
 		pTemp = pTemp->_next;
 	}
 	tftp_print("\r\n-----------------------------------------------------------------");
@@ -74,11 +75,17 @@ EXTERN tftpReturnValue_t tftp_cmd_display_task_pool(INT32 argc, CHAR * argv[])
 	return tftp_ret_Ok;
 }
 
+LOCAL VOID tftp_cmd_server_handle(INT32 argc, CHAR * argv[])
+{
+
+}
+
 /*
  * FunctionName:
  *     tftp_server_shell_command_init
  * Description:
- *     
+ *     线程池display的shell命令初始化
+ *     tftpserver启动/关闭的
  * Notes:
  *     
  */
@@ -86,12 +93,17 @@ LOCAL VOID tftp_server_shell_command_init(VOID)
 {
 	TFTP_LOGDBG(tftp_dbgSwitch_server, "tftp server module shell command register");
 
-	tftp_cmd_register((tftp_cmd_deal_fun)tftp_cmd_display_task_pool, 
-		__TFTP_CMD_HIDE_ | __TFTP_CMD_DYN_,
-		"taskpool{commuication child task pool display}"
+	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_cmd_display_task_pool, 
+		__TFTP_CMD_HIDE_,
+		"taskpool{commuication child task pool information display}"
 			"display{display some information}"
 				"taskId{display with tid}"
 					"__INT32__{task tid(-1 is all)}");
+
+	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_cmd_server_handle, 
+		__TFTP_CMD_NORMAL_ | __TFTP_CMD_DYN_,
+		"tftpserver{tftp server enable/disable}"
+			"__STRING__{enable or disable}");
 }
 
 
@@ -420,7 +432,7 @@ LOCAL tftpReturnValue_t tftp_task_pool_init(VOID)
 			TFTP_LOGERR("create node for task pool child task fail, return NULL!");
 			return tftp_ret_Error;
 		}
-		tftp_print("\r\n---------taskIndex=%d", taskIndex);
+
 		/* 将节点插入线程池 */
 		tftp_server_task_pool_node_insert(pChildNode);
 	}
@@ -453,7 +465,7 @@ EXTERN tftpReturnValue_t tftp_server_module_init(VOID)
 	/* 初始化子线程线程池 */
 	TFTP_IF_ERROR_RET(tftp_task_pool_init());
 
-	/* 初始化display命令 */
+	/* 初始化display、server注册等命令 */
 	tftp_server_shell_command_init();
 }
 

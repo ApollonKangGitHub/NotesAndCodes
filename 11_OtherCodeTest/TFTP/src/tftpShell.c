@@ -13,16 +13,38 @@ LOCAL tftpShellList_t * gShellTail = NULL;
 
 VOID ttp_shell_normal_menu(VOID)
 {
+	tftpShellList_t * pTemp = gShellHead;
+	INT32 index = 0;
+	CHAR cmdStr[__TFTP_SHELL_BUFFER_LEN_MAX_] = {0};
+	CHAR cmdChild[__TFTP_SHELL_BUFFER_LEN_MAX_] = {0};
+	
 	tftp_print("\r\n-------------------------------------------------------------------"); 
 	tftp_print("\r\n------------------------%s MENU-------------------------", __TFTP_SHELL_VERSION_);
-	tftp_print("\r\n| shellcmd      :   Display all not hide command with format      |");
-	tftp_print("\r\n| sem           :   Display the sem list info                     |");
-	tftp_print("\r\n| quit          :   Quit the TFTP server                          |");
-	tftp_print("\r\n| client        :   Download target file with argument            |");
-	tftp_print("\r\n| server        :   Start the TFTP server or close server         |");
-	tftp_print("\r\n| thread        :   Display the thread list info                  |");
-	tftp_print("\r\n| taskPool      :   Display the sem list info                     |");
-	tftp_print("\r\n-------------------------------------------------------------------"); 
+
+	while (pTemp) {
+		if(pTemp->_status & __TFTP_CMD_HIDE_) {
+			pTemp = pTemp->_next;
+			continue;
+		}
+		tftp_print("\r\n");
+		memset(cmdStr, 0, sizeof(cmdStr));
+		for (index = 0; index < pTemp->_cmdArgc && index < __TFTP_SHELL_CMD_MAX_NUM_; index++) {
+			if (pTemp->_cmdArgv._info[index]._type == tftpCmdType_cmd) {
+				memset(cmdChild, 0, sizeof(cmdChild));
+				tftp_sprint(cmdChild ,"%s ", pTemp->_cmdArgv._info[index]._cmdStr);
+				strcat(cmdStr, cmdChild);
+			}
+			else {
+				strcat(cmdStr, "xxx ");
+			}
+		}
+		memset(cmdChild, 0, sizeof(cmdChild));
+		tftp_sprint(cmdChild ,": %s", pTemp->_cmdArgv._info[0]._cmdDescr);
+		strcat(cmdStr, cmdChild);
+		tftp_print("%s", cmdStr);
+		pTemp = pTemp->_next;
+	}
+	tftp_print("\r\n-------------------------------------------------------------------"); 	
 }
 
 LOCAL INT32 tftp_shell_wait_for_string(CHAR * str, INT32 strLen)
@@ -61,52 +83,6 @@ LOCAL INT32 tftp_shell_line(CHAR * str, INT32 strLen)
 	
 	tftp_print("\r\ntftp>");
 	return tftp_shell_wait_for_string(str, strLen);
-}
-
-VOID tftp_shell_deal_input(CONST CHAR * input)
-{
-	TFTP_LOGDBG(tftp_dbgSwitch_shell, "input=%s, len=%d", input, strlen(input));
-	tftpReturnValue_t ret = tftp_ret_Ok;
-	
-	if (0 == strcmp(input, "debug on")){
-		tftp_print("\r\ndebug switch menu is on!");
-		tftp_log_debug_control(tftp_dbgSwitch_shell, __TFTP_DBG_ON_);
-	}
-	else if (0 == strcmp(input, "debug off")){
-		tftp_print("\r\ndebug switch menu is off!");
-		tftp_log_debug_control(tftp_dbgSwitch_shell, __TFTP_DBG_OFF_);
-	}
-	else if (0 == strcmp(input, "quit")) {
-		tftpTaskStruct_t tstructId = 0;
-		tstructId = tftp_task_get_structId();
-		exit(EXIT_SUCCESS);
-		/* do something, last to destroy all task */
-		
-		//(VOID)tftp_task_destroy(tstructId);
-	}
-	else if (0 == strcmp(input, "client")) {
-
-	}
-	else if (0 == strcmp(input, "server")) {
-
-	}
-	else if (0 == strcmp(input, "thread")) {
-		tftp_task_list_display();
-	}
-	else if (0 == strcmp(input, "sem")) {
-		tftp_sem_list_display();
-	}
-	#if 0
-	else {
-		if (0 != strlen(input)) {
-			tftp_print("\nInvalid input, please Re-input!");
-		}
-	}
-
-	if (ret == tftp_ret_Invalid) {
-		TFTP_LOGNOTE("shell inpiut return %s(%d)", tftp_err_msg(ret), ret);
-	}
-	#endif
 }
 
 LOCAL tftpReturnValue_t tftp_shell_line_format
@@ -166,16 +142,48 @@ LOCAL tftpReturnValue_t tftp_shell_cmd_deal
 	
 	while (pTemp) {
 		argcReg = pTemp->_cmdArgc;
-		if (argc <= argcReg) {
-			if (0 == strcmp(pTemp->_cmdArgv._info[0]._cmdStr, argv[0])) {
-				(pTemp->_dealFun)(argc, argv);
+		if (argc != argcReg) {
+			pTemp = pTemp->_next;
+			continue;
+		}
+
+		for (index = 0; index < argcReg; index++) {
+			if ((pTemp->_cmdArgv._info[index]._type == tftpCmdType_cmd)
+				&& (strcmp(pTemp->_cmdArgv._info[index]._cmdStr, argv[index]))) {
 				break;
 			}
 		}
-		pTemp = pTemp->_next;
-		index++;
+
+		/* 参数格式检查完毕，并且函数默认已经注册 */
+		if (index == argcReg) {
+			if (pTemp->_status & __TFTP_CMD_DYN_) {
+				goto __tftp_deal_function;
+			}
+			else {
+				goto _tftp_deal_invalid_cmd;
+			}
+		}
+		
+		else {
+			/* 对于参数个数相同，但是命令格式不一致进行下一条命令判断 */
+			pTemp = pTemp->_next;
+		}
+	}
+
+_tftp_deal_invalid_cmd:	
+	if ((NULL == pTemp) && (NULL != argv[0])
+		|| !(pTemp->_status & __TFTP_CMD_DYN_)) {
+		tftp_print("\r\nPlease running 'shellcmd display %s' "
+					"command to display detail information only for '%s'"
+					"\r\nOr enter ? / help to get help information", argv[0], argv[0]);
+		return tftp_ret_Invalid;
 	}
 	
+__tftp_deal_function:
+	/* 执行具体函数 */
+	(pTemp->_dealFun)(argc, argv);
+
+	return tftp_ret_Ok;
 }
 
 VOID * tftp_shell_task_deal(VOID * argv)
@@ -191,17 +199,15 @@ VOID * tftp_shell_task_deal(VOID * argv)
 	for (index = 0; index < __TFTP_SHELL_CMD_MAX_NUM_; index++) {
 		shellArgv[index] = (CHAR *)(&gCmdFormat[index]);
 	}
-	
+	ttp_shell_normal_menu();
 	while (TRUE) {
-		if (lineLen > 0) {
-			ttp_shell_normal_menu();
-		}
 		memset(shellStr, 0, sizeof(shellStr));
 		lineLen = tftp_shell_line(shellStr, sizeof(shellStr));
+		if (lineLen < 1) {
+			continue;
+		}
 		tftp_shell_line_format(shellStr, &shellArgc, shellArgv);
 		tftp_shell_cmd_deal(shellArgc, shellArgv);
-		
-		tftp_shell_deal_input(shellStr);
 		usleep(1000);
 	}
 	
@@ -226,7 +232,7 @@ LOCAL INT32 tftp_shell_thread_create(VOID)
 	return tftp_ret_Ok;
 }
 
-LOCAL tftpCmdType_t tftp_cmd_type_get(CONST CHAR * strCmd)
+LOCAL tftpCmdType_t tftp_shell_cmd_type_get(CONST CHAR * strCmd)
 {
 	if (NULL == strCmd) {
 		return tftpCmdType_unknown;
@@ -234,7 +240,10 @@ LOCAL tftpCmdType_t tftp_cmd_type_get(CONST CHAR * strCmd)
 	
 	TFTP_LOGDBG(tftp_dbgSwitch_shell, "strCmd=%s", strCmd);
 	
-	if (0 == strncmp(__TFTP_CMD_STR_, strCmd, strlen(__TFTP_CMD_STR_))) {
+	if (0 == strncmp(__TFTP_CMD_CMD_, strCmd, strlen(__TFTP_CMD_CMD_))) {
+		return tftpCmdType_cmd;
+	}
+	else if (0 == strncmp(__TFTP_CMD_STR_, strCmd, strlen(__TFTP_CMD_STR_))) {
 		return tftpCmdType_str;
 	}
 	else if (0 == strncmp(__TFTP_CMD_INT_, strCmd, strlen(__TFTP_CMD_UINT_))) {
@@ -250,10 +259,10 @@ LOCAL tftpCmdType_t tftp_cmd_type_get(CONST CHAR * strCmd)
 		return tftpCmdType_ip;
 	}
 	else {
-		/* 非格式化字符串也是字符串 */
-		return tftpCmdType_str;
+		/* 非格式化字符串默认是指令 */
+		return tftpCmdType_cmd;
 	}
-	return tftpCmdType_unknown;
+	return tftpCmdType_cmd;
 }
 
 LOCAL tftpReturnValue_t tftp_shell_cmd_insert(tftpShellList_t * pCmdNode)
@@ -279,14 +288,15 @@ LOCAL tftpReturnValue_t tftp_shell_cmd_insert(tftpShellList_t * pCmdNode)
 
 /*
  * FunctionName:
- *     tftp_command_register
+ *     tftp_shell_cmd_register
  * Description:
  *     命令shell格式解析注册函数
  * Notes:
  *     实现上的限制，注册命令时，命令前半部分可能相同，
- *     那么注册的处理函数接口必须为同一个
+ *     那么注册的处理函数接口必须为同一个,此外命令注册时，
+ *     字符'{'和'}'前后均不能有空格
  */
-EXTERN tftpReturnValue_t tftp_cmd_register
+EXTERN tftpReturnValue_t tftp_shell_cmd_register
 (
 	tftp_cmd_deal_fun function, 
 	tftpCmdAbil_t ability,
@@ -339,7 +349,7 @@ EXTERN tftpReturnValue_t tftp_cmd_register
 		/* 节点赋值 */
 		pCmdNode->_cmdArgv._info[index]._cmdStr = pCmdBuf;
 		pCmdNode->_cmdArgv._info[index]._cmdDescr = pDesBuf;
-		pCmdNode->_cmdArgv._info[index]._type = tftp_cmd_type_get(pCmdBuf);
+		pCmdNode->_cmdArgv._info[index]._type = tftp_shell_cmd_type_get(pCmdBuf);
 
 		index++;
 		pCmdStr = NULL;
@@ -392,7 +402,7 @@ LOCAL VOID tftp_shell_cmd_help_deal
 LOCAL VOID tftp_shell_cmd_dyn_deal
 (
 	INT32 argc, 
-	CONST CHAR * argv
+	CONST CHAR * argv[]
 )
 {
 
@@ -411,23 +421,39 @@ LOCAL tftpReturnValue_t tftp_shell_cmd_display(INT32 argc, CHAR * argv[])
 	tftpShellList_t * pTemp = gShellHead;
 	INT32 argcReg = 0;
 	INT32 index = 0;
+	CHAR * pcmd = argv[2];
 
 	TFTP_LOGDBG(tftp_dbgSwitch_shell, "tftp shell cmd display, argc=%d", argc);
-
-	if (argc > 4 || argc < 1) {
-		TFTP_LOGWARN("too many or few argument:%d", argc);
-		return tftp_ret_Invalid;
-	}
 	
 	tftp_print("\r\ncommand list detail information:");
 	while (pTemp) {
 		argcReg = pTemp->_cmdArgc;
-		tftp_print("\r\n");
-		for (index = 0; index < argcReg && index < __TFTP_SHELL_CMD_MAX_NUM_; index++) {
-			tftp_print("[%s] ", pTemp->_cmdArgv._info[index]._cmdStr);
+		/* 
+		 * allCommand为隐藏命令，但是不需要注册便可以运行
+         * 其他命令必须确定完整命令才可以显示完整format格式
+		 * 没有经过注册的命令不能显示也不能执行
+		 */
+		if ((0 == strcmp(pcmd, "allCommand"))
+			|| (0 == strcmp(pcmd, pTemp->_cmdArgv._info[0]._cmdStr))
+			&& (pTemp->_status & __TFTP_CMD_DYN_)) {
+			tftp_print("\r\n");
+			for (index = 0; index < argcReg && index < __TFTP_SHELL_CMD_MAX_NUM_; index++) {
+				tftp_print("[%s] ", pTemp->_cmdArgv._info[index]._cmdStr);
+			}
+		}
+
+		/* 找到后直接结束 */
+		if (0 == strcmp(pcmd, pTemp->_cmdArgv._info[0]._cmdStr)) {
+			break;
 		}
 		pTemp = pTemp->_next;
 	}
+
+	if (!pTemp && strcmp(pcmd, "allCommand") 
+		|| !(pTemp->_status & __TFTP_CMD_DYN_)) {
+		tftp_print("\r\nnot found '%s' this command, please check it", pcmd);
+	}
+	
 	return tftp_ret_Ok;
 }
 
@@ -443,14 +469,26 @@ LOCAL tftpReturnValue_t tftp_shell_cmd_display(INT32 argc, CHAR * argv[])
 LOCAL VOID tftp_shell_cmd_init(VOID)
 {
 	TFTP_LOGDBG(tftp_dbgSwitch_shell, "tftp shell module shell command register");
+	
+	tftp_shell_cmd_register((tftp_cmd_deal_fun)ttp_shell_normal_menu, 
+		__TFTP_CMD_NORMAL_ | __TFTP_CMD_DYN_, 
+			"?{shell command help menu}");
 
-	tftp_cmd_register((tftp_cmd_deal_fun)tftp_shell_cmd_display, 
-		__TFTP_CMD_HIDE_ | __TFTP_CMD_DYN_,
-		"shellcmd{shell command display}"
-			"display{display command format}"
-				"command{display with tid}"
+	tftp_shell_cmd_register((tftp_cmd_deal_fun)ttp_shell_normal_menu, 
+		__TFTP_CMD_NORMAL_ | __TFTP_CMD_DYN_, 
+			"help{shell command help menu}");
+
+	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_shell_cmd_dyn_deal, 
+		__TFTP_CMD_HIDE_ | __TFTP_CMD_DYN_, 
+			"dynamic{shell command dynamic register}"
+				"__STRING__{command do you want to dynamic register}"
+					"__STRING__{enable or disable}");
+		
+	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_shell_cmd_display, 
+		__TFTP_CMD_NORMAL_ | __TFTP_CMD_DYN_,
+			"shellcmd{Display command with format for special command}"
+				"display{display command format}"
 					"__STRING__{command string}");
-
 }
 
 EXTERN INT32 tftp_shell_module_init(VOID)

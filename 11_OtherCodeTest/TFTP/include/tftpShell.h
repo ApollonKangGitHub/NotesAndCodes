@@ -17,6 +17,7 @@
 #define __TFTP_CMD_REG_STR_LEN_				(1024)
 
 typedef UINT32  tftpCmdAbil_t;
+
 #define __TFTP_CMD_NORMAL_		(1U << 0)
 #define __TFTP_CMD_HIDE_		(1U << 1)
 #define __TFTP_CMD_DYN_			(1U << 2)
@@ -25,6 +26,7 @@ typedef VOID (*tftp_cmd_deal_fun)(INT32 argc, CHAR * argv[]);
 
 typedef enum tftpCmdType_e
 {
+	tftpCmdType_cmd,
 	tftpCmdType_str,
 	tftpCmdType_int32,
 	tftpCmdType_uint32,
@@ -34,6 +36,8 @@ typedef enum tftpCmdType_e
 	tftpCmdType_max
 }tftpCmdType_t;
 
+/* CMD默认是指令而非参数，该宏正常注册用不到 */
+#define __TFTP_CMD_CMD_		"__CMD__"
 #define __TFTP_CMD_STR_		"__STRING__"
 #define __TFTP_CMD_INT_		"__INT32__"
 #define __TFTP_CMD_UINT_	"__UINT32__"
@@ -63,7 +67,7 @@ typedef struct tftpShellList_s
 }tftpShellList_t;
 
 EXTERN INT32 tftp_shell_module_init(VOID);
-EXTERN tftpReturnValue_t tftp_cmd_register
+EXTERN tftpReturnValue_t tftp_shell_cmd_register
 (
 	tftp_cmd_deal_fun function, 
 	tftpCmdAbil_t ability,

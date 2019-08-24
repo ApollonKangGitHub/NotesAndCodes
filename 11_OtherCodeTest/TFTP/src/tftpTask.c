@@ -1,6 +1,7 @@
 #include <tftpType.h>
 #include <tftpTask.h>
 #include <tftpLog.h>
+#include <tftpShell.h>
 #include <tftpPublic.h>
 
 /*
@@ -428,7 +429,7 @@ EXTERN tftpPid_t tftp_task_get_tid_by_structId(tftpTaskStruct_t structId)
  * FunctionName:
  *     tftp_task_list_display
  * Description:
- *     
+ *     显示task相关信息
  * Notes:
  *     
  */
@@ -569,6 +570,16 @@ LOCAL tftpReturnValue_t tftp_task_info_init(VOID)
 	return tftp_ret_Ok;
 }
 
+LOCAL VOID tftp_task_cmd_init()
+{
+	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_task_list_display, 
+		__TFTP_CMD_HIDE_,
+		"tftptask{all childs task information for tftp process display}"
+			"display{display some information}"
+				"taskId{display with tid}"
+					"__INT32__{task tid(-1 is all)}");
+}
+
 /*
  * FunctionName:
  *     tftp_task_module_init
@@ -586,5 +597,8 @@ EXTERN tftpReturnValue_t tftp_task_module_init(VOID)
 
 	/* 创建访问模块链表的信号量 */
 	tftp_task_sem_init();
+
+	/* 初始化shell命令 */
+	tftp_task_cmd_init();
 }
 
