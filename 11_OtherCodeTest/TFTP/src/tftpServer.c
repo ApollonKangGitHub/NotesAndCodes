@@ -3,6 +3,7 @@
 #include <tftpSem.h>
 #include <tftpLog.h>
 #include <tftpSocket.h>
+#include <tftpShell.h>
 
 #include <tftpPublic.h>
 
@@ -13,14 +14,30 @@ tftpTaskPoolList_t * gTaskPoolTail = NULL;
 INT32 gListenSocket = 0;
 LOCAL tftpSem_t * gSemPool;
 
-EXTERN VOID tftp_task_pool_display(VOID)
+EXTERN tftpReturnValue_t tftp_cmd_display_task_pool(INT32 argc, CHAR * argv[])
 {
 	tftpTaskPoolList_t * pTemp = gTaskPoolHead;
 	tftpTaskPool_t * pTaskNode = NULL;
 	tftpTaskInfo_t taskInfo;
 	tftpTaskId_t taskId = 0;
+	tftpPid_t tid = 0;
+		
+	TFTP_LOGDBG(tftp_dbgSwitch_server, "tftp task pool display, argc=%d", argc);
+
+	if (NULL == argv) {
+		return tftp_ret_Null;
+	}
+
+	if (argc != 4) {
+		tftp_print("\r\nPlease running shellcmd command to display detail information with %s", argv[0]);
+		return tftp_ret_Invalid;
+	}
+
+	tid = atoi(argv[3]);
+	
 	tftp_print("\r\n-----------------------------------------------------------------");
 	tftp_print("\r\n---------------------- TFTP TASK POOL INFO ----------------------");
+	
 	while (pTemp) {
 		pTaskNode = &pTemp->_taskNode;
 		memset(&taskInfo, 0, sizeof(taskInfo));
@@ -29,29 +46,54 @@ EXTERN VOID tftp_task_pool_display(VOID)
 		taskId = tftp_task_get_info_by_tid(pTaskNode->_tid, &taskInfo);
 		if (taskId < 0) {
 			TFTP_LOGERR("tftp get task info fail, tid=%d, return taskId=%d", pTaskNode->_tid, taskId);
-			return;
+			return tftp_ret_Error;
 		}
 
-		tftp_print("\r\n----commucation child task name:%s----", taskInfo._name);
-		tftp_print("\r\n\t%-16s:%u", "client IP", ntohl(pTaskNode->_cliInfo._cliAddr.sin_addr.s_addr));
-		tftp_print("\r\n\t%-16s:%d", "client UDP port", ntohs(pTaskNode->_cliInfo._cliAddr.sin_port));
-		tftp_print("\r\n\t%-16s:%d", "socket fd", pTaskNode->_cliInfo._sockId);
-		tftp_print("\r\n\t%-16s:%s", "file Name", pTaskNode->_cliInfo._fileName);
-		tftp_print("\r\n\t%-16s:%d", "file fd", pTaskNode->_cliInfo._fileFd);
-		tftp_print("\r\n\t%-16s:%u", "file size", pTaskNode->_cliInfo._tSize);
-		tftp_print("\r\n\t%-16s:%u", "block size", pTaskNode->_cliInfo._blkSize);
-		tftp_print("\r\n\t%-16s:%u", "break point id", pTaskNode->_cliInfo._bpId);
-		tftp_print("\r\n\t%-16s:%u", "timout", pTaskNode->_cliInfo._timeout);
-		tftp_print("\r\n\t%-16s:%u", "opcode", pTaskNode->_cliInfo._opcode);
-		tftp_print("\r\n\t%-16s:%u", "task bind port", pTaskNode->_port);
-		tftp_print("\r\n\t%-16s:%u", "task tid", pTaskNode->_tid);
-		tftp_print("\r\n\t%-16s:%s", "task busy status", pTaskNode->_busy ? "BUSY" : "FREE");
-		tftp_print("\r\n\t%-16s:%p", "sync lock", pTaskNode->_syncLock);
+		if((tid == pTaskNode->_tid) || (tid == __TFTP_TID_ALL_)) {
+			tftp_print("\r\n----commucation child task name:%s----", taskInfo._name);
+			tftp_print("\r\n\t%-16s:%u", "client IP", ntohl(pTaskNode->_cliInfo._cliAddr.sin_addr.s_addr));
+			tftp_print("\r\n\t%-16s:%d", "client UDP port", ntohs(pTaskNode->_cliInfo._cliAddr.sin_port));
+			tftp_print("\r\n\t%-16s:%d", "socket fd", pTaskNode->_cliInfo._sockId);
+			tftp_print("\r\n\t%-16s:%s", "file Name", pTaskNode->_cliInfo._fileName);
+			tftp_print("\r\n\t%-16s:%d", "file fd", pTaskNode->_cliInfo._fileFd);
+			tftp_print("\r\n\t%-16s:%u", "file size", pTaskNode->_cliInfo._tSize);
+			tftp_print("\r\n\t%-16s:%u", "block size", pTaskNode->_cliInfo._blkSize);
+			tftp_print("\r\n\t%-16s:%u", "break point id", pTaskNode->_cliInfo._bpId);
+			tftp_print("\r\n\t%-16s:%u", "timout", pTaskNode->_cliInfo._timeout);
+			tftp_print("\r\n\t%-16s:%u", "opcode", pTaskNode->_cliInfo._opcode);
+			tftp_print("\r\n\t%-16s:%u", "task bind port", pTaskNode->_port);
+			tftp_print("\r\n\t%-16s:%u", "task tid", pTaskNode->_tid);
+			tftp_print("\r\n\t%-16s:%s", "task busy status", pTaskNode->_busy ? "BUSY" : "FREE");
+			tftp_print("\r\n\t%-16s:%p", "sync lock", pTaskNode->_syncLock);
+		}
 		
 		pTemp = pTemp->_next;
 	}
 	tftp_print("\r\n-----------------------------------------------------------------");
+
+	return tftp_ret_Ok;
 }
+
+/*
+ * FunctionName:
+ *     tftp_server_shell_command_init
+ * Description:
+ *     
+ * Notes:
+ *     
+ */
+LOCAL VOID tftp_server_shell_command_init(VOID)
+{
+	TFTP_LOGDBG(tftp_dbgSwitch_server, "tftp server module shell command register");
+
+	tftp_cmd_register((tftp_cmd_deal_fun)tftp_cmd_display_task_pool, 
+		__TFTP_CMD_HIDE_ | __TFTP_CMD_DYN_,
+		"taskpool{commuication child task pool display}"
+			"display{display some information}"
+				"taskId{display with tid}"
+					"__INT32__{task tid(-1 is all)}");
+}
+
 
 /*
  * FunctionName:
@@ -378,7 +420,7 @@ LOCAL tftpReturnValue_t tftp_task_pool_init(VOID)
 			TFTP_LOGERR("create node for task pool child task fail, return NULL!");
 			return tftp_ret_Error;
 		}
-		
+		tftp_print("\r\n---------taskIndex=%d", taskIndex);
 		/* 将节点插入线程池 */
 		tftp_server_task_pool_node_insert(pChildNode);
 	}
@@ -410,6 +452,9 @@ EXTERN tftpReturnValue_t tftp_server_module_init(VOID)
 	
 	/* 初始化子线程线程池 */
 	TFTP_IF_ERROR_RET(tftp_task_pool_init());
+
+	/* 初始化display命令 */
+	tftp_server_shell_command_init();
 }
 
 

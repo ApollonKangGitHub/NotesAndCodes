@@ -20,6 +20,7 @@ INT32 main(void)
 	tftp_sem_module_init();
 	/* 调试相关模块时打开对应debug开关 */
 	//tftp_log_debug_control(tftp_dbgSwitch_server, __TFTP_DBG_ON_);
+	//tftp_log_debug_control(tftp_dbgSwitch_shell, __TFTP_DBG_ON_);
 	#if 0
 	tftp_log_debug_control(tftp_dbgSwitch_task, __TFTP_DBG_ON_);
 	tftp_log_debug_control(tftp_dbgSwitch_shell, __TFTP_DBG_ON_);

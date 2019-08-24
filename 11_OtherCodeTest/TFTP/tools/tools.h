@@ -3,9 +3,10 @@
 
 #include <tftpType.h>
 
-CHAR * uitoa(UINT32 value, CHAR * str);
-UINT32 atoui(CONST CHAR * str);
-CHAR * uitoxa(UINT32 value, CHAR * str);
+EXTERN CHAR * uitoa(UINT32 value, CHAR * str);
+EXTERN UINT32 atoui(CONST CHAR * str);
+EXTERN CHAR * uitoxa(UINT32 value, CHAR * str);
+EXTERN CHAR * clear_more_space(CHAR * str);
 
 
 #endif

@@ -116,3 +116,429 @@
 [1;36m2089-08-24 02:05:36(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-153]tftp server task pool task init[0m
 [1;36m2089-08-24 02:05:36(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-102]tftp server task pool sem init[0m
 [1;36m2089-08-24 02:05:36(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool_node_create-33]tftp server task pool create node, tid=10936[0m
+[1;36m2089-08-24 16:01:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_listen_socket_init-196]tftp server task listen socket create[0m
+[1;36m2089-08-24 16:01:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_pool_operator_sem-226]tftp server task pool operator sem init[0m
+[1;36m2089-08-24 16:01:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_init-260]tftp server task create init[0m
+[1;36m2089-08-24 16:01:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_init-393]tftp server task pool init[0m
+[1;36m2089-08-24 16:01:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-348]tftp server task pool task init[0m
+[1;36m2089-08-24 16:01:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-297]tftp server task pool sem init[0m
+[1;36m2089-08-24 16:01:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool_node_create-105]tftp server task pool create node, tid=19434[0m
+[1;36m2089-08-24 16:01:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-348]tftp server task pool task init[0m
+[1;36m2089-08-24 16:01:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-297]tftp server task pool sem init[0m
+[1;36m2089-08-24 16:01:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool_node_create-105]tftp server task pool create node, tid=19435[0m
+[1;36m2089-08-24 16:01:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-348]tftp server task pool task init[0m
+[1;36m2089-08-24 16:01:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-297]tftp server task pool sem init[0m
+[1;36m2089-08-24 16:01:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool_node_create-105]tftp server task pool create node, tid=19436[0m
+[1;36m2089-08-24 16:01:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-348]tftp server task pool task init[0m
+[1;36m2089-08-24 16:01:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-297]tftp server task pool sem init[0m
+[1;36m2089-08-24 16:01:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool
+[1;36m2089-08-24 16:05:03(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_listen_socket_init-196]tftp server task listen socket create[0m
+[1;36m2089-08-24 16:05:03(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_pool_operator_sem-226]tftp server task pool operator sem init[0m
+[1;36m2089-08-24 16:05:03(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_init-260]tftp server task create init[0m
+[1;36m2089-08-24 16:05:03(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_init-393]tftp server task pool init[0m
+[1;36m2089-08-24 16:05:03(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-348]tftp server task pool task init[0m
+[1;36m2089-08-24 16:05:03(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-297]tftp server task pool sem init[0m
+[1;36m2089-08-24 16:05:03(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool_node_create-105]tftp server task pool create node, tid=19544[0m
+[1;36m2089-08-24 16:05:03(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-348]tftp server task pool task init[0m
+[1;36m2089-08-24 16:05:03(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-297]tftp server task pool sem init[0m
+[1;36m2089-08-24 16:05:03(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool_node_create-105]tftp server task pool create node, tid=19545[0m
+[1;36m2089-08-24 16:05:03(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-348]tftp server task pool task init[0m
+[1;36m2089-08-24 16:05:03(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-297]tftp server task pool sem init[0m
+[1;36m2089-08-24 16:05:03(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool_node_create-105]tftp server task pool create node, tid=19546[0m
+[1;36m2089-08-24 16:05:03(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-348]tftp server task pool task init[0m
+[1;36m2089-08-24 16:05:03(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-297]tftp server task pool sem init[0m
+[1;36m2089-08-24 16:05:03(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool
+[1;36m2089-08-24 16:05:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_listen_socket_init-196]tftp server task listen socket create[0m
+[1;36m2089-08-24 16:05:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_pool_operator_sem-226]tftp server task pool operator sem init[0m
+[1;36m2089-08-24 16:05:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_init-260]tftp server task create init[0m
+[1;36m2089-08-24 16:05:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_init-393]tftp server task pool init[0m
+[1;36m2089-08-24 16:05:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-348]tftp server task pool task init[0m
+[1;36m2089-08-24 16:05:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-297]tftp server task pool sem init[0m
+[1;36m2089-08-24 16:05:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool_node_create-105]tftp server task pool create node, tid=19730[0m
+[1;36m2089-08-24 16:05:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-348]tftp server task pool task init[0m
+[1;36m2089-08-24 16:05:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-297]tftp server task pool sem init[0m
+[1;36m2089-08-24 16:05:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool_node_create-105]tftp server task pool create node, tid=19731[0m
+[1;36m2089-08-24 16:05:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-348]tftp server task pool task init[0m
+[1;36m2089-08-24 16:05:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-297]tftp server task pool sem init[0m
+[1;36m2089-08-24 16:05:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool_node_create-105]tftp server task pool create node, tid=19732[0m
+[1;36m2089-08-24 16:05:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-348]tftp server task pool task init[0m
+[1;36m2089-08-24 16:05:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-297]tftp server task pool sem init[0m
+[1;36m2089-08-24 16:05:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool
+[1;36m2089-08-24 16:07:04(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_listen_socket_init-196]tftp server task listen socket create[0m
+[1;36m2089-08-24 16:07:04(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_pool_operator_sem-226]tftp server task pool operator sem init[0m
+[1;36m2089-08-24 16:07:04(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_init-260]tftp server task create init[0m
+[1;36m2089-08-24 16:07:04(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_init-393]tftp server task pool init[0m
+[1;36m2089-08-24 16:07:04(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-348]tftp server task pool task init[0m
+[1;36m2089-08-24 16:07:04(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-297]tftp server task pool sem init[0m
+[1;36m2089-08-24 16:07:04(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool_node_create-105]tftp server task pool create node, tid=19832[0m
+[1;36m2089-08-24 16:07:04(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-348]tftp server task pool task init[0m
+[1;36m2089-08-24 16:07:04(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-297]tftp server task pool sem init[0m
+[1;36m2089-08-24 16:07:04(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool_node_create-105]tftp server task pool create node, tid=19833[0m
+[1;36m2089-08-24 16:07:04(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-348]tftp server task pool task init[0m
+[1;36m2089-08-24 16:07:04(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-297]tftp server task pool sem init[0m
+[1;36m2089-08-24 16:07:04(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool_node_create-105]tftp server task pool create node, tid=19834[0m
+[1;36m2089-08-24 16:07:04(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-348]tftp server task pool task init[0m
+[1;36m2089-08-24 16:07:04(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-297]tftp server task pool sem init[0m
+[1;36m2089-08-24 16:07:04(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool
+[1;36m2089-08-24 16:07:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_listen_socket_init-196]tftp server task listen socket create[0m
+[1;36m2089-08-24 16:07:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_pool_operator_sem-226]tftp server task pool operator sem init[0m
+[1;36m2089-08-24 16:07:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_init-260]tftp server task create init[0m
+[1;36m2089-08-24 16:07:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_init-393]tftp server task pool init[0m
+[1;36m2089-08-24 16:07:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-348]tftp server task pool task init[0m
+[1;36m2089-08-24 16:07:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-297]tftp server task pool sem init[0m
+[1;36m2089-08-24 16:07:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool_node_create-105]tftp server task pool create node, tid=19934[0m
+[1;36m2089-08-24 16:07:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-348]tftp server task pool task init[0m
+[1;36m2089-08-24 16:07:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-297]tftp server task pool sem init[0m
+[1;36m2089-08-24 16:07:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool_node_create-105]tftp server task pool create node, tid=19935[0m
+[1;36m2089-08-24 16:07:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-348]tftp server task pool task init[0m
+[1;36m2089-08-24 16:07:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-297]tftp server task pool sem init[0m
+[1;36m2089-08-24 16:07:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool_node_create-105]tftp server task pool create node, tid=19936[0m
+[1;36m2089-08-24 16:07:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-348]tftp server task pool task init[0m
+[1;36m2089-08-24 16:07:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-297]tftp server task pool sem init[0m
+[1;36m2089-08-24 16:07:48(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool
+[1;36m2089-08-24 16:11:22(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_listen_socket_init-196]tftp server task listen socket create[0m
+[1;36m2089-08-24 16:11:22(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_pool_operator_sem-226]tftp server task pool operator sem init[0m
+[1;36m2089-08-24 16:11:22(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_init-260]tftp server task create init[0m
+[1;36m2089-08-24 16:11:22(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_shell_command_init-77]tftp server shell command register[0m
+[1;36m2089-08-24 16:11:22(UTC)[Saturday]%% TFTP-DEBUG :[tftp_command_register-202]tftp shell command register[0m
+[1;36m2089-08-24 16:11:22(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_task_deal-114]shell deal thread, argv=(nil)[0m
+[1;36m2089-08-24 16:11:36(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_deal_input-65]input=, len=0[0m
+[1;36m2089-08-24 16:12:18(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_deal_input-65]input=, len=0[0m
+[1;36m2089-08-24 16:12:18(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_
+[1;36m2089-08-24 16:37:29(UTC)[Saturday]%% TFTP-DEBUG :[tftp_command_register-205]tftp shell command register, cmd_str=0x405630[0m
+[1;36m2089-08-24 16:37:29(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=taskpool[0m
+[1;36m2089-08-24 16:37:29(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=display[0m
+[1;36m2089-08-24 16:37:29(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=taskId[0m
+[1;36m2089-08-24 16:37:29(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=__INT32__[0m
+[1;36m2089-08-24 16:37:29(UTC)[Saturday]%% TFTP-DEBUG :[tftp_command_register-245]argc = 4, status= 0x6[0m
+[1;36m2089-08-24 16:37:29(UTC)[Saturday]%% TFTP-DEBUG :[tftp_command_register-251]argv[0]:, taskpool:commuication child task pool display, type=5, [0m
+[1;36m2089-08-24 16:37:29(UTC)[Saturday]%% TFTP-DEBUG :[tftp_command_register-251]argv[1]:, display:display some information, type=5, [0m
+[1;36m2089-08-24 16:37:29(UTC)[Saturday]%% TFTP-DEBUG :[tftp_command_register-251]ar
+[1;36m2089-08-24 16:38:13(UTC)[Saturday]%% TFTP-DEBUG :[tftp_command_register-206]tftp shell command register, cmd_str=0x405630[0m
+[1;36m2089-08-24 16:38:13(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=taskpool[0m
+[1;36m2089-08-24 16:38:13(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=display[0m
+[1;36m2089-08-24 16:38:13(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=taskId[0m
+[1;36m2089-08-24 16:38:13(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=__INT32__[0m
+[1;36m2089-08-24 16:38:13(UTC)[Saturday]%% TFTP-DEBUG :[tftp_command_register-246]argc = 4, status= 0x6[0m
+[1;36m2089-08-24 16:38:13(UTC)[Saturday]%% TFTP-DEBUG :[tftp_command_register-252]argv[0]:, taskpool:commuication child task pool display, type=0, [0m
+[1;36m2089-08-24 16:38:13(UTC)[Saturday]%% TFTP-DEBUG :[tftp_command_register-252]argv[1]:, display:display some information, type=0, [0m
+[1;36m2089-08-24 16:38:13(UTC)[Saturday]%% TFTP-DEBUG :[tftp_command_register-252]ar
+[1;36m2089-08-24 16:41:44(UTC)[Saturday]%% TFTP-DEBUG :[tftp_command_register-206]tftp shell command register, cmd_str=0x405650[0m
+[1;36m2089-08-24 16:41:44(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=taskpool[0m
+[1;36m2089-08-24 16:41:44(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=display[0m
+[1;36m2089-08-24 16:41:44(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=taskId[0m
+[1;36m2089-08-24 16:41:44(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=__INT32__[0m
+[1;36m2089-08-24 16:41:44(UTC)[Saturday]%% TFTP-DEBUG :[tftp_command_register-248]argc = 4, status= 0x6[0m
+[1;36m2089-08-24 16:41:44(UTC)[Saturday]%% TFTP-DEBUG :[tftp_command_register-254]argv[0]:, taskpool:commuication child task pool display, type=0, [0m
+[1;36m2089-08-24 16:41:44(UTC)[Saturday]%% TFTP-DEBUG :[tftp_command_register-254]argv[1]:, display:display some information, type=0, [0m
+[1;36m2089-08-24 16:41:44(UTC)[Saturday]%% TFTP-DEBUG :[tftp_command_register-254]ar
+[1;36m2089-08-24 16:56:32(UTC)[Saturday]%% TFTP-DEBUG :NULL[tftp_command_register-206]tftp shell command register, cmd_str=0x405650[0m
+[1;36m2089-08-24 16:56:32(UTC)[Saturday]%% TFTP-DEBUG :NULL[tftp_cmd_type_get-154]strCmd=taskpool[0m
+[1;36m2089-08-24 16:56:32(UTC)[Saturday]%% TFTP-DEBUG :NULL[tftp_cmd_type_get-154]strCmd=display[0m
+[1;36m2089-08-24 16:56:32(UTC)[Saturday]%% TFTP-DEBUG :NULL[tftp_cmd_type_get-154]strCmd=taskId[0m
+[1;36m2089-08-24 16:56:32(UTC)[Saturday]%% TFTP-DEBUG :NULL[tftp_cmd_type_get-154]strCmd=__INT32__[0m
+[1;36m2089-08-24 16:56:32(UTC)[Saturday]%% TFTP-DEBUG :NULL[tftp_command_register-248]argc = 4, status= 0x6[0m
+[1;36m2089-08-24 16:56:32(UTC)[Saturday]%% TFTP-DEBUG :NULL[tftp_command_register-254]argv[0]:, taskpool:commuication child task pool display, type=0, [0m
+[1;36m2089-08-24 16:56:32(UTC)[Saturday]%% TFTP-DEBUG :NULL[tftp_command_register-254]argv[1]:, display:display some information, type=0, [0m
+[1;36m2089-08-24 16:56:32(UTC)[Saturday]%% TFTP-DEBU
+[1;36m2089-08-24 17:23:23(UTC)[Saturday]%% TFTP-DEBUG :NULL[tftp_command_register-206]tftp shell command register, cmd_str=0x405650[0m
+[1;36m2089-08-24 17:23:23(UTC)[Saturday]%% TFTP-DEBUG :NULL[tftp_cmd_type_get-154]strCmd=taskpool[0m
+[1;36m2089-08-24 17:23:23(UTC)[Saturday]%% TFTP-DEBUG :NULL[tftp_cmd_type_get-154]strCmd=display[0m
+[1;36m2089-08-24 17:23:23(UTC)[Saturday]%% TFTP-DEBUG :NULL[tftp_cmd_type_get-154]strCmd=taskId[0m
+[1;36m2089-08-24 17:23:23(UTC)[Saturday]%% TFTP-DEBUG :NULL[tftp_cmd_type_get-154]strCmd=__INT32__[0m
+[1;36m2089-08-24 17:23:23(UTC)[Saturday]%% TFTP-DEBUG :NULL[tftp_command_register-248]argc = 4, status= 0x6[0m
+[1;36m2089-08-24 17:23:23(UTC)[Saturday]%% TFTP-DEBUG :NULL[tftp_command_register-254]argv[0]:, taskpool:commuication child task pool display, type=0, [0m
+[1;36m2089-08-24 17:23:23(UTC)[Saturday]%% TFTP-DEBUG :NULL[tftp_command_register-254]argv[1]:, display:display some information, type=0, [0m
+[1;36m2089-08-24 17:23:23(UTC)[Saturday]%% TFTP-DEBU
+[1;36m2089-08-24 17:41:05(UTC)[Saturday]%% TFTP-DEBUG :[tftp_command_register-206]tftp shell command register, cmd_str=0x405650[0m
+[1;36m2089-08-24 17:41:05(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=taskpool[0m
+[1;36m2089-08-24 17:41:05(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=display[0m
+[1;36m2089-08-24 17:41:05(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=taskId[0m
+[1;36m2089-08-24 17:41:05(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=__INT32__[0m
+[1;36m2089-08-24 17:41:05(UTC)[Saturday]%% TFTP-DEBUG :[tftp_command_register-248]argc = 4, status= 0x6[0m
+[1;36m2089-08-24 17:41:05(UTC)[Saturday]%% TFTP-DEBUG :[tftp_command_register-254]argv[0]:, taskpool:commuication child task pool display, type=0, [0m
+[1;36m2089-08-24 17:41:05(UTC)[Saturday]%% TFTP-DEBUG :[tftp_command_register-254]argv[1]:, display:display some information, type=0, [0m
+[1;36m2089-08-24 17:41:05(UTC)[Saturday]%% TFTP-DEBUG :[tftp_command_register-254]argv[2]:, taskId:display with tid, type=0, [0m
+[1;36m2089-08-24 17:41:05(UTC)[Saturday]%% TFTP-DEBUG :[tftp_command_register-254]argv[3]:, __INT32__:task tid(-1 is all), type=1, [0m
+[1;36m2089-08-24 17:41:05(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_task_deal-114]shell deal thread, argv=(nil)[0m
+[1;36m2089-08-24 17:41:07(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_deal_input-65]input=quit, len=4[0m
+[1;36m2089-08-24 18:11:34(UTC)[Saturday]%% TFTP-DEBUG :[tftp_command_register-228]tftp shell command register, cmd_str=0x405670[0m
+[1;36m2089-08-24 18:11:34(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=taskpool[0m
+[1;36m2089-08-24 18:11:34(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=display[0m
+[1;36m2089-08-24 18:11:34(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=taskId[0m
+[1;36m2089-08-24 18:11:34(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=__INT32__[0m
+[1;36m2089-08-24 18:11:34(UTC)[Saturday]%% TFTP-DEBUG :[tftp_command_register-272]argc = 4, status= 0x6[0m
+[1;36m2089-08-24 18:11:34(UTC)[Saturday]%% TFTP-DEBUG :[tftp_command_register-278]argv[0]:, taskpool:commuication child task pool display, type=0, [0m
+[1;36m2089-08-24 18:11:34(UTC)[Saturday]%% TFTP-DEBUG :[tftp_command_register-278]argv[1]:, display:display some information, type=0, [0m
+[1;36m2089-08-24 18:11:34(UTC)[Saturday]%% TFTP-DEBUG :[tftp_command_register-278]ar
+[1;36m2089-08-24 18:18:30(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-228]tftp shell command register, cmd_str=0x405670[0m
+[1;36m2089-08-24 18:18:30(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=taskpool[0m
+[1;36m2089-08-24 18:18:30(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=display[0m
+[1;36m2089-08-24 18:18:30(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=taskId[0m
+[1;36m2089-08-24 18:18:30(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=__INT32__[0m
+[1;36m2089-08-24 18:18:30(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-272]argc = 4, status= 0x6[0m
+[1;36m2089-08-24 18:18:30(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-278]argv[0]:, taskpool:commuication child task pool display, type=0, [0m
+[1;36m2089-08-24 18:18:30(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-278]argv[1]:, display:display some information, type=0, [0m
+[1;36m2089-08-24 18:18:30(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-278]argv[2]:, taskId:displ
+[1;36m2089-08-24 18:18:45(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-228]tftp shell command register, cmd_str=0x405670[0m
+[1;36m2089-08-24 18:18:45(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=taskpool[0m
+[1;36m2089-08-24 18:18:45(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=display[0m
+[1;36m2089-08-24 18:18:45(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=taskId[0m
+[1;36m2089-08-24 18:18:45(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=__INT32__[0m
+[1;36m2089-08-24 18:18:45(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-272]argc = 4, status= 0x6[0m
+[1;36m2089-08-24 18:18:45(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-278]argv[0]:, taskpool:commuication child task pool display, type=0, [0m
+[1;36m2089-08-24 18:18:45(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-278]argv[1]:, display:display some information, type=0, [0m
+[1;36m2089-08-24 18:18:45(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-278]argv[2]:, taskId:displ
+[1;36m2089-08-24 18:37:00(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_cmd_init-345]tftp shell module shell command register[0m
+[1;36m2089-08-24 18:37:00(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-228]tftp shell command register, cmd_str=0x406338[0m
+[1;36m2089-08-24 18:37:00(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=taskshell[0m
+[1;36m2089-08-24 18:37:00(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=display[0m
+[1;36m2089-08-24 18:37:00(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=command[0m
+[1;36m2089-08-24 18:37:00(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=__STRING__[0m
+[1;36m2089-08-24 18:37:00(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-272]argc = 4, status= 0x6[0m
+[1;36m2089-08-24 18:37:00(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-278]argv[0]:, taskshell:shell command display, type=0, [0m
+[1;36m2089-08-24 18:37:00(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-278]argv[1]:, display:display command format, type=0, [0m
+[1;36m2089-08-24 18:37:00(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-278]argv[2]:, command:display with tid, type=0, [0m
+[1;36m2089-08-24 18:37:00(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-278]argv[3]:, __STRING__:command string, type=0, [0m
+[1;36m2089-08-24 18:37:00(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-228]tftp shell command register, cmd_str=0x4056d8[0m
+[1;36m2089-08-24 18:37:00(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=taskpool[0m
+[1;36m2089-08-24 18:37:00(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=display[0m
+[1;36m2089-08-24 18:37:00(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=taskId[0m
+[1;36m2089-08-24 18:37:00(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-154]strCmd=__INT32__[0m
+[1;36m2089-08-24 18:37:00(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-272]argc = 4, status= 0x6[0m
+[1;36m2089-08-24 18:37:00(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-278]argv[0]:, taskpool:commuication child t
+[1;36m2089-08-24 19:55:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_cmd_init-430]tftp shell module shell command register[0m
+[1;36m2089-08-24 19:55:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-294]tftp shell command register, cmd_str=0x406920[0m
+[1;36m2089-08-24 19:55:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-220]strCmd=shellcmd[0m
+[1;36m2089-08-24 19:55:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-220]strCmd=display[0m
+[1;36m2089-08-24 19:55:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-220]strCmd=command[0m
+[1;36m2089-08-24 19:55:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-220]strCmd=__STRING__[0m
+[1;36m2089-08-24 19:55:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-338]argc = 4, status= 0x6[0m
+[1;36m2089-08-24 19:55:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-344]argv[0]:, shellcmd:shell command display, type=0, [0m
+[1;36m2089-08-24 19:55:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-344]argv[1]:, display:display command format, type=0, [0m
+[1;36m2089-08-24 19:55:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-344]argv[2]:, command:display with tid, type=0, [0m
+[1;36m2089-08-24 19:55:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-344]argv[3]:, __STRING__:command string, type=0, [0m
+[1;36m2089-08-24 19:55:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-294]tftp shell command register, cmd_str=0x405bd8[0m
+[1;36m2089-08-24 19:55:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-220]strCmd=taskpool[0m
+[1;36m2089-08-24 19:55:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-220]strCmd=display[0m
+[1;36m2089-08-24 19:55:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-220]strCmd=taskId[0m
+[1;36m2089-08-24 19:55:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-220]strCmd=__INT32__[0m
+[1;36m2089-08-24 19:55:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-338]argc = 4, status= 0x6[0m
+[1;36m2089-08-24 19:55:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-344]argv[0]:, taskpool:commuication child tas
+[1;36m2089-08-24 19:56:44(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_cmd_init-430]tftp shell module shell command register[0m
+[1;36m2089-08-24 19:56:44(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-294]tftp shell command register, cmd_str=0x406948[0m
+[1;36m2089-08-24 19:56:44(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-220]strCmd=shellcmd[0m
+[1;36m2089-08-24 19:56:44(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-220]strCmd=display[0m
+[1;36m2089-08-24 19:56:44(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-220]strCmd=command[0m
+[1;36m2089-08-24 19:56:44(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-220]strCmd=__STRING__[0m
+[1;36m2089-08-24 19:56:44(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-338]argc = 4, status= 0x6[0m
+[1;36m2089-08-24 19:56:44(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-344]argv[0]:, shellcmd:shell command display, type=0, [0m
+[1;36m2089-08-24 19:56:44(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-344]argv[1]:, display:display command format, type=0, [0m
+[1;36m2089-08-24 19:56:44(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-344]argv[2]:, command:display with tid, type=0, [0m
+[1;36m2089-08-24 19:56:44(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-344]argv[3]:, __STRING__:command string, type=0, [0m
+[1;36m2089-08-24 19:56:44(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-294]tftp shell command register, cmd_str=0x405bf8[0m
+[1;36m2089-08-24 19:56:44(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-220]strCmd=taskpool[0m
+[1;36m2089-08-24 19:56:44(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-220]strCmd=display[0m
+[1;36m2089-08-24 19:56:44(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-220]strCmd=taskId[0m
+[1;36m2089-08-24 19:56:44(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-220]strCmd=__INT32__[0m
+[1;36m2089-08-24 19:56:44(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-338]argc = 4, status= 0x6[0m
+[1;36m2089-08-24 19:56:44(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-344]argv[0]:, taskpool:commuication child tas
+[1;36m2089-08-24 19:58:46(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_cmd_init-431]tftp shell module shell command register[0m
+[1;36m2089-08-24 19:58:46(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-295]tftp shell command register, cmd_str=0x406968[0m
+[1;36m2089-08-24 19:58:46(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-221]strCmd=shellcmd[0m
+[1;36m2089-08-24 19:58:46(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-221]strCmd=display[0m
+[1;36m2089-08-24 19:58:46(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-221]strCmd=command[0m
+[1;36m2089-08-24 19:58:46(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-221]strCmd=__STRING__[0m
+[1;36m2089-08-24 19:58:46(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-339]argc = 4, status= 0x6[0m
+[1;36m2089-08-24 19:58:46(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-345]argv[0]:, shellcmd:shell command display, type=0, [0m
+[1;36m2089-08-24 19:58:46(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-345]argv[1]:, display:display command format, type=0, [0m
+[1;36m2089-08-24 19:58:46(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-345]argv[2]:, command:display with tid, type=0, [0m
+[1;36m2089-08-24 19:58:46(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-345]argv[3]:, __STRING__:command string, type=0, [0m
+[1;36m2089-08-24 19:58:46(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-295]tftp shell command register, cmd_str=0x405c18[0m
+[1;36m2089-08-24 19:58:46(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-221]strCmd=taskpool[0m
+[1;36m2089-08-24 19:58:46(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-221]strCmd=display[0m
+[1;36m2089-08-24 19:58:46(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-221]strCmd=taskId[0m
+[1;36m2089-08-24 19:58:46(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-221]strCmd=__INT32__[0m
+[1;36m2089-08-24 19:58:46(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-339]argc = 4, status= 0x6[0m
+[1;36m2089-08-24 19:58:46(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-345]argv[0]:, taskpool:commuication child tas
+[1;36m2089-08-24 19:59:26(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_cmd_init-432]tftp shell module shell command register[0m
+[1;36m2089-08-24 19:59:26(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-296]tftp shell command register, cmd_str=0x406970[0m
+[1;36m2089-08-24 19:59:26(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-222]strCmd=shellcmd[0m
+[1;36m2089-08-24 19:59:26(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-222]strCmd=display[0m
+[1;36m2089-08-24 19:59:26(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-222]strCmd=command[0m
+[1;36m2089-08-24 19:59:26(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-222]strCmd=__STRING__[0m
+[1;36m2089-08-24 19:59:26(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-340]argc = 4, status= 0x6[0m
+[1;36m2089-08-24 19:59:26(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-346]argv[0]:, shellcmd:shell command display, type=0, [0m
+[1;36m2089-08-24 19:59:26(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-346]argv[1]:, display:display command format, type=0, [0m
+[1;36m2089-08-24 19:59:26(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-346]argv[2]:, command:display with tid, type=0, [0m
+[1;36m2089-08-24 19:59:26(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-346]argv[3]:, __STRING__:command string, type=0, [0m
+[1;36m2089-08-24 19:59:26(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-296]tftp shell command register, cmd_str=0x405c18[0m
+[1;36m2089-08-24 19:59:26(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-222]strCmd=taskpool[0m
+[1;36m2089-08-24 19:59:26(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-222]strCmd=display[0m
+[1;36m2089-08-24 19:59:26(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-222]strCmd=taskId[0m
+[1;36m2089-08-24 19:59:26(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-222]strCmd=__INT32__[0m
+[1;36m2089-08-24 19:59:26(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-340]argc = 4, status= 0x6[0m
+[1;36m2089-08-24 19:59:26(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-346]argv[0]:, taskpool:commuication child tas
+[1;36m2089-08-24 20:27:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_cmd_init-447]tftp shell module shell command register[0m
+[1;36m2089-08-24 20:27:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-310]tftp shell command register, cmd_str=0x406b50[0m
+[1;36m2089-08-24 20:27:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-235]strCmd=shellcmd[0m
+[1;36m2089-08-24 20:27:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-235]strCmd=display[0m
+[1;36m2089-08-24 20:27:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-235]strCmd=command[0m
+[1;36m2089-08-24 20:27:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-235]strCmd=__STRING__[0m
+[1;36m2089-08-24 20:27:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-354]argc = 4, status= 0x6[0m
+[1;36m2089-08-24 20:27:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-360]argv[0]:, shellcmd:shell command display, type=0, [0m
+[1;36m2089-08-24 20:27:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-360]argv[1]:, display:display command format, type=0, [0m
+[1;36m2089-08-24 20:27:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-360]argv[2]:, command:display with tid, type=0, [0m
+[1;36m2089-08-24 20:27:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-360]argv[3]:, __STRING__:command string, type=0, [0m
+[1;36m2089-08-24 20:27:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_listen_socket_init-197]tftp server task listen socket create[0m
+[1;36m2089-08-24 20:27:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_pool_operator_sem-227]tftp server task pool operator sem init[0m
+[1;36m2089-08-24 20:27:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_init-261]tftp server task create init[0m
+[1;36m2089-08-24 20:27:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_shell_command_init-78]tftp server module shell command register[0m
+[1;36m2089-08-24 20:27:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-310]tftp shell command register, cmd_str=0x405d70[0m
+[1;36m2089-08-24 20:27:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-235]strCmd=taskpool[0m
+[1;36m2089-08-24 20:27:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-235]strCmd=display[0m
+[1;36m2089-08-24 20:27:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-235]strCmd=taskId[0m
+[1;36m2089-08-24 20:27:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-235]strCmd=__INT32__[0m
+[1;36m2089-08-24 20:27:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-354]argc = 4, status= 0x6[0m
+[1;36m2089-08-24 20:27:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-360]argv[0]:, taskpool:commuication child task pool display, type=0, [0m
+[1;36m2089-08-24 20:27:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-360]argv[1]:, display:display some information, type=0, [0m
+[1;36m2089-08-24 20:27:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-360]argv[2]:, taskId:display with tid, type=0, [0m
+[1;36m2089-08-24 20:27:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-360]argv[3]:, __INT32__:task tid(-1 is all), type=1, [0m
+[1;36m2089-08-24 20:27:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_task_deal-189]shell deal thread, argv=(nil)[0m
+[1;36m2089-08-24 20:28:00(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-128]
+shell shell string:taskpool display taskId 123[0m
+[1;36m2089-08-24 20:28:00(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-130]
+shell shell string:taskpool display taskId 123[0m
+[1;36m2089-08-24 20:28:00(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-143]
+shell argc:4, argv[0]:taskpool[0m
+[1;36m2089-08-24 20:28:00(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-143]
+shell argc:4, argv[1]:display[0m
+[1;36m2089-08-24 20:28:00(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-143]
+shell argc:4, argv[2]:taskId[0m
+[1;36m2089-08-24 20:28:00(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-143]
+shell argc:4, argv[3]:123[0m
+[1;36m2089-08-24 20:28:00(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_cmd_deal-164]
+shell argc:4, argv[0]:taskpool[0m
+[1;36m2089-08-24 20:28:00(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_cmd_deal-164]
+shell argc:4, argv
+[1;36m2089-08-24 20:30:01(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_cmd_init-447]tftp shell module shell command register[0m
+[1;36m2089-08-24 20:30:01(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-310]tftp shell command register, cmd_str=0x406b48[0m
+[1;36m2089-08-24 20:30:01(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-235]strCmd=shellcmd[0m
+[1;36m2089-08-24 20:30:01(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-235]strCmd=display[0m
+[1;36m2089-08-24 20:30:01(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-235]strCmd=command[0m
+[1;36m2089-08-24 20:30:01(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-235]strCmd=__STRING__[0m
+[1;36m2089-08-24 20:30:01(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-354]argc = 4, status= 0x6[0m
+[1;36m2089-08-24 20:30:01(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-360]argv[0]:, shellcmd:shell command display, type=0, [0m
+[1;36m2089-08-24 20:30:01(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-360]argv[1]:, display:display command format, type=0, [0m
+[1;36m2089-08-24 20:30:01(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-360]argv[2]:, command:display with tid, type=0, [0m
+[1;36m2089-08-24 20:30:01(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-360]argv[3]:, __STRING__:command string, type=0, [0m
+[1;36m2089-08-24 20:30:01(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_listen_socket_init-197]tftp server task listen socket create[0m
+[1;36m2089-08-24 20:30:01(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_pool_operator_sem-227]tftp server task pool operator sem init[0m
+[1;36m2089-08-24 20:30:01(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_init-261]tftp server task create init[0m
+[1;36m2089-08-24 20:30:01(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_shell_command_init-78]tftp server module shell command register[0m
+[1;36m2089-08-24 20:30:01(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-310]tftp shell command register, cmd_str=0x405d70[0m
+[1;36m2089-08-24 20:30:01(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-235]strCmd=taskpool[0m
+[1;36m2089-08-24 20:30:01(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-235]strCmd=display[0m
+[1;36m2089-08-24 20:30:01(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-235]strCmd=taskId[0m
+[1;36m2089-08-24 20:30:01(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-235]strCmd=__INT32__[0m
+[1;36m2089-08-24 20:30:01(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-354]argc = 4, status= 0x6[0m
+[1;36m2089-08-24 20:30:01(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-360]argv[0]:, taskpool:commuication child task pool display, type=0, [0m
+[1;36m2089-08-24 20:30:01(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-360]argv[1]:, display:display some information, type=0, [0m
+[1;36m2089-08-24 20:30:01(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-360]argv[2]:, taskId:display with tid, type=0, [0m
+[1;36m2089-08-24 20:30:01(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-360]argv[3]:, __INT32__:task tid(-1 is all), type=1, [0m
+[1;36m2089-08-24 20:30:01(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_task_deal-189]shell deal thread, argv=(nil)[0m
+[1;36m2089-08-24 20:30:04(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-128]shell shell string:[0m
+[1;36m2089-08-24 20:30:04(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-130]shell shell string:[0m
+[1;36m2089-08-24 20:30:04(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_deal_input-68]input=, len=0[0m
+[1;36m2089-08-24 20:30:04(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-128]shell shell string:[0m
+[1;36m2089-08-24 20:30:04(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-130]shell shell string:[0m
+[1;36m2089-08-24 20:30:04(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_deal_input-68]input=, len=0[0m
+[1;36m2089-08-24 20:30:04(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-128]shell shell string:[0m
+[1;36m2089-08-24 20:30:04(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-130]shell shell string:[0m
+[1;36m2089-08-24 20:30:04(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_deal_input-68]input=, len=0[0m
+[1;36m2089-08-24 20:30:05(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-128]shell shell string:[0m
+[1;36m2089-08-24 20:30:05(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-130]shell shell string:[0m
+[1;36m2089-08-24 20:30:05(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_deal_input-68]input=, len=0[0m
+[1;36m2089-08-24 20:30:05(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-128]shell shell string:[0m
+[1;36m2089-08-24 20:30:05(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-130]shell shell string:[0m
+[1;36m2089-08-24 20:30:05(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_deal_input-68]input=, len=0[0m
+[1;36m2089-08-24 20:30:07(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-128]shell shell string:taskpool display taskId 123[0m
+[1;36m2089-08-24 20:30:07(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-130]shell shell string:taskpool display taskId 123[0m
+[1;36m2089-08-24 20:30:07(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-143]shell argc:4, argv[0]:taskpool[0m
+[1;36m2089-08-24 20:30:07(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-143]shell argc:4, argv[1]:display[0m
+[1;36m2089-08-24 20:30:07(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-143]shell argc:4, argv[2]:taskId[0m
+[1;36m2089-08-24 20:30:07(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-143]shell argc:4, argv[3]:123[0m
+[1;36m2089-08-24 20:30:07(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_cmd_deal-164]shell argc:4, argv[0]:taskpool[0m
+[1;36m2089-08-24 20:30:07(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_cmd_deal-164]shell argc:4, argv[1]:display[0m
+[1;36m2089-08-24 20:30:07(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_cmd_deal-164]shell argc:4, argv[2]:taskId[0m
+[1;36m2089-08-24 20:30:07(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_cmd_deal-164]shell argc:4, argv[3]:123[0m
+[1;36m2089-08-24 20:30:07(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_deal_input-68]input=taskpool, len=8[0m
+[1;36m2089-08-24 20:30:09(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-128]shell shell string:taskpool display taskId 123[0m
+[1;36m2089-08-24 20:30:09(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-130]shell shell string:taskpool display taskId 123[0m
+[1;36m2089-08-24 20:30:09(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-143]shell argc:4, argv[0]:taskpool[0m
+[1;36m2089-08-24 20:30:09(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-143]shell argc:4, argv[1]:display[0m
+[1;36m2089-08-24 20:30:09(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-143]shell argc:4, argv[2]:taskId[0m
+[1;36m2089-08-24 20:30:09(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-143]shell argc:4, argv[3]:123[0m
+[1;36m2089-08-24 20:30:09(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_cmd_deal-164]shell argc:4, argv[0]:taskpool[0m
+[1;36m2089-08-24 20:30:09(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_cmd_deal-164]shell argc:4, argv[1]:display[0m
+[1;36m2089-08-24 20:30:09(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_cmd_deal-164]shell argc:4, argv[2]:taskId[0m
+[1;36m2089-08-24 20:30:09(UTC)[Saturday]%% TFTP
+[1;36m2089-08-24 20:31:31(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_cmd_init-447]tftp shell module shell command register[0m
+[1;36m2089-08-24 20:31:31(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-310]tftp shell command register, cmd_str=0x406b48[0m
+[1;36m2089-08-24 20:31:31(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-235]strCmd=shellcmd[0m
+[1;36m2089-08-24 20:31:31(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-235]strCmd=display[0m
+[1;36m2089-08-24 20:31:31(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-235]strCmd=command[0m
+[1;36m2089-08-24 20:31:31(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-235]strCmd=__STRING__[0m
+[1;36m2089-08-24 20:31:31(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-354]argc = 4, status= 0x6[0m
+[1;36m2089-08-24 20:31:31(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-360]argv[0]:, shellcmd:shell command display, type=0, [0m
+[1;36m2089-08-24 20:31:31(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-360]argv[1]:, display:display command format, type=0, [0m
+[1;36m2089-08-24 20:31:31(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-360]argv[2]:, command:display with tid, type=0, [0m
+[1;36m2089-08-24 20:31:31(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-360]argv[3]:, __STRING__:command string, type=0, [0m
+[1;36m2089-08-24 20:31:31(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_listen_socket_init-197]tftp server task listen socket create[0m
+[1;36m2089-08-24 20:31:31(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_pool_operator_sem-227]tftp server task pool operator sem init[0m
+[1;36m2089-08-24 20:31:31(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_init-261]tftp server task create init[0m
+[1;36m2089-08-24 20:31:31(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_shell_command_init-78]tftp server module shell command register[0m
+[1;36m2089-08-24 20:31:31(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-310]tftp shell command register, cmd_str=0x405d70[0m
+[1;36m2089-08-24 20:31:31(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-235]strCmd=taskpool[0m
+[1;36m2089-08-24 20:31:31(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-235]strCmd=display[0m
+[1;36m2089-08-24 20:31:31(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-235]strCmd=taskId[0m
+[1;36m2089-08-24 20:31:31(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_type_get-235]strCmd=__INT32__[0m
+[1;36m2089-08-24 20:31:31(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-354]argc = 4, status= 0x6[0m
+[1;36m2089-08-24 20:31:31(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-360]argv[0]:, taskpool:commuication child task pool display, type=0, [0m
+[1;36m2089-08-24 20:31:31(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-360]argv[1]:, display:display some information, type=0, [0m
+[1;36m2089-08-24 20:31:31(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-360]argv[2]:, taskId:display with tid, type=0, [0m
+[1;36m2089-08-24 20:31:31(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_register-360]argv[3]:, __INT32__:task tid(-1 is all), type=1, [0m
+[1;36m2089-08-24 20:31:31(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_task_deal-189]shell deal thread, argv=(nil)[0m
+[1;36m2089-08-24 20:31:35(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-128]shell shell string:taskpool display taskId 123[0m
+[1;36m2089-08-24 20:31:35(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-130]shell shell string:taskpool display taskId 123[0m
+[1;36m2089-08-24 20:31:35(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-143]shell argc:4, argv[0]:taskpool[0m
+[1;36m2089-08-24 20:31:35(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-143]shell argc:4, argv[1]:display[0m
+[1;36m2089-08-24 20:31:35(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-143]shell argc:4, argv[2]:taskId[0m
+[1;36m2089-08-24 20:31:35(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-143]shell argc:4, argv[3]:123[0m
+[1;36m2089-08-24 20:31:35(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_cmd_deal-164]shell argc:4, argv[0]:taskpool[0m
+[1;36m2089-08-24 20:31:35(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_cmd_deal-164]shell argc:4, argv[1]:display[0m
+[1;36m2089-08-24 20:31:35(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_cmd_deal-164]shell argc:4, argv[2]:taskId[0m
+[1;36m2089-08-24 20:31:35(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_cmd_deal-164]shell argc:4, argv[3]:123[0m
+[1;36m2089-08-24 20:31:35(UTC)[Saturday]%% TFTP-DEBUG :[tftp_cmd_display_task_pool-24]tftp task pool display, argc=4[0m
+[1;36m2089-08-24 20:31:35(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_deal_input-68]input=taskpool, len=8[0m
+[1;36m2089-08-24 20:31:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-128]shell shell string:taskpool display taskId [0m
+[1;36m2089-08-24 20:31:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-130]shell shell string:taskpool display taskId [0m
+[1;36m2089-08-24 20:31:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-143]shell argc:3, argv[0]:taskpool[0m
+[1;36m2089-08-24 20:31:50(UTC)[Saturday]%% TFTP-DEBUG :[tftp_shell_line_format-143]shell argc:3, argv[1]:display[0m
+[1;36m2089-08-24 20:31:50(UTC)[Saturday]%% TFTP-DEBUG :[tf
+[1;36m2089-08-24 20:33:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_listen_socket_init-197]tftp server task listen socket create[0m
+[1;36m2089-08-24 20:33:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_pool_operator_sem-227]tftp server task pool operator sem init[0m
+[1;36m2089-08-24 20:33:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_init-261]tftp server task create init[0m
+[1;36m2089-08-24 20:33:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_init-394]tftp server task pool init[0m
+[1;36m2089-08-24 20:33:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-349]tftp server task pool task init[0m
+[1;36m2089-08-24 20:33:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-298]tftp server task pool sem init[0m
+[1;36m2089-08-24 20:33:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool_node_create-106]tftp server task pool create node, tid=32377[0m
+[1;36m2089-08-24 20:33:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-349]tftp server task pool task init[0m
+[1;36m2089-08-24 20:33:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-298]tftp server task pool sem init[0m
+[1;36m2089-08-24 20:33:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool_node_create-106]tftp server task pool create node, tid=32378[0m
+[1;36m2089-08-24 20:33:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-349]tftp server task pool task init[0m
+[1;36m2089-08-24 20:33:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-298]tftp server task pool sem init[0m
+[1;36m2089-08-24 20:33:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool_node_create-106]tftp server task pool create node, tid=32379[0m
+[1;36m2089-08-24 20:33:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_task_create_init-349]tftp server task pool task init[0m
+[1;36m2089-08-24 20:33:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_task_pool_sem_create_init-298]tftp server task pool sem init[0m
+[1;36m2089-08-24 20:33:54(UTC)[Saturday]%% TFTP-DEBUG :[tftp_server_task_pool

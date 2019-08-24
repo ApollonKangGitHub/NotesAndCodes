@@ -5,6 +5,7 @@
 #include <tftpSem.h>
 #include <tftpPublic.h>
 
+#define __TFTP_TID_ALL_						(-1)
 #define __TFTP_FILE_EOF_					(EOF)
 #define __TFTP_SERVER_TASK_STACK_SIZE_		(0x400000)
 #define __TFTP_CLIENT_TASK_STACK_SIZE_		(0x100000)
@@ -67,6 +68,6 @@ typedef struct tftpTaskPoolList_s
 	struct tftpTaskPoolList_s * _pre;
 }tftpTaskPoolList_t;
 EXTERN tftpReturnValue_t tftp_server_module_init(VOID);
-EXTERN VOID tftp_task_pool_display(VOID);
+EXTERN tftpReturnValue_t tftp_cmd_del_task_pool(INT32 argc, CHAR * argv);
 
 #endif /* __TFTP_SERVER_H__ */
