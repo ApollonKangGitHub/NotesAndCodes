@@ -75,38 +75,6 @@ EXTERN tftpReturnValue_t tftp_cmd_display_task_pool(INT32 argc, CHAR * argv[])
 	return tftp_ret_Ok;
 }
 
-LOCAL VOID tftp_cmd_server_handle(INT32 argc, CHAR * argv[])
-{
-
-}
-
-/*
- * FunctionName:
- *     tftp_server_shell_command_init
- * Description:
- *     线程池display的shell命令初始化
- *     tftpserver启动/关闭的
- * Notes:
- *     
- */
-LOCAL VOID tftp_server_shell_command_init(VOID)
-{
-	TFTP_LOGDBG(tftp_dbgSwitch_server, "tftp server module shell command register");
-
-	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_cmd_display_task_pool, 
-		__TFTP_CMD_HIDE_,
-		"taskpool{commuication child task pool information display}"
-			"display{display some information}"
-				"taskId{display with tid}"
-					"__INT32__{task tid(-1 is all)}");
-
-	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_cmd_server_handle, 
-		__TFTP_CMD_NORMAL_ | __TFTP_CMD_DYN_,
-		"tftpserver{tftp server enable/disable}"
-			"__STRING__{enable or disable}");
-}
-
-
 /*
  * FunctionName:
  *     tftp_server_task_pool_node_create
@@ -443,6 +411,62 @@ LOCAL tftpReturnValue_t tftp_task_pool_init(VOID)
 
 /*
  * FunctionName:
+ *     tftp_cmd_server_handle
+ * Description:
+ *     tftpserver启动/关闭的命令执行函数
+ * Notes:
+ *     
+ */
+LOCAL VOID tftp_cmd_server_handle(INT32 argc, CHAR * argv[])
+{
+	if (0 == strcmp(argv[1], "enable")) {
+		if (gServerRun) {
+			TFTP_LOGWARN("TFTP server is running already!");
+			return;
+		}
+		/* 初始化主线程用于监听连接的socket */
+		TFTP_IF_ERROR_RET(tftp_server_listen_socket_init());
+
+		/* 创建线程池结构访问的信号量 */
+		TFTP_IF_ERROR_RET(tftp_server_pool_operator_sem());
+
+		/* 创建Server线程 */
+		TFTP_IF_ERROR_RET(tftp_server_task_init());
+		TFTP_LOGNOR("TFTP server is start!");
+	}
+	else if (0 == strcmp(argv[1], "disable")) {
+		TFTP_LOGWARN("TFTP server is over!");
+	}
+}
+
+/*
+ * FunctionName:
+ *     tftp_server_shell_command_init
+ * Description:
+ *     线程池display的shell命令初始化
+ *     tftpserver启动/关闭的
+ * Notes:
+ *     
+ */
+LOCAL VOID tftp_server_shell_command_init(VOID)
+{
+	TFTP_LOGDBG(tftp_dbgSwitch_server, "tftp server module shell command register");
+
+	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_cmd_display_task_pool, 
+		__TFTP_CMD_HIDE_,
+		"taskpool{commuication child task pool information display}"
+			"display{display some information}"
+				"taskId{display with tid}"
+					"__INT32__{task tid(-1 is all)}");
+
+	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_cmd_server_handle, 
+		__TFTP_CMD_NORMAL_ | __TFTP_CMD_DYN_,
+		"tftpserver{tftp server enable/disable}"
+			"__STRING__{enable or disable}");
+}
+
+/*
+ * FunctionName:
  *     tftp_server_module_init
  * Description:
  *     server模块初始化接口
@@ -452,15 +476,6 @@ LOCAL tftpReturnValue_t tftp_task_pool_init(VOID)
 EXTERN tftpReturnValue_t tftp_server_module_init(VOID)
 {
 	TFTP_LOGNOR("tftp server module init......");
-
-	/* 初始化主线程用于监听连接的socket */
-	TFTP_IF_ERROR_RET(tftp_server_listen_socket_init());
-
-	/* 创建线程池结构访问的信号量 */
-	TFTP_IF_ERROR_RET(tftp_server_pool_operator_sem());
-
-	/* 创建Server线程 */
-	TFTP_IF_ERROR_RET(tftp_server_task_init());
 	
 	/* 初始化子线程线程池 */
 	TFTP_IF_ERROR_RET(tftp_task_pool_init());
