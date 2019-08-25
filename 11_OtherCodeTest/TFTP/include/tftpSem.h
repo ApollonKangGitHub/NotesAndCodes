@@ -60,7 +60,6 @@ EXTERN INT32 tftp_sem_destroy(tftpSem_t * semId);
 EXTERN INT32 tftp_sem_wait(tftpSemInfo_t * semInfo);
 EXTERN INT32 tftp_sem_post(tftpSem_t * semId);
 EXTERN tftpReturnValue_t tftp_sem_module_init(VOID);
-EXTERN VOID tftp_sem_list_display(VOID);
 EXTERN tftpReturnValue_t tftp_sem_create_init(IN OUT tftpSemInfo_t * pSemInfo);
 
 #endif

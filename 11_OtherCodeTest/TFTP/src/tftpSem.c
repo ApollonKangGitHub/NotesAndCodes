@@ -1,5 +1,6 @@
 #include <tftpSem.h>
 #include <tftpLog.h>
+#include <tftpShell.h>
 #include <tftpPublic.h>
 
 /* 信号量管理结构链表保护信号量 */
@@ -11,22 +12,29 @@ tftpSemInfo_t * gSelfNode = NULL;
 tftpSemInfoList_t * gSemListHead = NULL;
 tftpSemInfoList_t * gSemListTail = NULL;
 
-EXTERN VOID tftp_sem_list_display(VOID)
+LOCAL VOID tftp_sem_list_display(INT32 argc, CHAR * argv[])
 {
 	tftpSemInfoList_t * pSemInfo;
-
+	CHAR * semName = argv[3];
+	
 	tftp_print("\r\n%-16s%-16s%-16s%-16s%-16s%-16s", 
 		"semName", "shared", "semId", "curTask", "timeout(s:ms)", "waitForever");
 	
 	for (pSemInfo = gSemListHead; pSemInfo; pSemInfo = pSemInfo->_next) {
-		tftp_print("\r\n%-16s%-16s%-16p%-16d%-7ld:%-8ld%-16s", 
-			pSemInfo->_semInfo._semName,
-			pSemInfo->_semInfo._pshared ? "process" : "thread", 
-			pSemInfo->_semInfo._semId,
-			pSemInfo->_semInfo._semTask,
-			pSemInfo->_semInfo._timeout._sec, 
-			pSemInfo->_semInfo._timeout._nsec * 1000,
-			pSemInfo->_semInfo._waitForever ? "TRUE" : "FALSE");
+		if ((0 == strcmp(semName, pSemInfo->_semInfo._semName))
+			|| (0 == strcmp(semName, "all"))) {
+			tftp_print("\r\n%-16s%-16s%-16p%-16d%-7ld:%-8ld%-16s", 
+				pSemInfo->_semInfo._semName,
+				pSemInfo->_semInfo._pshared ? "process" : "thread", 
+				pSemInfo->_semInfo._semId,
+				pSemInfo->_semInfo._semTask,
+				pSemInfo->_semInfo._timeout._sec, 
+				pSemInfo->_semInfo._timeout._nsec * 1000,
+				pSemInfo->_semInfo._waitForever ? "TRUE" : "FALSE");
+		}
+		if (0 == strcmp(semName, pSemInfo->_semInfo._semName)) {
+			break;
+		}
 	} 
 }
 
@@ -330,6 +338,27 @@ LOCAL tftpReturnValue_t tftp_sem_module_List_init(VOID)
 
 /*
  * FunctionName:
+ *     tftp_sem_shell_command_init
+ * Description:
+ *     信号量相关的shell命令初始化
+ * Notes:
+ *     
+ */
+LOCAL VOID tftp_sem_shell_command_init(VOID)
+{
+	TFTP_LOGDBG(tftp_dbgSwitch_server, "tftp server module shell command register");
+
+	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_sem_list_display, 
+		__TFTP_CMD_HIDE_,
+		"sem{semaphore information display}"
+			"display{display some information with sem}"
+				"name{display with sem name}"
+					"__STRING__{sem name('all' or special name)}");
+}
+
+
+/*
+ * FunctionName:
  *     tftp_sem_module_init
  * Description:
  *     信号量管理模块初始化
@@ -341,6 +370,6 @@ EXTERN tftpReturnValue_t tftp_sem_module_init(VOID)
 	TFTP_LOGNOR("tftp semaphore module init......");
 	
 	tftp_sem_module_List_init();
-	
+	tftp_sem_shell_command_init();
 	return tftp_ret_Ok;
 }
