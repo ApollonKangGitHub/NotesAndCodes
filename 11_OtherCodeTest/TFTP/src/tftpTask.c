@@ -433,13 +433,14 @@ EXTERN tftpPid_t tftp_task_get_tid_by_structId(tftpTaskStruct_t structId)
  * Notes:
  *     
  */
-EXTERN VOID tftp_task_list_display(VOID)
+LOCAL VOID tftp_task_list_display(INT32 argc, CHAR * argv[])
 {
 	INT32 taskIndex = 0;
 	INT32 taskNum = 0;
 	tftpTaskId_t taskId = 0;
 	tftpTaskId_t taskIdRet = 0;
 	tftpTaskInfo_t taskInfo;
+	INT32 taskIdFind = atoi(argv[3]);
 	INT32 taskStart = __TFTP_TASK_ID_START_;
 	
 	memset(&taskInfo, 0, sizeof(tftpTaskInfo_t));
@@ -447,16 +448,21 @@ EXTERN VOID tftp_task_list_display(VOID)
 	taskNum = tftp_task_get_task_num();
 
 	/* 各个条目信息 */
-	tftp_print("\r\n%-16s%-16s%-20s%-10s%-10s%-16s", 
+	tftp_print("\r\n%-12s%-16s%-16s%-20s%-10s%-10s%-16s", "taskIndex",
 		"taskName", "stackSize(B)", "structId", "taskPid", "taskTid", "detachStatus");
 	
 	for (taskIndex = 0; taskIndex < taskNum; taskIndex++) {
 		taskId = taskIndex + taskStart;
-		taskIdRet = tftp_task_get_info(taskId, &taskInfo);
-		if(taskId == taskIdRet) {
-			tftp_print("\r\n%-16s%-16d0x%-18lx%-10d%-10d%-16s", taskInfo._name, 
-				taskInfo._stackSize, taskInfo._taskStructid, taskInfo._pid, taskInfo._tid,
-					(taskInfo._detachState == __TFTP_TASK_DETACHED_) ? "detach" : "attach");
+		if (taskId == taskIdFind || taskIdFind == -1) {
+			taskIdRet = tftp_task_get_info(taskId, &taskInfo);
+			if(taskId == taskIdRet) {
+				tftp_print("\r\n%-12d%-16s%-16d0x%-18lx%-10d%-10d%-16s", taskId, taskInfo._name, 
+					taskInfo._stackSize, taskInfo._taskStructid, taskInfo._pid, taskInfo._tid,
+						(taskInfo._detachState == __TFTP_TASK_DETACHED_) ? "detach" : "attach");
+			}
+		}
+		if (taskIdFind == taskId) {
+			break;
 		}
 	}
 }

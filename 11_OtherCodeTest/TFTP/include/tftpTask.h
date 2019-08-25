@@ -62,7 +62,6 @@ extern int pthread_getname_np(pthread_t thread, char *name, size_t len);
 #define tftp_task_get_pid()						getpid()
 #define tftp_task_get_structId()				pthread_self()
 
-EXTERN VOID tftp_task_list_display(VOID);
 EXTERN tftpReturnValue_t tftp_task_module_init(VOID);
 EXTERN tftpReturnValue_t tftp_task_create_init(tftpTaskInfo_t * taskInfo);
 EXTERN tftpReturnValue_t tftp_task_destroy(tftpTaskStruct_t tid);

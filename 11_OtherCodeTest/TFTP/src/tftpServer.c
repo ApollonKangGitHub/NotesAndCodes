@@ -456,7 +456,7 @@ LOCAL VOID tftp_server_shell_command_init(VOID)
 		__TFTP_CMD_HIDE_,
 		"taskpool{commuication child task pool information display}"
 			"display{display some information}"
-				"taskId{display with tid}"
+				"taskTid{display with tid}"
 					"__INT32__{task tid(-1 is all)}");
 
 	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_cmd_server_handle, 

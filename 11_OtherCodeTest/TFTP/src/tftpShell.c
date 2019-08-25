@@ -407,8 +407,8 @@ LOCAL VOID tftp_shell_cmd_dyn_deal
 {
 	VOLATILE BOOL enable = FALSE;
 	VOLATILE tftpShellList_t * pTemp = gShellHead;
-	CONST CHAR * cmdName = argv[1];
-	CONST CHAR * cmdEnable = argv[2];
+	CONST CHAR * cmdName = argv[2];
+	CONST CHAR * cmdEnable = argv[3];
 	VOLATILE BOOL enableAll = FALSE;
 
 	enableAll = (0 == strcmp(cmdName, "all")) ? (TRUE) : (FALSE);
@@ -449,7 +449,7 @@ LOCAL VOID tftp_shell_cmd_dyn_deal
  * FunctionName:
  *     tftp_shell_cmd_display
  * Description:
- *     动态命令注册执行函数
+ *     显示命令的输入格式
  * Notes:
  *     
  */
@@ -465,18 +465,15 @@ LOCAL tftpReturnValue_t tftp_shell_cmd_display(INT32 argc, CHAR * argv[])
 	tftp_print("\r\ncommand list detail information:");
 	while (pTemp) {
 		argcReg = pTemp->_cmdArgc;
-		/* 
-		 * allCommand为隐藏命令，但是不需要注册便可以运行
-         * 其他命令必须确定完整命令才可以显示完整format格式
-		 * 没有经过注册的命令不能显示也不能执行
-		 */
-		if ((0 == strcmp(pcmd, "allCommand"))
-			|| (0 == strcmp(pcmd, pTemp->_cmdArgv._info[0]._cmdStr))
+		if (((0 == strcmp(pcmd, "all")) || (0 == strcmp(pcmd, pTemp->_cmdArgv._info[0]._cmdStr)))
 			&& (pTemp->_status & __TFTP_CMD_DYN_)) {
-			tftp_print("\r\n");
+			tftp_print("\r\n\t------------------------------command:%s [start]", pTemp->_cmdArgv._info[0]._cmdStr);
 			for (index = 0; index < argcReg && index < __TFTP_SHELL_CMD_MAX_NUM_; index++) {
-				tftp_print("[%s] ", pTemp->_cmdArgv._info[index]._cmdStr);
+				tftp_print("\n\t%-16s:%s ", 
+					pTemp->_cmdArgv._info[index]._cmdStr,
+					pTemp->_cmdArgv._info[index]._cmdDescr);
 			}
+			tftp_print("\r\n\t------------------------------command:%s [end]\r\n", pTemp->_cmdArgv._info[0]._cmdStr);
 		}
 
 		/* 找到后直接结束 */
@@ -486,8 +483,7 @@ LOCAL tftpReturnValue_t tftp_shell_cmd_display(INT32 argc, CHAR * argv[])
 		pTemp = pTemp->_next;
 	}
 
-	if (!pTemp && strcmp(pcmd, "allCommand") 
-		|| !(pTemp->_status & __TFTP_CMD_DYN_)) {
+	if ((!pTemp) && strcmp(pcmd, "all")) {
 		tftp_print("\r\nnot found '%s' this command, please check it", pcmd);
 	}
 	
@@ -518,8 +514,9 @@ LOCAL VOID tftp_shell_cmd_init(VOID)
 	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_shell_cmd_dyn_deal, 
 		__TFTP_CMD_HIDE_ | __TFTP_CMD_DYN_, 
 			"dynamic{shell command dynamic register(enable/disable)}"
-				"__STRING__{command do you want to dynamic register}"
-					"__STRING__{enable or disable}");
+				"command{shell command dynamic register}"
+					"__STRING__{command do you want to dynamic register}"
+						"__STRING__{enable or disable}");
 		
 	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_shell_cmd_display, 
 		__TFTP_CMD_NORMAL_ | __TFTP_CMD_DYN_,
