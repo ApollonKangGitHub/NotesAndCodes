@@ -151,10 +151,31 @@ LOCAL tftpReturnValue_t tftp_server_task_pool_node_insert
 VOID * tftp_client_connect_handle(VOID * arg)
 {
 	while (gServerRun) {
-		sleep(1);
+		/* 子线程阻塞等待同步信号量 */
+
+		/* 处理连接请求 */
+
+		/* 处理完毕后释放信号量，清空线程信息 */
 	}
 
 }
+
+LOCAL tftpTaskPool_t * tftp_server_find_free_task(VOID)
+{
+	tftpTaskPoolList_t * pFind = gTaskPoolHead;
+
+	while (pFind) {
+		if (FALSE == pFind->_taskNode._busy) {
+			pFind->_taskNode._busy = TRUE;
+			return &(pFind->_taskNode);
+		}
+		pFind = pFind->_next;
+	}
+
+	/* 没找到，并且线程池没有达到最大限度，则创建新线程，之后考虑实现 */
+	return NULL;
+}
+
 
 /*
  * FunctionName:
@@ -166,8 +187,31 @@ VOID * tftp_client_connect_handle(VOID * arg)
  */
 VOID * tftp_server_task_handle(VOID * argv)
 {
+	INT32 connfd = -1;
+	struct sockaddr_in cliaddr;
+	tftpTaskPool_t * pFind = NULL;
+	INT32 rv = 0;
+	
+	memset(&cliaddr, 0, sizeof(struct sockaddr_in));
 	while (gServerRun) {
-		sleep(1);
+		TFTP_LOGDBG(tftp_dbgSwitch_server, "tftp server wait client connect...");
+
+		/* 从线程池中find一个空闲的子线程*/
+		pFind = tftp_server_find_free_task();
+		TFTP_LOGDBG(tftp_dbgSwitch_server, \
+			"get free task = %p, tid=%d", pFind, pFind ? pFind->_tid : -1);
+		
+		/* 阻塞recv UDP请求，有空闲子线程则，处理，否则不处理，只记录日志 */
+		if (pFind) {
+			/* 对子线程的结构信息做初始化信息同步 */
+			memcpy(&pFind->_cliInfo._cliAddr, &cliaddr, sizeof(cliaddr));			
+		
+			/* 释放同步信号量，唤醒子线程处理链接 */
+			tftp_sem_post(pFind->_syncLock);	
+		}
+		else {
+			TFTP_LOGWARN("Too many connect for tftp server, do not any deal!");
+		}
 	}
 }
 
@@ -276,7 +320,7 @@ LOCAL tftpReturnValue_t tftp_server_task_init(VOID)
 LOCAL tftpReturnValue_t tftp_task_pool_sem_create_init
 (
 	INT32 childTaskId, 
-	tftpSem_t * pSem
+	tftpSem_t ** pSem
 )
 {
 	tftpReturnValue_t ret = tftp_ret_Error;
@@ -310,7 +354,8 @@ LOCAL tftpReturnValue_t tftp_task_pool_sem_create_init
 		return tftp_ret_Error;
 	}
 	else{
-		pSem = semInfo._semId;
+		/* malloc创建的sem内存地址，用指针传出去 */
+		*pSem = semInfo._semId;
 	}
 	return tftp_ret_Ok;
 }
@@ -391,7 +436,7 @@ LOCAL tftpReturnValue_t tftp_task_pool_init(VOID)
 		tid = tftp_task_get_tid_by_structId(clientTask._taskStructid);
 	
 		/* 为子线程创建同步信号量 */
-		TFTP_IF_ERROR_RET(tftp_task_pool_sem_create_init(taskIndex, clientSem));
+		TFTP_IF_ERROR_RET(tftp_task_pool_sem_create_init(taskIndex, &clientSem));
 
 		/* 创建线程池节点，将线程信息和信号量存储到线程池节点中 */
 		pChildNode = tftp_server_task_pool_node_create(clientSem, tid, \

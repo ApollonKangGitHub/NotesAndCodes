@@ -406,13 +406,15 @@ LOCAL VOID tftp_shell_cmd_dyn_deal
 )
 {
 	VOLATILE BOOL enable = FALSE;
+	VOLATILE BOOL disable = FALSE;
 	VOLATILE tftpShellList_t * pTemp = gShellHead;
 	CONST CHAR * cmdName = argv[2];
 	CONST CHAR * cmdEnable = argv[3];
 	VOLATILE BOOL enableAll = FALSE;
-
+	
 	enableAll = (0 == strcmp(cmdName, "all")) ? (TRUE) : (FALSE);
 	enable = (0 == strcmp(cmdEnable, "enable")) ? (TRUE) : (FALSE);
+	disable = (0 == strcmp(cmdEnable, "disable")) ? (TRUE) : (FALSE);
 
 	if (0 == strcmp(cmdEnable, "dynamic")) {
 		tftp_print("\r\nplease don't try disable this command:%s!!!", cmdName);
@@ -427,7 +429,7 @@ LOCAL VOID tftp_shell_cmd_dyn_deal
 				pTemp->_status |= (__TFTP_CMD_NORMAL_) | (__TFTP_CMD_DYN_);
 				tftp_print("\r\n%s is already dynamic register success!", pTemp->_cmdArgv._info[0]._cmdStr);
 			}
-			else if (!enable && (pTemp->_status & __TFTP_CMD_DYN_)) {
+			else if (disable && (pTemp->_status & __TFTP_CMD_DYN_)) {
 				pTemp->_status &= 0;
 				pTemp->_status |= __TFTP_CMD_HIDE_;
 				tftp_print("\r\n%s is already delete register success!", pTemp->_cmdArgv._info[0]._cmdStr);

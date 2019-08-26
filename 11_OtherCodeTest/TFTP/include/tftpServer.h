@@ -54,7 +54,7 @@ typedef struct tftpSocketInfo_s
 typedef struct tftpTaskPool_s
 {
 	 VOLATILE BOOL _busy;			/* 标志线程是否空闲 */
-	 tftpPid_t _tid;				/* 线程tid */
+	 tftpPid_t _tid;				/* 线程tid，与同步信号量一一对应 */
 	 tftpSem_t * _syncLock;			/* 主线程与通信线程之间的同步信号量 */
 	 UINT32 _port;					/* 线程任务通信端口号 */
 	 tftpSocketInfo_t _cliInfo;		/* 客户端相关通信信息 */
@@ -67,6 +67,13 @@ typedef struct tftpTaskPoolList_s
 	struct tftpTaskPoolList_s * _next;
 	struct tftpTaskPoolList_s * _pre;
 }tftpTaskPoolList_t;
+
+#if 0
+#define LINK_SYNC_LOCK(tid, semInfo) \
+		
+#define LINK_SYNC_UNLOCK(tid, semInfo) 
+#endif
+
 EXTERN tftpReturnValue_t tftp_server_module_init(VOID);
 EXTERN tftpReturnValue_t tftp_cmd_del_task_pool(INT32 argc, CHAR * argv);
 
