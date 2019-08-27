@@ -10,7 +10,7 @@
  * FunctionName:
  *     tftp_cmd_client_handle
  * Description:
- *     tftpserver启动/关闭的命令执行函数
+ *     tftpclient下载/上传命令
  * Notes:
  *     
  */
@@ -26,11 +26,11 @@ LOCAL VOID tftp_client_command_init(VOID )
 			"tftpclient{tftp server enable/disable}"
 				"__STRING__{upload(put) or download(get)}"
 					"serverip{server ip address}"
-					"__IPADDR__{ip address(eg:192.168.1.100)}"
-						"file{file name for get/put}"
-						"__STRING__{string of file name without path}"
-							"blocksize{translation blockszie(Bytes) everytimes}"
-							"__UINT32__{128/256/512/1024/2048/4096 Bytes, default is 512}");
+						"__IPADDR__{ip address(eg:192.168.1.100)}"
+							"file{file name for get/put}"
+								"__STRING__{string of file name without path}"
+									"blocksize{translation blockszie(Bytes) everytimes}"
+										"__UINT32__{128/256/512/1024/2048/4096 Bytes, default is 512}");
 }
 
 /*

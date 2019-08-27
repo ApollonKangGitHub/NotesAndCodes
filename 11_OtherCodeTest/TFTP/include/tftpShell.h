@@ -9,12 +9,12 @@
 #define __TFTP_SHELL_TASK_STACK_SIZE_		(0x100000)	
 
 /* shell输入输出缓冲区大小 */
-#define __TFTP_SHELL_BUFFER_LEN_MAX_		(256)
+#define __TFTP_SHELL_BUFFER_LEN_MAX_		(1024)
 
 /* 命令最大长度 */
-#define __TFTP_SHELL_CMD_MAX_LEN_ 			(16)
+#define __TFTP_SHELL_CMD_MAX_LEN_ 			(128)
 #define __TFTP_SHELL_CMD_MAX_NUM_			(16)
-#define __TFTP_CMD_REG_STR_LEN_				(1024)
+#define __TFTP_CMD_REG_STR_LEN_				(2048)
 
 typedef UINT32  tftpCmdAbil_t;
 
