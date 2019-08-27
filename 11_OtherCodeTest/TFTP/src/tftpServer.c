@@ -190,6 +190,7 @@ VOID * tftp_server_task_handle(VOID * argv)
 	INT32 connfd = -1;
 	struct sockaddr_in cliaddr;
 	tftpTaskPool_t * pFind = NULL;
+	CHAR buf[__TFTP_RECV_BUF_LEN_] = {0};
 	INT32 rv = 0;
 	
 	memset(&cliaddr, 0, sizeof(struct sockaddr_in));
@@ -203,6 +204,11 @@ VOID * tftp_server_task_handle(VOID * argv)
 		
 		/* 阻塞recv UDP请求，有空闲子线程则，处理，否则不处理，只记录日志 */
 		if (pFind) {
+			/* 接收UDP请求信息 */
+			rv = tftp_socket_recv(gListenSocket, buf, __TFTP_RECV_BUF_LEN_, &cliaddr);
+			TFTP_LOGDBG(tftp_dbgSwitch_server, \
+				"socket recvfrom fd = %d return %s(%d)", gListenSocket, tftp_err_msg(rv), rv);
+
 			/* 对子线程的结构信息做初始化信息同步 */
 			memcpy(&pFind->_cliInfo._cliAddr, &cliaddr, sizeof(cliaddr));			
 		
@@ -429,14 +435,14 @@ LOCAL tftpReturnValue_t tftp_task_pool_init(VOID)
 
 	/* 先创建线程池最小保证线程个数 */
 	for (taskIndex = 0; taskIndex < __TFTP_TASK_POOL_MIN_; taskIndex++) {
+		/* 为子线程创建同步信号量 */
+		TFTP_IF_ERROR_RET(tftp_task_pool_sem_create_init(taskIndex, &clientSem));
+		
 		/* 依次创建子线程 */
 		TFTP_IF_ERROR_RET(tftp_task_pool_task_create_init(taskIndex, &clientTask));
 
 		/* 根据返回的structID获取线程tid */
 		tid = tftp_task_get_tid_by_structId(clientTask._taskStructid);
-	
-		/* 为子线程创建同步信号量 */
-		TFTP_IF_ERROR_RET(tftp_task_pool_sem_create_init(taskIndex, &clientSem));
 
 		/* 创建线程池节点，将线程信息和信号量存储到线程池节点中 */
 		pChildNode = tftp_server_task_pool_node_create(clientSem, tid, \
@@ -469,8 +475,12 @@ LOCAL VOID tftp_cmd_server_handle(INT32 argc, CHAR * argv[])
 			TFTP_LOGWARN("TFTP server is running already!");
 			return;
 		}
+		
 		/* 初始化主线程用于监听连接的socket */
 		TFTP_IF_ERROR_RET(tftp_server_listen_socket_init());
+
+		/* 初始化子线程线程池 */
+		TFTP_IF_ERROR_RET(tftp_task_pool_init());
 
 		/* 创建线程池结构访问的信号量 */
 		TFTP_IF_ERROR_RET(tftp_server_pool_operator_sem());
@@ -482,6 +492,19 @@ LOCAL VOID tftp_cmd_server_handle(INT32 argc, CHAR * argv[])
 	else if (0 == strcmp(argv[1], "disable")) {
 		TFTP_LOGWARN("TFTP server is over!");
 	}
+}
+
+/*
+ * FunctionName:
+ *     tftp_cmd_server_ip_set
+ * Description:
+ *     设置tftp server ip地址，默认为INADDR_ANY
+ * Notes:
+ *     
+ */
+LOCAL VOID tftp_cmd_server_ip_set(INT32 argc, CHAR * argv[])
+{
+	tftp_print("\r\nset ip address:%s", argv[2]);
 }
 
 /*
@@ -508,6 +531,12 @@ LOCAL VOID tftp_server_shell_command_init(VOID)
 		__TFTP_CMD_NORMAL_ | __TFTP_CMD_DYN_,
 		"tftpserver{tftp server enable/disable}"
 			"__STRING__{enable or disable}");
+
+	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_cmd_server_ip_set, 
+		__TFTP_CMD_NORMAL_ | __TFTP_CMD_DYN_,
+		"tftpserverip{tftp server ip address operator}"
+			"set{set tftp server ip address}"
+			 	"__IPADDR__{string of ip address(eg:192.168.1.100)}");
 }
 
 /*
@@ -521,12 +550,11 @@ LOCAL VOID tftp_server_shell_command_init(VOID)
 EXTERN tftpReturnValue_t tftp_server_module_init(VOID)
 {
 	TFTP_LOGNOR("tftp server module init......");
-	
-	/* 初始化子线程线程池 */
-	TFTP_IF_ERROR_RET(tftp_task_pool_init());
 
 	/* 初始化display、server注册等命令 */
 	tftp_server_shell_command_init();
+
+	/* 打开配置文件，获取服务器可下载文件路径 */
 }
 
 

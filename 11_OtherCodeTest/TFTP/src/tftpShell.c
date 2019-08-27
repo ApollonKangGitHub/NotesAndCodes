@@ -466,9 +466,12 @@ LOCAL tftpReturnValue_t tftp_shell_cmd_display(INT32 argc, CHAR * argv[])
 	
 	tftp_print("\r\ncommand list detail information:");
 	while (pTemp) {
+		if(pTemp->_status & __TFTP_CMD_HIDE_) {
+			pTemp = pTemp->_next;
+			continue;
+		}
 		argcReg = pTemp->_cmdArgc;
-		if (((0 == strcmp(pcmd, "all")) || (0 == strcmp(pcmd, pTemp->_cmdArgv._info[0]._cmdStr)))
-			&& (pTemp->_status & __TFTP_CMD_DYN_)) {
+		if ((0 == strcmp(pcmd, "all")) || (0 == strcmp(pcmd, pTemp->_cmdArgv._info[0]._cmdStr))) {
 			tftp_print("\r\n\t------------------------------command:%s [start]", pTemp->_cmdArgv._info[0]._cmdStr);
 			for (index = 0; index < argcReg && index < __TFTP_SHELL_CMD_MAX_NUM_; index++) {
 				tftp_print("\n\t%-16s:%s ", 
@@ -492,6 +495,20 @@ LOCAL tftpReturnValue_t tftp_shell_cmd_display(INT32 argc, CHAR * argv[])
 	return tftp_ret_Ok;
 }
 
+/*
+ * FunctionName:
+ *     tftp_shell_cmd_display
+ * Description:
+ *     显示命令的输入格式
+ * Notes:
+ *     
+ */
+LOCAL VOID tftp_shell_detail_menu(VOID)
+{
+	INT32 argc = 3;
+	CHAR * argv[3] = {"shellcmd", "display", "all"};
+	tftp_shell_cmd_display(argc, argv);
+}
 
 /*
  * FunctionName:
@@ -507,11 +524,11 @@ LOCAL VOID tftp_shell_cmd_init(VOID)
 	
 	tftp_shell_cmd_register((tftp_cmd_deal_fun)ttp_shell_normal_menu, 
 		__TFTP_CMD_NORMAL_ | __TFTP_CMD_DYN_, 
-			"?{shell command help menu}");
+			"?{shell command help menu with simple information}");
 
-	tftp_shell_cmd_register((tftp_cmd_deal_fun)ttp_shell_normal_menu, 
+	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_shell_detail_menu, 
 		__TFTP_CMD_NORMAL_ | __TFTP_CMD_DYN_, 
-			"help{shell command help menu}");
+			"help{shell command help menu with detail all}");
 
 	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_shell_cmd_dyn_deal, 
 		__TFTP_CMD_HIDE_ | __TFTP_CMD_DYN_, 
