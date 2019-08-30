@@ -61,5 +61,5 @@ EXTERN CHAR * tftp_err_code_msg[tftp_ret_Max + 1];
 #define tftp_sprint sprintf
 #define tftp_gets fgets
 #define tftp_perror perror
-
+#define tftp_fflush fflush
 #endif /* __TFTP_TYPE_H */

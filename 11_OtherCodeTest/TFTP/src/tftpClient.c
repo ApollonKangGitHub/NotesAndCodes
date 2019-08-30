@@ -5,23 +5,43 @@
 #include <tftpShell.h>
 #include <tftpPublic.h>
 
+LOCAL INT32 gClientSockfd = 0;
+LOCAL CHAR gSendBuf[__TFTP_SEND_BUG_LEN_] = {0};
+LOCAL CHAR gRecvBuf[__TFTP_RECV_BUF_LEN_] = {0};
 
 /*
  * FunctionName:
- *     tftp_cmd_client_handle
+ *     tftp_client_cmd_handle
  * Description:
  *     tftpclient下载/上传命令
  * Notes:
  *     
  */
-LOCAL VOID tftp_cmd_client_handle(INT32 argc, CHAR * argv[])
+LOCAL VOID tftp_client_cmd_handle(INT32 argc, CHAR * argv[])
 {
 	tftp_print("\r\ntftp client start!!!");
+	struct sockaddr_in seraddr;
+	INT32 sendLen = 0;
+	INT32 recvLen = 0;
+	INT32 ret = 0;
+	
+	/* 初始化服务器地址等信息 */
+
+	/* 客户端socket创建 */
+	memset(&seraddr, 0, sizeof(seraddr));
+	seraddr.sin_family = AF_INET;
+	seraddr.sin_port = htons(__TFTP_CLIENT_DEFAULT_SOCKET_UDP_PORT_);
+	seraddr.sin_addr.s_addr = __TFTP_CLIENT_DEFAULT_IP_ADDR_;
+	gClientSockfd = tftp_socket_create(&seraddr);	
+
+	/* 发送请求到服务器 */
+	sendLen = 0;
+	ret = tftp_socket_send(gClientSockfd, gSendBuf, sendLen, &seraddr);
 }
 
-LOCAL VOID tftp_client_command_init(VOID )
+LOCAL VOID tftp_client_command_init(VOID)
 {
-	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_cmd_client_handle, 
+	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_client_cmd_handle, 
 		__TFTP_CMD_NORMAL_ | __TFTP_CMD_DYN_,
 			"tftpclient{tftp server enable/disable}"
 				"__STRING__{upload(put) or download(get)}"

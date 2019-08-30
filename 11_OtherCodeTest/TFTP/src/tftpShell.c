@@ -208,7 +208,7 @@ VOID * tftp_shell_task_deal(VOID * argv)
 		}
 		tftp_shell_line_format(shellStr, &shellArgc, shellArgv);
 		tftp_shell_cmd_deal(shellArgc, shellArgv);
-		usleep(1000);
+		usleep(1000 * 10);
 	}
 	
 	return argv;

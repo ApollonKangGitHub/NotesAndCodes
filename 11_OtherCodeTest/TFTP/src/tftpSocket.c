@@ -32,8 +32,6 @@ EXTERN INT32 tftp_socket_create
 		return -1;
 	}
 
-	len = sizeof(struct sockaddr_in);
-
 	/* 绑定sockfd套接字和指定端口 */
 	ret = bind(sockfd, (struct sockaddr *)addr, len);
 	if (ret < 0) {
@@ -45,6 +43,97 @@ EXTERN INT32 tftp_socket_create
 	}
 	
 	return sockfd;
+}
+
+/*
+ * FunctionName:
+ *     tftp_socket_recv
+ * Description:
+ *     接收UDP数据
+ * Notes:
+ *     
+ */
+EXTERN tftpReturnValue_t tftp_socket_recv
+(
+	INT32 sockfd, 
+	CHAR * buf, 
+	INT32 bufLen, 
+	struct sockaddr_in * client
+) 
+{
+	INT32 ret = 0;
+	socklen_t sockLen = 0;
+
+	if (NULL == buf) {
+		return tftp_ret_Null;
+	}
+
+	sockLen = sizeof(struct sockaddr_in);
+	ret = recvfrom(sockfd, buf, (size_t)bufLen, 0, (struct sockaddr *)client, &sockLen);
+	if (ret < 0) {
+		TFTP_LOGERR("recv data from sockfd fail, sockfd = %d, errno = %d", sockfd, errno);
+		tftp_perror("recv fail reason is");
+		return tftp_ret_Error;
+	}
+}
+
+/*
+ * FunctionName:
+ *     tftp_socket_send
+ * Description:
+ *     发送UDP数据
+ * Notes:
+ *     
+ */
+EXTERN tftpReturnValue_t tftp_socket_send
+(
+	INT32 sockfd, 
+	CHAR * buf, 
+	INT32 bufLen, 
+	struct sockaddr_in * seraddr
+) 
+{
+	socklen_t sockLen = 0;
+	INT32 ret = 0;
+	if (NULL == buf || NULL == seraddr) {
+		return tftp_ret_Null;
+	}
+	sockLen = sizeof(struct sockaddr_in);
+	ret = sendto(sockfd, buf, bufLen, 0, (struct sockaddr *)seraddr, sockLen);
+	if (ret < 0) {
+	TFTP_LOGERR("send data to sockfd fail, sockfd = %d, errno = %d", sockfd, errno);
+		tftp_perror("send fail reason is");
+		return tftp_ret_Error;
+	}
+}
+
+#define __TFTP_SOCKET_UDP_ 	(1)
+#define __TFTP_SOCKET_TCP_	(!__TFTP_SOCKET_UDP_)
+#if __TFTP_SOCKET_TCP_
+/*
+ * FunctionName:
+ *     tftp_socket_connect
+ * Description:
+ *     TCP客户端连接服务器，tftp用不到
+ * Notes:
+ *     
+ */
+EXTERN INT32 tftp_socket_connect
+(
+	INT32 sockfd, 
+	struct sockaddr_in * seraddr
+)
+{
+	INT32 ret = 0;
+	socklen_t addrLen = sizeof(struct sockaddr_in);
+
+	ret = connect(sockfd, (struct sockaddr *)seraddr, addrLen);
+	if (ret < 0) {
+		TFTP_LOGERR("connect to server fd = %d fail, errno = %d", sockfd, errno);
+		tftp_perror("connect fail reason is");
+		return -1;
+	}
+	return ret;
 }
 
 /*
@@ -102,37 +191,6 @@ EXTERN INT32 tftp_socket_accept(INT32 listenfd, struct sockaddr_in * cliaddr)
 
 	return connfd;
 }
-
-/*
- * FunctionName:
- *     tftp_socket_recv
- * Description:
- *     接收UDP数据
- * Notes:
- *     
- */
-EXTERN tftpReturnValue_t tftp_socket_recv
-(
-	INT32 sockfd, 
-	CHAR * buf, 
-	INT32 bufLen, 
-	struct sockaddr_in * client
-) 
-{
-	INT32 ret = 0;
-	socklen_t sockLen = 0;
-
-	if (NULL == buf) {
-		return tftp_ret_Null;
-	}
-
-	sockLen = sizeof(struct sockaddr_in);
-	ret = recvfrom(sockfd, buf, (size_t)bufLen, 0, (struct sockaddr *)client, &sockLen);
-	if (ret < 0) {
-		TFTP_LOGERR("recv data from fd fail, sockfd = %d, errno = %d", sockfd, errno);
-		tftp_perror("recv fail reason is");
-		return -1;
-	}
-}
+#endif /* __TFTP_SOCKET_TCP_ */
 
  

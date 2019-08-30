@@ -128,6 +128,8 @@ EXTERN INT32 tftp_log_level_print
 				(VOID)tftp_log_level_print_format(gLogFile[level],\
 							gLogFilePath[level], pFormatAll, argList);
 				va_end (argList);
+				/* 刷新到文件中去 */
+				tftp_fflush(gLogFile[level]);
 			}
 			else {
 				tftp_print("\r\nlog file %s is not open or not exist, file pointer=%p!", 

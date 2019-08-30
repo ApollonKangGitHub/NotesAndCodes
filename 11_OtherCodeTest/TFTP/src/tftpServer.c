@@ -16,13 +16,13 @@ LOCAL tftpSem_t * gSemPool;
 
 /*
  * FunctionName:
- *     tftp_cmd_display_task_pool
+ *     tftp_server_cmd_display_task_pool
  * Description:
  *     显示task pool信息，可全部显示或显示指定tid的task信息
  * Notes:
  *     
  */
-EXTERN tftpReturnValue_t tftp_cmd_display_task_pool(INT32 argc, CHAR * argv[])
+EXTERN tftpReturnValue_t tftp_server_cmd_display_task_pool(INT32 argc, CHAR * argv[])
 {
 	tftpTaskPoolList_t * pTemp = gTaskPoolHead;
 	tftpTaskPool_t * pTaskNode = NULL;
@@ -142,13 +142,13 @@ LOCAL tftpReturnValue_t tftp_server_task_pool_node_insert
 
 /*
  * FunctionName:
- *     tftp_client_connect_handle
+ *     tftp_server_client_connect_handle
  * Description:
  *     子线程处理客户端连接的执行函数
  * Notes:
  *     
  */
-VOID * tftp_client_connect_handle(VOID * arg)
+VOID * tftp_server_client_connect_handle(VOID * arg)
 {
 	while (gServerRun) {
 		/* 子线程阻塞等待同步信号量 */
@@ -317,13 +317,13 @@ LOCAL tftpReturnValue_t tftp_server_task_init(VOID)
 
 /*
  * FunctionName:
- *     tftp_task_pool_sem_create_init
+ *     tftp_server_task_pool_sem_create_init
  * Description:
  *     线程池读写互斥信号量初始化
  * Notes:
  *     
  */
-LOCAL tftpReturnValue_t tftp_task_pool_sem_create_init
+LOCAL tftpReturnValue_t tftp_server_task_pool_sem_create_init
 (
 	INT32 childTaskId, 
 	tftpSem_t ** pSem
@@ -369,13 +369,13 @@ LOCAL tftpReturnValue_t tftp_task_pool_sem_create_init
 
 /*
  * FunctionName:
- *     tftp_task_pool_task_create_init
+ *     tftp_server_task_pool_task_create_init
  * Description:
  *     线程池任务创建初始化
  * Notes:
  *     
  */
-LOCAL tftpReturnValue_t tftp_task_pool_task_create_init
+LOCAL tftpReturnValue_t tftp_server_task_pool_task_create_init
 (
 	INT32 childTaskId,
 	tftpTaskInfo_t * pClientTask
@@ -395,7 +395,7 @@ LOCAL tftpReturnValue_t tftp_task_pool_task_create_init
 	clientTask._pid = 0;
 	clientTask._tid = 0;
 	clientTask._taskStructid = 0;
-	clientTask._deal_function = tftp_client_connect_handle;
+	clientTask._deal_function = tftp_server_client_connect_handle;
 	clientTask._stackSize = __TFTP_CLIENT_TASK_STACK_SIZE_;
 	clientTask._detachState = __TFTP_TASK_DETACHED_;
 	
@@ -417,13 +417,13 @@ LOCAL tftpReturnValue_t tftp_task_pool_task_create_init
 
 /*
  * FunctionName:
- *     tftp_task_pool_init
+ *     tftp_server_task_pool_init
  * Description:
  *     线程池初始化
  * Notes:
  *     
  */
-LOCAL tftpReturnValue_t tftp_task_pool_init(VOID)
+LOCAL tftpReturnValue_t tftp_server_task_pool_init(VOID)
 {
 	INT32 taskIndex = 0;
 	tftpSem_t * clientSem = NULL;
@@ -436,10 +436,10 @@ LOCAL tftpReturnValue_t tftp_task_pool_init(VOID)
 	/* 先创建线程池最小保证线程个数 */
 	for (taskIndex = 0; taskIndex < __TFTP_TASK_POOL_MIN_; taskIndex++) {
 		/* 为子线程创建同步信号量 */
-		TFTP_IF_ERROR_RET(tftp_task_pool_sem_create_init(taskIndex, &clientSem));
+		TFTP_IF_ERROR_RET(tftp_server_task_pool_sem_create_init(taskIndex, &clientSem));
 		
 		/* 依次创建子线程 */
-		TFTP_IF_ERROR_RET(tftp_task_pool_task_create_init(taskIndex, &clientTask));
+		TFTP_IF_ERROR_RET(tftp_server_task_pool_task_create_init(taskIndex, &clientTask));
 
 		/* 根据返回的structID获取线程tid */
 		tid = tftp_task_get_tid_by_structId(clientTask._taskStructid);
@@ -462,13 +462,13 @@ LOCAL tftpReturnValue_t tftp_task_pool_init(VOID)
 
 /*
  * FunctionName:
- *     tftp_cmd_server_handle
+ *     tftp_server_cmd_enable_handle
  * Description:
  *     tftpserver启动/关闭的命令执行函数
  * Notes:
  *     
  */
-LOCAL VOID tftp_cmd_server_handle(INT32 argc, CHAR * argv[])
+LOCAL VOID tftp_server_cmd_enable_handle(INT32 argc, CHAR * argv[])
 {
 	if (0 == strcmp(argv[1], "enable")) {
 		if (gServerRun) {
@@ -480,7 +480,7 @@ LOCAL VOID tftp_cmd_server_handle(INT32 argc, CHAR * argv[])
 		TFTP_IF_ERROR_RET(tftp_server_listen_socket_init());
 
 		/* 初始化子线程线程池 */
-		TFTP_IF_ERROR_RET(tftp_task_pool_init());
+		TFTP_IF_ERROR_RET(tftp_server_task_pool_init());
 
 		/* 创建线程池结构访问的信号量 */
 		TFTP_IF_ERROR_RET(tftp_server_pool_operator_sem());
@@ -496,13 +496,13 @@ LOCAL VOID tftp_cmd_server_handle(INT32 argc, CHAR * argv[])
 
 /*
  * FunctionName:
- *     tftp_cmd_server_ip_set
+ *     tftp_server_cmd_ip_set
  * Description:
  *     设置tftp server ip地址，默认为INADDR_ANY
  * Notes:
  *     
  */
-LOCAL VOID tftp_cmd_server_ip_set(INT32 argc, CHAR * argv[])
+LOCAL VOID tftp_server_cmd_ip_set(INT32 argc, CHAR * argv[])
 {
 	tftp_print("\r\nset ip address:%s", argv[2]);
 }
@@ -520,19 +520,19 @@ LOCAL VOID tftp_server_shell_command_init(VOID)
 {
 	TFTP_LOGDBG(tftp_dbgSwitch_server, "tftp server module shell command register");
 
-	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_cmd_display_task_pool, 
+	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_server_cmd_display_task_pool, 
 		__TFTP_CMD_HIDE_,
 		"taskpool{commuication child task pool information display}"
 			"display{display some information}"
 				"taskTid{display with tid}"
 					"__INT32__{task tid(-1 is all)}");
 
-	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_cmd_server_handle, 
+	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_server_cmd_enable_handle, 
 		__TFTP_CMD_NORMAL_ | __TFTP_CMD_DYN_,
 		"tftpserver{tftp server enable/disable}"
 			"__STRING__{enable or disable}");
 
-	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_cmd_server_ip_set, 
+	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_server_cmd_ip_set, 
 		__TFTP_CMD_NORMAL_ | __TFTP_CMD_DYN_,
 		"tftpserverip{tftp server ip address operator}"
 			"set{set tftp server ip address}"
