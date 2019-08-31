@@ -14,11 +14,12 @@
  */
 EXTERN INT32 tftp_socket_create
 (
-	struct sockaddr_in * addr
+	struct sockaddr_in * addr,
+	BOOL needBind
 )
 {
 	INT32 ret = 0;
-	socklen_t len = 0;
+	socklen_t addrLen = 0;
 
 	if (NULL == addr) {
 		TFTP_LOGERR("Error parameter addr = %p", addr);
@@ -28,16 +29,21 @@ EXTERN INT32 tftp_socket_create
 	INT32 sockfd = socket(AF_INET, SOCK_DGRAM, 0);
 	if (sockfd < 0) {
 		TFTP_LOGERR("create socket fail, errno = %d!", errno);
-		tftp_perror("create fail reason is");
+		tftp_perror("\r\ncreate fail reason is");
 		return -1;
 	}
 
+	if (!needBind) {
+		return sockfd;
+	}
+
 	/* 绑定sockfd套接字和指定端口 */
-	ret = bind(sockfd, (struct sockaddr *)addr, len);
+	addrLen = sizeof(struct sockaddr_in);
+	ret = bind(sockfd, (struct sockaddr *)addr, addrLen);
 	if (ret < 0) {
 		TFTP_LOGERR("bind socket fd fail, sockfd = %d, port = %u, errno = %d", \
 			sockfd, ntohs(addr->sin_port), errno);
-		tftp_perror("bind fail reason is");
+		tftp_perror("\r\nbind fail reason is");
 		close(sockfd);
 		return -1;
 	}
@@ -62,17 +68,17 @@ EXTERN tftpReturnValue_t tftp_socket_recv
 ) 
 {
 	INT32 ret = 0;
-	socklen_t sockLen = 0;
+	socklen_t addrLen = 0;
 
 	if (NULL == buf) {
 		return tftp_ret_Null;
 	}
 
-	sockLen = sizeof(struct sockaddr_in);
-	ret = recvfrom(sockfd, buf, (size_t)bufLen, 0, (struct sockaddr *)client, &sockLen);
+	addrLen = sizeof(struct sockaddr_in);
+	ret = recvfrom(sockfd, buf, (size_t)bufLen, 0, (struct sockaddr *)client, &addrLen);
 	if (ret < 0) {
 		TFTP_LOGERR("recv data from sockfd fail, sockfd = %d, errno = %d", sockfd, errno);
-		tftp_perror("recv fail reason is");
+		tftp_perror("\r\nrecv fail reason is");
 		return tftp_ret_Error;
 	}
 }
@@ -93,16 +99,16 @@ EXTERN tftpReturnValue_t tftp_socket_send
 	struct sockaddr_in * seraddr
 ) 
 {
-	socklen_t sockLen = 0;
+	socklen_t addrLen = 0;
 	INT32 ret = 0;
 	if (NULL == buf || NULL == seraddr) {
 		return tftp_ret_Null;
 	}
-	sockLen = sizeof(struct sockaddr_in);
-	ret = sendto(sockfd, buf, bufLen, 0, (struct sockaddr *)seraddr, sockLen);
+	addrLen = sizeof(struct sockaddr_in);
+	ret = sendto(sockfd, buf, bufLen, 0, (struct sockaddr *)seraddr, addrLen);
 	if (ret < 0) {
 	TFTP_LOGERR("send data to sockfd fail, sockfd = %d, errno = %d", sockfd, errno);
-		tftp_perror("send fail reason is");
+		tftp_perror("\r\nsend fail reason is");
 		return tftp_ret_Error;
 	}
 }
@@ -130,7 +136,7 @@ EXTERN INT32 tftp_socket_connect
 	ret = connect(sockfd, (struct sockaddr *)seraddr, addrLen);
 	if (ret < 0) {
 		TFTP_LOGERR("connect to server fd = %d fail, errno = %d", sockfd, errno);
-		tftp_perror("connect fail reason is");
+		tftp_perror("\r\nconnect fail reason is");
 		return -1;
 	}
 	return ret;
@@ -151,7 +157,7 @@ EXTERN INT32 tftp_socket_listen(INT32 listenfd)
 	if (ret < 0) {
 		TFTP_LOGERR("listen fd = %d fail, backlog = %d, errno = %d", \
 			listenfd, TFTP_SOCKET_BACKLOG_THREAD, errno);
-		tftp_perror("listen fail reason is");
+		tftp_perror("\r\nlisten fail reason is");
 		return -1;
 	}
 	return 0;
@@ -185,7 +191,7 @@ EXTERN INT32 tftp_socket_accept(INT32 listenfd, struct sockaddr_in * cliaddr)
 		}
         	
 		TFTP_LOGERR("accept listen fd fail, listenfd = %d, errno = %d", listenfd, errno);
-		tftp_perror("accept fail reason is");
+		tftp_perror("\r\naccept fail reason is");
 		return -1;
 	}
 

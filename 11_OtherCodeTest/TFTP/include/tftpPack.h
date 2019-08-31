@@ -1,6 +1,26 @@
 #ifndef __TFTP_PACK_H__
 #define __TFTP_PACK_H__
 
+/* 操作码，标识报文类型,RFC-1350 */
+typedef enum tftpPackOperCode_e
+{
+	tftp_Pack_OperCode_Rrq 	= 1,		/* Read request (RRQ) */
+	tftp_Pack_OperCode_Wrq 	= 2,		/* Write request (WRQ) */
+	tftp_Pack_OperCode_Data	= 3,		/* Data (DATA) */
+	tftp_Pack_OperCode_Ack 	= 4,		/* Acknowledgment (ACK) */
+	tftp_Pack_OperCode_Err 	= 5,		/* Error (ERROR) */
+	tftp_Pack_OperCode_Max
+}tftpPackOperCode_t;
+
+/* tftp传输模式 */
+typedef enum tftpPackMode_e
+{
+	tftp_Pack_Mode_netascii,			
+	tftp_Pack_Mode_octet,				
+	tftp_Pack_Mode_mail
+};
+
+/* 错误码，标识错误类型 */
 typedef enum tftpPackErroCode_e
 {
 	tftp_Pack_ErrCode_NotFound 		= 0,	/* Not defined, see error message (if any). */

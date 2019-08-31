@@ -11,6 +11,16 @@ LOCAL CHAR gCmdFormat[__TFTP_SHELL_CMD_MAX_NUM_][__TFTP_SHELL_CMD_MAX_LEN_] = {0
 LOCAL tftpShellList_t * gShellHead = NULL;
 LOCAL tftpShellList_t * gShellTail = NULL;
 
+EXTERN BOOL initSucces;
+
+/*
+ * FunctionName:
+ *     ttp_shell_normal_menu
+ * Description:
+ *     命令行菜单简略信息
+ * Notes:
+ *     
+ */
 VOID ttp_shell_normal_menu(VOID)
 {
 	tftpShellList_t * pTemp = gShellHead;
@@ -47,6 +57,14 @@ VOID ttp_shell_normal_menu(VOID)
 	tftp_print("\r\n-------------------------------------------------------------------"); 	
 }
 
+/*
+ * FunctionName:
+ *     tftp_shell_wait_for_string
+ * Description:
+ *     阻塞获取命令行输入
+ * Notes:
+ *     
+ */
 LOCAL INT32 tftp_shell_wait_for_string(CHAR * str, INT32 strLen)
 {
 	CHAR * read = 0;
@@ -74,6 +92,14 @@ LOCAL INT32 tftp_shell_wait_for_string(CHAR * str, INT32 strLen)
 	return getLen;
 }
 
+/*
+ * FunctionName:
+ *     tftp_shell_line
+ * Description:
+ *     获取命令行字符串
+ * Notes:
+ *     
+ */
 LOCAL INT32 tftp_shell_line(CHAR * str, INT32 strLen)
 {
 	if (NULL == str){
@@ -85,6 +111,14 @@ LOCAL INT32 tftp_shell_line(CHAR * str, INT32 strLen)
 	return tftp_shell_wait_for_string(str, strLen);
 }
 
+/*
+ * FunctionName:
+ *     tftp_shell_cmd_deal
+ * Description:
+ *     命令行字符串格式化切割成多个命令
+ * Notes:
+ *     
+ */
 LOCAL tftpReturnValue_t tftp_shell_line_format
 (
 	CHAR * shellStr, 
@@ -121,6 +155,14 @@ LOCAL tftpReturnValue_t tftp_shell_line_format
 	return tftp_ret_Ok;
 }
 
+/*
+ * FunctionName:
+ *     tftp_shell_cmd_deal
+ * Description:
+ *     命令检查与执行
+ * Notes:
+ *     
+ */
 LOCAL tftpReturnValue_t tftp_shell_cmd_deal
 (
 	INT32 argc, 
@@ -148,9 +190,42 @@ LOCAL tftpReturnValue_t tftp_shell_cmd_deal
 		}
 
 		for (index = 0; index < argcReg; index++) {
+			/* 命令字符串检查 */
 			if ((pTemp->_cmdArgv._info[index]._type == tftpCmdType_cmd)
 				&& (strcmp(pTemp->_cmdArgv._info[index]._cmdStr, argv[index]))) {
+				tftp_print("\r\nError cmd string:%s", argv[index]);
 				break;
+			}
+			/* 命令"__IPADDR__"检查 */
+			else if (pTemp->_cmdArgv._info[index]._type == tftpCmdType_ip) {
+				if(NULL == str_ipv4_check(argv[index])) {
+					tftp_print("\r\nError ip address:%s", argv[index]);
+					break;
+				}
+			}
+			else if (pTemp->_cmdArgv._info[index]._type == tftpCmdType_str) {
+				if (NULL == str_cmdstr_check(argv[index])) {
+					tftp_print("\r\nError string value:%s", argv[index]);
+					break;
+				}
+			}
+			else if (pTemp->_cmdArgv._info[index]._type == tftpCmdType_int32) {
+				if (NULL == str_int32_check(argv[index])) {
+					tftp_print("\r\nError 32bits int value:%s", argv[index]);
+					break;
+				}
+			}
+			else if (pTemp->_cmdArgv._info[index]._type == tftpCmdType_uint32) {
+				if (NULL == str_uint32_check(argv[index])) {
+					tftp_print("\r\nError 32bits unsigned int value:%s", argv[index]);
+					break;
+				}
+			}
+			else if (pTemp->_cmdArgv._info[index]._type == tftpCmdType_hex) {
+				if (NULL == str_hex_check(argv[index])) {
+					tftp_print("\r\nError hex value:%s", argv[index]);
+					break;
+				}
 			}
 		}
 
@@ -186,6 +261,14 @@ __tftp_deal_function:
 	return tftp_ret_Ok;
 }
 
+/*
+ * FunctionName:
+ *     tftp_shell_task_deal
+ * Description:
+ *     shell任务主函数，负责字符串获取、格式化、检查、执行等
+ * Notes:
+ *     
+ */
 VOID * tftp_shell_task_deal(VOID * argv)
 {
 	INT32 shellArgc = 0;
@@ -199,6 +282,9 @@ VOID * tftp_shell_task_deal(VOID * argv)
 	for (index = 0; index < __TFTP_SHELL_CMD_MAX_NUM_; index++) {
 		shellArgv[index] = (CHAR *)(&gCmdFormat[index]);
 	}
+
+	while (!initSucces) {}
+	
 	ttp_shell_normal_menu();
 	while (TRUE) {
 		memset(shellStr, 0, sizeof(shellStr));
@@ -213,6 +299,15 @@ VOID * tftp_shell_task_deal(VOID * argv)
 	
 	return argv;
 }
+
+/*
+ * FunctionName:
+ *     tftp_shell_thread_create
+ * Description:
+ *     shell任务创建
+ * Notes:
+ *     
+ */
 LOCAL INT32 tftp_shell_thread_create(VOID)
 {
 	tftpTaskInfo_t shellTask;
@@ -232,6 +327,14 @@ LOCAL INT32 tftp_shell_thread_create(VOID)
 	return tftp_ret_Ok;
 }
 
+/*
+ * FunctionName:
+ *     tftp_shell_cmd_type_get
+ * Description:
+ *     根据注册格式化字符串获取shell命令类型
+ * Notes:
+ *     
+ */
 LOCAL tftpCmdType_t tftp_shell_cmd_type_get(CONST CHAR * strCmd)
 {
 	if (NULL == strCmd) {
@@ -265,6 +368,14 @@ LOCAL tftpCmdType_t tftp_shell_cmd_type_get(CONST CHAR * strCmd)
 	return tftpCmdType_cmd;
 }
 
+/*
+ * FunctionName:
+ *     tftp_shell_cmd_insert
+ * Description:
+ *     shell命令注册创建的节点插入链表
+ * Notes:
+ *     
+ */
 LOCAL tftpReturnValue_t tftp_shell_cmd_insert(tftpShellList_t * pCmdNode)
 {
 	if (NULL == pCmdNode) {
@@ -499,7 +610,7 @@ LOCAL tftpReturnValue_t tftp_shell_cmd_display(INT32 argc, CHAR * argv[])
  * FunctionName:
  *     tftp_shell_cmd_display
  * Description:
- *     显示命令的输入格式
+ *     显示命令的输入格式，命令行菜单详细信息
  * Notes:
  *     
  */
@@ -544,6 +655,14 @@ LOCAL VOID tftp_shell_cmd_init(VOID)
 					"__STRING__{command string}");
 }
 
+/*
+ * FunctionName:
+ *     tftp_shell_module_init
+ * Description:
+ *     shell模块初始化
+ * Notes:
+ *     
+ */
 EXTERN INT32 tftp_shell_module_init(VOID)
 {
 	TFTP_LOGNOR("tftp shell module init......");

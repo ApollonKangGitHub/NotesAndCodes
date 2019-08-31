@@ -27,4 +27,6 @@
 
 #include <tools.h>
 
+EXTERN BOOL initSucces;
+
 #endif

@@ -160,6 +160,14 @@ VOID * tftp_server_client_connect_handle(VOID * arg)
 
 }
 
+/*
+ * FunctionName:
+ *     tftp_server_find_free_task
+ * Description:
+ *     在客户端请求到来时寻找空闲线程
+ * Notes:
+ *     
+ */
 LOCAL tftpTaskPool_t * tftp_server_find_free_task(VOID)
 {
 	tftpTaskPoolList_t * pFind = gTaskPoolHead;
@@ -208,6 +216,7 @@ VOID * tftp_server_task_handle(VOID * argv)
 			rv = tftp_socket_recv(gListenSocket, buf, __TFTP_RECV_BUF_LEN_, &cliaddr);
 			TFTP_LOGDBG(tftp_dbgSwitch_server, \
 				"socket recvfrom fd = %d return %s(%d)", gListenSocket, tftp_err_msg(rv), rv);
+			tftp_print("\r\nserver recv:%s", buf);
 
 			/* 对子线程的结构信息做初始化信息同步 */
 			memcpy(&pFind->_cliInfo._cliAddr, &cliaddr, sizeof(cliaddr));			
@@ -217,6 +226,7 @@ VOID * tftp_server_task_handle(VOID * argv)
 		}
 		else {
 			TFTP_LOGWARN("Too many connect for tftp server, do not any deal!");
+			exit(EXIT_FAILURE);
 		}
 	}
 }
@@ -238,10 +248,10 @@ LOCAL tftpReturnValue_t tftp_server_listen_socket_init(VOID)
 	memset(&addr, 0, sizeof(addr));
 	
 	addr.sin_family = AF_INET;
-	addr.sin_port = htons(__TFTP_SERVER_SOCKET_UDP_PORT_);
-	addr.sin_addr.s_addr = __TFTP_SERVER_IP_ADDR_;
+	addr.sin_port = htons(__TFTP_SOCKET_SERVER_UDP_PORT_);
+	addr.sin_addr.s_addr = __TFTP_SCKET_SERVER_IP_ADDR_;
 	
-	gListenSocket = tftp_socket_create(&addr);
+	gListenSocket = tftp_socket_create(&addr, TRUE);
 	if (gListenSocket < 0) {
 		TFTP_LOGERR("create server socket fail!");
 		return tftp_ret_Error;
@@ -446,7 +456,7 @@ LOCAL tftpReturnValue_t tftp_server_task_pool_init(VOID)
 
 		/* 创建线程池节点，将线程信息和信号量存储到线程池节点中 */
 		pChildNode = tftp_server_task_pool_node_create(clientSem, tid, \
-						taskIndex + __TFTP_CLIENT_SOCKET_UDP_PORT_MIN_);
+						taskIndex + __TFTP_SOCKET_CLIENT_UDP_PORT_MIN_);
 		if (NULL == pChildNode) {
 			TFTP_LOGERR("create node for task pool child task fail, return NULL!");
 			return tftp_ret_Error;

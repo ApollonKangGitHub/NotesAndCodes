@@ -12,6 +12,14 @@ tftpSemInfo_t * gSelfNode = NULL;
 tftpSemInfoList_t * gSemListHead = NULL;
 tftpSemInfoList_t * gSemListTail = NULL;
 
+/*
+ * FunctionName:
+ *     tftp_sem_list_display
+ * Description:
+ *     信号量相关信息显示命令执行函数
+ * Notes:
+ *     
+ */
 LOCAL VOID tftp_sem_list_display(INT32 argc, CHAR * argv[])
 {
 	tftpSemInfoList_t * pSemInfo;

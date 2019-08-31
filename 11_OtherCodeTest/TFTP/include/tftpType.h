@@ -1,7 +1,7 @@
 #ifndef __TFTP_TYPE_H_
 #define __TFTP_TYPE_H_
 
-#define NULL ((void *)(0))
+#include <stdio.h>
 
 #define IN
 #define OUT
@@ -62,4 +62,5 @@ EXTERN CHAR * tftp_err_code_msg[tftp_ret_Max + 1];
 #define tftp_gets fgets
 #define tftp_perror perror
 #define tftp_fflush fflush
+
 #endif /* __TFTP_TYPE_H */

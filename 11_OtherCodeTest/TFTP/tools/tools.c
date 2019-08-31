@@ -2,8 +2,17 @@
 #include <tftpType.h>
 #include <string.h>
 #include <stdlib.h>
+#include <tftpLog.h>
 
-/* INT32整数value转十进制字符串str，并返回字符串首地址，如1235，转成"1235" */
+/*
+ * FunctionName:
+ *     uitoa
+ * Description:
+ *     INT32整数value转十进制字符串str
+ *     并返回字符串首地址，如1235，转成"1235"
+ * Notes:
+ *     
+ */
 EXTERN CHAR * uitoa(UINT32 value, CHAR * str)
 {
 	INT32 high = value;
@@ -31,7 +40,15 @@ EXTERN CHAR * uitoa(UINT32 value, CHAR * str)
 	return str;
 }
 
-/* 十进制的字符串表示形式，转换为十进制数值，只支持无符号UINT3232 */
+/*
+ * FunctionName:
+ *     atoui
+ * Description:
+ *    十进制的字符串表示形式，转换为十进制数值
+ *    只支持无符号UINT32 
+ * Notes:
+ *     
+ */
 EXTERN UINT32 atoui(const CHAR * str)
 {
 	const CHAR *s = str;
@@ -42,13 +59,20 @@ EXTERN UINT32 atoui(const CHAR * str)
 		}
 		value = (value << 3) + (value << 1);	/* 即value = value x 10 */
 		value += (*s - '0');
-		//SOC_DEBUG_PRINT32(SOC_DBG_LOG, "value = %d\r\n", value);
 		s++;
 	}
 	return value;
 }
 
-/* INT32整数value转十六进制字符串str，并返回字符串首地址，如1235，转成"0X000004D3" */
+/*
+ * FunctionName:
+ *     uitoxa
+ * Description:
+ *    INT32整数value转十六进制字符串str
+ *    并返回字符串首地址，如1235，转成"0X000004D3"
+ * Notes:
+ *     
+ */
 EXTERN CHAR * uitoxa(UINT32 value, CHAR * str)
 {
 	CHAR * s = str;
@@ -71,7 +95,15 @@ EXTERN CHAR * uitoxa(UINT32 value, CHAR * str)
 	return str;
 }
 
-/* 清除字符串str中多余的空格，两个单词之间只有一个空格 */
+/*
+ * FunctionName:
+ *     clear_more_space
+ * Description:
+ *    清除字符串str中多余的空格，两个单词之间只有一个空格
+ *    字符串缓冲器开始和结束不能有空格
+ * Notes:
+ *     
+ */
 EXTERN CHAR * clear_more_space(CHAR * str) 
 {
 	INT32 i = 0;
@@ -103,5 +135,107 @@ EXTERN CHAR * clear_more_space(CHAR * str)
 	memcpy(str, target, len);
 	free(target);
 
+	return str;
+}
+
+/*
+ * FunctionName:
+ *     str_ipv4_check
+ * Description:
+ *     检查IPv4地址格式是否合法:xx.xx.xx.xx
+ * Notes:
+ *     
+ */
+EXTERN CONST CHAR * str_ipv4_check(CONST CHAR * str)
+{
+	CHAR * savePtr = NULL;
+	CHAR * strTemp = NULL;
+	CHAR * strPtr = NULL;
+	INT32 strLen = 0;
+	INT32 num = 0;
+	INT32 index = 1;
+	
+	if (NULL == str) {
+		return NULL;
+	}
+	
+	strLen = strlen(str);
+	if (strLen > 15) {
+		return NULL;		/* ipv4最大地址255.255.255.255共15字节 */
+	}
+	
+	strTemp = malloc(strLen + 1);
+	memset(strTemp, 0, strLen + 1);
+	memcpy(strTemp, str, strLen);
+	
+	while(strTemp || (savePtr && *savePtr)){
+		if (index > 4) {
+			free(strTemp);
+			return NULL;
+		}
+		else {
+			strPtr = strtok_r(strTemp, ".", &savePtr);
+		}
+
+		num = atoui(strPtr);
+		if (num < 0 || num > 255) {
+			free(strTemp);
+			return NULL;
+		}
+		strTemp = NULL;
+		index++;
+	}
+
+	free(strTemp);
+	return str;
+}
+
+/*
+ * FunctionName:
+ *     str_hex_check
+ * Description:
+ *     检查十六进制数是否合法
+ * Notes:
+ *     
+ */
+EXTERN CONST CHAR * str_hex_check(CONST CHAR * str)
+{
+	return str;
+}
+/*
+ * FunctionName:
+ *     str_uint32_check
+ * Description:
+ *     检查无符号整数是否合法
+ * Notes:
+ *     
+ */
+EXTERN CONST CHAR * str_uint32_check(CONST CHAR * str)
+{
+	return str;
+}
+/*
+ * FunctionName:
+ *     str_int32_check
+ * Description:
+ *     检查有符号整数是否合法
+ * Notes:
+ *     
+ */
+EXTERN CONST CHAR * str_int32_check(CONST CHAR * str)
+{
+	return str;
+}
+
+/*
+ * FunctionName:
+ *     str_cmdstr_check
+ * Description:
+ *    检查字符串是否合法
+ * Notes:
+ *     
+ */
+EXTERN CONST CHAR * str_cmdstr_check(CONST CHAR * str)
+{
 	return str;
 }
