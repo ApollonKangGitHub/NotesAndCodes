@@ -254,3 +254,238 @@
 [0m2089-08-31 19:36:51(UTC)[Saturday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
 [0m2089-08-31 19:36:51(UTC)[Saturday]%% TFTP-NORMAL:[tftp_shell_module_init-589]tftp shell module init......[0m
 [0m2089-08-31 19:36:51(UTC)[Saturday]%% TFTP-NORMAL:[tftp_server_module_init-554]tftp server module init......[0m
+[0m2089-09-01 00:45:25(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 00:45:25(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 00:45:25(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 00:45:25(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 00:47:33(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 00:47:33(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 00:47:33(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 00:47:33(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 00:48:12(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 00:48:12(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 00:48:12(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 00:48:12(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 00:51:07(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 00:51:07(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 00:51:07(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 00:51:07(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 00:51:09(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-64]packet request success,return:58[0m
+[0m2089-09-01 00:52:01(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 00:52:01(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 00:52:01(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 00:52:01(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 00:52:10(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-64]packet request success,return:58[0m
+[0m2089-09-01 00:52:41(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 00:52:41(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 00:52:41(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 00:52:41(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 00:52:42(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-64]packet request success,return:58[0m
+[0m2089-09-01 00:53:32(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 00:53:32(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 00:53:32(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 00:53:32(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 00:53:33(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-64]packet request success,return:58[0m
+[0m2089-09-01 00:53:48(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 00:53:48(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 00:53:48(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 00:53:48(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 00:53:49(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-64]packet request success,return:58[0m
+[0m2089-09-01 00:54:31(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 00:54:31(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 00:54:31(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 00:54:31(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 00:54:33(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-64]packet request success,return:58[0m
+[0m2089-09-01 00:58:08(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 00:58:08(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 00:58:08(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 00:58:08(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 00:59:46(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 00:59:46(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 00:59:46(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 00:59:46(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 01:00:06(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-64]packet request success,return:55[0m
+[0m2089-09-01 01:02:11(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 01:02:11(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 01:02:11(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 01:02:11(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 01:02:19(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-64]packet request success,return:55[0m
+[0m2089-09-01 01:03:31(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 01:03:31(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 01:03:31(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 01:03:31(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 01:03:32(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-64]packet request success,return:55[0m
+[0m2089-09-01 01:03:55(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 01:03:55(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 01:03:55(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 01:03:55(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 01:03:58(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-64]packet request success,return:55[0m
+[0m2089-09-01 01:04:22(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 01:04:22(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 01:04:22(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 01:04:22(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 01:04:23(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-64]packet request success,return:55[0m
+[0m2089-09-01 01:06:03(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 01:06:03(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 01:06:03(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 01:06:03(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 01:06:04(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-64]packet request success,return:55[0m
+[0m2089-09-01 01:06:28(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 01:06:28(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 01:06:28(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 01:06:28(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 01:06:33(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-64]packet request success,return:55[0m
+[0m2089-09-01 01:08:39(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 01:08:39(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 01:08:39(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 01:08:39(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 01:08:49(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-64]packet request success,return:55[0m
+[0m2089-09-01 01:13:42(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 01:13:42(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 01:13:42(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 01:13:42(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 01:13:43(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-64]packet request success,return:55[0m
+[0m2089-09-01 01:14:34(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 01:14:34(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 01:14:34(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 01:14:34(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 01:14:36(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-64]packet request success,return:55[0m
+[0m2089-09-01 01:15:17(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 01:15:17(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 01:15:17(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 01:15:17(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 01:15:20(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-64]packet request success,return:55[0m
+[0m2089-09-01 01:17:16(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 01:17:16(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 01:17:16(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 01:17:16(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 01:17:18(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-66]packet request success,return:55[0m
+[0m2089-09-01 01:18:20(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 01:18:20(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 01:18:20(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 01:18:20(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 01:18:21(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-66]packet request success,return:55[0m
+[0m2089-09-01 01:19:23(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 01:19:23(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 01:19:23(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 01:19:23(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 01:19:24(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-66]packet request success,return:55[0m
+[0m2089-09-01 01:20:13(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 01:20:13(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 01:20:13(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 01:20:13(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 01:20:16(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-66]packet request success,return:55[0m
+[0m2089-09-01 01:21:40(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 01:21:40(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 01:21:40(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 01:21:40(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 01:21:42(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-66]packet request success,return:55[0m
+[0m2089-09-01 01:22:15(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 01:22:15(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 01:22:15(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 01:22:15(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 01:22:16(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-65]packet request success,return:55[0m
+[0m2089-09-01 01:22:46(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 01:22:46(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 01:22:46(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 01:22:46(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 01:22:47(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-65]packet request success,return:55[0m
+[0m2089-09-01 01:23:18(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 01:23:18(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 01:23:18(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 01:23:18(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 01:23:19(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-65]packet request success,return:55[0m
+[0m2089-09-01 01:23:52(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 01:23:52(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 01:23:52(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 01:23:52(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 01:23:53(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-65]packet request success,return:55[0m
+[0m2089-09-01 01:24:43(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 01:24:43(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 01:24:43(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 01:24:43(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 01:24:44(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-65]packet request success,return:55[0m
+[0m2089-09-01 01:25:05(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 01:25:05(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 01:25:05(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 01:25:05(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 01:25:06(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-65]packet request success,return:55[0m
+[0m2089-09-01 01:26:27(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 01:26:27(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 01:26:27(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 01:26:27(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 01:26:28(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-65]packet request success,return:55[0m
+[0m2089-09-01 01:26:44(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 01:26:44(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 01:26:44(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 01:26:44(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 01:26:45(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-65]packet request success,return:55[0m
+[0m2089-09-01 01:27:28(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 01:27:28(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 01:27:28(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 01:27:28(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 01:27:31(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-65]packet request success,return:55[0m
+[0m2089-09-01 01:27:52(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 01:27:52(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 01:27:52(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 01:27:52(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 01:27:52(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-65]packet request success,return:55[0m
+[0m2089-09-01 01:28:55(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 01:28:55(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 01:28:55(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 01:28:55(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 01:28:57(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-65]packet request success,return:55[0m
+[0m2089-09-01 01:51:11(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 01:51:11(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 01:51:11(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 01:51:11(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 01:51:22(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-65]packet request success,return:55[0m
+[0m2089-09-01 01:58:51(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 01:58:51(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 01:58:51(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 01:58:51(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 02:00:00(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 02:00:00(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 02:00:00(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 02:00:00(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 02:00:51(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 02:00:51(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 02:00:51(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 02:00:51(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 02:02:47(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 02:02:47(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 02:02:47(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 02:02:47(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 02:03:08(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 02:03:08(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 02:03:08(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 02:03:08(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 02:04:46(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 02:04:46(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 02:04:46(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 02:04:46(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 02:04:52(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_cmd_enable_handle-500]TFTP server is start![0m
+[0m2089-09-01 02:04:53(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-65]packet request success,return:55[0m
+[0m2089-09-01 02:06:09(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 02:06:09(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 02:06:09(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 02:06:09(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 02:06:52(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 02:06:52(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 02:06:52(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 02:06:52(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 02:07:06(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_cmd_enable_handle-500]TFTP server is start![0m
+[0m2089-09-01 02:07:07(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-65]packet request success,return:55[0m
+[0m2089-09-01 02:10:09(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 02:10:09(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 02:10:09(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 02:10:09(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 02:10:12(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-65]packet request success,return:55[0m
+[0m2089-09-01 02:10:18(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_cmd_enable_handle-500]TFTP server is start![0m
+[0m2089-09-01 02:10:19(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-65]packet request success,return:55[0m
+[0m2089-09-01 02:11:14(UTC)[Sunday]%% TFTP-NORMAL:[tftp_sem_module_init-378]tftp semaphore module init......[0m
+[0m2089-09-01 02:11:14(UTC)[Sunday]%% TFTP-NORMAL:[tftp_task_module_init-599]tftp task module init......[0m
+[0m2089-09-01 02:11:14(UTC)[Sunday]%% TFTP-NORMAL:[tftp_shell_module_init-657]tftp shell module init......[0m
+[0m2089-09-01 02:11:14(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_module_init-562]tftp server module init......[0m
+[0m2089-09-01 02:11:22(UTC)[Sunday]%% TFTP-NORMAL:[tftp_server_cmd_enable_handle-500]TFTP server is start![0m
+[0m2089-09-01 02:11:23(UTC)[Sunday]%% TFTP-NORMAL:[tftp_pack_req-65]packet request success,return:55[0m

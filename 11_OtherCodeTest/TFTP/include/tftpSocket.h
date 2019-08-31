@@ -25,7 +25,7 @@ EXTERN INT32 tftp_socket_listen(INT32 listenfd);
 EXTERN INT32 tftp_socket_connect(INT32 sockfd, struct sockaddr_in * seraddr);
 EXTERN INT32 tftp_socket_accept(INT32 listenfd, struct sockaddr_in * cliaddr);
 
-EXTERN tftpReturnValue_t tftp_socket_recv
+EXTERN INT32 tftp_socket_recv
 (
 	INT32 sockfd, 
 	CHAR * buf, 
@@ -33,7 +33,7 @@ EXTERN tftpReturnValue_t tftp_socket_recv
 	struct sockaddr_in * client
 );
 
-EXTERN tftpReturnValue_t tftp_socket_send
+EXTERN INT32 tftp_socket_send
 (
 	INT32 sockfd, 
 	CHAR * buf, 

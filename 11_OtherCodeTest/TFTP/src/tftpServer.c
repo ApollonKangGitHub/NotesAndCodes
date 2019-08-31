@@ -216,7 +216,7 @@ VOID * tftp_server_task_handle(VOID * argv)
 			rv = tftp_socket_recv(gListenSocket, buf, __TFTP_RECV_BUF_LEN_, &cliaddr);
 			TFTP_LOGDBG(tftp_dbgSwitch_server, \
 				"socket recvfrom fd = %d return %s(%d)", gListenSocket, tftp_err_msg(rv), rv);
-			tftp_print("\r\nserver recv:%s", buf);
+			tftp_print("\r\nserver recv len = %d!", rv);
 
 			/* 对子线程的结构信息做初始化信息同步 */
 			memcpy(&pFind->_cliInfo._cliAddr, &cliaddr, sizeof(cliaddr));			

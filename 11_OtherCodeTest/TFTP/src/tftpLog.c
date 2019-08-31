@@ -1,6 +1,6 @@
 #include <tftpLog.h>
 #include <tftpType.h>
-
+#include <tftpShell.h>
 #include <tftpPublic.h>
 
 UINT8 gDbgSwitchFlg[TFTP_DBG_SWITCH_NUMBER_MAX];
@@ -24,7 +24,20 @@ LOCAL CHAR * gLogFilePath[tftp_logLevel_Max] = {
 	"./logFile/tftpDebug.log",
 	"./logFile/tftpNote.log",
 	"./logFile/tftpWarn.log",
-	"./logFile/tftpError.log",
+	"./logFile/tftpError.log"
+};
+
+/* debug开关字符串 */
+LOCAL CHAR * gSwitchStr[tftp_dbgSwitch_max] = {
+	"task",
+	"server",
+	"client",
+	"shell",
+	"sem",
+	"send",
+	"recv",
+	"pack",
+	"other"
 };
 
 /*
@@ -205,7 +218,55 @@ LOCAL INT32 tftp_log_debug_switch_init(VOID)
 	__SET_BIT(gDbgSwitchFlg, tftp_dbgSwitch_sem, FALSE);
 	__SET_BIT(gDbgSwitchFlg, tftp_dbgSwitch_send, FALSE);
 	__SET_BIT(gDbgSwitchFlg, tftp_dbgSwitch_recv, FALSE);
+	__SET_BIT(gDbgSwitchFlg, tftp_dbgSwitch_pack, FALSE);
 	__SET_BIT(gDbgSwitchFlg, tftp_dbgSwitch_other, FALSE);
+}
+
+LOCAL VOID tftp_log_cmd_debug_switch(INT32 argc, CHAR * argv[])
+{
+	BOOL open = FALSE;
+	tftpDbgSwitch_t sw = tftp_dbgSwitch_max;
+
+	sw = (tftpDbgSwitch_t)(atoui(argv[2]));
+
+	if (sw >= tftp_dbgSwitch_max) {
+		tftp_print("\r\ninvalid operator parmeter:switch(%d),operator(%s)", sw, argv[3]);
+		return;
+	}
+
+	if (0 == strcmp(argv[3], "open")) {
+		open = TRUE;
+	}
+	else if (0 == strcmp(argv[3], "close")) {
+		open = FALSE;
+	}
+	else {
+		tftp_print("\r\ninvalid operator parmeter:switch(%s),operator(%s)", \
+			gSwitchStr[sw], argv[3]);
+		return;
+	}
+	
+	tftp_log_debug_control(sw, open);
+	tftp_print("\r\n%s debug switch %s", gSwitchStr[sw], argv[3]);
+}
+
+LOCAL VOID tftp_log_command_init(VOID)
+{	
+	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_log_cmd_debug_switch, 
+	__TFTP_CMD_NORMAL_ | __TFTP_CMD_DYN_,
+		"tftplog{tftp log}"
+			"debug{debug switch open or close}"
+				"__UINT32__{switch choose[eg:"
+					"\n\t\t\t\t\t->(0)task"
+					"\n\t\t\t\t\t->(1)server"
+					"\n\t\t\t\t\t->(2)client"
+					"\n\t\t\t\t\t->(3)shell"
+					"\n\t\t\t\t\t->(4)sem"
+					"\n\t\t\t\t\t->(5)send"
+					"\n\t\t\t\t\t->(6)recv"
+					"\n\t\t\t\t\t->(7)pack"
+					"\n\t\t\t\t\t->(8)other]}"
+					"__STRING__{open/close}");
 }
 
 /*
@@ -223,6 +284,9 @@ EXTERN INT32 tftp_log_module_init(VOID)
 	
 	/* 初始化debug打印开关 */
 	tftp_log_debug_switch_init();
+
+	/* 注册log debug开关的命令 */
+	tftp_log_command_init();
 }
 
 

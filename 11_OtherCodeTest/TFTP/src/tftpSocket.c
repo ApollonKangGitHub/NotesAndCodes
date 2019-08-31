@@ -59,7 +59,7 @@ EXTERN INT32 tftp_socket_create
  * Notes:
  *     
  */
-EXTERN tftpReturnValue_t tftp_socket_recv
+EXTERN INT32 tftp_socket_recv
 (
 	INT32 sockfd, 
 	CHAR * buf, 
@@ -71,7 +71,7 @@ EXTERN tftpReturnValue_t tftp_socket_recv
 	socklen_t addrLen = 0;
 
 	if (NULL == buf) {
-		return tftp_ret_Null;
+		return -1;
 	}
 
 	addrLen = sizeof(struct sockaddr_in);
@@ -79,8 +79,9 @@ EXTERN tftpReturnValue_t tftp_socket_recv
 	if (ret < 0) {
 		TFTP_LOGERR("recv data from sockfd fail, sockfd = %d, errno = %d", sockfd, errno);
 		tftp_perror("\r\nrecv fail reason is");
-		return tftp_ret_Error;
+		return -1;
 	}
+	return ret;
 }
 
 /*
@@ -91,7 +92,7 @@ EXTERN tftpReturnValue_t tftp_socket_recv
  * Notes:
  *     
  */
-EXTERN tftpReturnValue_t tftp_socket_send
+EXTERN INT32 tftp_socket_send
 (
 	INT32 sockfd, 
 	CHAR * buf, 
@@ -102,15 +103,16 @@ EXTERN tftpReturnValue_t tftp_socket_send
 	socklen_t addrLen = 0;
 	INT32 ret = 0;
 	if (NULL == buf || NULL == seraddr) {
-		return tftp_ret_Null;
+		return -1;
 	}
 	addrLen = sizeof(struct sockaddr_in);
 	ret = sendto(sockfd, buf, bufLen, 0, (struct sockaddr *)seraddr, addrLen);
 	if (ret < 0) {
 	TFTP_LOGERR("send data to sockfd fail, sockfd = %d, errno = %d", sockfd, errno);
 		tftp_perror("\r\nsend fail reason is");
-		return tftp_ret_Error;
+		return -1;
 	}
+	return ret;
 }
 
 #define __TFTP_SOCKET_UDP_ 	(1)

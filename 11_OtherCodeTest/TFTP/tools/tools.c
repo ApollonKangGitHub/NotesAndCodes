@@ -97,14 +97,14 @@ EXTERN CHAR * uitoxa(UINT32 value, CHAR * str)
 
 /*
  * FunctionName:
- *     clear_more_space
+ *     clearMoreSpace
  * Description:
  *    清除字符串str中多余的空格，两个单词之间只有一个空格
  *    字符串缓冲器开始和结束不能有空格
  * Notes:
  *     
  */
-EXTERN CHAR * clear_more_space(CHAR * str) 
+EXTERN CHAR * clearMoreSpace(CHAR * str) 
 {
 	INT32 i = 0;
 	INT32 j = 0;
@@ -140,13 +140,13 @@ EXTERN CHAR * clear_more_space(CHAR * str)
 
 /*
  * FunctionName:
- *     str_ipv4_check
+ *     strIpv4Check
  * Description:
  *     检查IPv4地址格式是否合法:xx.xx.xx.xx
  * Notes:
  *     
  */
-EXTERN CONST CHAR * str_ipv4_check(CONST CHAR * str)
+EXTERN CONST CHAR * strIpv4Check(CONST CHAR * str)
 {
 	CHAR * savePtr = NULL;
 	CHAR * strTemp = NULL;
@@ -192,50 +192,74 @@ EXTERN CONST CHAR * str_ipv4_check(CONST CHAR * str)
 
 /*
  * FunctionName:
- *     str_hex_check
+ *     strHexCheck
  * Description:
  *     检查十六进制数是否合法
  * Notes:
  *     
  */
-EXTERN CONST CHAR * str_hex_check(CONST CHAR * str)
+EXTERN CONST CHAR * strHexCheck(CONST CHAR * str)
 {
 	return str;
 }
 /*
  * FunctionName:
- *     str_uint32_check
+ *     strUint32Check
  * Description:
  *     检查无符号整数是否合法
  * Notes:
  *     
  */
-EXTERN CONST CHAR * str_uint32_check(CONST CHAR * str)
+EXTERN CONST CHAR * strUint32Check(CONST CHAR * str)
 {
 	return str;
 }
 /*
  * FunctionName:
- *     str_int32_check
+ *     strInt32Check
  * Description:
  *     检查有符号整数是否合法
  * Notes:
  *     
  */
-EXTERN CONST CHAR * str_int32_check(CONST CHAR * str)
+EXTERN CONST CHAR * strInt32Check(CONST CHAR * str)
 {
 	return str;
 }
 
 /*
  * FunctionName:
- *     str_cmdstr_check
+ *     strCmdStrCheck
  * Description:
  *    检查字符串是否合法
  * Notes:
  *     
  */
-EXTERN CONST CHAR * str_cmdstr_check(CONST CHAR * str)
+EXTERN CONST CHAR * strCmdStrCheck(CONST CHAR * str)
 {
 	return str;
+}
+
+EXTERN BOOL isfileExist(CONST CHAR * filename)
+{
+	if (NULL == filename) {
+		return FALSE;
+	}
+
+	/* 文件存在返回0，其他情况返回-1 */
+	if (0 == access(filename, F_OK)) {
+		return TRUE;
+	}
+	return FALSE;
+}
+
+EXTERN UINT64 fileSize(CONST CHAR * filename)
+{
+    struct stat buf;  
+	
+    if (stat(filename, &buf) < 0) {  
+        return 0;  
+    }  
+	
+    return (UINT64)(buf.st_size);  
 }

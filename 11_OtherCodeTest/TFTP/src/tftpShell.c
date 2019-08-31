@@ -136,7 +136,7 @@ LOCAL tftpReturnValue_t tftp_shell_line_format
 	}
 	
 	TFTP_LOGDBG(tftp_dbgSwitch_shell, "shell shell string:%s", shellStr);
-	(VOID)clear_more_space(shellStr);
+	(VOID)clearMoreSpace(shellStr);
  	TFTP_LOGDBG(tftp_dbgSwitch_shell, "shell shell string:%s", shellStr);
 	
 	savePtr = pstr;
@@ -198,31 +198,35 @@ LOCAL tftpReturnValue_t tftp_shell_cmd_deal
 			}
 			/* 命令"__IPADDR__"检查 */
 			else if (pTemp->_cmdArgv._info[index]._type == tftpCmdType_ip) {
-				if(NULL == str_ipv4_check(argv[index])) {
+				if(NULL == strIpv4Check(argv[index])) {
 					tftp_print("\r\nError ip address:%s", argv[index]);
 					break;
 				}
 			}
+			/* 命令"__STRING__"检查 */
 			else if (pTemp->_cmdArgv._info[index]._type == tftpCmdType_str) {
-				if (NULL == str_cmdstr_check(argv[index])) {
+				if (NULL == strCmdStrCheck(argv[index])) {
 					tftp_print("\r\nError string value:%s", argv[index]);
 					break;
 				}
 			}
+			/* 命令"__INT32__"检查 */
 			else if (pTemp->_cmdArgv._info[index]._type == tftpCmdType_int32) {
-				if (NULL == str_int32_check(argv[index])) {
+				if (NULL == strInt32Check(argv[index])) {
 					tftp_print("\r\nError 32bits int value:%s", argv[index]);
 					break;
 				}
 			}
+			/* 命令"__UINT32__"检查 */
 			else if (pTemp->_cmdArgv._info[index]._type == tftpCmdType_uint32) {
-				if (NULL == str_uint32_check(argv[index])) {
+				if (NULL == strUint32Check(argv[index])) {
 					tftp_print("\r\nError 32bits unsigned int value:%s", argv[index]);
 					break;
 				}
 			}
+			/* 命令"__HEX32__"检查 */
 			else if (pTemp->_cmdArgv._info[index]._type == tftpCmdType_hex) {
-				if (NULL == str_hex_check(argv[index])) {
+				if (NULL == strHexCheck(argv[index])) {
 					tftp_print("\r\nError hex value:%s", argv[index]);
 					break;
 				}
@@ -283,7 +287,9 @@ VOID * tftp_shell_task_deal(VOID * argv)
 		shellArgv[index] = (CHAR *)(&gCmdFormat[index]);
 	}
 
-	while (!initSucces) {}
+	while (!initSucces) {
+		usleep(1000 * 10);
+	}
 	
 	ttp_shell_normal_menu();
 	while (TRUE) {
@@ -403,9 +409,7 @@ LOCAL tftpReturnValue_t tftp_shell_cmd_insert(tftpShellList_t * pCmdNode)
  * Description:
  *     命令shell格式解析注册函数
  * Notes:
- *     实现上的限制，注册命令时，命令前半部分可能相同，
- *     那么注册的处理函数接口必须为同一个,此外命令注册时，
- *     字符'{'和'}'前后均不能有空格
+ *     此外命令注册时，字符'{'和'}'前后均不能有空格
  */
 EXTERN tftpReturnValue_t tftp_shell_cmd_register
 (
@@ -483,23 +487,6 @@ EXTERN tftpReturnValue_t tftp_shell_cmd_register
 	tftp_shell_cmd_insert(pCmdNode);
 
 	return tftp_ret_Ok;
-}
-
-/*
- * FunctionName:
- *     tftp_shell_cmd_help_deal
- * Description:
- *     帮助命令执行函数
- * Notes:
- *     
- */
-LOCAL VOID tftp_shell_cmd_help_deal
-(
-	INT32 argc, 
-	CONST CHAR * argv
-)
-{
-	
 }
 
 /*

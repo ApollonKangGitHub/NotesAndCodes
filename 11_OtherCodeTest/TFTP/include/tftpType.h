@@ -46,6 +46,7 @@ typedef enum tftpReturnValue_e
 	tftp_ret_NotFound,
 	tftp_ret_NotSupport,
 	tftp_ret_Null,
+	tftp_ret_Exist,
 	tftp_ret_Max
 }tftpReturnValue_t;
 

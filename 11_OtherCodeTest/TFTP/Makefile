@@ -17,7 +17,7 @@ OBJS += ./src/tftpServer.o
 OBJS += ./src/tftpClient.o
 OBJS += ./src/tftpLog.o
 OBJS += ./src/tftpShell.o
-#OBJS += ./src/tftpPack.o
+OBJS += ./src/tftpPack.o
 OBJS += ./src/tftpTask.o
 OBJS += ./src/tftpSem.o
 

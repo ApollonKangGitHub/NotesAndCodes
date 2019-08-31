@@ -28,6 +28,7 @@ typedef enum tftpDbgSwitch_e
 	tftp_dbgSwitch_sem,
 	tftp_dbgSwitch_send,
 	tftp_dbgSwitch_recv,
+	tftp_dbgSwitch_pack,
 	tftp_dbgSwitch_other,
 	tftp_dbgSwitch_max		/* last, Please */
 }tftpDbgSwitch_t;
