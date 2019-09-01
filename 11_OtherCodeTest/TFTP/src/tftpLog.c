@@ -234,10 +234,10 @@ LOCAL VOID tftp_log_cmd_debug_switch(INT32 argc, CHAR * argv[])
 		return;
 	}
 
-	if (0 == strcmp(argv[3], "open")) {
+	if (0 == strcasecmp(argv[3], "open")) {
 		open = TRUE;
 	}
-	else if (0 == strcmp(argv[3], "close")) {
+	else if (0 == strcasecmp(argv[3], "close")) {
 		open = FALSE;
 	}
 	else {

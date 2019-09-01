@@ -192,8 +192,7 @@ LOCAL tftpReturnValue_t tftp_shell_cmd_deal
 		for (index = 0; index < argcReg; index++) {
 			/* 命令字符串检查 */
 			if ((pTemp->_cmdArgv._info[index]._type == tftpCmdType_cmd)
-				&& (strcmp(pTemp->_cmdArgv._info[index]._cmdStr, argv[index]))) {
-				tftp_print("\r\nError cmd string:%s", argv[index]);
+				&& (strcasecmp(pTemp->_cmdArgv._info[index]._cmdStr, argv[index]))) {
 				break;
 			}
 			/* 命令"__IPADDR__"检查 */
@@ -510,17 +509,17 @@ LOCAL VOID tftp_shell_cmd_dyn_deal
 	CONST CHAR * cmdEnable = argv[3];
 	VOLATILE BOOL enableAll = FALSE;
 	
-	enableAll = (0 == strcmp(cmdName, "all")) ? (TRUE) : (FALSE);
-	enable = (0 == strcmp(cmdEnable, "enable")) ? (TRUE) : (FALSE);
-	disable = (0 == strcmp(cmdEnable, "disable")) ? (TRUE) : (FALSE);
+	enableAll = (0 == strcasecmp(cmdName, "all")) ? (TRUE) : (FALSE);
+	enable = (0 == strcasecmp(cmdEnable, "enable")) ? (TRUE) : (FALSE);
+	disable = (0 == strcasecmp(cmdEnable, "disable")) ? (TRUE) : (FALSE);
 
-	if (0 == strcmp(cmdEnable, "dynamic")) {
+	if (0 == strcasecmp(cmdEnable, "dynamic")) {
 		tftp_print("\r\nplease don't try disable this command:%s!!!", cmdName);
 	}
 	
 	while (pTemp) {
-		if ((0 == strcmp(cmdName, pTemp->_cmdArgv._info[0]._cmdStr)) || enableAll
-			&& (strcmp("dynamic", pTemp->_cmdArgv._info[0]._cmdStr))) {
+		if ((0 == strcasecmp(cmdName, pTemp->_cmdArgv._info[0]._cmdStr)) || enableAll
+			&& (strcasecmp("dynamic", pTemp->_cmdArgv._info[0]._cmdStr))) {
 			
 			if (enable && !(pTemp->_status & __TFTP_CMD_DYN_)) {
 				pTemp->_status &= 0;
@@ -540,7 +539,7 @@ LOCAL VOID tftp_shell_cmd_dyn_deal
 		pTemp = pTemp->_next;
 	}
 
-	if (!pTemp && (strcmp(cmdName, "all"))) {
+	if (!pTemp && (strcasecmp(cmdName, "all"))) {
 		tftp_print("\r\n%s is not a valid command name", cmdName);
 	}
 }
@@ -569,7 +568,7 @@ LOCAL tftpReturnValue_t tftp_shell_cmd_display(INT32 argc, CHAR * argv[])
 			continue;
 		}
 		argcReg = pTemp->_cmdArgc;
-		if ((0 == strcmp(pcmd, "all")) || (0 == strcmp(pcmd, pTemp->_cmdArgv._info[0]._cmdStr))) {
+		if ((0 == strcasecmp(pcmd, "all")) || (0 == strcmp(pcmd, pTemp->_cmdArgv._info[0]._cmdStr))) {
 			tftp_print("\r\n\t------------------------------command:%s [start]", pTemp->_cmdArgv._info[0]._cmdStr);
 			for (index = 0; index < argcReg && index < __TFTP_SHELL_CMD_MAX_NUM_; index++) {
 				tftp_print("\n\t%-16s:%s ", 
@@ -580,13 +579,13 @@ LOCAL tftpReturnValue_t tftp_shell_cmd_display(INT32 argc, CHAR * argv[])
 		}
 
 		/* 找到后直接结束 */
-		if (0 == strcmp(pcmd, pTemp->_cmdArgv._info[0]._cmdStr)) {
+		if (0 == strcasecmp(pcmd, pTemp->_cmdArgv._info[0]._cmdStr)) {
 			break;
 		}
 		pTemp = pTemp->_next;
 	}
 
-	if ((!pTemp) && strcmp(pcmd, "all")) {
+	if ((!pTemp) && strcasecmp(pcmd, "all")) {
 		tftp_print("\r\nnot found '%s' this command, please check it", pcmd);
 	}
 	

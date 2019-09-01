@@ -83,8 +83,7 @@ typedef struct tftpDbgFileInfo_s{
 /* 参数格式化，函数调用 */
 #define __TFTP_LOGLEVEL_PRINT(col, lev, abil, fmt, ...) \
 	do{ \
-		tftp_log_level_print(col, abil, lev"[%s-%d]"fmt, \
-			__FUNCTION__, __LINE__, ##__VA_ARGS__); \
+		tftp_log_level_print(col, abil, lev"(%d)"fmt, __LINE__, ##__VA_ARGS__); \
 	}while(0)
 
 /* Log打印宏函数级别区分与参数指定 */
@@ -150,10 +149,12 @@ typedef struct tftpDbgFileInfo_s{
 			__TFTP_LOG_ABIL_SHELL_ | __TFTP_LOG_ABIL_ERR_, format, ##__VA_ARGS__); \
 	}while(0)
 
-#define TFTP_IF_ERROR_RET(ret) \
+#define TFTP_FAILURE(ret) 		(tftp_ret_Ok != ret)
+
+#define TFTP_IF_ERROR(ret) \
 	do{\
 		if(ret != tftp_ret_Ok) { \
-			TFTP_LOGERR("tftp operator failure, ret=%d", ret);\
+			TFTP_LOGERR("tftp operator failure, return %s(%d)", tftp_err_msg(ret), ret);\
 		}\
 	}while(0)
 	

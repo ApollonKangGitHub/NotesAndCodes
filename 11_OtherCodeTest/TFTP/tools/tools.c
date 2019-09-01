@@ -21,6 +21,7 @@ EXTERN CHAR * uitoa(UINT32 value, CHAR * str)
 
 	if(!value){
 		str[0] = '0';
+		str[1] = '\0';
 		return str;
 	}
 	

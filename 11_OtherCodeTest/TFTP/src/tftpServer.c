@@ -4,6 +4,7 @@
 #include <tftpLog.h>
 #include <tftpSocket.h>
 #include <tftpShell.h>
+#include <tftpPack.h>
 
 #include <tftpPublic.h>
 
@@ -50,20 +51,21 @@ EXTERN tftpReturnValue_t tftp_server_cmd_display_task_pool(INT32 argc, CHAR * ar
 
 		if((tid == pTaskNode->_tid) || (tid == __TFTP_TID_ALL_)) {
 			tftp_print("\r\n----commucation child task name:%s----", taskInfo._name);
-			tftp_print("\r\n\t%-16s:%u", "client IP", ntohl(pTaskNode->_cliInfo._cliAddr.sin_addr.s_addr));
+			tftp_print("\r\n\t%-16s:%s", "client IP", inet_ntoa(pTaskNode->_cliInfo._cliAddr.sin_addr));
 			tftp_print("\r\n\t%-16s:%d", "client UDP port", ntohs(pTaskNode->_cliInfo._cliAddr.sin_port));
-			tftp_print("\r\n\t%-16s:%d", "socket fd", pTaskNode->_cliInfo._sockId);
-			tftp_print("\r\n\t%-16s:%s", "file Name", pTaskNode->_cliInfo._fileName);
-			tftp_print("\r\n\t%-16s:%d", "file fd", pTaskNode->_cliInfo._fileFd);
-			tftp_print("\r\n\t%-16s:%u", "file size", pTaskNode->_cliInfo._tSize);
-			tftp_print("\r\n\t%-16s:%u", "block size", pTaskNode->_cliInfo._blkSize);
-			tftp_print("\r\n\t%-16s:%u", "break point id", pTaskNode->_cliInfo._bpId);
-			tftp_print("\r\n\t%-16s:%u", "timout", pTaskNode->_cliInfo._timeout);
-			tftp_print("\r\n\t%-16s:%u", "opcode", pTaskNode->_cliInfo._opcode);
+			tftp_print("\r\n\t%-16s:%d", "client socket fd", pTaskNode->_cliInfo._sockId);
+			tftp_print("\r\n\t%-16s:%s", "client file Name", pTaskNode->_cliInfo._fileName);
+			tftp_print("\r\n\t%-16s:%d", "client file fd", pTaskNode->_cliInfo._fileFd);
+			tftp_print("\r\n\t%-16s:%u", "client file size", pTaskNode->_cliInfo._tSize);
+			tftp_print("\r\n\t%-16s:%u", "client block size", pTaskNode->_cliInfo._blkSize);
+			tftp_print("\r\n\t%-16s:%u", "client break point id", pTaskNode->_cliInfo._bpId);
+			tftp_print("\r\n\t%-16s:%u", "client timout", pTaskNode->_cliInfo._timeout);
+			tftp_print("\r\n\t%-16s:%u", "client opcode", pTaskNode->_cliInfo._opcode);
+			tftp_print("\r\n\t%-16s:%d", "task socket fd", pTaskNode->_sockfd);
 			tftp_print("\r\n\t%-16s:%u", "task bind port", pTaskNode->_port);
 			tftp_print("\r\n\t%-16s:%u", "task tid", pTaskNode->_tid);
 			tftp_print("\r\n\t%-16s:%s", "task busy status", pTaskNode->_busy ? "BUSY" : "FREE");
-			tftp_print("\r\n\t%-16s:%p", "sync lock", pTaskNode->_syncLock);
+			tftp_print("\r\n\t%-16s:%p", "task sync lock", pTaskNode->_syncLock);
 		}
 		if (tid == pTaskNode->_tid) {
 			break;
@@ -86,8 +88,7 @@ EXTERN tftpReturnValue_t tftp_server_cmd_display_task_pool(INT32 argc, CHAR * ar
 LOCAL tftpTaskPoolList_t * tftp_server_task_pool_node_create
 (
 	tftpSem_t * sem, 
-	tftpPid_t tid,
-	UINT16 port
+	tftpPid_t tid
 )
 {
 	tftpTaskPoolList_t * pPoolNode = NULL;
@@ -103,8 +104,9 @@ LOCAL tftpTaskPoolList_t * tftp_server_task_pool_node_create
 	pPoolNode->_next = pPoolNode->_pre = NULL;
 	pPoolNode->_taskNode._tid = tid;
 	pPoolNode->_taskNode._syncLock = sem;
-	pPoolNode->_taskNode._busy = FALSE;
-	pPoolNode->_taskNode._port = port;
+	pPoolNode->_taskNode._busy = FALSE;		/* 初始化为free状态 */
+	pPoolNode->_taskNode._port = 0;			/* 初始化为0，由通信子线程创建socket后获取赋值 */
+	pPoolNode->_taskNode._sockfd = 0;		/* 同样由子线程初始化 */
 	
 	return pPoolNode;
 }
@@ -140,6 +142,63 @@ LOCAL tftpReturnValue_t tftp_server_task_pool_node_insert
 	return tftp_ret_Ok;
 }
 
+LOCAL tftpTaskPool_t * tftp_server_get_client_info_bytid(tftpPid_t tid)
+{
+	tftpTaskPoolList_t * pFind = gTaskPoolHead;
+
+	while (pFind) {
+		if (tid == pFind->_taskNode._tid) {
+			return &(pFind->_taskNode);
+		}
+		pFind = pFind->_next;
+	}	
+	
+	return NULL;
+}
+ 
+tftpSemInfo_t * tftp_server_find_task_sem(tftpPid_t tid)
+{
+	IN tftpSem_t * semId= NULL;
+	OUT tftpSemInfo_t * pSemInfo = NULL;
+	tftpTaskPoolList_t * find = NULL;
+	
+	/* 找到smeid，根据semid获取semInfo */
+	for (find = gTaskPoolHead; find; find = find->_next) {
+		if (tid == find->_taskNode._tid) {
+			semId = find->_taskNode._syncLock;
+			break;
+		}
+	}
+	
+	pSemInfo = tftp_sem_info_node_find(semId, &pSemInfo);
+	if (NULL == pSemInfo) {
+		TFTP_LOGERR("find sem for server task pool fail");
+		return NULL;
+	}
+	
+	return pSemInfo;
+}
+
+LOCAL tftpReturnValue_t tftp_server_child_task_socket_init(tftpTaskPool_t * pClient)
+{
+	socklen_t addrLen = 0;
+	struct sockaddr_in addr;
+	INT32 ret = 0;
+	
+	addrLen= sizeof(addr);
+	memset(&addr, 0, addrLen);
+	pClient->_sockfd =	tftp_socket_create(&addr, FALSE);
+	ret = getsockname(pClient->_sockfd, (struct sockaddr *)&addr, &addrLen);
+	if (ret < 0) {
+		TFTP_LOGERR("get child task commucation socket name fail, return %d, socketfd=%d", \
+			ret, pClient->_sockfd);
+		return tftp_ret_Error;
+	}		
+	pClient->_port = ntohs(addr.sin_port);
+	
+	return tftp_ret_Ok;
+}
+
 /*
  * FunctionName:
  *     tftp_server_client_connect_handle
@@ -150,12 +209,61 @@ LOCAL tftpReturnValue_t tftp_server_task_pool_node_insert
  */
 VOID * tftp_server_client_connect_handle(VOID * arg)
 {
-	while (gServerRun) {
+	tftpPid_t tid = 0;
+	tftpTaskPool_t * pClient = NULL;
+	tftpSemInfo_t * pSem = NULL;
+	INT32 ret = 0;
+	
+	while (initSucces && gServerRun) {
+		tid = tftp_task_get_tid();
+
+		/* 获取信号量 */
+		pSem = tftp_server_find_task_sem(tid);
+		if (NULL == pSem) {
+			TFTP_LOGERR("Error find task sync lock");
+			return NULL;
+		}
+		
 		/* 子线程阻塞等待同步信号量 */
+		tftp_sem_wait(pSem);
+		
+		/* 根据线程tid获取线程信息 */
+		pClient = tftp_server_get_client_info_bytid(tid);
+		if (NULL == pClient) {
+			TFTP_LOGERR("task pool information eror, not find task:%d", tid);
+		}
 
-		/* 处理连接请求 */
+		/* 为子线程创建scket，获取socket信息 */
+		tftp_server_child_task_socket_init(pClient);
+		
+		TFTP_LOGNOR("client %s req deal start!", \
+				inet_ntoa(pClient->_cliInfo._cliAddr.sin_addr));
 
-		/* 处理完毕后释放信号量，清空线程信息 */
+		TFTP_LOGDBG(tftp_dbgSwitch_recv, "client connect:"
+					"ip:%s,"
+					"port:%d,"
+					"file:%s,"
+					"mode:%s,"
+					"blksize:%d,"
+					"timeout:%d,"
+					"bpid:%d",
+					inet_ntoa(pClient->_cliInfo._cliAddr.sin_addr),
+					ntohs(pClient->_cliInfo._cliAddr.sin_port),
+					pClient->_cliInfo._fileName ? pClient->_cliInfo._fileName  : "NULL",
+					pClient->_cliInfo._pMode ? pClient->_cliInfo._pMode : "NULL",
+					pClient->_cliInfo._blkSize,
+					pClient->_cliInfo._timeout,
+					pClient->_cliInfo._bpId);
+			
+		/* 处理连接请求... */	
+					
+		TFTP_LOGNOR("client %s req deal success!", \
+				inet_ntoa(pClient->_cliInfo._cliAddr.sin_addr));
+
+		/* 释放资源 */
+		//close(sockfd);
+		//close(filefd);
+		pClient->_busy = FALSE;
 	}
 
 }
@@ -184,6 +292,80 @@ LOCAL tftpTaskPool_t * tftp_server_find_free_task(VOID)
 	return NULL;
 }
 
+EXTERN tftpReturnValue_t tftp_server_client_req_analyse
+(
+	tftpTaskPool_t * task,
+	CONST CHAR * buf, 
+	INT32 bufLen
+)
+{
+	CHAR reqBuf[__TFTP_REQ_PACK_BUF_LEN_] = {0};
+	INT32 strLen = 0;
+	INT32 strVlaueLen = 0;
+	INT32 index = 0;
+	CHAR * subStr = NULL;
+	CHAR * subStrValue = NULL;
+	CHAR * savePtr = reqBuf;
+
+	memcpy(reqBuf, buf, __TFTP_REQ_PACK_BUF_LEN_);
+
+	/* 取opcode */
+	task->_cliInfo._opcode = ((UINT16 *)savePtr)[0];
+	index += 2;
+	savePtr += 2;
+
+	/* 获取文件名 */
+	subStr = strtok_r(NULL, "\0", &savePtr);
+	strLen = strlen(subStr) + 1;
+	strncpy(task->_cliInfo._fileName, subStr, __TFTP_FILENAME_STR_LEN_);
+	index += strLen;
+
+	/* 获取传输mode，跳过'\0'符号 */
+	savePtr++;
+	subStr = strtok_r(NULL, "\0", &savePtr);
+	strLen = strlen(subStr) + 1;
+	strncpy(task->_cliInfo._pMode, subStr, __TFTP_MODE_MAX_);
+	index += strLen;
+
+	/* 获取其他扩展选项 */
+	while (index < bufLen) {
+		/* 获取选项，跳过'\0'符号 */
+		savePtr++;
+		subStr = strtok_r(NULL, "\0", &savePtr);
+		strLen = strlen(subStr) + 1;
+
+		/* 获取选项值，跳过'\0'符号 */
+		savePtr++;
+		subStrValue = strtok_r(NULL, "\0", &savePtr);
+		strVlaueLen = strlen(subStrValue) + 1;
+		
+		/* 选项解析，选项值赋值 */
+		if (0 == strcasecmp(subStr, __TFTP_OPTION_TSIZE_)) {
+			task->_cliInfo._tSize = atoui(subStrValue);
+		}
+		else if (0 == strcasecmp(subStr, __TFTP_OPTION_TIMEOUT_)) {
+			task->_cliInfo._timeout = atoui(subStrValue);
+		}
+		else if (0 == strcasecmp(subStr, __TFTP_OPTION_BIKSIZE_)) {
+			task->_cliInfo._blkSize = atoui(subStrValue);
+		}
+		else if (0 == strcasecmp(subStr, __TFTP_OPTION_BPID_)) {
+			task->_cliInfo._bpId = atoui(subStrValue);
+		}
+		index += (strLen + strVlaueLen);
+	}
+	
+#if 0
+	for (index = 0; index < bufLen; index++) {
+		if (index % 8 == 0) {
+			tftp_print("\r\n");
+		}
+		tftp_print("0x%02x ", reqBuf[index]);
+	}
+#endif
+
+	return tftp_ret_Ok;
+}
 
 /*
  * FunctionName:
@@ -195,38 +377,50 @@ LOCAL tftpTaskPool_t * tftp_server_find_free_task(VOID)
  */
 VOID * tftp_server_task_handle(VOID * argv)
 {
+	INT32 rv = 0;
 	INT32 connfd = -1;
 	struct sockaddr_in cliaddr;
+	INT32 recvLen = 0;
 	tftpTaskPool_t * pFind = NULL;
 	CHAR buf[__TFTP_RECV_BUF_LEN_] = {0};
-	INT32 rv = 0;
+	tftpTaskInfo_t taskInfo;
 	
 	memset(&cliaddr, 0, sizeof(struct sockaddr_in));
-	while (gServerRun) {
+	while (initSucces && gServerRun) {
 		TFTP_LOGDBG(tftp_dbgSwitch_server, "tftp server wait client connect...");
 
 		/* 从线程池中find一个空闲的子线程*/
 		pFind = tftp_server_find_free_task();
-		TFTP_LOGDBG(tftp_dbgSwitch_server, \
-			"get free task = %p, tid=%d", pFind, pFind ? pFind->_tid : -1);
 		
-		/* 阻塞recv UDP请求，有空闲子线程则，处理，否则不处理，只记录日志 */
+		/* 阻塞recv UDP请求，有空闲子线程则处理，否则不处理，只记录日志 */
 		if (pFind) {
+			memset(&taskInfo, 0, sizeof(taskInfo));
+			tftp_task_get_info_by_tid(pFind->_tid, &taskInfo);
+			TFTP_LOGNOR("get free task:%s, tid=%d", taskInfo._name, pFind->_tid);
+			
 			/* 接收UDP请求信息 */
-			rv = tftp_socket_recv(gListenSocket, buf, __TFTP_RECV_BUF_LEN_, &cliaddr);
-			TFTP_LOGDBG(tftp_dbgSwitch_server, \
-				"socket recvfrom fd = %d return %s(%d)", gListenSocket, tftp_err_msg(rv), rv);
-			tftp_print("\r\nserver recv len = %d!", rv);
-
+			memset(buf, 0, __TFTP_RECV_BUF_LEN_);
+			recvLen = tftp_socket_recv(gListenSocket, buf, __TFTP_RECV_BUF_LEN_ - 1, &cliaddr);
+			TFTP_LOGDBG(tftp_dbgSwitch_server, "socket recvfrom fd = %d, recv len = %d", gListenSocket, recvLen);
+			if (recvLen >= __TFTP_REQ_PACK_BUF_LEN_ || recvLen < 0) {
+				TFTP_LOGWARN("Error client %s request, recv length=%d", \
+						inet_ntoa(cliaddr.sin_addr), recvLen);
+				pFind->_busy = FALSE;
+				continue;
+			}
+			
 			/* 对子线程的结构信息做初始化信息同步 */
 			memcpy(&pFind->_cliInfo._cliAddr, &cliaddr, sizeof(cliaddr));			
-		
+
+			/* 解析请求并将请求信息同步给子线程进行处理 */
+			tftp_server_client_req_analyse(pFind, buf, recvLen);
+			
 			/* 释放同步信号量，唤醒子线程处理链接 */
 			tftp_sem_post(pFind->_syncLock);	
 		}
 		else {
 			TFTP_LOGWARN("Too many connect for tftp server, do not any deal!");
-			exit(EXIT_FAILURE);
+			sleep(60);
 		}
 	}
 }
@@ -446,22 +640,24 @@ LOCAL tftpReturnValue_t tftp_server_task_pool_init(VOID)
 	/* 先创建线程池最小保证线程个数 */
 	for (taskIndex = 0; taskIndex < __TFTP_TASK_POOL_MIN_; taskIndex++) {
 		/* 为子线程创建同步信号量 */
-		TFTP_IF_ERROR_RET(tftp_server_task_pool_sem_create_init(taskIndex, &clientSem));
+		TFTP_IF_ERROR(tftp_server_task_pool_sem_create_init(taskIndex, &clientSem));
 		
 		/* 依次创建子线程 */
-		TFTP_IF_ERROR_RET(tftp_server_task_pool_task_create_init(taskIndex, &clientTask));
+		TFTP_IF_ERROR(tftp_server_task_pool_task_create_init(taskIndex, &clientTask));
 
 		/* 根据返回的structID获取线程tid */
 		tid = tftp_task_get_tid_by_structId(clientTask._taskStructid);
 
 		/* 创建线程池节点，将线程信息和信号量存储到线程池节点中 */
-		pChildNode = tftp_server_task_pool_node_create(clientSem, tid, \
-						taskIndex + __TFTP_SOCKET_CLIENT_UDP_PORT_MIN_);
+		pChildNode = tftp_server_task_pool_node_create(clientSem, tid);
 		if (NULL == pChildNode) {
 			TFTP_LOGERR("create node for task pool child task fail, return NULL!");
 			return tftp_ret_Error;
 		}
 
+		/* 将线程所属tid保存到sem结构链表中去 */
+		(VOID)tftp_sem_save_tid(clientSem, tid);
+		
 		/* 将节点插入线程池 */
 		tftp_server_task_pool_node_insert(pChildNode);
 	}
@@ -480,26 +676,45 @@ LOCAL tftpReturnValue_t tftp_server_task_pool_init(VOID)
  */
 LOCAL VOID tftp_server_cmd_enable_handle(INT32 argc, CHAR * argv[])
 {
-	if (0 == strcmp(argv[1], "enable")) {
+	tftpReturnValue_t tftpRet = tftp_ret_Error;
+	
+	if (0 == strcasecmp(argv[1], "enable")) {
 		if (gServerRun) {
 			TFTP_LOGWARN("TFTP server is running already!");
 			return;
 		}
 		
 		/* 初始化主线程用于监听连接的socket */
-		TFTP_IF_ERROR_RET(tftp_server_listen_socket_init());
-
+		tftpRet = tftp_server_listen_socket_init();
+		if (TFTP_FAILURE(tftpRet)) {
+			TFTP_IF_ERROR(tftpRet);
+			return;
+		}
+		
 		/* 初始化子线程线程池 */
-		TFTP_IF_ERROR_RET(tftp_server_task_pool_init());
+		tftpRet = tftp_server_task_pool_init();
+		if (TFTP_FAILURE(tftpRet)) {
+			TFTP_IF_ERROR(tftpRet);
+			return;
+		}
 
 		/* 创建线程池结构访问的信号量 */
-		TFTP_IF_ERROR_RET(tftp_server_pool_operator_sem());
+		tftpRet = tftp_server_pool_operator_sem();
+		if (TFTP_FAILURE(tftpRet)) {
+			TFTP_IF_ERROR(tftpRet);
+			return;
+		}
 
 		/* 创建Server线程 */
-		TFTP_IF_ERROR_RET(tftp_server_task_init());
+		tftpRet = tftp_server_task_init();
+		if (TFTP_FAILURE(tftpRet)) {
+			TFTP_IF_ERROR(tftpRet);
+			return;
+		}
+		
 		TFTP_LOGNOR("TFTP server is start!");
 	}
-	else if (0 == strcmp(argv[1], "disable")) {
+	else if (0 == strcasecmp(argv[1], "disable")) {
 		TFTP_LOGWARN("TFTP server is over!");
 	}
 }

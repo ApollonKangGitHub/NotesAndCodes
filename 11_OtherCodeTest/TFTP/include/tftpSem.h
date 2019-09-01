@@ -61,5 +61,7 @@ EXTERN INT32 tftp_sem_wait(tftpSemInfo_t * semInfo);
 EXTERN INT32 tftp_sem_post(tftpSem_t * semId);
 EXTERN tftpReturnValue_t tftp_sem_module_init(VOID);
 EXTERN tftpReturnValue_t tftp_sem_create_init(IN OUT tftpSemInfo_t * pSemInfo);
+EXTERN tftpReturnValue_t tftp_sem_save_tid(tftpSem_t * semId, tftpPid_t tid);
+EXTERN tftpSemInfo_t * tftp_sem_info_node_find(IN tftpSem_t * semId, OUT tftpSemInfo_t ** pSemInfo);
 
 #endif

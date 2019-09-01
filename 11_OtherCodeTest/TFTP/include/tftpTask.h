@@ -24,7 +24,7 @@
 
 typedef pthread_t tftpTaskStruct_t;
 typedef pid_t tftpPid_t;
-typedef pid_t tftpTaskId_t;
+typedef INT32 tftpTaskId_t;
 
 typedef struct tftpTaskInfo_s{
 	CHAR _name[__TFTP_TASK_NAME_LENGTH_];		/* 任务名 */

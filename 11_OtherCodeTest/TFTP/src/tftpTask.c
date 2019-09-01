@@ -180,7 +180,7 @@ EXTERN tftpReturnValue_t tftp_task_create_init(tftpTaskInfo_t * taskInfo)
 	/* 根据pthread_t指针获取pid和tid */
 	taskInfo->_pid = tftp_task_get_pid_by_structId(structId);
 	taskInfo->_tid = tftp_task_get_tid_by_structId(structId);
-	
+
 	/* 销毁线程属性结构,重新初始化之前不能使用 */
 	ret = pthread_attr_destroy(&attr);
 	if(ret != 0){

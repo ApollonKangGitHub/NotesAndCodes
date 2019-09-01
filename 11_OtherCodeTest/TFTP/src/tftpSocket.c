@@ -19,6 +19,8 @@ EXTERN INT32 tftp_socket_create
 )
 {
 	INT32 ret = 0;
+	BOOL bAddrReuse  = TRUE;
+	BOOL bPortReuse = TRUE;
 	socklen_t addrLen = 0;
 
 	if (NULL == addr) {
@@ -30,6 +32,24 @@ EXTERN INT32 tftp_socket_create
 	if (sockfd < 0) {
 		TFTP_LOGERR("create socket fail, errno = %d!", errno);
 		tftp_perror("\r\ncreate fail reason is");
+		return -1;
+	}
+
+	/* 给socket设置SO_REUSEADDR属性,设定套接字地址复用 */
+	ret = setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &bAddrReuse, sizeof(bAddrReuse));
+	if (ret < 0) {
+		TFTP_LOGERR("set socket option optname %d fail, errno = %d", SO_REUSEADDR, errno);
+		tftp_perror("\r\nset socket option SO_REUSEADDR fail reason is");
+		close(sockfd);
+		return -1;
+	}
+	
+	/* 设置SO_REUSEPORT属性，实现端口复用 */
+	ret = setsockopt(sockfd, SOL_SOCKET, SO_REUSEPORT, &bPortReuse, sizeof(bPortReuse));
+	if (ret < 0) {
+		TFTP_LOGERR("set socket option optname %d fail, errno = %d", SO_REUSEPORT, errno);
+		tftp_perror("\r\nset socket option SO_REUSEPORT fail reason is");
+		close(sockfd);
 		return -1;
 	}
 

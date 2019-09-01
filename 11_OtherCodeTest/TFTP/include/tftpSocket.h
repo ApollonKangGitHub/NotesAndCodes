@@ -11,14 +11,6 @@
 
 #define __TFTP_SOCKET_SERVER_UDP_PORT_		(69)
 #define __TFTP_SCKET_SERVER_IP_ADDR_		(INADDR_ANY)
-/* 
- * 通信端口建议：
- * 美国IANA建议使用49152~65535
- * Linux 32768~61000
- * Windows 1025~5000
- */
-#define __TFTP_SOCKET_CLIENT_UDP_PORT_MIN_	(55555)
-#define __TFTP_SOCKET_CLIENT_UDP_PORT_MAX_	(59999)
 
 EXTERN INT32 tftp_socket_create(struct sockaddr_in * addr, BOOL needBind);
 EXTERN INT32 tftp_socket_listen(INT32 listenfd);

@@ -25,13 +25,13 @@ LOCAL VOID tftp_sem_list_display(INT32 argc, CHAR * argv[])
 	tftpSemInfoList_t * pSemInfo;
 	CHAR * semName = argv[3];
 	
-	tftp_print("\r\n%-16s%-16s%-16s%-16s%-16s%-16s", 
+	tftp_print("\r\n%-16s%-12s%-18s%-12s%-16s%-16s", 
 		"semName", "shared", "semId", "curTask", "timeout(s:ms)", "waitForever");
 	
 	for (pSemInfo = gSemListHead; pSemInfo; pSemInfo = pSemInfo->_next) {
-		if ((0 == strcmp(semName, pSemInfo->_semInfo._semName))
-			|| (0 == strcmp(semName, "all"))) {
-			tftp_print("\r\n%-16s%-16s%-16p%-16d%-7ld:%-8ld%-16s", 
+		if ((0 == strcasecmp(semName, pSemInfo->_semInfo._semName))
+			|| (0 == strcasecmp(semName, "all"))) {
+			tftp_print("\r\n%-16s%-12s%-18p%-12d%-7ld:%-8ld%-16s", 
 				pSemInfo->_semInfo._semName,
 				pSemInfo->_semInfo._pshared ? "process" : "thread", 
 				pSemInfo->_semInfo._semId,
@@ -40,7 +40,7 @@ LOCAL VOID tftp_sem_list_display(INT32 argc, CHAR * argv[])
 				pSemInfo->_semInfo._timeout._nsec * 1000,
 				pSemInfo->_semInfo._waitForever ? "TRUE" : "FALSE");
 		}
-		if (0 == strcmp(semName, pSemInfo->_semInfo._semName)) {
+		if (0 == strcasecmp(semName, pSemInfo->_semInfo._semName)) {
 			break;
 		}
 	} 
@@ -144,6 +144,30 @@ EXTERN INT32 tftp_sem_post(tftpSem_t * semId)
 	return sem_post(semId);
 }
 
+EXTERN tftpReturnValue_t tftp_sem_save_tid(tftpSem_t * semId, tftpPid_t tid)
+{
+	tftpSemInfoList_t * pHeadTemp = NULL;
+
+	TFTP_LOGDBG(tftp_dbgSwitch_task, \
+		"tftp sem info save tid, tid=%d semId=%p", tid, semId);
+
+	if (NULL == semId) {
+		TFTP_LOGERR("Error tftp info node for agrument, semId=%p!", semId);
+		return tftp_ret_Null;
+	}
+
+	/* 遍历信号量信息链表，根据semId匹配信号量节点 */
+	pHeadTemp = gSemListHead;
+	for (; pHeadTemp; pHeadTemp = pHeadTemp->_next) {
+		if (pHeadTemp->_semInfo._semId == semId) {
+			pHeadTemp->_semInfo._semTask = tid;
+			return tftp_ret_Ok;
+		}
+	}
+	
+	return tftp_ret_NotFound;
+}
+
 /*
  * FunctionName:
  *     tftp_sem_info_node_find
@@ -152,30 +176,67 @@ EXTERN INT32 tftp_sem_post(tftpSem_t * semId)
  * Notes:
  *     
  */
-LOCAL tftpReturnValue_t tftp_sem_info_node_find
+EXTERN tftpSemInfo_t * tftp_sem_info_node_find
 (
 	IN tftpSem_t * semId, 
-	OUT tftpSemInfo_t * pSemInfo
+	OUT tftpSemInfo_t ** pSemInfo
 )
 {
 	TFTP_LOGDBG(tftp_dbgSwitch_task, \
 		"tftp sem info node find, semId=%p pSemInfo=%p", semId, pSemInfo);
 
 	if (NULL == pSemInfo) {
-		TFTP_LOGERR("Error tftp info node find for agrument, pSemInfo=%p!", pSemInfo);
-		return tftp_ret_Null;
+		TFTP_LOGERR("Error tftp sem info node find, pSemInfo=%p!", pSemInfo);
+		return NULL;
 	}
+
+	/* 遍历信号量信息链表，根据semId匹配信号量节点 */
+	*pSemInfo = NULL;
+	tftpSemInfoList_t * pHeadTemp = gSemListHead;
+	for (; pHeadTemp; pHeadTemp = pHeadTemp->_next) {
+		if (pHeadTemp->_semInfo._semId == semId) {
+			*pSemInfo = &pHeadTemp->_semInfo;
+			break;
+		}
+	}
+	return *pSemInfo;
+}
+
+/*
+ * FunctionName:
+ *     tftp_sem_info_node_find
+ * Description:
+ *     查找信号量信息节点
+ * Notes:
+ *     
+ */
+EXTERN tftpSemInfo_t * tftp_sem_info_find_bytid
+(
+	IN tftpPid_t tid, 
+	OUT tftpSemInfo_t ** pSemInfo
+)
+{
+	TFTP_LOGDBG(tftp_dbgSwitch_task, \
+		"tftp sem info node find, tid=%d pSemInfo=%p", tid, pSemInfo);
+
+	if (NULL == pSemInfo) {
+		TFTP_LOGERR("Error tftp info node find for agrument, pSemInfo=%p!", pSemInfo);
+		return NULL;
+	}
+
+	*pSemInfo = NULL;
 
 	/* 遍历信号量信息链表，根据semId匹配信号量节点 */
 	tftpSemInfoList_t * pHeadTemp = gSemListHead;
 	for (; pHeadTemp; pHeadTemp = pHeadTemp->_next) {
-		if (pHeadTemp->_semInfo._semId == semId) {
-			memcpy(pSemInfo, &pHeadTemp->_semInfo, sizeof(tftpSemInfo_t));
-			return tftp_ret_Ok;
+		if (pHeadTemp->_semInfo._semTask == tid) {
+			*pSemInfo = &pHeadTemp->_semInfo;
+			break;
 		}
 	}
-	return tftp_ret_NotFound;
+	return *pSemInfo;
 }
+
 /*
  * FunctionName:
  *     tftp_sem_info_node_find

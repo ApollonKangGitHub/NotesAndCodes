@@ -10,8 +10,13 @@
 #define __TFTP_BLKSIZE_256_BYTES_		(256)
 #define __TFTP_BLKSIZE_512_BYTES_		(512)
 #define __TFTP_BLKSIZE_1024_BYTES_		(1024)
+#define __TFTP_BLKSIZE_1428_BYTES_		(1428)
 #define __TFTP_BLKSIZE_2048_BYTES_		(2048)
 #define __TFTP_BLKSIZE_4096_BYTES_		(4096)
+
+
+#define __TFTP_REQ_PACK_BUF_LEN_		(1024)
+#define __TFTP_MODE_MAX_				(9)
 
 /* 操作码，标识报文类型 */
 typedef enum tftpPackOperCode_e
