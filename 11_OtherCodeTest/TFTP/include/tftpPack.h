@@ -3,8 +3,10 @@
 
 #define __TFTP_FILE_PATH_LEN_		(512)
 #define __TFTP_FILE_NAME_LEN_		(128)
-#define __TFTP_DEFAULT_TIMEOUT_ 	(60)	/* default timeout is 60s */
-#define __TFTP_DEFAULT_BLKSIZE_		(512)	/* default blksize is 512Bytes */
+
+#define __TFTP_TIMEOUT_MIN_			(1)
+#define __TFTP_TIMEOUT_MAX_			(255)
+#define __TFTP_TIMEOUT_DEFAULT_ 	(60)	/* default timeout is 60s */
 
 #define __TFTP_BLKSIZE_128_BYTES_		(128)
 #define __TFTP_BLKSIZE_256_BYTES_		(256)
@@ -13,7 +15,13 @@
 #define __TFTP_BLKSIZE_1428_BYTES_		(1428)
 #define __TFTP_BLKSIZE_2048_BYTES_		(2048)
 #define __TFTP_BLKSIZE_4096_BYTES_		(4096)
+#define __TFTP_DEFAULT_BLKSIZE_			(512)	/* default blksize is 512Bytes */
 
+#define __TFTP_BPID_MAX_				(0xFFFF)
+#define __TFTP_BPID_MIN_				(0x1)
+
+#define __TFTP_TSIZE_MAX_				(0xFFFFFFFF)
+#define __TFTP_TSIZE_MIN_				(0x1)
 
 #define __TFTP_REQ_PACK_BUF_LEN_		(1024)
 #define __TFTP_MODE_MAX_				(9)
@@ -51,7 +59,8 @@ typedef enum tftpPackMode_e
 {
 	tftp_Pack_Mode_netascii,			
 	tftp_Pack_Mode_octet,				
-	tftp_Pack_Mode_mail
+	tftp_Pack_Mode_mail,
+	tftp_Pack_Mode_max
 }tftpPackMode_t;
 
 /* 错误码，标识错误类型 */
@@ -67,7 +76,10 @@ typedef enum tftpPackErroCode_e
 	tftp_Pack_ErrCode_NoSuchUser	= 7,	/* No such user. */
 	tftp_Pack_ErrCode_Invalid		= 8		/* last invalid error code, please. */
 }tftpPackErrCode_t;
+	
 EXTERN tftpPackOperCode_t tftp_pack_oper_para_get(CONST CHAR * operator);
+EXTERN CHAR * tftp_pack_get_tranfer_mode(CHAR  * pMode, tftpPackMode_t * mode);
+
 EXTERN UINT16 tftp_pack_req
 (
 	UINT8 * buf, 
@@ -80,6 +92,7 @@ EXTERN UINT16 tftp_pack_req
 	UINT16 bpid,	/* 自定义扩展选项 */
 	...				
 );
+
 
 
 

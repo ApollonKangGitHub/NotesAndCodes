@@ -26,6 +26,35 @@ EXTERN tftpPackOperCode_t tftp_pack_oper_para_get(CONST CHAR * operator)
 	return opcode;
 }
 
+/*
+ * FunctionName:
+ *     tftp_pack_get_tranfer_mode
+ * Description:
+ *     获取文件传输模式
+ * Notes:
+ *     
+ */
+EXTERN CHAR * tftp_pack_get_tranfer_mode(CHAR  * pMode, tftpPackMode_t * mode)
+{
+	if (0 == strcasecmp(pMode, __TFTP_MODE_NETASCII_)) {
+		*mode = tftp_Pack_Mode_netascii;
+		return pMode;
+	}
+	else if (0 == strcasecmp(pMode, __TFTP_MODE_OCTET_)) {
+		*mode = tftp_Pack_Mode_octet;
+		return pMode;
+	}
+	else if (0 == strcasecmp(pMode, __TFTP_MODE_MAIL_)) {
+		*mode = tftp_Pack_Mode_mail;
+		return pMode;
+	}
+	else {
+		TFTP_LOGWARN("invalid mode:%s, set default:%s", pMode, __TFTP_MODE_OCTET_);
+		*mode = tftp_Pack_Mode_octet;
+		return __TFTP_MODE_OCTET_;
+	}
+}
+
 EXTERN UINT16 tftp_pack_req
 (
 	UINT8 * buf, 

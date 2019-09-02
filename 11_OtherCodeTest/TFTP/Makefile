@@ -41,7 +41,7 @@ $(TARGETP_ROJECT):$(OBJS)
 	$(LD) $(OBJS) $(LDFLAGS) -o $(TARDIR) && \
 	$(ECHO) "link all files to target file $(TARGETP_ROJECT) succeed!" | tee -a $(COMPILE_LOG) || \
 	$(ECHO) "link all files to target file $(TARGETP_ROJECT) failure!" | tee -a $(COMPILE_LOG) 
-	sudo $(TARDIR)
+	#sudo $(TARDIR)
 %.o:%.c
 	@$(ECHO) "$< compile running..." | tee -a $(COMPILE_LOG) && \
 	$(CC) -c $< $(CFLAGS) -o $@ -MD -MF $(patsubst %.c,%.d,$<) && \

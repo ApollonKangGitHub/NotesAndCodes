@@ -138,7 +138,7 @@ LOCAL UINT32 tftp_client_get_timeout(CONST CHAR * pTimeout)
 {
 	UINT32 timeout = 0;
 	if (NULL == pTimeout) {
-		timeout = __TFTP_DEFAULT_TIMEOUT_;
+		timeout = __TFTP_TIMEOUT_DEFAULT_;
 	}
 	else {
 		timeout = atoui(pTimeout);
@@ -146,8 +146,8 @@ LOCAL UINT32 tftp_client_get_timeout(CONST CHAR * pTimeout)
 
 	/* Valid values range between "1" and "255" seconds,inclusive */
 	if (timeout > 255 || timeout < 1) {
-		tftp_print("invalid timeout:%d(s), set default:%d(s)", timeout, __TFTP_DEFAULT_TIMEOUT_);
-		timeout = __TFTP_DEFAULT_TIMEOUT_;
+		TFTP_LOGWARN("invalid timeout:%d(s), set default:%d(s)", timeout, __TFTP_TIMEOUT_DEFAULT_);
+		timeout = __TFTP_TIMEOUT_DEFAULT_;
 	}
 
 	return timeout;
@@ -172,7 +172,7 @@ LOCAL UINT32 tftp_client_get_blksize(CONST CHAR * pBlksize)
 		case __TFTP_BLKSIZE_4096_BYTES_:	
 			break;
 		default:
-			tftp_print("invalid block size:%d(Bytes), set default:%d(Bytes)", blksize, __TFTP_DEFAULT_BLKSIZE_);
+			TFTP_LOGWARN("invalid block size:%d(Bytes), set default:%d(Bytes)", blksize, __TFTP_DEFAULT_BLKSIZE_);
 			blksize = __TFTP_DEFAULT_BLKSIZE_;
 			break;
 	}
@@ -194,35 +194,6 @@ LOCAL UINT16 tftp_client_get_bpid(CONST CHAR * filename)
 	
 	/* 无断点传输，即断点块号为0 */
 	return bpid;
-}
-
-/*
- * FunctionName:
- *     tftp_client_cmd_handle
- * Description:
- *     tftpclient下载/上传命令
- * Notes:
- *     
- */
-LOCAL CHAR * tftp_client_get_tranfer_mode(CHAR  * pMode, tftpPackMode_t * mode)
-{
-	if (0 == strcasecmp(pMode, __TFTP_MODE_NETASCII_)) {
-		*mode = tftp_Pack_Mode_netascii;
-		return pMode;
-	}
-	else if (0 == strcasecmp(pMode, __TFTP_MODE_OCTET_)) {
-		*mode = tftp_Pack_Mode_octet;
-		return pMode;
-	}
-	else if (0 == strcasecmp(pMode, __TFTP_MODE_MAIL_)) {
-		*mode = tftp_Pack_Mode_mail;
-		return pMode;
-	}
-	else {
-		tftp_print("invalid mode:%s, set default:%s", pMode, __TFTP_MODE_OCTET_);
-		*mode = tftp_Pack_Mode_octet;
-		return __TFTP_MODE_OCTET_;
-	}
 }
 
 LOCAL tftpReturnValue_t tftp_client_tranfer_info_init(INT32 argc, CHAR * argv[])
@@ -264,7 +235,7 @@ LOCAL tftpReturnValue_t tftp_client_tranfer_info_init(INT32 argc, CHAR * argv[])
 	}
 
 	/* 4、请求报文参数获取 */
-	gCliTranInfo._pMode = tftp_client_get_tranfer_mode(pMode, &gCliTranInfo._mode);
+	gCliTranInfo._pMode = tftp_pack_get_tranfer_mode(pMode, &gCliTranInfo._mode);
 	gCliTranInfo._timeout = tftp_client_get_timeout(pTimeout);
 	gCliTranInfo._blksize = tftp_client_get_blksize(pBlksize);
 	gCliTranInfo._fileSize = tftp_cilent_get_file_size((CONST CHAR *)(&gCliTranInfo._opcode));

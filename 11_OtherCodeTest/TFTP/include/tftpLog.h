@@ -34,8 +34,8 @@ typedef enum tftpDbgSwitch_e
 }tftpDbgSwitch_t;
 
 typedef struct tftpDbgFileInfo_s{
-	FILE * _fp;					/* 日志文件指针，包含文件读写的信息 */
-	CHAR _filePath[64];			/* 文件路径 */
+	FILE * _fileFp;				/* 日志文件指针，包含文件读写的信息 */
+	CHAR _filePath[256];		/* 文件路径 */
 	UINT32 _curSize;			/* 文件大小 */
 	UINT32 _limitSize;			/* 存储容量 */
 	tftpSemInfo_t _sem;			/* 文件操作信号量信息 */

@@ -17,7 +17,7 @@ LOCAL CHAR * gWeekStr[] = {
 };
 
 /* 日志文件描述符以及对应的文件路径 */
-LOCAL FILE * gLogFile[tftp_logLevel_Max] = {NULL};
+LOCAL tftpDbgFileInfo_t gLogFile[tftp_logLevel_Max] = {0};
 LOCAL CHAR * gLogFilePath[tftp_logLevel_Max] = {
 	"/dev/stdin",
 	"./logFile/tftpNormal.log",
@@ -134,19 +134,25 @@ EXTERN INT32 tftp_log_level_print
 	(VOID)strncat(pFormatAll, pEnd, strlen(pEnd));				/* 格式化输出颜色reset */
 
 	for (level = tftp_logLevel_Shell; level < tftp_logLevel_Max; level++) {
-		if (_TEST_TRUE(&ability, level)) {
-			if (gLogFile[level]) {
+		if (_TEST_TRUE(&ability, level)) {			
+			if (gLogFile[level]._fileFp) {
+				/* 获取文件操作信号量 */
+				
+				
 				/* 打印到对应文件 */
 				va_start (argList, format);
-				(VOID)tftp_log_level_print_format(gLogFile[level],\
-							gLogFilePath[level], pFormatAll, argList);
+				(VOID)tftp_log_level_print_format(gLogFile[level]._fileFp,\
+							gLogFile[level]._filePath, pFormatAll, argList);
 				va_end (argList);
 				/* 刷新到文件中去 */
-				tftp_fflush(gLogFile[level]);
+				tftp_fflush(gLogFile[level]._fileFp);
+
+				/* 释放文件操作信号量 */
+				
 			}
 			else {
 				tftp_print("\r\nlog file %s is not open or not exist, file pointer=%p!", 
-					gLogFilePath[level], gLogFile[level]);
+					gLogFile[level]._filePath, gLogFile[level]._fileFp);
 			}
 		}
 	}
@@ -167,16 +173,22 @@ LOCAL INT32 tftp_log_to_file_init(VOID)
 	INT32 i = 0;
 	FILE * fp = NULL;
 
-	gLogFile[tftp_logLevel_Shell] = __TFTP_STDOUT_;
+	/* shell直接赋值stdin */
+	gLogFile[tftp_logLevel_Shell]._fileFp = __TFTP_STDOUT_;
+	memcpy(gLogFile[tftp_logLevel_Shell]._filePath, \
+		gLogFilePath[tftp_logLevel_Shell], strlen(gLogFilePath[tftp_logLevel_Shell]));
+
+	/* 依次打开其他文件 */
 	for (i = tftp_logLevel_Normal; i < tftp_logLevel_Max; i++) {
-		fp = fopen(gLogFilePath[i], "ab+");
+		memcpy(gLogFile[i]._filePath, gLogFilePath[i], strlen(gLogFilePath[i]));
+		fp = fopen(gLogFile[i]._filePath, "ab+");
 		if (NULL == fp) {
-			tftp_print("\r\nError to open file:%s!", gLogFilePath[i]);
+			tftp_print("\r\nError to open file:%s(%d)!", gLogFile[i]._filePath, i);
 			tftp_perror("open fail reason is");
 			exit(EXIT_FAILURE);
 		}
 
-		gLogFile[i] = fp;
+		gLogFile[i]._fileFp = fp;
 	}
 
 	return tftp_ret_Ok;
