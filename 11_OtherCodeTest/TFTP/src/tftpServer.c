@@ -51,21 +51,21 @@ EXTERN tftpReturnValue_t tftp_server_cmd_display_task_pool(INT32 argc, CHAR * ar
 
 		if((tid == pTaskNode->_tid) || (tid == __TFTP_TID_ALL_)) {
 			tftp_print("\r\n----commucation child task name:%s----", taskInfo._name);
-			tftp_print("\r\n\t%-16s:%s", "client IP", inet_ntoa(pTaskNode->_cliInfo._cliAddr.sin_addr));
-			tftp_print("\r\n\t%-16s:%d", "client UDP port", ntohs(pTaskNode->_cliInfo._cliAddr.sin_port));
-			tftp_print("\r\n\t%-16s:%d", "client socket fd", pTaskNode->_cliInfo._sockId);
-			tftp_print("\r\n\t%-16s:%s", "client file Name", pTaskNode->_cliInfo._fileName);
-			tftp_print("\r\n\t%-16s:%d", "client file fd", pTaskNode->_fileFd);
-			tftp_print("\r\n\t%-16s:%u", "client file size", pTaskNode->_cliInfo._tSize);
-			tftp_print("\r\n\t%-16s:%u", "client block size", pTaskNode->_cliInfo._blkSize);
-			tftp_print("\r\n\t%-16s:%u", "client break point id", pTaskNode->_cliInfo._bpId);
-			tftp_print("\r\n\t%-16s:%u", "client timout", pTaskNode->_cliInfo._timeout);
-			tftp_print("\r\n\t%-16s:%u", "client opcode", pTaskNode->_cliInfo._opcode);
-			tftp_print("\r\n\t%-16s:%d", "task socket fd", pTaskNode->_sockfd);
-			tftp_print("\r\n\t%-16s:%u", "task bind port", pTaskNode->_port);
-			tftp_print("\r\n\t%-16s:%u", "task tid", pTaskNode->_tid);
-			tftp_print("\r\n\t%-16s:%s", "task busy status", pTaskNode->_busy ? "BUSY" : "FREE");
-			tftp_print("\r\n\t%-16s:%p", "task sync lock", pTaskNode->_syncLock);
+			tftp_print("\r\n\t%-24s:%s", "client IP", inet_ntoa(pTaskNode->_cliInfo._cliAddr.sin_addr));
+			tftp_print("\r\n\t%-24s:%d", "client UDP port", ntohs(pTaskNode->_cliInfo._cliAddr.sin_port));
+			tftp_print("\r\n\t%-24s:%d", "client socket fd", pTaskNode->_cliInfo._sockId);
+			tftp_print("\r\n\t%-24s:%s", "client file Name", pTaskNode->_cliInfo._fileName);
+			tftp_print("\r\n\t%-24s:%d", "client file fd", pTaskNode->_fileFd);
+			tftp_print("\r\n\t%-24s:%u", "client file size", pTaskNode->_cliInfo._tSize);
+			tftp_print("\r\n\t%-24s:%u", "client block size", pTaskNode->_cliInfo._blkSize);
+			tftp_print("\r\n\t%-24s:%u", "client break point id", pTaskNode->_cliInfo._bpId);
+			tftp_print("\r\n\t%-24s:%u", "client timout", pTaskNode->_cliInfo._timeout);
+			tftp_print("\r\n\t%-24s:%u", "client opcode", pTaskNode->_cliInfo._opcode);
+			tftp_print("\r\n\t%-24s:%d", "task socket fd", pTaskNode->_sockfd);
+			tftp_print("\r\n\t%-24s:%u", "task bind port", pTaskNode->_port);
+			tftp_print("\r\n\t%-24s:%u", "task tid", pTaskNode->_tid);
+			tftp_print("\r\n\t%-24s:%s", "task busy status", pTaskNode->_busy ? "BUSY" : "FREE");
+			tftp_print("\r\n\t%-24s:%p", "task sync lock", pTaskNode->_syncLock);
 		}
 		if (tid == pTaskNode->_tid) {
 			break;
@@ -373,7 +373,7 @@ EXTERN tftpReturnValue_t tftp_server_client_req_analyse
 	memcpy(reqBuf, buf, __TFTP_REQ_PACK_BUF_LEN_);
 
 	/* 取opcode */
-	task->_cliInfo._opcode = ((UINT16 *)savePtr)[0];
+	task->_cliInfo._opcode = ntohs(((UINT16 *)savePtr)[0]);
 	index += 2;
 	savePtr += 2;
 

@@ -1,0 +1,6 @@
+1、errno = 13权限拒绝，使用sudo ./out/TFTP.exe运行
+	2089-09-03 22:38:10(UTC)[Tuesday]%% TFTP-ERROR :(65)bind socket fd fail, sockfd = 8, port = 69, errno = 13
+	bind fail reason is: Permission denied
+	2089-09-03 22:38:10(UTC)[Tuesday]%% TFTP-ERROR :(513)create server socket fail!
+	2089-09-03 22:38:10(UTC)[Tuesday]%% TFTP-ERROR :(753)tftp operator failure, return ERROR (1)
+	tftp>

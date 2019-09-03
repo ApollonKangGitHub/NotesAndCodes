@@ -76,8 +76,8 @@ EXTERN UINT16 tftp_pack_req
 	
 	/* 封装opcode */
 	((UINT16 *)p)[0] = (opcode == tftp_Pack_OperCode_Rrq ) \
-			? __TFTP_OPCODE_RRQ_ 
-			: __TFTP_OPCODE_WRQ_;
+			? htons(__TFTP_OPCODE_RRQ_)
+			: htons(__TFTP_OPCODE_WRQ_);
 
 	p += 2;
 	

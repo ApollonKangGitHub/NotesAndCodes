@@ -1,0 +1,3 @@
+1、opcode无法识别:opcode为整数，未进行网络字节序转换，在client端用htons转换，在server端用ntohs转换即可
+	2089-09-03 22:41:02(UTC)[Tuesday]%% TFTP-WARN  :(262)client tftp request invalid
+	 Client connect:ip:192.168.1.254, port:51895, file:test.txt, mode:octet, blksize:1024, timeout:200, bpid:0
