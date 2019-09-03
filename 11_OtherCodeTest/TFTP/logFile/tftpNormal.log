@@ -60,3 +60,10 @@
 [0m2089-09-03 22:42:03(UTC)[Tuesday]%% TFTP-NORMAL:(462)get free task:tftpCliTask1, tid=14923[0m
 [0m2089-09-03 22:42:03(UTC)[Tuesday]%% TFTP-NORMAL:(305)client 192.168.1.254 req deal start![0m
 [0m2089-09-03 22:42:03(UTC)[Tuesday]%% TFTP-NORMAL:(324)client 192.168.1.254 req deal success![0m
+[0m2089-09-04 00:10:52(UTC)[Wednesday]%% TFTP-NORMAL:(439)tftp semaphore module init......[0m
+[0m2089-09-04 00:10:52(UTC)[Wednesday]%% TFTP-NORMAL:(599)tftp task module init......[0m
+[0m2089-09-04 00:10:52(UTC)[Wednesday]%% TFTP-NORMAL:(656)tftp shell module init......[0m
+[0m2089-09-04 00:10:52(UTC)[Wednesday]%% TFTP-NORMAL:(778)tftp server module init......[0m
+[0m2089-09-04 00:10:58(UTC)[Wednesday]%% TFTP-NORMAL:(716)TFTP server is start![0m
+[0m2089-09-04 00:10:58(UTC)[Wednesday]%% TFTP-NORMAL:(399)get free task:tftpCliTask0, tid=17001[0m
+[0m2089-09-04 00:11:12(UTC)[Wednesday]%% TFTP-NORMAL:(399)get free task:tftpCliTask1, tid=0[0m

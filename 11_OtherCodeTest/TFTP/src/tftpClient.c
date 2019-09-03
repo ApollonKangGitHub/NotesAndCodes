@@ -11,9 +11,6 @@
 /* 全局资源 */
 LOCAL CHAR gSendBuf[__TFTP_SEND_BUG_LEN_] = {0};
 LOCAL CHAR gRecvBuf[__TFTP_RECV_BUF_LEN_] = {0};
-LOCAL CHAR * gFileName[__TFTP_FILE_NAME_LEN_] = {0};
-LOCAL CHAR * gClientPath[__TFTP_FILE_PATH_LEN_] = {0};
-LOCAL CHAR * gClientFile[__TFTP_FILE_PATH_LEN_] = {0};
 
 /* 客户端通信传输相关信息结构 */
 LOCAL tftpClientInfo_t gCliTranInfo;
@@ -88,31 +85,27 @@ LOCAL tftpReturnValue_t tftp_client_pack_deal_upload()
 LOCAL tftpReturnValue_t tftp_client_oper_valid(CONST char * fileName)
 {
 	BOOL exist = FALSE;
+	INT32 len = 0;
 	tftpReturnValue_t ret = tftp_ret_Ok;
 
-	/* 初始化 */
-	gCliTranInfo._fileName = (CHAR *)gFileName;
-	gCliTranInfo._filePath = (CHAR *)gClientFile;
-	gCliTranInfo._clientPath = (CHAR *)gClientPath;
-	
-	memcpy(gCliTranInfo._fileName, fileName, strlen(fileName));
-	memset(gCliTranInfo._filePath, 0, strlen(gCliTranInfo._filePath));
-	memcpy(gCliTranInfo._filePath,
-			gCliTranInfo._clientPath, 
-			strlen(gCliTranInfo._clientPath));
-	
-	strncat((CHAR*)(gCliTranInfo._filePath),
-			gCliTranInfo._fileName, 
-			strlen(gCliTranInfo._fileName));
+	/* 记录文件名，补全文件名绝对路径 */
+	len = strlen(fileName);
+	memcpy(gCliTranInfo._reqPack._fileName, fileName, len);
+	len = strlen(gCliTranInfo._filePath);
+	memset(gCliTranInfo._filePath, 0, len);
+	len = strlen(gCliTranInfo._clientPath);
+	memcpy(gCliTranInfo._filePath, gCliTranInfo._clientPath, len);
+	len = strlen(gCliTranInfo._reqPack._fileName);
+	strncat((CHAR*)(gCliTranInfo._filePath), gCliTranInfo._reqPack._fileName, len);
 	
 	/* 判断文件是否存在 */
 	exist = isfileExist((CONST CHAR * )gCliTranInfo._filePath);
 	
 	/* 根据操作决定返回值 */
-	if (exist && (tftp_Pack_OperCode_Rrq == gCliTranInfo._opcode)) {
+	if (exist && (tftp_Pack_OperCode_Rrq == gCliTranInfo._reqPack._opcode)) {
 		ret = tftp_ret_Exist;
 	}
-	else if (!exist && (tftp_Pack_OperCode_Wrq == gCliTranInfo._opcode)) {
+	else if (!exist && (tftp_Pack_OperCode_Wrq == gCliTranInfo._reqPack._opcode)) {
 		ret =  tftp_ret_NotFound;
 	}
 	else {
@@ -124,7 +117,7 @@ LOCAL tftpReturnValue_t tftp_client_oper_valid(CONST char * fileName)
 
 LOCAL UINT32 tftp_cilent_get_file_size(CONST char * filePath)
 {
-	if (tftp_Pack_OperCode_Rrq == gCliTranInfo._opcode) {
+	if (tftp_Pack_OperCode_Rrq == gCliTranInfo._reqPack._opcode) {
 		/* 下载，文件大小为0 */
 		return 0;				
 	}
@@ -134,14 +127,14 @@ LOCAL UINT32 tftp_cilent_get_file_size(CONST char * filePath)
 	}
 }
 
-LOCAL UINT32 tftp_client_get_timeout(CONST CHAR * pTimeout)
+LOCAL UINT16 tftp_client_get_timeout(CONST CHAR * pTimeout)
 {
-	UINT32 timeout = 0;
+	UINT16 timeout = 0;
 	if (NULL == pTimeout) {
 		timeout = __TFTP_TIMEOUT_DEFAULT_;
 	}
 	else {
-		timeout = atoui(pTimeout);
+		timeout = (UINT16)atoui(pTimeout);
 	}
 
 	/* Valid values range between "1" and "255" seconds,inclusive */
@@ -152,9 +145,28 @@ LOCAL UINT32 tftp_client_get_timeout(CONST CHAR * pTimeout)
 
 	return timeout;
 }
-LOCAL UINT32 tftp_client_get_blksize(CONST CHAR * pBlksize)
+
+LOCAL UINT16 tftp_client_get_tmfreq(CONST CHAR * pTmFreq)
 {
-	UINT32 blksize = 0;
+	UINT16 tmfreq = 0;
+	if (NULL == pTmFreq) {
+		tmfreq = __TFTP_TMFREQ_DEFAULT_;
+	}
+	else {
+		tmfreq = (UINT16)atoui(pTmFreq);
+	}
+
+	if (tmfreq > __TFTP_TMFREQ_MAX_ || tmfreq < __TFTP_TMFREQ_MIN_) {
+		TFTP_LOGWARN("invalid timeout frequency:%d, set default:%d", tmfreq, __TFTP_TMFREQ_DEFAULT_);
+		tmfreq = __TFTP_TMFREQ_DEFAULT_;
+	}
+
+	return tmfreq;
+}
+
+LOCAL UINT16 tftp_client_get_blksize(CONST CHAR * pBlksize)
+{
+	UINT16 blksize = 0;
 	if (NULL == pBlksize) {
 		blksize = __TFTP_DEFAULT_BLKSIZE_;
 	}
@@ -208,14 +220,15 @@ LOCAL tftpReturnValue_t tftp_client_tranfer_info_init(INT32 argc, CHAR * argv[])
 	CHAR * pMode = argv[7];
 	CHAR * pBlksize = argv[9];
 	CHAR * pTimeout = argv[11];
-
+	CHAR * pTmFreq = argv[13];
+	
 	TFTP_LOGDBG(tftp_dbgSwitch_client, \
 		"operator:%s, ipaddr:%s, filename:%s, blksize:%d, timeout:%d", \
 			pOperator, pIpaddr, pFilename, pBlksize, pTimeout);
 
 	/* 1、操作类型获取 */
-	gCliTranInfo._opcode = tftp_pack_oper_para_get(pOperator);
-	if (tftp_Pack_OperCode_Max == gCliTranInfo._opcode) {
+	gCliTranInfo._reqPack._opcode = tftp_pack_oper_para_get(pOperator);
+	if (tftp_Pack_OperCode_Max == gCliTranInfo._reqPack._opcode) {
 		tftp_print("\r\nInvalid operator for %s!", pOperator);
 		return tftp_ret_Error;
 	}
@@ -235,13 +248,22 @@ LOCAL tftpReturnValue_t tftp_client_tranfer_info_init(INT32 argc, CHAR * argv[])
 	}
 
 	/* 4、请求报文参数获取 */
-	gCliTranInfo._pMode = tftp_pack_get_tranfer_mode(pMode, &gCliTranInfo._mode);
-	gCliTranInfo._timeout = tftp_client_get_timeout(pTimeout);
-	gCliTranInfo._blksize = tftp_client_get_blksize(pBlksize);
-	gCliTranInfo._fileSize = tftp_cilent_get_file_size((CONST CHAR *)(&gCliTranInfo._opcode));
-	gCliTranInfo._bpid = tftp_client_get_bpid(pFilename);
-
-	/* 5、客户端socket结构信息获取保存 */
+	tftp_pack_get_tranfer_mode(pMode, gCliTranInfo._reqPack._pMode, &gCliTranInfo._reqPack._mode);
+	gCliTranInfo._reqPack._blkSize = tftp_client_get_blksize(pBlksize);
+	gCliTranInfo._reqPack._tSize = tftp_cilent_get_file_size((CONST CHAR *)(&gCliTranInfo._reqPack._opcode));
+	gCliTranInfo._reqPack._bpId = tftp_client_get_bpid(pFilename);
+	gCliTranInfo._reqPack._timeout = tftp_client_get_timeout(pTimeout);
+	gCliTranInfo._reqPack._tmfreq = tftp_client_get_tmfreq(pTmFreq);
+	
+	/* 5、可扩展选项有效标志，当前定义选项参数都为有效 */
+	gCliTranInfo._reqPack._options._opt_blksize = 1;
+	gCliTranInfo._reqPack._options._opt_bpid = 1;
+	gCliTranInfo._reqPack._options._opt_tmfreq = 1;
+	gCliTranInfo._reqPack._options._opt_timout = 1;
+	gCliTranInfo._reqPack._options._opt_tsize = 1;
+	gCliTranInfo._reqPack._options._opt_other = 0;
+	
+	/* 6、客户端socket结构信息获取保存 */
 	addrLen = sizeof(gCliTranInfo._cliAddr);
 	ret = getsockname(gCliTranInfo._socketFd, (struct sockaddr *)&gCliTranInfo._cliAddr, &addrLen);
 	if (ret < 0) {
@@ -279,23 +301,16 @@ LOCAL VOID tftp_client_cmd_handle(INT32 argc, CHAR * argv[])
 	}
 	
 	/* 2、请求报文封装 */
-	sendLen = tftp_pack_req(gSendBuf, \
-				gCliTranInfo._opcode, \
-				gCliTranInfo._fileName, \
-				gCliTranInfo._pMode, \
-				gCliTranInfo._fileSize, \
-				gCliTranInfo._timeout, \
-				gCliTranInfo._blksize, \
-				gCliTranInfo._bpid);
+	sendLen = tftp_pack_req(gSendBuf, &gCliTranInfo._reqPack);
 	
 	/* 3、发送请求到服务器 */
 	ret = tftp_socket_send(gCliTranInfo._socketFd, gSendBuf, sendLen, &gCliTranInfo._serAddr);
 
 	/* 4、处理服务器响应 */
-	if (tftp_Pack_OperCode_Rrq == gCliTranInfo._opcode) {
+	if (tftp_Pack_OperCode_Rrq == gCliTranInfo._reqPack._opcode) {
 		tftpRet = tftp_client_pack_deal_download();
 	} 
-	else if (tftp_Pack_OperCode_Wrq == gCliTranInfo._opcode) {
+	else if (tftp_Pack_OperCode_Wrq == gCliTranInfo._reqPack._opcode) {
 		tftpRet = tftp_client_pack_deal_upload();
 	}
 
@@ -326,7 +341,9 @@ LOCAL VOID tftp_client_command_init(VOID)
 							"blocksize{translation blockszie(Bytes) everytimes}"
 							"__UINT32__{128/256/512/1024/1428/2048/4096 Bytes, default is 512}"
 								"timeout{DATA/ACK timeout second}"
-								"__UINT32__{0 is default 60 s}");
+								"__UINT32__{0 is default 60 s}"
+									"tmfreq{DATA/ACK timeout retransmission frequency}"
+									"__UINT32__{0 is default 5 times}");
 }
 
 /*

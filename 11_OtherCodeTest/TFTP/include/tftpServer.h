@@ -11,22 +11,13 @@
 #define __TFTP_SERVER_TASK_STACK_SIZE_		(0x400000)
 #define __TFTP_CLIENT_TASK_STACK_SIZE_		(0x100000)
 
-#define __TFTP_FILENAME_STR_LEN_  	(128)	
 #define __TFTP_TASK_POOL_MIN_		(10)	/* 线程池最少线程数目 */
 #define __TFTP_TASK_POOL_MAX_		(20)	/* 线程池最多线程数目 */
 
 typedef struct tftpSocketInfo_s
 {
 	INT32 _sockId;								/* 与客户端建立连接的sockId */
-	CHAR _fileName[__TFTP_FILENAME_STR_LEN_];	/* 请求报文中的文件名 */
-	UINT16 _opcode;								/* 请求报文中的操作符 */
-	CHAR _pMode[__TFTP_MODE_MAX_];				/* 文件传输模式 */
-	tftpPackMode_t _mode;						/* 文件传输模式枚举 */
-	UINT32 _tSize;			/* 请求报文中的文件大小 */
-	UINT16 _bpId;			/* 请求报文中的断点块号，支持断点续传 */
-	UINT16 _blkSize;		/* 块大小 */
-	UINT16 _times;			/* 超时重传次数 */
-	UINT16 _timeout;		/* 超时重传时间，支持超时重传 */
+	tftpPacktReq_t _reqInfo;					/* 请求报文信息 */
 	struct sockaddr_in _cliAddr;				/* 客户端相关连接信息 */
 }tftpSocketInfo_t;
 
