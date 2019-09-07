@@ -354,6 +354,8 @@ LOCAL VOID tftp_client_command_init(VOID)
  */
 EXTERN tftpReturnValue_t tftp_client_module_init(VOID)
 {
+	TFTP_LOGDBG(tftp_dbgSwitch_client, "tftp client module init...");
+
 	/* 注册客户端相关操作命令 */
 	tftp_client_command_init();
 }

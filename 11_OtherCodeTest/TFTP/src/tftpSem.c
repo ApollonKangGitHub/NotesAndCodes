@@ -436,7 +436,7 @@ LOCAL VOID tftp_sem_shell_command_init(VOID)
  */
 EXTERN tftpReturnValue_t tftp_sem_module_init(VOID)
 {	
-	TFTP_LOGNOR("tftp semaphore module init......");
+	TFTP_LOGDBG(tftp_dbgSwitch_sem, "tftp semaphore module init......");
 	
 	tftp_sem_module_List_init();
 	tftp_sem_shell_command_init();

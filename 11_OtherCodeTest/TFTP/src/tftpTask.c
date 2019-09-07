@@ -596,7 +596,7 @@ LOCAL VOID tftp_task_cmd_init()
  */
 EXTERN tftpReturnValue_t tftp_task_module_init(VOID)
 {
-	TFTP_LOGNOR("tftp task module init......");
+	TFTP_LOGDBG(tftp_dbgSwitch_task, "tftp task module init......");
 
 	/* 初始化任务模块的信息链表，并添加第一条信息：主线程信息 */
 	tftp_task_info_init();

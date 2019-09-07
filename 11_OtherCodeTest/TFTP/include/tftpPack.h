@@ -23,15 +23,19 @@
 #define __TFTP_BLKSIZE_1428_BYTES_		(1428)
 #define __TFTP_BLKSIZE_2048_BYTES_		(2048)
 #define __TFTP_BLKSIZE_4096_BYTES_		(4096)
+#define __TFTP_BLKSIZE_8192_BYTES_		(8192)
 #define __TFTP_DEFAULT_BLKSIZE_			(512)	/* default blksize is 512Bytes */
 
-#define __TFTP_BPID_MAX_				(0xFFFF)
-#define __TFTP_BPID_MIN_				(0x1)
+#define __TFTP_BLKID_MAX_				(0xFFFF)
+#define __TFTP_BLKID_MIN_				(0x1)
 
-#define __TFTP_TSIZE_MAX_				(0xFFFFFFFF)
+#define __TFTP_TSIZE_MAX_				(0x4FFFFFFF)
 #define __TFTP_TSIZE_MIN_				(0x1)
 
+#define __TFTP_OPTION_MAX_LEN_ 			(64)
 #define __TFTP_REQ_PACK_BUF_LEN_		(1024)
+
+#define __TFTP_ERR_PACK_MAX_LEN_		(256)
 
 /* 操作码，标识报文类型 */
 typedef enum tftpPackOperCode_e
@@ -93,15 +97,18 @@ typedef enum tftpPackErroCode_e
 	tftp_Pack_ErrCode_Invalid		= 8		/* last invalid error code, please. */
 }tftpPackErrCode_t;
 
-#define __TFTP_ERR_NOTDEFINE_		"(•́へ•́╬) !!! Unknown error. (•́へ•́╬)!!!"
-#define __TFTP_ERR_FILENOTFOUED_	"(•́へ•́╬) !!! File not found. (•́へ•́╬)!!!"
-#define __TFTP_ERR_ACCVIOLATE_		"(•́へ•́╬) !!! Access violation. (•́へ•́╬)!!!"
-#define __TFTP_ERR_DISKFULL_		"(•́へ•́╬) !!! Disk full or allocation exceeded. (•́へ•́╬)!!!"
-#define __TFTP_ERR_ILLEGALOPER_		"(•́へ•́╬) !!! Illegal TFTP operation. (•́へ•́╬)!!!"
-#define __TFTP_ERR_UNKNOWNTD_		"(•́へ•́╬) !!! Unknown transfer ID. (•́へ•́╬)!!!"
-#define __TFTP_ERR_FILEXIST_		"(•́へ•́╬) !!! File already exists. (•́へ•́╬)!!!"
-#define __TFTP_ERR_NOSUCHUSER_		"(•́へ•́╬) !!! No such user. (•́へ•́╬)!!!"
-#define __TFTP_ERR_INVALID_			"(•́へ•́╬) !!! Invalid eeeor code. (•́へ•́╬)!!!"
+#define __TFTP_ERR_NOTDEFINE_		"!!!^o^ Unknown error."
+#define __TFTP_ERR_NOTDEFINE_FILE_TOO_LARGE_	"!!!^o^ Unknown error:file is to large."
+#define __TFTP_ERR_OTDEFINE_FILE_READ_FAIL_		"!!!^o^ Unknown error:file read fail."
+
+#define __TFTP_ERR_FILENOTFOUED_	"!!!^o^ File not found."
+#define __TFTP_ERR_ACCVIOLATE_		"!!!^o^ Access violation."
+#define __TFTP_ERR_DISKFULL_		"!!!^o^ Disk full or allocation exceeded."
+#define __TFTP_ERR_ILLEGALOPER_		"!!!^o^ Illegal TFTP operation."
+#define __TFTP_ERR_UNKNOWNTD_		"!!!^o^ Unknown transfer ID."
+#define __TFTP_ERR_FILEXIST_		"!!!^o^ File already exists."
+#define __TFTP_ERR_NOSUCHUSER_		"!!!^o^ No such user."
+#define __TFTP_ERR_INVALID_			"!!!^o^ Invalid eeeor code."
 
 #define __TFTP_ERR_MSG_LEN_MAX_		(64)
 
@@ -131,15 +138,34 @@ typedef struct tftpPacktReq_s
 	UINT16 _tmfreq;			/* 超时重传次数 */
 }tftpPacktReq_t;
 
-#define TFTP_GET_OPCODE(opcde, recvBuf)		(opcde = ntohs(((UINT16 *)(recvBuf))[0])) 
+#define __TFTP_OPCODE_SHIFT_ 	(0)
+#define __TFTP_OPCODE_LEN_		(2)
+
+#define __TFTP_ACK_SHIFT_		(2)
+#define __TFTP_ACK_LEN_			(2)
+
+#define __TFTP_ERROCDE_SHIFT_	(2)
+#define __TFTP_ERRCODE_LEN_		(2)
+
+#define __TFTP_BLKID_SHIFT		(2)
+#define __TFTP_BLKID_LEN_		(2)
+#define __TFTP_DATA_SHIFT_		(4)
+
+#define __TFTP_ERRMSG_SHIFT_	(4)
+
+#define TFTP_GET_OPCODE(recvBuf)			(ntohs(((UINT16 *)(recvBuf))[0])) 
+#define TFTP_GET_ACK(recvBuf)				(ntohs(((UINT16 *)(recvBuf))[1]))							
+#define TFTP_GET_ERRCODE(recvBuf)			(ntohs(((UINT16 *)(recvBuf))[1]))
+#define TFTP_GET_ERRMSG(recvBuf)			(((UINT8 *)(recvBuf)) + __TFTP_ERRMSG_SHIFT_)
 
 EXTERN tftpPackOperCode_t tftp_pack_oper_para_get(CONST CHAR * operator);
 EXTERN VOID tftp_pack_get_tranfer_mode(CHAR * pMode, CHAR * pSaveMode, tftpPackMode_t * mode);
 EXTERN UINT16 tftp_pack_req(UINT8 * buf,tftpPacktReq_t * reqPack);
 EXTERN tftpReturnValue_t tftp_unpack_req(UINT8 * buf, INT32 bufLen,	tftpPacktReq_t * reqPack);
 EXTERN UINT16 tftp_pack_ack(UINT8 * buf, UINT16 id);
-EXTERN UINT16 tftp_pack_oack(UINT8 * buf, tftpPacktReq_t * req);
+EXTERN UINT16 tftp_pack_oack(UINT8 * buf, tftpPacktReq_t * reqPack);
 EXTERN UINT16 tftp_pack_error(UINT8 * buf, tftpPackErrCode_t errCode, UINT8 * errMsg);
+EXTERN UINT16 tftp_pack_data(UINT8 * buf, UINT16 blkid);
 
 
 #endif /* __TFTP_PACK_H__ */

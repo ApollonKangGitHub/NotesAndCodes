@@ -671,7 +671,7 @@ LOCAL VOID tftp_shell_cmd_init(VOID)
  */
 EXTERN INT32 tftp_shell_module_init(VOID)
 {
-	TFTP_LOGNOR("tftp shell module init......");
+	TFTP_LOGDBG(tftp_dbgSwitch_shell, "tftp shell module init......");
 
 	/* 创建shell线程 */
 	tftp_shell_thread_create();

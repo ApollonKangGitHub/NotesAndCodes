@@ -23,6 +23,7 @@ OBJS += ./src/tftpSem.o
 #OBJS += ./src/tftpCfg.o
 
 OBJS += ./tools/tools.o
+OBJS += ./tools/md5.o
 
 DEP_FILES := $(patsubst %.o,%.d,$(OBJS))
 DEP_FILES := $(wildcard $(DEP_FILES))

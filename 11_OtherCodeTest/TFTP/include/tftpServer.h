@@ -29,6 +29,7 @@ typedef struct tftpTaskPool_s
 	tftpPid_t _tid;					/* 线程tid，与同步信号量一一对应 */
 	tftpSem_t * _syncLock;			/* 主线程与通信线程之间的同步信号量 */
 	INT32 _sockfd;					/* 与客户端通信的socket fd */
+	UINT16 _port;					/* 通客户端通信的绑定的UDP port */
 	INT32 _fileFd;					/* 文件描述符 */
 	tftpSocketInfo_t _cliInfo;		/* 客户端相关通信信息 */
 }tftpTaskPool_t;
