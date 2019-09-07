@@ -234,7 +234,7 @@ LOCAL tftpReturnValue_t tftp_server_client_req_check(tftpSocketInfo_t * cliReqIn
 		reqInfo->_oack_opts++;
 	}
 	
-	/* 块大小检查不符合规范则回复一个默认块大小给客户端 */
+	/* 块大小检查，必须有该选项以匹配数据传输报文大小 */
 	if (reqInfo->_options._opt_blksize) {
 		if ((reqInfo->_blkSize != __TFTP_BLKSIZE_128_BYTES_) 
 			&& (reqInfo->_blkSize != __TFTP_BLKSIZE_256_BYTES_)
@@ -247,13 +247,16 @@ LOCAL tftpReturnValue_t tftp_server_client_req_check(tftpSocketInfo_t * cliReqIn
 		reqInfo->_oack_opts++;
 	}
 
-	/* tszie检查 */
+	/* tszie检查，必须有改选项，以确定磁盘余量 */
 	if (reqInfo->_options._opt_tsize) {
 		if ((reqInfo->_tSize > __TFTP_TSIZE_MAX_) 
 			|| (reqInfo->_mode < __TFTP_TSIZE_MIN_)) {
 			goto tftp_req_not_support_return;
 		}
 		reqInfo->_oack_opts++;
+	}
+	else {
+		goto tftp_req_not_support_return;
 	}
 
 	/* bpid检查 */
@@ -270,7 +273,7 @@ LOCAL tftpReturnValue_t tftp_server_client_req_check(tftpSocketInfo_t * cliReqIn
 		&& (tftp_Pack_OperCode_Wrq == reqInfo->_opcode)) {
 		goto tftp_req_not_support_return;
 	}
-
+		
 	return tftp_ret_Ok;
 	
 tftp_req_not_support_return:
@@ -352,28 +355,25 @@ LOCAL tftpReturnValue_t tftp_server_client_rrq_hanle
 	/* 根据blksize申请内存 */
 	sendBuf = malloc(sendBufLen);
 	if (NULL == sendBuf) {
-		TFTP_LOGERR("For client %s malloc send memry size:%d fail!", \
-			pCliInfo->_cliIpAddr, sendBufLen);
+		TFTP_LOGERR("For client %s malloc send memry size:%d fail!", pCliInfo->_cliIpAddr, sendBufLen);
 		return tftp_ret_Null;
 	}
 
 	/* 下载文件则先获取文件大小，打开文件等 */
 	tftpRet = tftp_server_rrq_file_init(pClient);
 	if (TFTP_FAILURE(tftpRet)) {
-		if (tftp_ret_NotFound == tftpRet)
+		if (tftp_ret_NotFound == tftpRet) {
 			sendLen = (INT32)tftp_pack_error(sendBuf, tftp_Pack_ErrCode_AccViolate, __TFTP_ERR_FILENOTFOUED_);
-		else
+		}
+			
+		else {
 			sendLen = (INT32)tftp_pack_error(sendBuf, tftp_Pack_ErrCode_AccViolate, __TFTP_ERR_NOTDEFINE_);
+		}
 		goto tftp_rrq_err_ret;
 	}	
 	
-	/* 回复ACK或者OACK */
-	if (pReqInfo->_oack_opts > 0) {
-		sendLen = tftp_pack_oack(sendBuf, pReqInfo);
-	}
-	else {
-		sendLen = tftp_pack_ack(sendBuf, 0);
-	}
+	/* 回复OACK */
+	sendLen = tftp_pack_oack(sendBuf, pReqInfo);
 	tftp_socket_send(sockFd, sendBuf, sendLen, pCliAddr);
 	
 	while (TRUE) {
@@ -431,7 +431,6 @@ LOCAL tftpReturnValue_t tftp_server_client_wrq_hanle
 LOCAL VOID tftp_server_client_resource_init(tftpTaskPool_t * pClient)
 {
 	memset(&pClient->_cliInfo, 0, sizeof(pClient->_cliInfo));
-	//pClient->_port = 0;
 	
 	if (pClient->_sockfd > 0) {
 		tftp_close(pClient->_sockfd);
@@ -441,6 +440,7 @@ LOCAL VOID tftp_server_client_resource_init(tftpTaskPool_t * pClient)
 		tftp_close(pClient->_fileFd);
 		pClient->_fileFd = -1;
 	}
+	return;
 }
 
 /*
