@@ -1,8 +1,0 @@
-
-[1;32m2029-09-08 01:38:03(UTC)[Sunday]%% TFTP-NOTE  :(312)file /home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/server/test.txt md5sum is [0m
-[1;32m2029-09-08 01:39:28(UTC)[Sunday]%% TFTP-NOTE  :(312)file test.txt md5sum is [0m
-[1;32m2029-09-08 01:40:28(UTC)[Sunday]%% TFTP-NOTE  :(312)file test.txt md5sum is 14[0m
-[1;32m2029-09-08 01:42:03(UTC)[Sunday]%% TFTP-NOTE  :(312)file test.txt md5sum is 14[0m
-[1;32m2029-09-08 01:42:57(UTC)[Sunday]%% TFTP-NOTE  :(312)file test.txt md5sum is 9cecb24b262a3b39a05e3e8b41a84914[0m
-[1;32m2029-09-08 01:44:28(UTC)[Sunday]%% TFTP-NOTE  :(312)file test.txt md5sum is 9cecb24b262a3b39a05e3e8b41a84914[0m
-[1;32m2029-09-08 01:46:30(UTC)[Sunday]%% TFTP-NOTE  :(313)file test.txt md5sum is 9cecb24b262a3b39a05e3e8b41a84914[0m

@@ -234,6 +234,14 @@ LOCAL INT32 tftp_log_debug_switch_init(VOID)
 	__SET_BIT(gDbgSwitchFlg, tftp_dbgSwitch_other, FALSE);
 }
 
+/*
+ * FunctionName:
+ *     tftp_log_cmd_debug_switch
+ * Description:
+ *     debug开关
+ * Notes:
+ *     
+ */
 LOCAL VOID tftp_log_cmd_debug_switch(INT32 argc, CHAR * argv[])
 {
 	BOOL open = FALSE;
@@ -262,23 +270,65 @@ LOCAL VOID tftp_log_cmd_debug_switch(INT32 argc, CHAR * argv[])
 	tftp_print("\r\n%s debug switch %s", gSwitchStr[sw], argv[3]);
 }
 
+/*
+ * FunctionName:
+ *     tftp_log_cmd_display_switch
+ * Description:
+ *     日志display显示
+ * Notes:
+ *     
+ */
+LOCAL VOID tftp_log_cmd_display_switch(INT32 argc, CHAR * argv[])
+{
+	tftpLogLevel_t level = atoi(argv[2]);
+	CHAR logFile[128] = {0};
+	
+	if ((level >= tftp_logLevel_Max)
+		|| (level <= tftp_logLevel_Shell)) {
+		tftp_print("Invalid input %d", level);
+	}
+	else {
+		tftp_sprint(logFile, "cat %s", gLogFilePath[level]);
+		system(logFile);
+	}
+}
+
+/*
+ * FunctionName:
+ *     tftp_log_command_init
+ * Description:
+ *     命令初始化
+ * Notes:
+ *     
+ */
 LOCAL VOID tftp_log_command_init(VOID)
 {	
 	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_log_cmd_debug_switch, 
-	__TFTP_CMD_NORMAL_ | __TFTP_CMD_DYN_,
-		"tftplog{tftp log}"
-			"debug{debug switch open or close}"
-				"__UINT32__{switch choose[eg:"
-					"\n\t\t\t\t\t->(0)task"
-					"\n\t\t\t\t\t->(1)server"
-					"\n\t\t\t\t\t->(2)client"
-					"\n\t\t\t\t\t->(3)shell"
-					"\n\t\t\t\t\t->(4)sem"
-					"\n\t\t\t\t\t->(5)send"
-					"\n\t\t\t\t\t->(6)recv"
-					"\n\t\t\t\t\t->(7)pack"
-					"\n\t\t\t\t\t->(8)other]}"
-					"__STRING__{open/close}");
+		__TFTP_CMD_NORMAL_ | __TFTP_CMD_DYN_,
+			"tftplog{tftp log}"
+				"debug{debug switch open or close}"
+					"__UINT32__{switch choose[eg:"
+						"\n\t\t\t\t\t->(0)task"
+						"\n\t\t\t\t\t->(1)server"
+						"\n\t\t\t\t\t->(2)client"
+						"\n\t\t\t\t\t->(3)shell"
+						"\n\t\t\t\t\t->(4)sem"
+						"\n\t\t\t\t\t->(5)send"
+						"\n\t\t\t\t\t->(6)recv"
+						"\n\t\t\t\t\t->(7)pack"
+						"\n\t\t\t\t\t->(8)other]}"
+						"__STRING__{open/close}");
+	
+	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_log_cmd_display_switch, 
+		__TFTP_CMD_NORMAL_ | __TFTP_CMD_DYN_,
+			"tftplog{tftp log}"
+				"display{display logging file}"
+					"__UINT32__{log level choose eg:"
+						"\n\t\t\t\t\t->(1)normal log"
+						"\n\t\t\t\t\t->(2)debug log"
+						"\n\t\t\t\t\t->(3)note log"
+						"\n\t\t\t\t\t->(4)warning log"
+						"\n\t\t\t\t\t->(5)error log}");
 }
 
 /*

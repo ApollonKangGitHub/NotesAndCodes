@@ -1,0 +1,59 @@
+
+[1;36m2029-09-08 02:07:45(UTC)[Sunday]%% TFTP-DEBUG :(138)shell shell string:tftplog debug 4 open[0m
+[1;36m2029-09-08 02:07:45(UTC)[Sunday]%% TFTP-DEBUG :(140)shell shell string:tftplog debug 4 open[0m
+[1;36m2029-09-08 02:07:45(UTC)[Sunday]%% TFTP-DEBUG :(153)shell argc:4, argv[0]:tftplog[0m
+[1;36m2029-09-08 02:07:45(UTC)[Sunday]%% TFTP-DEBUG :(153)shell argc:4, argv[1]:debug[0m
+[1;36m2029-09-08 02:07:45(UTC)[Sunday]%% TFTP-DEBUG :(153)shell argc:4, argv[2]:4[0m
+[1;36m2029-09-08 02:07:45(UTC)[Sunday]%% TFTP-DEBUG :(153)shell argc:4, argv[3]:open[0m
+[1;36m2029-09-08 02:07:45(UTC)[Sunday]%% TFTP-DEBUG :(182)shell argc:4, argv[0]:tftplog[0m
+[1;36m2029-09-08 02:07:45(UTC)[Sunday]%% TFTP-DEBUG :(182)shell argc:4, argv[1]:debug[0m
+[1;36m2029-09-08 02:07:45(UTC)[Sunday]%% TFTP-DEBUG :(182)shell argc:4, argv[2]:4[0m
+[1;36m2029-09-08 02:07:45(UTC)[Sunday]%% TFTP-DEBUG :(182)shell argc:4, argv[3]:open[0m
+[1;36m2029-09-08 02:08:02(UTC)[Sunday]%% TFTP-DEBUG :(138)shell shell string:tftplog display  1[0m
+[1;36m2029-09-08 02:08:02(UTC)[Sunday]%% TFTP-DEBUG :(140)shell shell string:tftplog display 1[0m
+[1;36m2029-09-08 02:08:02(UTC)[Sunday]%% TFTP-DEBUG :(153)shell argc:3, argv[0]:tftplog[0m
+[1;36m2029-09-08 02:08:02(UTC)[Sunday]%% TFTP-DEBUG :(153)shell argc:3, argv[1]:display[0m
+[1;36m2029-09-08 02:08:02(UTC)[Sunday]%% TFTP-DEBUG :(153)shell argc:3, argv[2]:1[0m
+[1;36m2029-09-08 02:08:02(UTC)[Sunday]%% TFTP-DEBUG :(182)shell argc:3, argv[0]:tftplog[0m
+[1;36m2029-09-08 02:08:02(UTC)[Sunday]%% TFTP-DEBUG :(182)shell argc:3, argv[1]:display[0m
+[1;36m2029-09-08 02:08:02(UTC)[Sunday]%% TFTP-DEBUG :(182)shell argc:3, argv[2]:1[0m
+[1;36m2029-09-08 02:08:09(UTC)[Sunday]%% TFTP-DEBUG :(138)shell shell string:tftplog debug 2[0m
+[1;36m2029-09-08 02:08:09(UTC)[Sunday]%% TFTP-DEBUG :(140)shell shell string:tftplog debug 2[0m
+[1;36m2029-09-08 02:08:09(UTC)[Sunday]%% TFTP-DEBUG :(153)shell argc:3, argv[0]:tftplog[0m
+[1;36m2029-09-08 02:08:09(UTC)[Sunday]%% TFTP-DEBUG :(153)shell argc:3, argv[1]:debug[0m
+[1;36m2029-09-08 02:08:09(UTC)[Sunday]%% TFTP-DEBUG :(153)shell argc:3, argv[2]:2[0m
+[1;36m2029-09-08 02:08:09(UTC)[Sunday]%% TFTP-DEBUG :(182)shell argc:3, argv[0]:tftplog[0m
+[1;36m2029-09-08 02:08:09(UTC)[Sunday]%% TFTP-DEBUG :(182)shell argc:3, argv[1]:debug[0m
+[1;36m2029-09-08 02:08:09(UTC)[Sunday]%% TFTP-DEBUG :(182)shell argc:3, argv[2]:2[0m
+[1;36m2029-09-08 02:08:17(UTC)[Sunday]%% TFTP-DEBUG :(138)shell shell string:tftplog display 3[0m
+[1;36m2029-09-08 02:08:17(UTC)[Sunday]%% TFTP-DEBUG :(140)shell shell string:tftplog display 3[0m
+[1;36m2029-09-08 02:08:17(UTC)[Sunday]%% TFTP-DEBUG :(153)shell argc:3, argv[0]:tftplog[0m
+[1;36m2029-09-08 02:08:17(UTC)[Sunday]%% TFTP-DEBUG :(153)shell argc:3, argv[1]:display[0m
+[1;36m2029-09-08 02:08:17(UTC)[Sunday]%% TFTP-DEBUG :(153)shell argc:3, argv[2]:3[0m
+[1;36m2029-09-08 02:08:17(UTC)[Sunday]%% TFTP-DEBUG :(182)shell argc:3, argv[0]:tftplog[0m
+[1;36m2029-09-08 02:08:17(UTC)[Sunday]%% TFTP-DEBUG :(182)shell argc:3, argv[1]:display[0m
+[1;36m2029-09-08 02:08:17(UTC)[Sunday]%% TFTP-DEBUG :(182)shell argc:3, argv[2]:3[0m
+[1;36m2029-09-08 02:08:20(UTC)[Sunday]%% TFTP-DEBUG :(138)shell shell string: tftplog display 4[0m
+[1;36m2029-09-08 02:08:20(UTC)[Sunday]%% TFTP-DEBUG :(140)shell shell string:tftplog display 4[0m
+[1;36m2029-09-08 02:08:20(UTC)[Sunday]%% TFTP-DEBUG :(153)shell argc:3, argv[0]:tftplog[0m
+[1;36m2029-09-08 02:08:20(UTC)[Sunday]%% TFTP-DEBUG :(153)shell argc:3, argv[1]:display[0m
+[1;36m2029-09-08 02:08:20(UTC)[Sunday]%% TFTP-DEBUG :(153)shell argc:3, argv[2]:4[0m
+[1;36m2029-09-08 02:08:20(UTC)[Sunday]%% TFTP-DEBUG :(182)shell argc:3, argv[0]:tftplog[0m
+[1;36m2029-09-08 02:08:20(UTC)[Sunday]%% TFTP-DEBUG :(182)shell argc:3, argv[1]:display[0m
+[1;36m2029-09-08 02:08:20(UTC)[Sunday]%% TFTP-DEBUG :(182)shell argc:3, argv[2]:4[0m
+[1;36m2029-09-08 02:08:22(UTC)[Sunday]%% TFTP-DEBUG :(138)shell shell string:tftplog display 1[0m
+[1;36m2029-09-08 02:08:22(UTC)[Sunday]%% TFTP-DEBUG :(140)shell shell string:tftplog display 1[0m
+[1;36m2029-09-08 02:08:22(UTC)[Sunday]%% TFTP-DEBUG :(153)shell argc:3, argv[0]:tftplog[0m
+[1;36m2029-09-08 02:08:22(UTC)[Sunday]%% TFTP-DEBUG :(153)shell argc:3, argv[1]:display[0m
+[1;36m2029-09-08 02:08:22(UTC)[Sunday]%% TFTP-DEBUG :(153)shell argc:3, argv[2]:1[0m
+[1;36m2029-09-08 02:08:22(UTC)[Sunday]%% TFTP-DEBUG :(182)shell argc:3, argv[0]:tftplog[0m
+[1;36m2029-09-08 02:08:22(UTC)[Sunday]%% TFTP-DEBUG :(182)shell argc:3, argv[1]:display[0m
+[1;36m2029-09-08 02:08:22(UTC)[Sunday]%% TFTP-DEBUG :(182)shell argc:3, argv[2]:1[0m
+[1;36m2029-09-08 02:08:25(UTC)[Sunday]%% TFTP-DEBUG :(138)shell shell string:tftplog display 2[0m
+[1;36m2029-09-08 02:08:25(UTC)[Sunday]%% TFTP-DEBUG :(140)shell shell string:tftplog display 2[0m
+[1;36m2029-09-08 02:08:25(UTC)[Sunday]%% TFTP-DEBUG :(153)shell argc:3, argv[0]:tftplog[0m
+[1;36m2029-09-08 02:08:25(UTC)[Sunday]%% TFTP-DEBUG :(153)shell argc:3, argv[1]:display[0m
+[1;36m2029-09-08 02:08:25(UTC)[Sunday]%% TFTP-DEBUG :(153)shell argc:3, argv[2]:2[0m
+[1;36m2029-09-08 02:08:25(UTC)[Sunday]%% TFTP-DEBUG :(182)shell argc:3, argv[0]:tftplog[0m
+[1;36m2029-09-08 02:08:25(UTC)[Sunday]%% TFTP-DEBUG :(182)shell argc:3, argv[1]:display[0m
+[1;36m2029-09-08 02:08:25(UTC)[Sunday]%% TFTP-DEBUG :(182)shell argc:3, argv[2]:2[0m
