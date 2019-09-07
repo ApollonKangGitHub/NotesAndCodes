@@ -40,8 +40,12 @@ EXTERN INT32 tftp_socket_create
 	if (ret < 0) {
 		TFTP_LOGERR("set socket option optname %d fail, errno = %d", SO_REUSEADDR, errno);
 		tftp_perror("\r\nset socket option SO_REUSEADDR fail reason is");
-		close(sockfd);
+		tftp_close(sockfd);
 		return -1;
+	}
+
+	if (!needBind) {
+		return sockfd;
 	}
 	
 	/* 设置SO_REUSEPORT属性，实现端口复用 */
@@ -49,12 +53,8 @@ EXTERN INT32 tftp_socket_create
 	if (ret < 0) {
 		TFTP_LOGERR("set socket option optname %d fail, errno = %d", SO_REUSEPORT, errno);
 		tftp_perror("\r\nset socket option SO_REUSEPORT fail reason is");
-		close(sockfd);
+		tftp_close(sockfd);
 		return -1;
-	}
-
-	if (!needBind) {
-		return sockfd;
 	}
 
 	/* 绑定sockfd套接字和指定端口 */
@@ -64,7 +64,7 @@ EXTERN INT32 tftp_socket_create
 		TFTP_LOGERR("bind socket fd fail, sockfd = %d, port = %u, errno = %d", \
 			sockfd, ntohs(addr->sin_port), errno);
 		tftp_perror("\r\nbind fail reason is");
-		close(sockfd);
+		tftp_close(sockfd);
 		return -1;
 	}
 	
@@ -116,17 +116,17 @@ EXTERN INT32 tftp_socket_send
 (
 	INT32 sockfd, 
 	CHAR * buf, 
-	INT32 bufLen, 
-	struct sockaddr_in * seraddr
+	INT32 sendLen, 
+	struct sockaddr_in * peerAddr
 ) 
 {
 	socklen_t addrLen = 0;
 	INT32 ret = 0;
-	if (NULL == buf || NULL == seraddr) {
+	if (NULL == buf || NULL == peerAddr) {
 		return -1;
 	}
 	addrLen = sizeof(struct sockaddr_in);
-	ret = sendto(sockfd, buf, bufLen, 0, (struct sockaddr *)seraddr, addrLen);
+	ret = sendto(sockfd, buf, sendLen, 0, (struct sockaddr *)peerAddr, addrLen);
 	if (ret < 0) {
 	TFTP_LOGERR("send data to sockfd fail, sockfd = %d, errno = %d", sockfd, errno);
 		tftp_perror("\r\nsend fail reason is");

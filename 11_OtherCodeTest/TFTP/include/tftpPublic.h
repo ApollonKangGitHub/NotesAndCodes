@@ -13,6 +13,7 @@
 #include <semaphore.h>
 #include <signal.h>
 #include <pthread.h>
+#include <fcntl.h>
 
 #include <sys/prctl.h>
 #include <sys/types.h>
@@ -23,7 +24,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <sys/stat.h>
-
+	  
 
 #include <tools.h>
 

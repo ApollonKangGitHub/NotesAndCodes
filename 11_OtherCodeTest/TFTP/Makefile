@@ -20,6 +20,7 @@ OBJS += ./src/tftpShell.o
 OBJS += ./src/tftpPack.o
 OBJS += ./src/tftpTask.o
 OBJS += ./src/tftpSem.o
+#OBJS += ./src/tftpCfg.o
 
 OBJS += ./tools/tools.o
 

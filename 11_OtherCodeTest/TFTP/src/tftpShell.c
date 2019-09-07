@@ -558,7 +558,11 @@ LOCAL tftpReturnValue_t tftp_shell_cmd_display(INT32 argc, CHAR * argv[])
 	INT32 argcReg = 0;
 	INT32 index = 0;
 	CHAR * pcmd = argv[2];
-
+	CHAR cmdLine[100] = {'-'};
+	CHAR cmdStr[32] = {0};
+	INT32 cmdStrLen = 0;
+	INT32 start = 0;
+	
 	TFTP_LOGDBG(tftp_dbgSwitch_shell, "tftp shell cmd display, argc=%d", argc);
 	
 	tftp_print("\r\ncommand list detail information:");
@@ -569,13 +573,29 @@ LOCAL tftpReturnValue_t tftp_shell_cmd_display(INT32 argc, CHAR * argv[])
 		}
 		argcReg = pTemp->_cmdArgc;
 		if ((0 == strcasecmp(pcmd, "all")) || (0 == strcmp(pcmd, pTemp->_cmdArgv._info[0]._cmdStr))) {
-			tftp_print("\r\n\t------------------------------command:%s [start]", pTemp->_cmdArgv._info[0]._cmdStr);
+			/* 命令开始提示行格式化 */
+			cmdStrLen = tftp_sprint(cmdStr, "<<<-command:%s->>>", pTemp->_cmdArgv._info[0]._cmdStr);
+			memset(cmdLine, '-', sizeof(cmdLine));
+			start = (sizeof(cmdLine) - cmdStrLen) / 2;
+			memcpy(cmdLine + start, cmdStr, cmdStrLen);
+
+			/* 打印命令开始提示行 */
+			tftp_print("\r\n\t%s", cmdLine);
+
+			/* 打印命令参数 */
 			for (index = 0; index < argcReg && index < __TFTP_SHELL_CMD_MAX_NUM_; index++) {
-				tftp_print("\n\t%-16s:%s ", 
-					pTemp->_cmdArgv._info[index]._cmdStr,
-					pTemp->_cmdArgv._info[index]._cmdDescr);
+				if (pTemp->_cmdArgv._info[index]._type == tftpCmdType_cmd) {
+					tftp_print("\r\n\t%s: ", pTemp->_cmdArgv._info[index]._cmdStr);
+				}
+				else {
+					tftp_print("\r\n\t\t%s: ", pTemp->_cmdArgv._info[index]._cmdStr);
+				}
+				tftp_print("%s", pTemp->_cmdArgv._info[index]._cmdDescr);
 			}
-			tftp_print("\r\n\t------------------------------command:%s [end]\r\n", pTemp->_cmdArgv._info[0]._cmdStr);
+
+			/* 打印结束行 */
+			memset(cmdLine, '-', sizeof(cmdLine));
+			tftp_print("\r\n\t%s\r\n", cmdLine);
 		}
 
 		/* 找到后直接结束 */

@@ -1,6 +1,7 @@
 #ifndef __TFTP_PACK_H__
 #define __TFTP_PACK_H__
 
+#define __TFTP_IP_ADDR_LEN_			(16)
 
 #define __TFTP_FILENAME_STR_LEN_  	(128)	
 #define __TFTP_TRAN_MODE_LEN_		(16)
@@ -57,6 +58,14 @@ typedef enum tftpPackOperCode_e
 #define __TFTP_OPTION_BIKSIZE_		"blksize"
 #define __TFTP_OPTION_BPID_			"bpid"
 
+/*
+ * 1.octet即八位binary方式为最小单元传输，octet方式传输在接收方不会改变内容，直接存到文件
+ * 2.netascii方式传输会改变原有内容，在在保存时会将net的接收信息转换为本地主机格式再存入文件
+ *     Unix/Linux操作系统每行结尾只有换行符，即'\n';而Mac系统里则使用回车来代表结尾，即'\r';
+ *     Windows则是回车+换行，即"\r\n".那么为了非Windows系统对于多出的'\r'/'\n'不被识别为^M
+ *     netascii和octet模式对于send来讲没有区别，只是对recv保存文件会有差异。
+ * 3.已经不再被支持，将数据直接返回给用户，而不是保存为文件，对于该版本：下载支持上mail传不支持mail
+ */
 #define __TFTP_MODE_NETASCII_	"netascii"
 #define __TFTP_MODE_OCTET_		"octet"
 #define __TFTP_MODE_MAIL_		"mail"
@@ -73,7 +82,7 @@ typedef enum tftpPackMode_e
 /* 错误码，标识错误类型 */
 typedef enum tftpPackErroCode_e
 {
-	tftp_Pack_ErrCode_NotFound 		= 0,	/* Not defined, see error message (if any). */
+	tftp_Pack_ErrCode_NotDefined	= 0,	/* Not defined, see error message (if any). */
 	tftp_Pack_ErrCode_FileNotFound 	= 1,	/* File not found. */
 	tftp_Pack_ErrCode_AccViolate 	= 2,	/* Access violation */
 	tftp_Pack_ErrCode_DiskFull		= 3,	/* Disk full or allocation exceeded. */
@@ -83,6 +92,18 @@ typedef enum tftpPackErroCode_e
 	tftp_Pack_ErrCode_NoSuchUser	= 7,	/* No such user. */
 	tftp_Pack_ErrCode_Invalid		= 8		/* last invalid error code, please. */
 }tftpPackErrCode_t;
+
+#define __TFTP_ERR_NOTDEFINE_		"(•́へ•́╬) !!! Unknown error. (•́へ•́╬)!!!"
+#define __TFTP_ERR_FILENOTFOUED_	"(•́へ•́╬) !!! File not found. (•́へ•́╬)!!!"
+#define __TFTP_ERR_ACCVIOLATE_		"(•́へ•́╬) !!! Access violation. (•́へ•́╬)!!!"
+#define __TFTP_ERR_DISKFULL_		"(•́へ•́╬) !!! Disk full or allocation exceeded. (•́へ•́╬)!!!"
+#define __TFTP_ERR_ILLEGALOPER_		"(•́へ•́╬) !!! Illegal TFTP operation. (•́へ•́╬)!!!"
+#define __TFTP_ERR_UNKNOWNTD_		"(•́へ•́╬) !!! Unknown transfer ID. (•́へ•́╬)!!!"
+#define __TFTP_ERR_FILEXIST_		"(•́へ•́╬) !!! File already exists. (•́へ•́╬)!!!"
+#define __TFTP_ERR_NOSUCHUSER_		"(•́へ•́╬) !!! No such user. (•́へ•́╬)!!!"
+#define __TFTP_ERR_INVALID_			"(•́へ•́╬) !!! Invalid eeeor code. (•́へ•́╬)!!!"
+
+#define __TFTP_ERR_MSG_LEN_MAX_		(64)
 
 typedef struct tftpPackOptions_s
 {
@@ -98,6 +119,7 @@ typedef struct tftpPackOptions_s
 typedef struct tftpPacktReq_s
 {
 	UINT16 _opcode;								/* 请求报文中的操作符 */
+	UINT16 _oack_opts;							/* 表示请求报文有扩展选项个数 */
 	CHAR _fileName[__TFTP_FILENAME_STR_LEN_];	/* 请求报文中的文件名 */
 	CHAR _pMode[__TFTP_TRAN_MODE_LEN_];			/* 文件传输模式 */
 	tftpPackMode_t _mode;						/* 文件传输模式枚举 */
@@ -109,26 +131,15 @@ typedef struct tftpPacktReq_s
 	UINT16 _tmfreq;			/* 超时重传次数 */
 }tftpPacktReq_t;
 
+#define TFTP_GET_OPCODE(opcde, recvBuf)		(opcde = ntohs(((UINT16 *)(recvBuf))[0])) 
+
 EXTERN tftpPackOperCode_t tftp_pack_oper_para_get(CONST CHAR * operator);
-EXTERN VOID tftp_pack_get_tranfer_mode
-(
-	CHAR * pMode, 
-	CHAR * pSaveMode, 
-	tftpPackMode_t * mode
-);
-
-EXTERN UINT16 tftp_pack_req
-(
-	UINT8 * buf,
-	tftpPacktReq_t * reqPack
-);
-
-EXTERN tftpReturnValue_t tftp_unpack_req
-(
-	UINT8 * buf, 
-	INT32 bufLen,	
-	tftpPacktReq_t * reqPack
-);
+EXTERN VOID tftp_pack_get_tranfer_mode(CHAR * pMode, CHAR * pSaveMode, tftpPackMode_t * mode);
+EXTERN UINT16 tftp_pack_req(UINT8 * buf,tftpPacktReq_t * reqPack);
+EXTERN tftpReturnValue_t tftp_unpack_req(UINT8 * buf, INT32 bufLen,	tftpPacktReq_t * reqPack);
+EXTERN UINT16 tftp_pack_ack(UINT8 * buf, UINT16 id);
+EXTERN UINT16 tftp_pack_oack(UINT8 * buf, tftpPacktReq_t * req);
+EXTERN UINT16 tftp_pack_error(UINT8 * buf, tftpPackErrCode_t errCode, UINT8 * errMsg);
 
 
 #endif /* __TFTP_PACK_H__ */

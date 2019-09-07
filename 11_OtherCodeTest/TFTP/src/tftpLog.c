@@ -85,7 +85,7 @@ LOCAL CHAR * tftp_log_time_get(OUT CHAR * date)
 
 	/* 1970-01-01 00:00:00 +0000 (UTC). */
 	tftp_sprint(date, "%04d-%02d-%02d %02d:%02d:%02d(UTC)[%s]",
-		tmStruct.tm_year + 1970, 
+		tmStruct.tm_year + 1910, 
 		tmStruct.tm_mon + 1, 
 		tmStruct.tm_mday,
 		tmStruct.tm_hour,

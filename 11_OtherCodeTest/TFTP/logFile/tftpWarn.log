@@ -1,6 +1,0 @@
-
-
-[1;33m2089-09-03 22:41:02(UTC)[Tuesday]%% TFTP-WARN  :(262)client tftp request invalid
- Client connect:ip:192.168.1.254, port:51895, file:test.txt, mode:octet, blksize:1024, timeout:200, bpid:0[0m
-[1;33m2089-09-04 00:11:12(UTC)[Wednesday]%% TFTP-WARN  :(160)invalid timeout frequency:100, set default:5[0m
-[1;33m2089-09-04 00:12:14(UTC)[Wednesday]%% TFTP-WARN  :(160)invalid timeout frequency:100, set default:5[0m

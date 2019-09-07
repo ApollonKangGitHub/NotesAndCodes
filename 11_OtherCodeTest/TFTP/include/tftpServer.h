@@ -16,9 +16,10 @@
 
 typedef struct tftpSocketInfo_s
 {
-	INT32 _sockId;								/* 与客户端建立连接的sockId */
 	tftpPacktReq_t _reqInfo;					/* 请求报文信息 */
 	struct sockaddr_in _cliAddr;				/* 客户端相关连接信息 */
+	CHAR _cliIpAddr[__TFTP_IP_ADDR_LEN_];		/* 客户端IP */
+	UINT16  _cliPort;							/* 客户端端口 */
 }tftpSocketInfo_t;
 
 /* 线程池节点结构，可构建静态/动态线程池，选择复合结构线程池 */
@@ -27,8 +28,7 @@ typedef struct tftpTaskPool_s
 	VOLATILE BOOL _busy;			/* 标志线程是否空闲 */
 	tftpPid_t _tid;					/* 线程tid，与同步信号量一一对应 */
 	tftpSem_t * _syncLock;			/* 主线程与通信线程之间的同步信号量 */
-	INT32 _sockfd;					/* 通信的socket fd */
-	UINT32 _port;					/* 线程任务通信端口号 */
+	INT32 _sockfd;					/* 与客户端通信的socket fd */
 	INT32 _fileFd;					/* 文件描述符 */
 	tftpSocketInfo_t _cliInfo;		/* 客户端相关通信信息 */
 }tftpTaskPool_t;

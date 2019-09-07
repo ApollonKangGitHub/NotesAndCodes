@@ -77,46 +77,48 @@ EXTERN UINT16 tftp_pack_req
 	((UINT16 *)p)[0] = (reqPack->_opcode == tftp_Pack_OperCode_Rrq ) \
 			? htons(__TFTP_OPCODE_RRQ_)
 			: htons(__TFTP_OPCODE_WRQ_);
-
-	p += 2;
-	
+	len += 2;
+			
 	/* 封装选项（文件名和传输模式） */
 	len += tftp_sprint(p + len, "%s%c%s%c", \
 			reqPack->_fileName, '\0', reqPack->_pMode, '\0');
 	
 	/* 封装扩展选项 */
+	if (reqPack->_options._opt_blksize) {
+		memset(fieldBuf, 0, sizeof(fieldBuf));
+		len += tftp_sprint(p + len, "%s%c%s%c", \
+				__TFTP_OPTION_BIKSIZE_, '\0', uitoa(reqPack->_blkSize, fieldBuf), '\0');
+	}
+				
 	if (reqPack->_options._opt_tsize) {
 		memset(fieldBuf, 0, sizeof(fieldBuf));
 		len += tftp_sprint(p + len, "%s%c%s%c", \
 				__TFTP_OPTION_TSIZE_, '\0', uitoa(reqPack->_tSize, fieldBuf), '\0');
 	}
+	
 	if (reqPack->_options._opt_timout) {
 		memset(fieldBuf, 0, sizeof(fieldBuf));
 		len += tftp_sprint(p + len, "%s%c%s%c", \
 				__TFTP_OPTION_TIMEOUT_, '\0', uitoa(reqPack->_timeout, fieldBuf), '\0');
 	}
+	
 	if (reqPack->_options._opt_tmfreq) {
 		memset(fieldBuf, 0, sizeof(fieldBuf));
 		len += tftp_sprint(p + len, "%s%c%s%c", \
 				__TFTP_OPTION_TMFREQ_, '\0', uitoa(reqPack->_tmfreq, fieldBuf), '\0');
 	}	
-	if (reqPack->_options._opt_blksize) {
-		memset(fieldBuf, 0, sizeof(fieldBuf));
-		len += tftp_sprint(p + len, "%s%c%s%c", \
-				__TFTP_OPTION_BIKSIZE_, '\0', uitoa(reqPack->_blkSize, fieldBuf), '\0');
-	}	
+	
 	if (reqPack->_options._opt_bpid) {
 		memset(fieldBuf, 0, sizeof(fieldBuf));
 		len += tftp_sprint(p + len, "%s%c%s%c", \
 				__TFTP_OPTION_BPID_, '\0', uitoa(reqPack->_bpId, fieldBuf), '\0');
 	}
-	
+
 	if (len < 0) {
 		TFTP_LOGERR("packet error,return:%d", len);
 		return -1;
 	}
-
-	len += 2;
+	
 #if 0	
 	TFTP_LOGNOR("packet request success,return:%d", len);
 	
@@ -202,7 +204,7 @@ EXTERN tftpReturnValue_t tftp_unpack_req
 		index += (strLen + strVlaueLen);
 	}
 	
-#if 0
+#if 1
 	for (index = 0; index < bufLen; index++) {
 		if (index % 8 == 0) {
 			tftp_print("\r\n");
@@ -219,7 +221,7 @@ EXTERN UINT16 tftp_pack_ack(UINT8 * buf, UINT16 id)
 
 }
 
-EXTERN UINT16 tftp_pack_oack(UINT8 * buf, UINT16 id)
+EXTERN UINT16 tftp_pack_oack(UINT8 * buf, tftpPacktReq_t * req)
 {
 
 }
@@ -229,8 +231,31 @@ EXTERN UINT16 tftp_pack_data(UINT8 * buf, UINT16 id)
 
 }
 
-EXTERN UINT16 tftp_pack_error(UINT8 * buf)
+EXTERN UINT16 tftp_pack_error(UINT8 * buf, tftpPackErrCode_t errCode, UINT8 * errMsg)
 {
-
+	UINT8 * p = buf;
+	UINT16 msgLen = 0;
+	UINT16 packLen = 4;
+	if (NULL == p) {
+		return 0;
+	}
+	
+	/* 封装opcode */
+	((UINT16 *)p)[0] = htons(__TFTP_OPCODE_ERR_);
+	
+	/* 封装错误编码 */
+	((UINT16 *)p)[1] = htons(errCode);
+#if 1
+	/* 封装错误消息 */
+	if (errMsg) {
+		msgLen = strlen(errMsg);
+		msgLen = (__TFTP_ERR_MSG_LEN_MAX_ < msgLen) ? __TFTP_ERR_MSG_LEN_MAX_ : msgLen;
+		memcpy(p + packLen, errMsg, msgLen);
+		packLen += msgLen;
+		p[packLen++] = '\0';
+	}
+#endif
+	printf("%s-%d", buf, packLen);
+	return packLen;
 }
 

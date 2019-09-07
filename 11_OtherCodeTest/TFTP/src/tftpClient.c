@@ -9,7 +9,7 @@
 #include <tftpPublic.h>
 
 /* 全局资源 */
-LOCAL CHAR gSendBuf[__TFTP_SEND_BUG_LEN_] = {0};
+LOCAL CHAR gSendBuf[__TFTP_SEND_BUF_LEN_] = {0};
 LOCAL CHAR gRecvBuf[__TFTP_RECV_BUF_LEN_] = {0};
 
 /* 客户端通信传输相关信息结构 */
@@ -51,8 +51,10 @@ LOCAL tftpReturnValue_t tftp_client_socket_init(CONST CHAR * ipaddr)
  */
 LOCAL tftpReturnValue_t tftp_client_pack_deal_download()
 {
-
+	INT32 recvLen = 0;
+	
 	while (TRUE) {
+		recvLen = tftp_socket_recv(gCliTranInfo._socketFd, gRecvBuf, __TFTP_RECV_BUF_LEN_, &gCliTranInfo._serAddr);
 		break;
 	}
 }
@@ -211,7 +213,6 @@ LOCAL UINT16 tftp_client_get_bpid(CONST CHAR * filename)
 LOCAL tftpReturnValue_t tftp_client_tranfer_info_init(INT32 argc, CHAR * argv[])
 {
 	tftpReturnValue_t tftpRet = tftp_ret_Ok;
-	socklen_t addrLen = 0;
 	INT32 ret = 0;
 	
 	CHAR * pOperator = argv[1];
@@ -255,23 +256,14 @@ LOCAL tftpReturnValue_t tftp_client_tranfer_info_init(INT32 argc, CHAR * argv[])
 	gCliTranInfo._reqPack._timeout = tftp_client_get_timeout(pTimeout);
 	gCliTranInfo._reqPack._tmfreq = tftp_client_get_tmfreq(pTmFreq);
 	
-	/* 5、可扩展选项有效标志，当前定义选项参数都为有效 */
+	/* 5、可扩展选项有效标志，当前命令行选项参数都为有效 */
 	gCliTranInfo._reqPack._options._opt_blksize = 1;
 	gCliTranInfo._reqPack._options._opt_bpid = 1;
 	gCliTranInfo._reqPack._options._opt_tmfreq = 1;
 	gCliTranInfo._reqPack._options._opt_timout = 1;
 	gCliTranInfo._reqPack._options._opt_tsize = 1;
 	gCliTranInfo._reqPack._options._opt_other = 0;
-	
-	/* 6、客户端socket结构信息获取保存 */
-	addrLen = sizeof(gCliTranInfo._cliAddr);
-	ret = getsockname(gCliTranInfo._socketFd, (struct sockaddr *)&gCliTranInfo._cliAddr, &addrLen);
-	if (ret < 0) {
-		TFTP_LOGERR("get client socket name fail, return %d, socketfd=%d, socketLen=%d", \
-			ret, gCliTranInfo._socketFd, addrLen);
-		return tftp_ret_Error;
-	}
-	
+
 	return tftp_ret_Ok;
 }
 
@@ -292,6 +284,12 @@ LOCAL VOID tftp_client_cmd_handle(INT32 argc, CHAR * argv[])
 	INT32 sendLen = 0;
 	INT32 recvLen = 0;
 	INT32 ret = 0;
+	
+	/*
+	 * 0、客户端配置初始化,客户端配置文件在config目录下的client.cfg文件中
+	 * 在启动客户端，执行客户端uload/download命令之前需要保证基本配置齐全
+	 */
+	//tftp_client_config_init();
 
 	/* 1、参数解析、初始化信息 */
 	tftpRet = tftp_client_tranfer_info_init(argc, argv);
@@ -302,7 +300,7 @@ LOCAL VOID tftp_client_cmd_handle(INT32 argc, CHAR * argv[])
 	
 	/* 2、请求报文封装 */
 	sendLen = tftp_pack_req(gSendBuf, &gCliTranInfo._reqPack);
-	
+
 	/* 3、发送请求到服务器 */
 	ret = tftp_socket_send(gCliTranInfo._socketFd, gSendBuf, sendLen, &gCliTranInfo._serAddr);
 
@@ -315,7 +313,7 @@ LOCAL VOID tftp_client_cmd_handle(INT32 argc, CHAR * argv[])
 	}
 
 	/* 5、传输完毕销毁相关传输资源 */
-	close(gCliTranInfo._socketFd);
+	tftp_close(gCliTranInfo._socketFd);
 }
 
 /*
@@ -330,7 +328,7 @@ LOCAL VOID tftp_client_command_init(VOID)
 {
 	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_client_cmd_handle, 
 		__TFTP_CMD_NORMAL_ | __TFTP_CMD_DYN_,
-			"tftpclient{tftp server enable/disable}"
+			"tftpclient{tftp client}"
 			"__STRING__{upload(put) or download(get)}"
 				"serverip{server ip address}"
 				"__IPADDR__{ip address(eg:192.168.1.100)}"
@@ -339,7 +337,7 @@ LOCAL VOID tftp_client_command_init(VOID)
 						"mode{mode of the file transfer}"
 						"__STRING__{transfer mode:netascii/octet/mail}"
 							"blocksize{translation blockszie(Bytes) everytimes}"
-							"__UINT32__{128/256/512/1024/1428/2048/4096 Bytes, default is 512}"
+							"__UINT32__{128/256/512/1024/1428/2048/4096 Bytes, default 512}"
 								"timeout{DATA/ACK timeout second}"
 								"__UINT32__{0 is default 60 s}"
 									"tmfreq{DATA/ACK timeout retransmission frequency}"
@@ -358,8 +356,6 @@ EXTERN tftpReturnValue_t tftp_client_module_init(VOID)
 {
 	/* 注册客户端相关操作命令 */
 	tftp_client_command_init();
-
-	/* 打开配置文件，获取客户端下载/上传的文件路径 */
 }
 
 
