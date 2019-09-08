@@ -8,8 +8,6 @@
 
 #include <tftpPublic.h>
 
-EXTERN VOID md5_algroithm(CHAR CONST * file, UINT8 * result);
-
 /* 在Server初始化时赋值为TRUE，Server结束时赋值为FALSE */
 LOCAL BOOL gServerRun = FALSE;
 tftpTaskPoolList_t * gTaskPoolHead = NULL;
@@ -17,6 +15,9 @@ tftpTaskPoolList_t * gTaskPoolTail = NULL;
 INT32 gListenSocket = 0;
 LOCAL tftpSem_t * gSemPool;
 LOCAL CHAR gServerPath[__TFTP_FILE_PATH_LEN_] = {"/home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/server/"};
+
+EXTERN VOID md5_algroithm(CHAR CONST * file, UINT8 * result);
+
 /*
  * FunctionName:
  *     tftp_server_cmd_display_task_pool
@@ -286,37 +287,40 @@ tftp_req_not_support_return:
 	return tftp_ret_NotSupport;
 }
 
+/*
+ * FunctionName:
+ *     tftp_server_rrq_file_init
+ * Description:
+ *     读请求文件初始化（存在判断、大小获取、文件打开）
+ * Notes:
+ *     
+ */
 LOCAL tftpReturnValue_t tftp_server_rrq_file_init(tftpTaskPool_t * pClient)
 {
 	UINT64 tsize = 0;
-	CHAR tftpFilePath[__TFTP_FILE_PATH_LEN_] = {0};
-	UINT8 md5Result[64] = {0};
 	INT32 fd = 0;
 		
 	/* 获取文件全路径 */
-	memcpy(tftpFilePath, gServerPath, strlen(gServerPath));
-	strcat(tftpFilePath, pClient->_cliInfo._reqInfo._fileName);
+	memcpy(pClient->_filePath, gServerPath, strlen(gServerPath));
+	strcat(pClient->_filePath, pClient->_cliInfo._reqInfo._fileName);
 
 	/* 判断文件是否存在 */
-	if (!isfileExist(tftpFilePath))
+	if (!isfileExist(pClient->_filePath))
 	{
 		TFTP_LOGWARN("client:%s download file %s is not exist", \
-			pClient->_cliInfo._cliIpAddr, tftpFilePath);
+			pClient->_cliInfo._cliIpAddr, pClient->_filePath);
 		return tftp_ret_NotFound;
 	}
 
 	/* 获取文件大小 */
-	tsize = fileSize(tftpFilePath);
+	tsize = fileSize(pClient->_filePath);
 	pClient->_cliInfo._reqInfo._tSize = tsize;
-
-	(VOID)md5_algroithm(tftpFilePath, md5Result);
-	TFTP_LOGNOTE("file %s md5sum is %s",  pClient->_cliInfo._reqInfo._fileName, md5Result);
 	
 	/* 打开文件 */
-	fd = tftp_open(tftpFilePath, O_RDONLY);
+	fd = tftp_open(pClient->_filePath, O_RDONLY);
 	if (fd < 0) {
 		TFTP_LOGERR("file %s open fail, errno:%d!", \
-			pClient->_cliInfo._cliIpAddr, tftpFilePath, errno);		
+			pClient->_cliInfo._cliIpAddr, pClient->_filePath, errno);		
 		tftp_perror("\r\nopen fail reason is");
 		return tftp_ret_Error;
 	}
@@ -367,20 +371,20 @@ LOCAL tftpReturnValue_t tftp_server_client_rrq_hanle
 	if (TFTP_FAILURE(tftpRet)) {
 		/* 文件没找到或者打开出错等 */
 		if (tftp_ret_NotFound == tftpRet) {
-			tftp_sprint(errMsg, "%s file name:%s", __TFTP_ERR_FILENOTFOUED_, pReqInfo->_fileName);
-			sendLen = (INT32)tftp_pack_error(sendBuf, tftp_Pack_ErrCode_AccViolate, __TFTP_ERR_FILENOTFOUED_);
+			tftp_sprint(errMsg, "%s<%s>", __TFTP_ERR_FILENOTFOUED_, pReqInfo->_fileName);
+			sendLen = (INT32)tftp_pack_error(sendBuf, tftp_Pack_ErrCode_AccViolate, errMsg);
 		}
 		else {
-			tftp_sprint(errMsg, "%s file name:%s", __TFTP_ERR_NOTDEFINE_, pReqInfo->_fileName);
-			sendLen = (INT32)tftp_pack_error(sendBuf, tftp_Pack_ErrCode_AccViolate, __TFTP_ERR_NOTDEFINE_);
+			tftp_sprint(errMsg, "%s<%s>", __TFTP_ERR_NOTDEFINE_, pReqInfo->_fileName);
+			sendLen = (INT32)tftp_pack_error(sendBuf, tftp_Pack_ErrCode_AccViolate, errMsg);
 		}
-		goto tftp_rrq_err_ret;
+		goto tftp_rrq_err_send_ret;
 	}	
 	else if (pReqInfo->_tSize > __TFTP_TSIZE_MAX_) {
 		/* 文件大于1G则不支持传输 */
-		tftp_sprint(errMsg, "%s file size:%d", __TFTP_ERR_NOTDEFINE_FILE_TOO_LARGE_, pReqInfo->_tSize);
-		sendLen = (INT32)tftp_pack_error(sendBuf, tftp_Pack_ErrCode_AccViolate, __TFTP_ERR_NOTDEFINE_FILE_TOO_LARGE_);
-		goto tftp_rrq_err_ret;
+		tftp_sprint(errMsg, "%s<%d>", __TFTP_ERR_NOTDEFINE_FILE_TOO_LARGE_, pReqInfo->_tSize);
+		sendLen = (INT32)tftp_pack_error(sendBuf, tftp_Pack_ErrCode_AccViolate, errMsg);
+		goto tftp_rrq_err_send_ret;
 	}
 
 	/* 回复OACK */
@@ -403,18 +407,18 @@ LOCAL tftpReturnValue_t tftp_server_client_rrq_hanle
 				ack = TFTP_GET_ACK(recvBuf);
 				/* 计算ACK,支持块ID复用 */
 				if (blkid != ack) {
-					tftp_sprint(errMsg, "%s ack tid:%d, blkid:%d", __TFTP_ERR_UNKNOWNTD_, ack, blkid);
+					tftp_sprint(errMsg, "%s<ack tid:%d, blkid:%d>", __TFTP_ERR_UNKNOWNTD_, ack, blkid);
 					sendLen = (INT32)tftp_pack_error(sendBuf, tftp_Pack_ErrCode_UnknownId, errMsg);					
-					goto tftp_rrq_err_ret;
+					goto tftp_rrq_err_send_ret;
 				}
 				blkid++;
 				
 				/* 读取文件 */
 				readLen = tftp_read(pClient->_fileFd, sendBuf + __TFTP_DATA_SHIFT_, blksize);
 				if (readLen < 0) {
-					tftp_sprint(errMsg, "%s file name:%s", __TFTP_ERR_OTDEFINE_FILE_READ_FAIL_, pReqInfo->_fileName);
+					tftp_sprint(errMsg, "%s<%s>", __TFTP_ERR_NOTDEFINE_FILE_READ_FAIL_, pReqInfo->_fileName);
 					sendLen = (INT32)tftp_pack_error(sendBuf, tftp_Pack_ErrCode_AccViolate, errMsg);
-					goto tftp_rrq_err_ret;
+					goto tftp_rrq_err_send_ret;
 				}
 				
 				/* 封装DATA数据包 */
@@ -437,9 +441,10 @@ tftp_rrq_ok_ret:
 	TFTP_LOGNOR("client %s download file <%s> success!", pCliInfo->_cliIpAddr, pReqInfo->_fileName);
 	return tftp_ret_Ok;
 	
-tftp_rrq_err_ret:
+tftp_rrq_err_send_ret:
 	/* 出错发送ERROR code */
 	(VOID)tftp_socket_send(sockFd, sendBuf, sendLen, pCliAddr);
+tftp_rrq_err_ret:
 	return tftp_ret_Error;
 }
 
@@ -461,15 +466,15 @@ LOCAL tftpReturnValue_t tftp_server_client_wrq_hanle
 
 /*
  * FunctionName:
- *     tftp_server_client_resource_init
+ *     tftp_server_client_resource_reset
  * Description:
  *     子线程通信相关的客户端资源清空
  * Notes:
  *     
  */
-LOCAL VOID tftp_server_client_resource_init(tftpTaskPool_t * pClient)
+LOCAL VOID tftp_server_client_resource_reset(tftpTaskPool_t * pClient)
 {
-	memset(&pClient->_cliInfo, 0, sizeof(pClient->_cliInfo));
+	UINT8 md5Result[64] = {0};
 	
 	if (pClient->_sockfd > 0) {
 		tftp_close(pClient->_sockfd);
@@ -479,6 +484,12 @@ LOCAL VOID tftp_server_client_resource_init(tftpTaskPool_t * pClient)
 		tftp_close(pClient->_fileFd);
 		pClient->_fileFd = -1;
 	}
+	
+	(VOID)md5_algroithm(pClient->_filePath, md5Result);
+	TFTP_LOGNOTE("file %s md5sum is %s",  pClient->_cliInfo._reqInfo._fileName, md5Result);	
+
+	memset(&pClient->_cliInfo, 0, sizeof(pClient->_cliInfo));
+
 	return;
 }
 
@@ -559,7 +570,7 @@ VOID * tftp_server_client_connect_handle(VOID * arg)
 		
 tftp_child_task_over:
 		/* 释放资源 */
-		tftp_server_client_resource_init(pClient);
+		tftp_server_client_resource_reset(pClient);
 		
 		/* 线程忙状态修改 */
 		pClient->_busy = FALSE;

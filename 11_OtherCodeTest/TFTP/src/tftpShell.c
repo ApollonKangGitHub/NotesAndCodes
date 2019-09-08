@@ -562,7 +562,8 @@ LOCAL tftpReturnValue_t tftp_shell_cmd_display(INT32 argc, CHAR * argv[])
 	CHAR cmdStr[32] = {0};
 	INT32 cmdStrLen = 0;
 	INT32 start = 0;
-	
+	INT32 cmdLen = sizeof(cmdLine);
+	cmdLine[cmdLen -1] = '\0';
 	TFTP_LOGDBG(tftp_dbgSwitch_shell, "tftp shell cmd display, argc=%d", argc);
 	
 	tftp_print("\r\ncommand list detail information:");
@@ -575,8 +576,8 @@ LOCAL tftpReturnValue_t tftp_shell_cmd_display(INT32 argc, CHAR * argv[])
 		if ((0 == strcasecmp(pcmd, "all")) || (0 == strcmp(pcmd, pTemp->_cmdArgv._info[0]._cmdStr))) {
 			/* 命令开始提示行格式化 */
 			cmdStrLen = tftp_sprint(cmdStr, "<<<-command:%s->>>", pTemp->_cmdArgv._info[0]._cmdStr);
-			memset(cmdLine, '-', sizeof(cmdLine));
-			start = (sizeof(cmdLine) - cmdStrLen) / 2;
+			memset(cmdLine, '-', cmdLen -1);
+			start = ( cmdLen - cmdStrLen) / 2;
 			memcpy(cmdLine + start, cmdStr, cmdStrLen);
 
 			/* 打印命令开始提示行 */
@@ -594,7 +595,7 @@ LOCAL tftpReturnValue_t tftp_shell_cmd_display(INT32 argc, CHAR * argv[])
 			}
 
 			/* 打印结束行 */
-			memset(cmdLine, '-', sizeof(cmdLine));
+			memset(cmdLine, '-', cmdLen -1);
 			tftp_print("\r\n\t%s\r\n", cmdLine);
 		}
 

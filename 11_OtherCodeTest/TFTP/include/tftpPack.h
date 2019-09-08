@@ -1,6 +1,9 @@
 #ifndef __TFTP_PACK_H__
 #define __TFTP_PACK_H__
 
+#define __TFTP_RECV_BUF_LEN_ 		(1024 * 9)
+#define __TFTP_SEND_BUF_LEN_		(1024 * 9)
+
 #define __TFTP_IP_ADDR_LEN_			(16)
 
 #define __TFTP_FILENAME_STR_LEN_  	(128)	
@@ -97,18 +100,24 @@ typedef enum tftpPackErroCode_e
 	tftp_Pack_ErrCode_Invalid		= 8		/* last invalid error code, please. */
 }tftpPackErrCode_t;
 
-#define __TFTP_ERR_NOTDEFINE_		"!!!^o^ Unknown error."
-#define __TFTP_ERR_NOTDEFINE_FILE_TOO_LARGE_	"!!!^o^ Unknown error:file is to large."
-#define __TFTP_ERR_OTDEFINE_FILE_READ_FAIL_		"!!!^o^ Unknown error:file read fail."
+#define __TFTP_ERR_NOTDEFINE_					"Unknown error."
+#define __TFTP_ERR_NOTDEFINE_FILE_TOO_LARGE_	"Unknown error:file is to large."
+#define __TFTP_ERR_NOTDEFINE_FILE_READ_FAIL_	"Unknown error:file read fail."
+#define __TFTP_ERR_NOTDEFINE_OPCODE_INVALID_	"Unknown error:invalid opcode"
+#define __TFTP_ERR_NOTDEFINE_BLKSIZE_INVALID_	"Unknown error:invalid blksize"
+#define __TFTP_ERR_NOTDEFINE_BPID_INVALID_		"Unknown error:invalid bpid"
+#define __TFTP_ERR_NOTDEFINE_TIMEOUT_INVALID_		"Unknown error:invalid timout"
+#define __TFTP_ERR_NOTDEFINE_TMFREQ_INVALID_		"Unknown error:invalid tmfreq"
 
-#define __TFTP_ERR_FILENOTFOUED_	"!!!^o^ File not found."
-#define __TFTP_ERR_ACCVIOLATE_		"!!!^o^ Access violation."
-#define __TFTP_ERR_DISKFULL_		"!!!^o^ Disk full or allocation exceeded."
-#define __TFTP_ERR_ILLEGALOPER_		"!!!^o^ Illegal TFTP operation."
-#define __TFTP_ERR_UNKNOWNTD_		"!!!^o^ Unknown transfer ID."
-#define __TFTP_ERR_FILEXIST_		"!!!^o^ File already exists."
-#define __TFTP_ERR_NOSUCHUSER_		"!!!^o^ No such user."
-#define __TFTP_ERR_INVALID_			"!!!^o^ Invalid eeeor code."
+
+#define __TFTP_ERR_FILENOTFOUED_	"File not found."
+#define __TFTP_ERR_ACCVIOLATE_		"Access violation."
+#define __TFTP_ERR_DISKFULL_		"Disk full or allocation exceeded."
+#define __TFTP_ERR_ILLEGALOPER_		"Illegal TFTP operation."
+#define __TFTP_ERR_UNKNOWNTD_		"Unknown transfer ID."
+#define __TFTP_ERR_FILEXIST_		"File already exists."
+#define __TFTP_ERR_NOSUCHUSER_		"No such user."
+#define __TFTP_ERR_INVALID_			"Invalid eeeor code."
 
 #define __TFTP_ERR_MSG_LEN_MAX_		(64)
 
@@ -140,17 +149,13 @@ typedef struct tftpPacktReq_s
 
 #define __TFTP_OPCODE_SHIFT_ 	(0)
 #define __TFTP_OPCODE_LEN_		(2)
-
 #define __TFTP_ACK_SHIFT_		(2)
 #define __TFTP_ACK_LEN_			(2)
-
 #define __TFTP_ERROCDE_SHIFT_	(2)
 #define __TFTP_ERRCODE_LEN_		(2)
-
 #define __TFTP_BLKID_SHIFT		(2)
 #define __TFTP_BLKID_LEN_		(2)
 #define __TFTP_DATA_SHIFT_		(4)
-
 #define __TFTP_ERRMSG_SHIFT_	(4)
 
 #define TFTP_GET_OPCODE(recvBuf)			(ntohs(((UINT16 *)(recvBuf))[0])) 
@@ -164,6 +169,7 @@ EXTERN UINT16 tftp_pack_req(UINT8 * buf,tftpPacktReq_t * reqPack);
 EXTERN tftpReturnValue_t tftp_unpack_req(UINT8 * buf, INT32 bufLen,	tftpPacktReq_t * reqPack);
 EXTERN UINT16 tftp_pack_ack(UINT8 * buf, UINT16 id);
 EXTERN UINT16 tftp_pack_oack(UINT8 * buf, tftpPacktReq_t * reqPack);
+EXTERN tftpReturnValue_t tftp_unpack_oack(UINT8 * buf, UINT16 recvLen, tftpPacktReq_t * recvPack);
 EXTERN UINT16 tftp_pack_error(UINT8 * buf, tftpPackErrCode_t errCode, UINT8 * errMsg);
 EXTERN UINT16 tftp_pack_data(UINT8 * buf, UINT16 blkid);
 

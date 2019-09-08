@@ -9,3 +9,15 @@
 [0m2029-09-08 02:11:15(UTC)[Sunday]%% TFTP-NORMAL:(532)client 192.168.10.100 req deal start![0m
 [0m2029-09-08 02:11:17(UTC)[Sunday]%% TFTP-NORMAL:(437)client 192.168.10.100 download file <test.txt> success![0m
 [0m2029-09-08 02:11:17(UTC)[Sunday]%% TFTP-NORMAL:(558)client 192.168.10.100 req deal success![0m
+[0m2029-09-08 20:23:01(UTC)[Sunday]%% TFTP-NORMAL:(967)TFTP server is start![0m
+[0m2029-09-08 20:23:01(UTC)[Sunday]%% TFTP-NORMAL:(633)get free task:tftpCliTask0, tid=8849[0m
+[0m2029-09-08 20:23:05(UTC)[Sunday]%% TFTP-NORMAL:(633)get free task:tftpCliTask1, tid=8850[0m
+[0m2029-09-08 20:23:05(UTC)[Sunday]%% TFTP-NORMAL:(542)client 192.168.10.100 req deal start![0m
+[0m2029-09-08 20:23:09(UTC)[Sunday]%% TFTP-NORMAL:(446)client 192.168.10.100 download file <test.txt> success![0m
+[0m2029-09-08 20:23:09(UTC)[Sunday]%% TFTP-NORMAL:(568)client 192.168.10.100 req deal success![0m
+[0m2029-09-08 20:29:25(UTC)[Sunday]%% TFTP-NORMAL:(968)TFTP server is start![0m
+[0m2029-09-08 20:29:25(UTC)[Sunday]%% TFTP-NORMAL:(634)get free task:tftpCliTask0, tid=8989[0m
+[0m2029-09-08 20:29:37(UTC)[Sunday]%% TFTP-NORMAL:(634)get free task:tftpCliTask1, tid=8990[0m
+[0m2029-09-08 20:29:37(UTC)[Sunday]%% TFTP-NORMAL:(543)client 192.168.10.100 req deal start![0m
+[0m2029-09-08 20:29:40(UTC)[Sunday]%% TFTP-NORMAL:(441)client 192.168.10.100 download file <test.txt> success![0m
+[0m2029-09-08 20:29:40(UTC)[Sunday]%% TFTP-NORMAL:(569)client 192.168.10.100 req deal success![0m

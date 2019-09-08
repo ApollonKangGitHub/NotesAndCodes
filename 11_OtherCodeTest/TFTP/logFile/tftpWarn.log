@@ -1,0 +1,12 @@
+
+[1;33m2029-09-08 18:08:56(UTC)[Sunday]%% TFTP-WARN  :(103)file:pwd/home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/client/test.txt[0m
+[1;33m2029-09-08 18:09:16(UTC)[Sunday]%% TFTP-WARN  :(103)file:/home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/client/test.txt[0m
+[1;33m2029-09-08 20:11:51(UTC)[Sunday]%% TFTP-WARN  :(266)file:/home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/client/test.txt[0m
+[1;33m2029-09-08 20:14:16(UTC)[Sunday]%% TFTP-WARN  :(266)file:/home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/client/bbbb.txt[0m
+[1;33m2029-09-08 20:15:16(UTC)[Sunday]%% TFTP-WARN  :(266)file:/home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/client/bbbb.txt[0m
+[1;33m2029-09-08 20:16:20(UTC)[Sunday]%% TFTP-WARN  :(266)file:/home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/client/bbbb.txt[0m
+[1;33m2029-09-08 20:16:36(UTC)[Sunday]%% TFTP-WARN  :(266)file:/home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/client/bbbb.txt[0m
+[1;33m2029-09-08 20:17:35(UTC)[Sunday]%% TFTP-WARN  :(266)file:/home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/client/test.txt[0m
+[1;33m2029-09-08 20:17:49(UTC)[Sunday]%% TFTP-WARN  :(266)file:/home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/client/test.txt[0m
+[1;33m2029-09-08 20:23:31(UTC)[Sunday]%% TFTP-WARN  :(314)invalid timeout:3000(s), set default:60(s)[0m
+[1;33m2029-09-08 20:29:31(UTC)[Sunday]%% TFTP-WARN  :(314)invalid timeout:3000(s), set default:60(s)[0m

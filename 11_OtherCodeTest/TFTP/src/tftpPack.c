@@ -260,7 +260,67 @@ EXTERN UINT16 tftp_pack_oack(UINT8 * buf, tftpPacktReq_t * reqPack)
 	
 	return len;
 }
+EXTERN tftpReturnValue_t tftp_unpack_oack
+(
+	UINT8 * buf, 
+	UINT16 recvLen, 
+	tftpPacktReq_t * recvPack
+)
+{
+	CHAR recvBuf[__TFTP_RECV_BUF_LEN_] = {0};
+	INT32 strLen = 0;
+	INT32 strVlaueLen = 0;
+	INT32 index = 0;
+	CHAR * subStr = NULL;
+	CHAR * subStrValue = NULL;
+	CHAR * savePtr = recvBuf;
 
+	memset(&recvPack->_options, 0, sizeof(recvPack->_options));
+	memcpy(recvBuf, buf, recvLen);
+
+	/* 取opcode */
+	recvPack->_opcode = ntohs(((UINT16 *)savePtr)[0]);
+	index += __TFTP_OPCODE_LEN_;
+	savePtr += __TFTP_OPCODE_LEN_;
+
+	/* 获取扩展选项 */
+	while (index < recvLen) {
+		/* 获取选项，跳过'\0'符号 */
+		subStr = strtok_r(NULL, "\0", &savePtr);
+		strLen = strlen(subStr) + 1;
+		savePtr++;
+
+		/* 获取选项值，跳过'\0'符号 */
+		subStrValue = strtok_r(NULL, "\0", &savePtr);
+		strVlaueLen = strlen(subStrValue) + 1;
+		savePtr++;
+		
+		/* 选项解析，选项值赋值 */
+		if (0 == strcasecmp(subStr, __TFTP_OPTION_TSIZE_)) {
+			recvPack->_tSize = atoui(subStrValue);
+			recvPack->_options._opt_tsize = 1;
+		}
+		else if (0 == strcasecmp(subStr, __TFTP_OPTION_TIMEOUT_)) {
+			recvPack->_timeout = (UINT16)atoui(subStrValue);
+			recvPack->_options._opt_timout = 1;
+		}
+		else if (0 == strcasecmp(subStr, __TFTP_OPTION_TMFREQ_)) {
+			recvPack->_tmfreq =(UINT16) atoui(subStrValue);
+			recvPack->_options._opt_tmfreq = 1;
+		}
+		else if (0 == strcasecmp(subStr, __TFTP_OPTION_BIKSIZE_)) {
+			recvPack->_blkSize = (UINT16)atoui(subStrValue);
+			recvPack->_options._opt_blksize = 1;
+		}
+		else if (0 == strcasecmp(subStr, __TFTP_OPTION_BPID_)) {
+			recvPack->_bpId = (UINT16)atoui(subStrValue);
+			recvPack->_options._opt_bpid = 1;
+		}
+
+		index += (strLen + strVlaueLen);
+	}
+	return tftp_ret_Ok;
+}
 EXTERN UINT16 tftp_pack_data(UINT8 * buf, UINT16 blkid)
 {
 	UINT16 * p = (UINT16 *)buf;

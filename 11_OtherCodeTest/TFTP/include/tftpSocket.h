@@ -5,9 +5,6 @@
 #include <tftpPublic.h>
 
 #define TFTP_SOCKET_BACKLOG_THREAD 	(5)
-#define __TFTP_RECV_BUF_LEN_ 		(1024 * 9)
-#define __TFTP_SEND_BUF_LEN_		(1024 * 9)
-
 #define __TFTP_SERVER_IP_ 			"192.168.10.99"
 
 #define __TFTP_SOCKET_SERVER_UDP_PORT_			(69)

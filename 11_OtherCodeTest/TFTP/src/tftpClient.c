@@ -9,11 +9,13 @@
 #include <tftpPublic.h>
 
 /* 全局资源 */
-LOCAL CHAR gSendBuf[__TFTP_SEND_BUF_LEN_] = {0};
-LOCAL CHAR gRecvBuf[__TFTP_RECV_BUF_LEN_] = {0};
+LOCAL UINT8 gSendBuf[__TFTP_SEND_BUF_LEN_] = {0};
+LOCAL UINT8 gRecvBuf[__TFTP_RECV_BUF_LEN_] = {0};
 
 /* 客户端通信传输相关信息结构 */
 LOCAL tftpClientInfo_t gCliTranInfo;
+
+EXTERN VOID md5_algroithm(CHAR CONST * file, UINT8 * result);
 
 /*
  * FunctionName:
@@ -56,7 +58,75 @@ LOCAL tftpReturnValue_t tftp_client_pack_deal_download()
 	while (TRUE) {
 		recvLen = tftp_socket_recv(gCliTranInfo._socketFd, gRecvBuf, __TFTP_RECV_BUF_LEN_, &gCliTranInfo._serAddr);
 		break;
+
 	}
+	return tftp_ret_Ok;
+}
+LOCAL tftpReturnValue_t tftp_client_oack_check
+(
+	tftpPacktReq_t * pRecvInfo, 
+	CHAR * errMsg
+)
+{
+	tftpReturnValue_t tftpRet = tftp_ret_Ok;
+	CHAR errMsgTemp[__TFTP_ERR_PACK_MAX_LEN_] = {0};
+
+	if (__TFTP_OPCODE_ERR_ == pRecvInfo->_opcode) {
+		TFTP_LOGERR("recv error code(%d), error message:%s", TFTP_GET_ERRCODE(gRecvBuf), TFTP_GET_ERRMSG(gRecvBuf));
+		tftpRet = tftp_ret_NotSupport;
+		goto ack_check_ret;
+	}
+	else if (__TFTP_OPCODE_OACK_ != pRecvInfo->_opcode) {
+		tftp_sprint(errMsgTemp, "%s<%d>, not have recv oack, waiting...", __TFTP_ERR_NOTDEFINE_OPCODE_INVALID_, pRecvInfo->_opcode);
+		tftpRet = tftp_ret_Error;
+		goto ack_check_ret;
+	}
+
+	/* 选项检查 */
+	if (pRecvInfo->_options._opt_blksize) {
+		if (pRecvInfo->_blkSize > __TFTP_BLKSIZE_8192_BYTES_
+			|| pRecvInfo->_blkSize  < __TFTP_BLKSIZE_128_BYTES_) {
+			tftp_sprint(errMsgTemp, "%s<%d>", __TFTP_ERR_NOTDEFINE_BLKSIZE_INVALID_, pRecvInfo->_blkSize);
+			tftpRet = tftp_ret_Error;
+			goto ack_check_ret;		
+		}
+	}
+	else if (pRecvInfo->_options._opt_tsize) {
+		if (pRecvInfo->_tSize > __TFTP_TSIZE_MAX_
+			|| pRecvInfo->_tSize < __TFTP_TSIZE_MIN_) {
+			tftp_sprint(errMsgTemp, "%s<%d>", __TFTP_ERR_NOTDEFINE_FILE_TOO_LARGE_, pRecvInfo->_tSize);
+			tftpRet = tftp_ret_Error;
+			goto ack_check_ret; 	
+		}
+	}
+	else if (pRecvInfo->_options._opt_bpid) {
+		if (pRecvInfo->_bpId < __TFTP_BLKID_MIN_
+			|| pRecvInfo->_bpId > __TFTP_BLKID_MAX_) {
+			tftp_sprint(errMsgTemp, "%s<%d>", __TFTP_ERR_NOTDEFINE_BPID_INVALID_, pRecvInfo->_bpId);
+			tftpRet = tftp_ret_Error;
+			goto ack_check_ret; 
+		}
+	}
+	else if (pRecvInfo->_options._opt_timout) {
+		if (pRecvInfo->_timeout < __TFTP_TIMEOUT_MIN_
+			|| pRecvInfo->_timeout > __TFTP_TIMEOUT_MAX_) {
+			tftp_sprint(errMsgTemp, "%s<%d>", __TFTP_ERR_NOTDEFINE_TIMEOUT_INVALID_, pRecvInfo->_timeout);
+			tftpRet = tftp_ret_Error;
+			goto ack_check_ret; 
+		}
+	}
+	else if (pRecvInfo->_options._opt_tmfreq) {
+		if (pRecvInfo->_tmfreq < __TFTP_TMFREQ_MIN_
+			|| pRecvInfo->_tmfreq > __TFTP_TMFREQ_MAX_) {
+			tftp_sprint(errMsgTemp, "%s<%d>", __TFTP_ERR_NOTDEFINE_TMFREQ_INVALID_, pRecvInfo->_tmfreq);
+			tftpRet = tftp_ret_Error;
+			goto ack_check_ret; 
+		}
+	}
+
+ack_check_ret:
+	memcpy(errMsg, errMsgTemp, __TFTP_ERR_PACK_MAX_LEN_);
+	return tftpRet;
 }
 
 /*
@@ -69,11 +139,103 @@ LOCAL tftpReturnValue_t tftp_client_pack_deal_download()
  */
 LOCAL tftpReturnValue_t tftp_client_pack_deal_upload()
 {
-	while (TRUE) {
-		/* 等待ACK/OACK */
-		break;
-	}
+	INT32 recvLen = 0;
+	INT32 sendLen = 0;
+	INT32 readLen = 0;
+	UINT16 ack = 0;
+	UINT16 blkid = 0;
+	tftpReturnValue_t tftpRet = tftp_ret_Ok;
+	INT32 sockfd = gCliTranInfo._socketFd;
+	CHAR errMsg[__TFTP_ERR_PACK_MAX_LEN_] = {0};
+	struct sockaddr_in * pSerAddr = &gCliTranInfo._serAddr;
+	tftpPacktReq_t recvInfo = gCliTranInfo._reqPack;
 
+	/* 接收客户端OACK/ERROR报文 */
+	recvLen = tftp_socket_recv(sockfd, gRecvBuf, __TFTP_RECV_BUF_LEN_, pSerAddr);
+	if (recvLen < 0) {
+		TFTP_LOGERR("Recv server information error, errno=%d!", errno);
+		tftp_perror("recv fail reason is");
+		goto tftp_upload_err_ret;
+	}
+	
+	/* 对于OACK解析 */
+	tftpRet = tftp_unpack_oack(gRecvBuf, recvLen, &recvInfo);
+	if (TFTP_FAILURE(tftpRet)) {
+		TFTP_IF_ERROR(tftpRet);
+		goto tftp_upload_err_ret;
+	}
+	/* OACK有效性检查 */
+	tftpRet = tftp_client_oack_check(&recvInfo, errMsg);
+	if (TFTP_FAILURE(tftpRet)) {
+		if (tftp_ret_Error == tftpRet) {
+			goto tftp_upload_err_send_ret;
+		}
+		else {
+			goto tftp_upload_err_ret;
+		}
+	}
+	
+	blkid = 1;
+	while (TRUE) {
+		(VOID)memset(gRecvBuf, 0, __TFTP_RECV_BUF_LEN_);
+		(VOID)memset(gSendBuf, 0, __TFTP_SEND_BUF_LEN_);
+		/* 读取文件 */
+		readLen = tftp_read(gCliTranInfo._fileFd, gSendBuf + __TFTP_DATA_SHIFT_, recvInfo._blkSize);
+		if (readLen < 0) {
+			tftp_sprint(errMsg, "%s<%s>", __TFTP_ERR_NOTDEFINE_FILE_READ_FAIL_, recvInfo._fileName);
+			sendLen = (INT32)tftp_pack_error(gSendBuf, tftp_Pack_ErrCode_AccViolate, errMsg);
+			goto tftp_upload_err_send_ret;
+		}		
+		
+		/* 封装DATA数据包 */
+		sendLen = readLen + (INT32)tftp_pack_data(gSendBuf, blkid);
+		
+		/* 发送数据 */
+		tftp_socket_send(sockfd, gSendBuf, sendLen, pSerAddr);
+
+		/* 接收ACK/ERROR数据 */
+		recvLen = tftp_socket_recv(sockfd, gRecvBuf, __TFTP_RECV_BUF_LEN_, pSerAddr);
+		if (recvLen < 0) {
+			TFTP_LOGERR("Recv server information error, errno=%d!", errno);
+			tftp_perror("recv fail reason is");
+			goto tftp_upload_err_ret;
+		}
+		
+		switch (TFTP_GET_OPCODE(gRecvBuf)) {
+			case __TFTP_OPCODE_ACK_:
+				ack = TFTP_GET_ACK(gRecvBuf);
+
+				/* ACK判断 */
+				if (ack != blkid) {
+					tftp_sprint(errMsg, "%s<ack tid:%d, blkid:%d>", __TFTP_ERR_UNKNOWNTD_, ack, blkid);
+					sendLen = (INT32)tftp_pack_error(gSendBuf, tftp_Pack_ErrCode_UnknownId, errMsg); 				
+					goto tftp_upload_err_send_ret;
+				}
+
+				/* 根据发送的报文大小小于blksize判断结束 */
+				if (readLen < recvInfo._blkSize) {
+					goto tftp_upload_ok_ret;
+				}	
+				blkid++;
+				break;
+			case __TFTP_OPCODE_ERR_:
+				TFTP_LOGERR("recv error code(%d), error message:%s", TFTP_GET_ERRCODE(gRecvBuf), TFTP_GET_ERRMSG(gRecvBuf));
+				goto tftp_upload_err_ret;
+			default:
+				tftp_sprint(errMsg, "%s(%d), not have recv ack, waiting...", __TFTP_ERR_NOTDEFINE_OPCODE_INVALID_, recvInfo._opcode);
+				sendLen = (INT32)tftp_pack_error(gSendBuf, tftp_Pack_ErrCode_AccViolate, errMsg);
+				goto tftp_upload_err_send_ret;
+		}
+	}
+tftp_upload_ok_ret:
+	return tftp_ret_Ok;
+
+tftp_upload_err_send_ret:
+	/* 出错发送ERROR code */
+	(VOID)tftp_socket_send(sockfd, gSendBuf, sendLen, pSerAddr);
+
+tftp_upload_err_ret:
+	return tftp_ret_Error;
 }
 
 /*
@@ -99,7 +261,7 @@ LOCAL tftpReturnValue_t tftp_client_oper_valid(CONST char * fileName)
 	memcpy(gCliTranInfo._filePath, gCliTranInfo._clientPath, len);
 	len = strlen(gCliTranInfo._reqPack._fileName);
 	strncat((CHAR*)(gCliTranInfo._filePath), gCliTranInfo._reqPack._fileName, len);
-	
+
 	/* 判断文件是否存在 */
 	exist = isfileExist((CONST CHAR * )gCliTranInfo._filePath);
 	
@@ -111,6 +273,13 @@ LOCAL tftpReturnValue_t tftp_client_oper_valid(CONST char * fileName)
 		ret =  tftp_ret_NotFound;
 	}
 	else {
+		/* 打开文件 */
+		gCliTranInfo._fileFd = tftp_open(gCliTranInfo._filePath, O_RDONLY);
+		if (gCliTranInfo._fileFd < 0) {
+			TFTP_LOGERR("open file %s fail, errno=%d", gCliTranInfo._filePath, errno);
+			tftp_perror("open file fail reason is");
+			return tftp_ret_Error;
+		}
 		ret =  tftp_ret_Ok;
 	}
 	
@@ -230,21 +399,20 @@ LOCAL tftpReturnValue_t tftp_client_tranfer_info_init(INT32 argc, CHAR * argv[])
 	/* 1、操作类型获取 */
 	gCliTranInfo._reqPack._opcode = tftp_pack_oper_para_get(pOperator);
 	if (tftp_Pack_OperCode_Max == gCliTranInfo._reqPack._opcode) {
-		tftp_print("\r\nInvalid operator for %s!", pOperator);
+		TFTP_LOGERR("Invalid operator for %s!", pOperator);
 		return tftp_ret_Error;
 	}
 	
 	/* 2、客户端socket初始化和服务器socket结构初始化 */
 	tftpRet = tftp_client_socket_init(pIpaddr);
-	if (tftp_ret_Ok != tftpRet) {
-		TFTP_IF_ERROR(tftpRet);
+	if (TFTP_FAILURE(tftpRet)) {
 		return tftpRet;
 	}
 
 	/* 3、文件名获取与操作有效判断 */
 	tftpRet = tftp_client_oper_valid(pFilename);
 	if (tftp_ret_Ok != tftpRet) {
-		tftp_print("\r\nfile %s %s, Can't do this operator!", pFilename, tftp_err_msg(tftpRet));
+		TFTP_LOGERR("file %s %s, Can't do this operator!", pFilename, tftp_err_msg(tftpRet));
 		return tftpRet;
 	}
 
@@ -267,13 +435,50 @@ LOCAL tftpReturnValue_t tftp_client_tranfer_info_init(INT32 argc, CHAR * argv[])
 	return tftp_ret_Ok;
 }
 
+LOCAL tftpReturnValue_t tftp_client_config_init(VOID)
+{
+	memcpy(gCliTranInfo._clientPath, "/home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/client/", __TFTP_FILE_PATH_LEN_);
+}
+
+/*
+ * FunctionName:
+ *     tftp_client_info_reset
+ * Description:
+ *     数据结构清空
+ *     
+ * Notes:
+ *     
+ */
+LOCAL VOID tftp_client_info_reset(VOID)
+{
+	UINT8 md5Result[64] = {0};
+	
+	if (gCliTranInfo._fileFd > 0) {
+		tftp_close(gCliTranInfo._fileFd);
+		gCliTranInfo._fileFd = -1;
+	}
+	if (gCliTranInfo._socketFd > 0) {
+		tftp_close(gCliTranInfo._socketFd);
+		gCliTranInfo._socketFd = -1;
+	}
+	
+	/* 计算文件md5值 */
+	(VOID)md5_algroithm(gCliTranInfo._filePath, md5Result);
+	TFTP_LOGNOTE("file %s md5sum is %s",  gCliTranInfo._filePath, md5Result);
+	
+	memset(&gCliTranInfo._cliAddr, 0, sizeof(gCliTranInfo._cliAddr));
+	memset(&gCliTranInfo._serAddr, 0, sizeof(gCliTranInfo._serAddr));
+	memset(gCliTranInfo._filePath, 0, sizeof(gCliTranInfo._filePath));
+	memset(&gCliTranInfo._reqPack, 0, sizeof(gCliTranInfo._reqPack));
+
+	return;
+}
 
 /*
  * FunctionName:
  *     tftp_client_cmd_handle
  * Description:
  *     tftpclient下载/上传命令解析处理函数
- *     example：tftpclient get serverip 127.0.110.1 file test.txt mode octet blocksize 1024 timeout 10 
  * Notes:
  *     
  */
@@ -289,7 +494,7 @@ LOCAL VOID tftp_client_cmd_handle(INT32 argc, CHAR * argv[])
 	 * 0、客户端配置初始化,客户端配置文件在config目录下的client.cfg文件中
 	 * 在启动客户端，执行客户端uload/download命令之前需要保证基本配置齐全
 	 */
-	//tftp_client_config_init();
+	tftp_client_config_init();
 
 	/* 1、参数解析、初始化信息 */
 	tftpRet = tftp_client_tranfer_info_init(argc, argv);
@@ -312,8 +517,8 @@ LOCAL VOID tftp_client_cmd_handle(INT32 argc, CHAR * argv[])
 		tftpRet = tftp_client_pack_deal_upload();
 	}
 
-	/* 5、传输完毕销毁相关传输资源 */
-	tftp_close(gCliTranInfo._socketFd);
+	/* 5、传输完毕重新初始化相关传输资源 */
+	tftp_client_info_reset();
 }
 
 /*
