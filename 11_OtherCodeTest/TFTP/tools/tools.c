@@ -241,6 +241,14 @@ EXTERN CONST CHAR * strCmdStrCheck(CONST CHAR * str)
 	return str;
 }
 
+/*
+ * FunctionName:
+ *     isfileExist
+ * Description:
+ *    检查文件是否存在
+ * Notes:
+ *     
+ */
 EXTERN BOOL isfileExist(CONST CHAR * filename)
 {
 	if (NULL == filename) {
@@ -253,7 +261,14 @@ EXTERN BOOL isfileExist(CONST CHAR * filename)
 	}
 	return FALSE;
 }
-
+/*
+ * FunctionName:
+ *     fileSize
+ * Description:
+ *    获取文件大小
+ * Notes:
+ *     
+ */
 EXTERN UINT64 fileSize(CONST CHAR * filename)
 {
     struct stat buf;  
@@ -265,18 +280,14 @@ EXTERN UINT64 fileSize(CONST CHAR * filename)
     return (UINT64)(buf.st_size);  
 }
 
-/******************************************************************************
- * Time:2018年9月30日13:23:31
- * printf()的颜色格式:\033[{attr1};{attr2};...{attrn}m
- * 以\033即Esc的ASCII开始，跟随n个属性，以m结尾
- * eg:\033[32;41m
- * attr属性取值：
- * 0：重置所有属性；1：高亮/加粗；2：暗淡；4：下滑线；5：闪烁；6：反转；8：隐藏
- * 30～37为前景色，40～47为背景色，依次是：
- * 黑	红	绿	黄	蓝	紫	青	白
- * 30	31 	32 	33	34 	35 	36  37
- * 40	41	42	43	44	45	46	47
- * ****************************************************************************/
+/*
+ * FunctionName:
+ *     progressBar
+ * Description:
+ *    进度条显示功能
+ * Notes:
+ *     
+ */
 EXTERN VOID progressBar(UINT32 fileSize, UINT32 curSize)
 {
 	LOCAL CHAR barChar[MAX_STR_LEN] = {0};

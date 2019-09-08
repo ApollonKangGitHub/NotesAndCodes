@@ -6,11 +6,24 @@
 #define MAX_STR_LEN 	101	
 #define SIZE_BIT_KB		10		/* 单位为KB */
 
-#define _PROGRESS_BAR_BLACK				"\033[30m"
-#define _PROGRESS_BAR_RED				"\033[31m"
-#define _PROGRESS_BAR_GREEN				"\033[32m"
-#define _PROGRESS_BAR_BLUE				"\033[34m"
-#define _PROGRESS_BAR_RESET				"\r\033[0m"
+/******************************************************************************
+ * Time:2018年9月30日13:23:31
+ * printf()的颜色格式:\033[{attr1};{attr2};...{attrn}m
+ * 以\033即Esc的ASCII开始，跟随n个属性，以m结尾
+ * eg:\033[32;41m
+ * attr属性取值：
+ * 0：重置所有属性；1：高亮/加粗；2：暗淡；4：下滑线；5：闪烁；6：反转；8：隐藏
+ * 30～37为前景色，40～47为背景色，依次是：
+ * 黑	红	绿	黄	蓝	紫	青	白
+ * 30	31 	32 	33	34 	35 	36  37
+ * 40	41	42	43	44	45	46	47
+ * ****************************************************************************/
+#define _PROGRESS_BAR_BLACK					"\033[30m"
+#define _PROGRESS_BAR_RED					"\033[31m"
+#define _PROGRESS_BAR_GREEN					"\033[32m"
+#define _PROGRESS_BAR_BLUE					"\033[34m"
+#define _PROGRESS_BAR_RESET					"\r\033[0m"
+
 #define PRINT_RED(format, ...)       		printf(_PROGRESS_BAR_RED""format""_PROGRESS_BAR_RESET, ##__VA_ARGS__)
 #define PRINT_GREEN(format, ...)   			printf(_PROGRESS_BAR_BLUE""format""_PROGRESS_BAR_RESET, ##__VA_ARGS__)  
 #define PRINT_YELLOW(format, ...)   		printf(_PROGRESS_BAR_GREEN""format""_PROGRESS_BAR_RESET, ##__VA_ARGS__) 
