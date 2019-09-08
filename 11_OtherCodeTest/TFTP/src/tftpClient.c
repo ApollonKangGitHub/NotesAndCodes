@@ -144,6 +144,7 @@ LOCAL tftpReturnValue_t tftp_client_pack_deal_upload()
 	INT32 readLen = 0;
 	UINT16 ack = 0;
 	UINT16 blkid = 0;
+	UINT32 curSize = 0;
 	tftpReturnValue_t tftpRet = tftp_ret_Ok;
 	INT32 sockfd = gCliTranInfo._socketFd;
 	CHAR errMsg[__TFTP_ERR_PACK_MAX_LEN_] = {0};
@@ -174,7 +175,7 @@ LOCAL tftpReturnValue_t tftp_client_pack_deal_upload()
 			goto tftp_upload_err_ret;
 		}
 	}
-	
+
 	blkid = 1;
 	while (TRUE) {
 		(VOID)memset(gRecvBuf, 0, __TFTP_RECV_BUF_LEN_);
@@ -186,6 +187,9 @@ LOCAL tftpReturnValue_t tftp_client_pack_deal_upload()
 			sendLen = (INT32)tftp_pack_error(gSendBuf, tftp_Pack_ErrCode_AccViolate, errMsg);
 			goto tftp_upload_err_send_ret;
 		}		
+		
+		curSize += readLen;
+		progressBar(recvInfo._tSize, curSize);
 		
 		/* 封装DATA数据包 */
 		sendLen = readLen + (INT32)tftp_pack_data(gSendBuf, blkid);
@@ -419,7 +423,7 @@ LOCAL tftpReturnValue_t tftp_client_tranfer_info_init(INT32 argc, CHAR * argv[])
 	/* 4、请求报文参数获取 */
 	tftp_pack_get_tranfer_mode(pMode, gCliTranInfo._reqPack._pMode, &gCliTranInfo._reqPack._mode);
 	gCliTranInfo._reqPack._blkSize = tftp_client_get_blksize(pBlksize);
-	gCliTranInfo._reqPack._tSize = tftp_cilent_get_file_size((CONST CHAR *)(&gCliTranInfo._reqPack._opcode));
+	gCliTranInfo._reqPack._tSize = tftp_cilent_get_file_size((CONST CHAR *)(&gCliTranInfo._filePath));
 	gCliTranInfo._reqPack._bpId = tftp_client_get_bpid(pFilename);
 	gCliTranInfo._reqPack._timeout = tftp_client_get_timeout(pTimeout);
 	gCliTranInfo._reqPack._tmfreq = tftp_client_get_tmfreq(pTmFreq);

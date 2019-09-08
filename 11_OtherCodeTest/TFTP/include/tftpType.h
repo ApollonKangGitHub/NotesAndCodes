@@ -27,6 +27,8 @@
 #define INT16 	signed short 
 #define INT8 	signed char 
 
+#define DOUBLE double
+#define FLOAT float
 #define __GET_BIT(addr, bitPos) \
 		(((((UINT8 *)(addr))[(bitPos) / 8]) >> ((bitPos) % 8)) & 1U)
 #define __SET_BIT(addr, bitPos, setBit) ((setBit) \

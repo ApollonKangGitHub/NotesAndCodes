@@ -14,7 +14,7 @@ tftpTaskPoolList_t * gTaskPoolHead = NULL;
 tftpTaskPoolList_t * gTaskPoolTail = NULL;
 INT32 gListenSocket = 0;
 LOCAL tftpSem_t * gSemPool;
-LOCAL CHAR gServerPath[__TFTP_FILE_PATH_LEN_] = {"/home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/server/"};
+LOCAL CHAR gServerPath[__TFTP_FILE_PATH_LEN_] = {0};
 
 EXTERN VOID md5_algroithm(CHAR CONST * file, UINT8 * result);
 
@@ -913,6 +913,10 @@ LOCAL tftpReturnValue_t tftp_server_task_pool_init(VOID)
 	return tftp_ret_Ok;
 }
 
+LOCAL tftpReturnValue_t tftp_server_config_init(VOID)
+{
+	memcpy(gServerPath, "/home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/server/", __TFTP_FILE_PATH_LEN_);
+}
 
 /*
  * FunctionName:
@@ -935,7 +939,7 @@ LOCAL VOID tftp_server_cmd_enable_handle(INT32 argc, CHAR * argv[])
 		/* 0、服务器配置初始化,在config目录下的server.cfg文件中
 		 * 在启动server之前需要保证server配置齐全
 		 */
-		//tftp_server_config_init();
+		tftp_server_config_init();
 	
 		/* 1、初始化主线程用于监听连接的socket */
 		tftpRet = tftp_server_listen_socket_init(argv[2]);

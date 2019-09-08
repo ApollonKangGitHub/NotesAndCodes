@@ -264,3 +264,55 @@ EXTERN UINT64 fileSize(CONST CHAR * filename)
 	
     return (UINT64)(buf.st_size);  
 }
+
+/******************************************************************************
+ * Time:2018年9月30日13:23:31
+ * printf()的颜色格式:\033[{attr1};{attr2};...{attrn}m
+ * 以\033即Esc的ASCII开始，跟随n个属性，以m结尾
+ * eg:\033[32;41m
+ * attr属性取值：
+ * 0：重置所有属性；1：高亮/加粗；2：暗淡；4：下滑线；5：闪烁；6：反转；8：隐藏
+ * 30～37为前景色，40～47为背景色，依次是：
+ * 黑	红	绿	黄	蓝	紫	青	白
+ * 30	31 	32 	33	34 	35 	36  37
+ * 40	41	42	43	44	45	46	47
+ * ****************************************************************************/
+EXTERN VOID progressBar(UINT32 fileSize, UINT32 curSize)
+{
+	LOCAL CHAR barChar[MAX_STR_LEN] = {0};
+	LOCAL CHAR table[5] = "-\\|/";
+	LOCAL BOOL first = TRUE;
+	LOCAL UINT8 pre = 0;
+	UINT32 cur = 0;
+	INT32 index = 0;
+
+	
+	/* 当前进度和上一次进度条刷新进度相同，则直接返回 */
+	cur = (UINT8)(((FLOAT)curSize / fileSize) * 100);
+	if (cur == pre) {
+		return;
+	}
+
+	for(index = pre; index < cur; index++){
+		barChar[index] = '#';
+		pre = cur;
+	}
+
+	if (first) {
+		printf("\r\n");
+		first = FALSE;
+	}
+
+	PRINT_GREEN("[%-100s][%d%%][%c][%dKB - %dKB]", \
+			barChar, cur, table[cur % 4], curSize >> 10, fileSize >> 10);
+	fflush(__TFTP_STDOUT_);
+
+	/* 全局数据清空 */
+	if (fileSize == curSize) {
+		pre = 0;
+		first = TRUE;
+		memset(barChar, 0, MAX_STR_LEN);
+	}
+}
+
+
