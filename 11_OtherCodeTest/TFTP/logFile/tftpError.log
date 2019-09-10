@@ -16,3 +16,13 @@ file test.txt NOT FOUND, Can't do this operator![0m
 [1;31m2019-09-10 22:44:20(UTC)[Tuesday]%% TFTP-ERROR :(65)bind socket fd fail, sockfd = 8, port = 69, errno = 99[0m
 [1;31m2019-09-10 22:44:20(UTC)[Tuesday]%% TFTP-ERROR :(686)create server socket fail![0m
 [1;31m2019-09-10 22:44:20(UTC)[Tuesday]%% TFTP-ERROR :(947)tftp operator failure, return ERROR (1)[0m
+[1;31m2019-09-11 00:32:25(UTC)[Wednesday]%% TFTP-ERROR :(423)file qwer NOT FOUND, Can't do this operator![0m
+[1;31m2019-09-11 00:32:25(UTC)[Wednesday]%% TFTP-ERROR :(515)tftp operator failure, return NOT FOUND(3)[0m
+[1;31m2019-09-11 00:41:57(UTC)[Wednesday]%% TFTP-ERROR :(424)file test.txt NOT FOUND, Can't do this operator![0m
+[1;31m2019-09-11 00:41:57(UTC)[Wednesday]%% TFTP-ERROR :(517)tftp operator failure, return NOT FOUND(3)[0m
+[1;31m2019-09-11 00:42:03(UTC)[Wednesday]%% TFTP-ERROR :(424)file test.txt NOT FOUND, Can't do this operator![0m
+[1;31m2019-09-11 00:42:03(UTC)[Wednesday]%% TFTP-ERROR :(517)tftp operator failure, return NOT FOUND(3)[0m
+[1;31m2019-09-11 00:42:09(UTC)[Wednesday]%% TFTP-ERROR :(424)file qwert NOT FOUND, Can't do this operator![0m
+[1;31m2019-09-11 00:42:09(UTC)[Wednesday]%% TFTP-ERROR :(517)tftp operator failure, return NOT FOUND(3)[0m
+[1;31m2019-09-11 00:42:24(UTC)[Wednesday]%% TFTP-ERROR :(424)file qwert NOT FOUND, Can't do this operator![0m
+[1;31m2019-09-11 00:42:24(UTC)[Wednesday]%% TFTP-ERROR :(517)tftp operator failure, return NOT FOUND(3)[0m

@@ -188,7 +188,8 @@ LOCAL tftpReturnValue_t tftp_client_pack_deal_upload()
 			sendLen = (INT32)tftp_pack_error(gSendBuf, tftp_Pack_ErrCode_AccViolate, errMsg);
 			goto tftp_upload_err_send_ret;
 		}		
-		
+
+		/* 进度条 */
 		curSize += readLen;
 		progressBar(recvInfo._tSize, curSize, progressBarFirst);
 		progressBarFirst = FALSE;
@@ -459,6 +460,9 @@ LOCAL tftpReturnValue_t tftp_client_config_init(VOID)
 LOCAL VOID tftp_client_info_reset(VOID)
 {
 	UINT8 md5Result[64] = {0};
+	time_t timeStampStart = 0;
+	time_t timeStampEnd = 0;
+	time_t useTime = 0;
 	
 	if (gCliTranInfo._fileFd > 0) {
 		tftp_close(gCliTranInfo._fileFd);
@@ -471,8 +475,21 @@ LOCAL VOID tftp_client_info_reset(VOID)
 	
 	/* 计算文件md5值 */
 	PRINT_GREEN("\r\nfile %s md5sum is calcing...",  gCliTranInfo._filePath);
+	tftp_fflush(__TFTP_STDOUT_);
+
+	/* 获取MD5计算开始时间戳 */
+	(VOID)time (&timeStampStart);
+
+	/* 开始计算 */
 	(VOID)md5_algroithm(gCliTranInfo._filePath, md5Result);
 	PRINT_GREEN("\r\nfile %s md5sum calc success hash result is %s",  gCliTranInfo._filePath, md5Result);
+
+	/* 获取结束时间戳 */
+	(VOID)time (&timeStampEnd);
+
+	/* 计算MD5计算耗时 */
+	useTime = timeStampEnd - timeStampStart;
+	PRINT_GREEN("\r\nMD5 calc use time:%lus", useTime);
 	
 	memset(&gCliTranInfo._cliAddr, 0, sizeof(gCliTranInfo._cliAddr));
 	memset(&gCliTranInfo._serAddr, 0, sizeof(gCliTranInfo._serAddr));
@@ -538,7 +555,7 @@ LOCAL VOID tftp_client_cmd_handle(INT32 argc, CHAR * argv[])
 	/* 计算耗时和速率 */
 	useTime = timeStampEnd - timeStampStart;
 	speed = (float)gCliTranInfo._reqPack._tSize / __MB_CELL_;
-	PRINT_GREEN("\r\nuse time:%lus, speed:%.2fMB/s", useTime, useTime ? (speed / useTime) : speed);
+	PRINT_GREEN("\r\nfile transfer use time:%lus, speed:%.2fMB/s", useTime, useTime ? (speed / useTime) : speed);
 	
 	/* 5、传输完毕重新初始化相关传输资源 */
 	tftp_client_info_reset();
