@@ -288,18 +288,27 @@ EXTERN UINT64 fileSize(CONST CHAR * filename)
  * Notes:
  *     
  */
-EXTERN VOID progressBar(UINT32 fileSize, UINT32 curSize)
+EXTERN VOID progressBar(UINT32 fileSize, UINT32 curSize, BOOL first)
 {
 	LOCAL CHAR barChar[MAX_STR_LEN] = {0};
 	LOCAL CHAR table[5] = "-\\|/";
-	LOCAL BOOL first = TRUE;
 	LOCAL UINT8 pre = 0;
 	UINT32 cur = 0;
 	INT32 index = 0;
-
+	
+	/* 杜绝浮点数例外 (核心已转储)错误,杜绝错误参数 */
+	if ((fileSize == 0) || (curSize > fileSize)) {
+		return;
+	}	
+	
+	if (first) {
+		pre = 0;
+		printf("\r\n");
+		memset(barChar, 0, MAX_STR_LEN);
+	}
 	
 	/* 当前进度和上一次进度条刷新进度相同，则直接返回 */
-	cur = (UINT8)(((FLOAT)curSize / fileSize) * 100);
+	cur = (UINT8)(((FLOAT)curSize / fileSize) * 100);	
 	if (cur == pre) {
 		return;
 	}
@@ -309,21 +318,9 @@ EXTERN VOID progressBar(UINT32 fileSize, UINT32 curSize)
 		pre = cur;
 	}
 
-	if (first) {
-		printf("\r\n");
-		first = FALSE;
-	}
-
-	PRINT_GREEN("[%-100s][%d%%][%c][%dKB - %dKB]", \
-			barChar, cur, table[cur % 4], curSize >> 10, fileSize >> 10);
+	PRINT_GREEN("[%-100s][%-3d%%][%c][%.2fMB - %.2fMB]  \r", \
+			barChar, cur, table[cur % 4], (float)curSize / __MB_CELL_, (float)fileSize / __MB_CELL_);
 	fflush(__TFTP_STDOUT_);
-
-	/* 全局数据清空 */
-	if (fileSize == curSize) {
-		pre = 0;
-		first = TRUE;
-		memset(barChar, 0, MAX_STR_LEN);
-	}
 }
 
 

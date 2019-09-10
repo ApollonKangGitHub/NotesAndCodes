@@ -18,16 +18,27 @@
  * 30	31 	32 	33	34 	35 	36  37
  * 40	41	42	43	44	45	46	47
  * ****************************************************************************/
-#define _PROGRESS_BAR_BLACK					"\033[30m"
-#define _PROGRESS_BAR_RED					"\033[31m"
-#define _PROGRESS_BAR_GREEN					"\033[32m"
-#define _PROGRESS_BAR_BLUE					"\033[34m"
-#define _PROGRESS_BAR_RESET					"\r\033[0m"
+#define _PROGRESS_BAR_BLACK					"\033[30;47m"
+#define _PROGRESS_BAR_RED					"\033[31;40m"
+#define _PROGRESS_BAR_GREEN					"\033[32;40m"
+#define _PROGRESS_BAR_YELLOW 				"\033[33;40m"
+#define _PROGRESS_BAR_BLUE					"\033[34;40m"
+#define __PROGRESS_BAR_PUPRLE				"\033[35;40m"
+#define __PROGRESS_BAR_CYAN					"\033[36;40m"
+#define __PROGRESS_BAR_WHITE				"\033[37;40m"
+#define _PROGRESS_BAR_RESET					"\033[0m"
 
-#define PRINT_RED(format, ...)       		printf(_PROGRESS_BAR_RED""format""_PROGRESS_BAR_RESET, ##__VA_ARGS__)
-#define PRINT_GREEN(format, ...)   			printf(_PROGRESS_BAR_BLUE""format""_PROGRESS_BAR_RESET, ##__VA_ARGS__)  
-#define PRINT_YELLOW(format, ...)   		printf(_PROGRESS_BAR_GREEN""format""_PROGRESS_BAR_RESET, ##__VA_ARGS__) 
 #define PRINT_BLACK(format, ...)			printf(_PROGRESS_BAR_BLACK""format""_PROGRESS_BAR_RESET, ##__VA_ARGS__) 
+#define PRINT_RED(format, ...)       		printf(_PROGRESS_BAR_RED""format""_PROGRESS_BAR_RESET, ##__VA_ARGS__)
+#define PRINT_GREEN(format, ...)   			printf(_PROGRESS_BAR_GREEN""format""_PROGRESS_BAR_RESET, ##__VA_ARGS__)  
+#define PRINT_YELLOW(format, ...)   		printf(_PROGRESS_BAR_YELLOW""format""_PROGRESS_BAR_RESET, ##__VA_ARGS__) 
+#define PRINT_BLUE(format, ...)				printf(_PROGRESS_BAR_BLUE""format""_PROGRESS_BAR_RESET, ##__VA_ARGS__) 
+#define PRINT_PUPRLE(format, ...)			printf(__PROGRESS_BAR_PUPRLE""format""_PROGRESS_BAR_RESET, ##__VA_ARGS__) 
+#define PRINT_CYAN(format, ...)				printf(__PROGRESS_BAR_CYAN""format""_PROGRESS_BAR_RESET, ##__VA_ARGS__) 
+#define PRINT_WHITE(format, ...)			printf(__PROGRESS_BAR_WHITE""format""_PROGRESS_BAR_RESET, ##__VA_ARGS__) 
+
+#define __MB_CELL_	(1U << 20)
+#define __KB_CELL_	(1U << 10)
 
 EXTERN CHAR * uitoa(UINT32 value, CHAR * str);
 EXTERN UINT32 atoui(CONST CHAR * str);
@@ -40,6 +51,6 @@ EXTERN CONST CHAR * strInt32Check(CONST CHAR * str);
 EXTERN CONST CHAR * strCmdStrCheck(CONST CHAR * str);
 EXTERN BOOL isfileExist(CONST CHAR * filename);
 EXTERN UINT64 fileSize(CONST CHAR * filename);
-EXTERN VOID progressBar(UINT32 fileSize, UINT32 curSize);
+EXTERN VOID progressBar(UINT32 fileSize, UINT32 curSize, BOOL first);
 
 #endif

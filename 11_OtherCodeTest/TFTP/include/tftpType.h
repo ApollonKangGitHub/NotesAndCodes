@@ -59,6 +59,7 @@ EXTERN CHAR * tftp_err_code_msg[tftp_ret_Max + 1];
 		tftp_err_code_msg[index] : \
 		tftp_err_code_msg[tftp_ret_Max])
 
+#define tftp_scan scanf
 #define tftp_print printf
 #define tftp_vfprint vfprintf
 #define tftp_sprint sprintf

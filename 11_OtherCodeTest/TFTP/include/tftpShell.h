@@ -5,16 +5,23 @@
 
 #define __TFTP_SHELL_VERSION_	"tftp Shell1.0"
 
-/* shell线程资源栈大小 */
-#define __TFTP_SHELL_TASK_STACK_SIZE_		(0x100000)	
-
-/* shell输入输出缓冲区大小 */
-#define __TFTP_SHELL_BUFFER_LEN_MAX_		(1024)
+/* 
+ * shell线程资源栈大小，线程栈设置稍大，
+ * 防止局部命令行解析的线程栈变量过大导致段错误
+ */
+#define __TFTP_SHELL_TASK_STACK_SIZE_		(0x200000)	
 
 /* 命令最大长度 */
-#define __TFTP_SHELL_CMD_MAX_LEN_ 			(128)
-#define __TFTP_SHELL_CMD_MAX_NUM_			(16)
-#define __TFTP_CMD_REG_STR_LEN_				(2048)
+#define __TFTP_SHELL_CMD_MAX_LEN_ 			(1U << 5)
+
+/* 一条命令argc最大值 */
+#define __TFTP_SHELL_CMD_MAX_NUM_			(1U << 5)
+
+/* 命令注册的字符串最大长度 */
+#define __TFTP_CMD_REG_STR_LEN_				(1U << 11)
+
+/* shell输入输出缓冲区大小 */
+#define __TFTP_SHELL_BUFFER_LEN_MAX_		(__TFTP_SHELL_CMD_MAX_LEN_ * __TFTP_SHELL_CMD_MAX_NUM_)
 
 typedef UINT32  tftpCmdAbil_t;
 

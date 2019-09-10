@@ -10,3 +10,9 @@ file test.txt NOT FOUND, Can't do this operator![0m
 [1;31m2029-09-08 18:07:57(UTC)[Sunday]%% TFTP-ERROR :(300)tftp operator failure, return NOT FOUND(3)[0m
 [1;31m2029-09-08 18:08:56(UTC)[Sunday]%% TFTP-ERROR :(247)file test.txt NOT FOUND, Can't do this operator![0m
 [1;31m2029-09-08 18:08:56(UTC)[Sunday]%% TFTP-ERROR :(301)tftp operator failure, return NOT FOUND(3)[0m
+[1;31m2019-09-10 00:34:48(UTC)[Tuesday]%% TFTP-ERROR :(312)command deal fail!![0m
+[1;31m2019-09-10 01:21:19(UTC)[Tuesday]%% TFTP-ERROR :(423)file test.txt NOT FOUND, Can't do this operator![0m
+[1;31m2019-09-10 01:21:19(UTC)[Tuesday]%% TFTP-ERROR :(515)tftp operator failure, return NOT FOUND(3)[0m
+[1;31m2019-09-10 22:44:20(UTC)[Tuesday]%% TFTP-ERROR :(65)bind socket fd fail, sockfd = 8, port = 69, errno = 99[0m
+[1;31m2019-09-10 22:44:20(UTC)[Tuesday]%% TFTP-ERROR :(686)create server socket fail![0m
+[1;31m2019-09-10 22:44:20(UTC)[Tuesday]%% TFTP-ERROR :(947)tftp operator failure, return ERROR (1)[0m

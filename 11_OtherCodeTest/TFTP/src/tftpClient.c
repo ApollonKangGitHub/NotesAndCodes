@@ -145,6 +145,7 @@ LOCAL tftpReturnValue_t tftp_client_pack_deal_upload()
 	UINT16 ack = 0;
 	UINT16 blkid = 0;
 	UINT32 curSize = 0;
+	BOOL progressBarFirst = TRUE;
 	tftpReturnValue_t tftpRet = tftp_ret_Ok;
 	INT32 sockfd = gCliTranInfo._socketFd;
 	CHAR errMsg[__TFTP_ERR_PACK_MAX_LEN_] = {0};
@@ -189,7 +190,8 @@ LOCAL tftpReturnValue_t tftp_client_pack_deal_upload()
 		}		
 		
 		curSize += readLen;
-		progressBar(recvInfo._tSize, curSize);
+		progressBar(recvInfo._tSize, curSize, progressBarFirst);
+		progressBarFirst = FALSE;
 		
 		/* 封装DATA数据包 */
 		sendLen = readLen + (INT32)tftp_pack_data(gSendBuf, blkid);
@@ -357,6 +359,7 @@ LOCAL UINT16 tftp_client_get_blksize(CONST CHAR * pBlksize)
 		case __TFTP_BLKSIZE_1428_BYTES_:
 		case __TFTP_BLKSIZE_2048_BYTES_:	
 		case __TFTP_BLKSIZE_4096_BYTES_:	
+		case __TFTP_BLKSIZE_8192_BYTES_:
 			break;
 		default:
 			TFTP_LOGWARN("invalid block size:%d(Bytes), set default:%d(Bytes)", blksize, __TFTP_DEFAULT_BLKSIZE_);
@@ -467,8 +470,9 @@ LOCAL VOID tftp_client_info_reset(VOID)
 	}
 	
 	/* 计算文件md5值 */
+	PRINT_GREEN("\r\nfile %s md5sum is calcing...",  gCliTranInfo._filePath);
 	(VOID)md5_algroithm(gCliTranInfo._filePath, md5Result);
-	TFTP_LOGNOTE("file %s md5sum is %s",  gCliTranInfo._filePath, md5Result);
+	PRINT_GREEN("\r\nfile %s md5sum calc success hash result is %s",  gCliTranInfo._filePath, md5Result);
 	
 	memset(&gCliTranInfo._cliAddr, 0, sizeof(gCliTranInfo._cliAddr));
 	memset(&gCliTranInfo._serAddr, 0, sizeof(gCliTranInfo._serAddr));
@@ -490,9 +494,13 @@ LOCAL VOID tftp_client_cmd_handle(INT32 argc, CHAR * argv[])
 {
 	tftp_print("\r\ntftp client start!!!");
 	tftpReturnValue_t tftpRet = tftp_ret_Ok;
+	time_t timeStampStart = 0;
+	time_t timeStampEnd = 0;
+	time_t useTime = 0;
 	INT32 sendLen = 0;
 	INT32 recvLen = 0;
 	INT32 ret = 0;
+	FLOAT speed = 0;
 	
 	/*
 	 * 0、客户端配置初始化,客户端配置文件在config目录下的client.cfg文件中
@@ -513,6 +521,9 @@ LOCAL VOID tftp_client_cmd_handle(INT32 argc, CHAR * argv[])
 	/* 3、发送请求到服务器 */
 	ret = tftp_socket_send(gCliTranInfo._socketFd, gSendBuf, sendLen, &gCliTranInfo._serAddr);
 
+	/* 获取传输前时间戳 */
+	(VOID)time (&timeStampStart);
+
 	/* 4、处理服务器响应 */
 	if (tftp_Pack_OperCode_Rrq == gCliTranInfo._reqPack._opcode) {
 		tftpRet = tftp_client_pack_deal_download();
@@ -520,7 +531,15 @@ LOCAL VOID tftp_client_cmd_handle(INT32 argc, CHAR * argv[])
 	else if (tftp_Pack_OperCode_Wrq == gCliTranInfo._reqPack._opcode) {
 		tftpRet = tftp_client_pack_deal_upload();
 	}
+	
+	/* 获取结束时间戳 */
+	(VOID)time (&timeStampEnd);
 
+	/* 计算耗时和速率 */
+	useTime = timeStampEnd - timeStampStart;
+	speed = (float)gCliTranInfo._reqPack._tSize / __MB_CELL_;
+	PRINT_GREEN("\r\nuse time:%lus, speed:%.2fMB/s", useTime, useTime ? (speed / useTime) : speed);
+	
 	/* 5、传输完毕重新初始化相关传输资源 */
 	tftp_client_info_reset();
 }

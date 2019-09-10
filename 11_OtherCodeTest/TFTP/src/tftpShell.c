@@ -6,8 +6,6 @@
 
 #include <tftpPublic.h>
 
-LOCAL CHAR gCmdStrBuf[__TFTP_CMD_REG_STR_LEN_] = {0};
-LOCAL CHAR gCmdFormat[__TFTP_SHELL_CMD_MAX_NUM_][__TFTP_SHELL_CMD_MAX_LEN_] = {0};
 LOCAL tftpShellList_t * gShellHead = NULL;
 LOCAL tftpShellList_t * gShellTail = NULL;
 
@@ -54,7 +52,7 @@ VOID ttp_shell_normal_menu(VOID)
 		tftp_print("%s", cmdStr);
 		pTemp = pTemp->_next;
 	}
-	tftp_print("\r\n-------------------------------------------------------------------"); 	
+	tftp_print("\r\n-------------------------------------------------------------------\r\n"); 	
 }
 
 /*
@@ -107,7 +105,7 @@ LOCAL INT32 tftp_shell_line(CHAR * str, INT32 strLen)
 		return -1;
 	}
 	
-	tftp_print("\r\ntftp>");
+	tftp_print("tftp>");
 	return tftp_shell_wait_for_string(str, strLen);
 }
 
@@ -127,8 +125,7 @@ LOCAL tftpReturnValue_t tftp_shell_line_format
 )
 {
 	CHAR * strPtr = NULL;
-	CHAR * savePtr = NULL;
-	CHAR * pstr = shellStr;
+	CHAR * savePtr = shellStr;
 	INT32 index = 0;
 
 	if (NULL == shellStr) {
@@ -138,13 +135,19 @@ LOCAL tftpReturnValue_t tftp_shell_line_format
 	TFTP_LOGDBG(tftp_dbgSwitch_shell, "shell shell string:%s", shellStr);
 	(VOID)clearMoreSpace(shellStr);
  	TFTP_LOGDBG(tftp_dbgSwitch_shell, "shell shell string:%s", shellStr);
-	
-	savePtr = pstr;
+
 	while (*savePtr != '\0') {
-		strPtr = strtok_r(pstr, " ", &savePtr);
+		strPtr = strtok_r(NULL, " ", &savePtr);
+		if (__TFTP_SHELL_CMD_MAX_LEN_ <= strlen(strPtr)) {
+			tftp_print("\r\nToo long command, max command length:%d!!!", __TFTP_SHELL_CMD_MAX_LEN_);
+			return tftp_ret_Error;
+		}
 		strncpy(argv[index], strPtr, __TFTP_SHELL_CMD_MAX_LEN_);
 		index++;
-		pstr = NULL;
+		if (__TFTP_SHELL_CMD_MAX_NUM_ <= index) {
+			tftp_print("\r\nToo many command, max cmmand argc number:%d!!!", __TFTP_SHELL_CMD_MAX_NUM_);
+			return tftp_ret_Error;
+		}
 	}
 	*argc = index;
 
@@ -259,8 +262,12 @@ _tftp_deal_invalid_cmd:
 	
 __tftp_deal_function:
 	/* 执行具体函数 */
-	(pTemp->_dealFun)(argc, argv);
-
+	if (pTemp && pTemp->_dealFun) {
+		(pTemp->_dealFun)(argc, argv);
+	}
+	else {
+		tftp_print("No have deal function!");
+	}
 	return tftp_ret_Ok;
 }
 
@@ -277,13 +284,15 @@ VOID * tftp_shell_task_deal(VOID * argv)
 	INT32 shellArgc = 0;
 	INT32 lineLen = 1;
 	INT32 index = 0;
+	tftpReturnValue_t tftpRet = tftp_ret_Ok;
 	CHAR shellStr[__TFTP_SHELL_BUFFER_LEN_MAX_] = {0};
 	CHAR * shellArgv[__TFTP_SHELL_CMD_MAX_NUM_] = {NULL};
+	LOCAL CHAR cmdFormat[__TFTP_SHELL_CMD_MAX_NUM_][__TFTP_SHELL_CMD_MAX_LEN_] = {0};	
 	
 	TFTP_LOGDBG(tftp_dbgSwitch_shell, "shell deal thread, argv=%p", argv);
 
 	for (index = 0; index < __TFTP_SHELL_CMD_MAX_NUM_; index++) {
-		shellArgv[index] = (CHAR *)(&gCmdFormat[index]);
+		shellArgv[index] = (CHAR *)(&cmdFormat[index]);
 	}
 
 	while (!initSucces) {
@@ -297,8 +306,14 @@ VOID * tftp_shell_task_deal(VOID * argv)
 		if (lineLen < 1) {
 			continue;
 		}
-		tftp_shell_line_format(shellStr, &shellArgc, shellArgv);
+		tftpRet = tftp_shell_line_format(shellStr, &shellArgc, shellArgv);
+		if (TFTP_FAILURE(tftpRet)) {
+			tftp_print("\r\ncommand deal fail!!");
+			tftp_scan("%*[^\n]%*c");
+			continue;
+		}
 		tftp_shell_cmd_deal(shellArgc, shellArgv);
+		tftp_print("\r\n");
 		usleep(1000 * 10);
 	}
 	
@@ -417,7 +432,7 @@ EXTERN tftpReturnValue_t tftp_shell_cmd_register
 	CHAR * cmd_str
 )
 {
-	CHAR * pCmdStr = NULL;
+	LOCAL CHAR cmdStrBuf[__TFTP_CMD_REG_STR_LEN_] = {0};
 	CHAR * pCmdSaveStr = NULL;
 	CHAR * pDesSaveStr = NULL;
 	CHAR * pMove = NULL;
@@ -436,18 +451,17 @@ EXTERN tftpReturnValue_t tftp_shell_cmd_register
 	}
 
 	/* 构建命令注册链表节点 */
-	memset(gCmdStrBuf, 0, __TFTP_CMD_REG_STR_LEN_);
-	strncpy(gCmdStrBuf, cmd_str, __TFTP_CMD_REG_STR_LEN_);
+	memset(cmdStrBuf, 0, __TFTP_CMD_REG_STR_LEN_);
+	strncpy(cmdStrBuf, cmd_str, __TFTP_CMD_REG_STR_LEN_);
 	
 	pCmdNode = malloc(sizeof(tftpShellList_t));
 	memset(pCmdNode, 0, sizeof(tftpShellList_t));
 
-	pCmdStr = pMove = gCmdStrBuf;
-
+	pMove = &cmdStrBuf[0];
 	while (*pMove) {
 
 		/* 解析注册信息并填充节点 */
-		pCmdSaveStr = strtok_r(pCmdStr, "{", &pMove);	/* 命令 */
+		pCmdSaveStr = strtok_r(NULL, "{", &pMove);	/* 命令 */
 		pDesSaveStr = strtok_r(NULL, "}", &pMove);		/* 描述 */
 
 		/* 找到的两个字符串进行内存申请与内容填充 */
@@ -466,7 +480,6 @@ EXTERN tftpReturnValue_t tftp_shell_cmd_register
 		pCmdNode->_cmdArgv._info[index]._type = tftp_shell_cmd_type_get(pCmdBuf);
 
 		index++;
-		pCmdStr = NULL;
 		pCmdNode->_cmdArgc = index;
 	}
 	
@@ -679,10 +692,6 @@ EXTERN INT32 tftp_shell_module_init(VOID)
 
 	/* 注册shell任务相关命令 */
 	tftp_shell_cmd_init();
-
-	/* 创建线程对应相关信号量 */
-	
-	/* 释放信号量，启动shell线程 */
 }
 
 
