@@ -212,7 +212,10 @@ EXTERN tftpReturnValue_t tftp_unpack_req
 
 EXTERN UINT16 tftp_pack_ack(UINT8 * buf, UINT16 id)
 {
-
+	UINT16 * p = (UINT16 *)buf;
+	p[0] = htons(__TFTP_OPCODE_ACK_);
+	p[1] = htons(id);
+	return __TFTP_ACK_LEN_ + __TFTP_OPCODE_LEN_;
 }
 
 EXTERN UINT16 tftp_pack_oack(UINT8 * buf, tftpPacktReq_t * reqPack)
@@ -294,7 +297,7 @@ EXTERN tftpReturnValue_t tftp_unpack_oack
 		subStrValue = strtok_r(NULL, "\0", &savePtr);
 		strVlaueLen = strlen(subStrValue) + 1;
 		savePtr++;
-		
+
 		/* 选项解析，选项值赋值 */
 		if (0 == strcasecmp(subStr, __TFTP_OPTION_TSIZE_)) {
 			recvPack->_tSize = atoui(subStrValue);
@@ -317,7 +320,7 @@ EXTERN tftpReturnValue_t tftp_unpack_oack
 			recvPack->_options._opt_bpid = 1;
 		}
 
-		index += (strLen + strVlaueLen);
+		index += (strLen + strVlaueLen + 2);
 	}
 	return tftp_ret_Ok;
 }
@@ -355,7 +358,7 @@ EXTERN UINT16 tftp_pack_error(UINT8 * buf, tftpPackErrCode_t errCode, UINT8 * er
 		p[packLen++] = '\0';
 	}
 #endif
-	printf("%s-%d", buf, packLen);
+
 	return packLen;
 }
 

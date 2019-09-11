@@ -98,3 +98,33 @@ Too many command, numner:64, max cmmand number:64[0m
 Too many command, numner:64, max cmmand number:64[0m
 [1;33m2019-09-10 01:21:35(UTC)[Tuesday]%% TFTP-WARN  :(338)invalid timeout frequency:65535, set default:5[0m
 [1;33m2019-09-10 01:21:45(UTC)[Tuesday]%% TFTP-WARN  :(338)invalid timeout frequency:65535, set default:5[0m
+[1;33m2019-09-12 00:36:45(UTC)[Thursday]%% TFTP-WARN  :(311)client:192.168.10.99 download file /home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/server/aaaa.txtaaaa.txt is not exist[0m
+[1;33m2019-09-12 00:45:58(UTC)[Thursday]%% TFTP-WARN  :(311)client:192.168.10.99 download file /home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/server/aaaa.txtaaaa.txt is not exist[0m
+[1;33m2019-09-12 00:47:27(UTC)[Thursday]%% TFTP-WARN  :(311)client:192.168.10.99 download file /home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/server/aaaa.txtaaaa.txt is not exist[0m
+[1;33m2019-09-12 00:48:00(UTC)[Thursday]%% TFTP-WARN  :(311)client:192.168.10.99 download file /home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/server/aaaa.txtaaaa.txtaaaa.txt is not exist[0m
+[1;33m2019-09-12 00:48:36(UTC)[Thursday]%% TFTP-WARN  :(311)client:192.168.10.99 download file /home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/server/aaaa.txtaaaa.txtaaaa.txt is not exist[0m
+[1;33m2019-09-12 01:00:33(UTC)[Thursday]%% TFTP-WARN  :(311)client:192.168.10.99 download file /home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/server/aaaa.txtaaaa.txt is not exist[0m
+[1;33m2019-09-12 01:07:49(UTC)[Thursday]%% TFTP-WARN  :(311)client:192.168.10.99 download file /home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/server/aaaa.txtaaaa.txt is not exist[0m
+[1;33m2019-09-12 01:10:36(UTC)[Thursday]%% TFTP-WARN  :(311)client:192.168.10.99 download file /home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/server/aaaa.txtaaaa.txt is not exist[0m
+[1;33m2019-09-12 01:11:59(UTC)[Thursday]%% TFTP-WARN  :(311)client:192.168.10.99 download file /home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/server/aaaa.txtaaaa.txtaaaa.txt is not exist[0m
+[1;33m2019-09-12 01:13:47(UTC)[Thursday]%% TFTP-WARN  :(311)client:192.168.10.99 download file /home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/server/aaaa.txtaaaa.txtaaaa.txt is not exist[0m
+[1;33m2019-09-12 01:14:22(UTC)[Thursday]%% TFTP-WARN  :(311)client:192.168.10.99 download file /home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/server/aaaa.txtaaaa.txtaaaa.txtaaaa.txt is not exist[0m
+[1;33m2019-09-12 01:16:38(UTC)[Thursday]%% TFTP-WARN  :(311)client:192.168.10.99 download file /home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/server/aaaa.txtaaaa.txtaaaa.txtaaaa.txt is not exist[0m
+[1;33m2019-09-12 01:17:02(UTC)[Thursday]%% TFTP-WARN  :(311)client:192.168.10.99 download file /home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/server/aaaa.txtaaaa.txtaaaa.txtaaaa.txtaaaa.txt is not exist[0m
+[1;33m2019-09-12 01:18:24(UTC)[Thursday]%% TFTP-WARN  :(311)client:192.168.10.99 download file /home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/server/aaaa.txtaaaa.txtaaaa.txtaaaa.txtaaaa.txt is not exist[0m
+[1;33m2019-09-12 01:19:35(UTC)[Thursday]%% TFTP-WARN  :(311)client:192.168.10.99 download file /home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/server/aaaa.txtaaaa.txtaaaa.txtaaaa.txtaaaa.txtaaaa.txt is not exist[0m
+[1;33m2019-09-12 01:20:05(UTC)[Thursday]%% TFTP-WARN  :(311)client:192.168.10.99 download file /home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/server/aaaa.txtaaaa.txtaaaa.txtaaaa.txtaaaa.txtaaaa.txt is not exist[0m
+[1;33m2019-09-12 01:21:03(UTC)[Thursday]%% TFTP-WARN  :(311)client:192.168.10.99 download file /home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/server/aaaa.txtaaaa.txtaaaa.txtaaaa.txtaaaa.txtaaaa.txtaaaa.txt is not exist[0m
+[1;33m2019-09-12 01:23:40(UTC)[Thursday]%% TFTP-WARN  :(311)client:192.168.10.99 download file /home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/server/aaaa.txtaaaa.txtaaaa.txtaaaa.txtaaaa.txtaaaa.txtaaaa.txt is not exist[0m
+[1;33m2019-09-12 01:25:52(UTC)[Thursday]%% TFTP-WARN  :(311)client:192.168.10.99 download file /home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/server/aaaa.txtaaaa.txtaaaa.txtaaaa.txtaaaa.txtaaaa.txtaaaa.txtaaaa.txt is not exist[0m
+[1;33m2019-09-12 01:26:56(UTC)[Thursday]%% TFTP-WARN  :(311)client:192.168.10.99 download file /home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/server/aaaa.txtaaaa.txtaaaa.txtaaaa.txtaaaa.txtaaaa.txtaaaa.txtaaaa.txt is not exist[0m
+[1;33m2019-09-12 01:27:47(UTC)[Thursday]%% TFTP-WARN  :(311)client:192.168.10.99 download file /home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/server/aaaa.txtaaaa.txtaaaa.txtaaaa.txtaaaa.txtaaaa.txtaaaa.txtaaaa.txtaaaa.txt is not exist[0m
+[1;33m2019-09-12 01:28:40(UTC)[Thursday]%% TFTP-WARN  :(311)client:192.168.10.99 download file /home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/server/aaaa.txtaaaa.txtaaaa.txtaaaa.txtaaaa.txtaaaa.txtaaaa.txtaaaa.txtaaaa.txt is not exist[0m
+[1;33m2019-09-12 02:02:58(UTC)[Thursday]%% TFTP-WARN  :(285)client tftp request invalid
+ Client connect:ip:192.168.10.100, port:1320, file:asdfg, mode:octet, blksize:512, timeout:60, tmfreq:5, bpid:0[0m
+[1;33m2019-09-12 02:03:00(UTC)[Thursday]%% TFTP-WARN  :(285)client tftp request invalid
+ Client connect:ip:192.168.10.100, port:1321, file:asdfg, mode:octet, blksize:512, timeout:60, tmfreq:5, bpid:0[0m
+[1;33m2019-09-12 02:04:04(UTC)[Thursday]%% TFTP-WARN  :(285)client tftp request invalid
+ Client connect:ip:192.168.10.100, port:1322, file:asdfg, mode:octet, blksize:1428, timeout:60, tmfreq:5, bpid:0[0m
+[1;33m2019-09-12 02:04:12(UTC)[Thursday]%% TFTP-WARN  :(285)client tftp request invalid
+ Client connect:ip:192.168.10.100, port:1323, file:asdfg, mode:octet, blksize:1428, timeout:60, tmfreq:5, bpid:0[0m

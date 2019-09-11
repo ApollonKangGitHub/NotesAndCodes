@@ -103,12 +103,13 @@ typedef enum tftpPackErroCode_e
 #define __TFTP_ERR_NOTDEFINE_					"Unknown error."
 #define __TFTP_ERR_NOTDEFINE_FILE_TOO_LARGE_	"Unknown error:file is to large."
 #define __TFTP_ERR_NOTDEFINE_FILE_READ_FAIL_	"Unknown error:file read fail."
+#define __TFTP_ERR_NOTDEFINE_FILE_WRITE_FAIL_	"Unknown error:file write fail."
 #define __TFTP_ERR_NOTDEFINE_OPCODE_INVALID_	"Unknown error:invalid opcode"
 #define __TFTP_ERR_NOTDEFINE_BLKSIZE_INVALID_	"Unknown error:invalid blksize"
 #define __TFTP_ERR_NOTDEFINE_BPID_INVALID_		"Unknown error:invalid bpid"
 #define __TFTP_ERR_NOTDEFINE_TIMEOUT_INVALID_		"Unknown error:invalid timout"
 #define __TFTP_ERR_NOTDEFINE_TMFREQ_INVALID_		"Unknown error:invalid tmfreq"
-
+#define __TFTP_ERR_NOTDEFINE_PACK_LEN_ERR_			"Unknown error:not match packet length"
 
 #define __TFTP_ERR_FILENOTFOUED_	"File not found."
 #define __TFTP_ERR_ACCVIOLATE_		"Access violation."
@@ -159,7 +160,8 @@ typedef struct tftpPacktReq_s
 #define __TFTP_ERRMSG_SHIFT_	(4)
 
 #define TFTP_GET_OPCODE(recvBuf)			(ntohs(((UINT16 *)(recvBuf))[0])) 
-#define TFTP_GET_ACK(recvBuf)				(ntohs(((UINT16 *)(recvBuf))[1]))							
+#define TFTP_GET_ACK(recvBuf)				(ntohs(((UINT16 *)(recvBuf))[1]))	
+#define TFTP_GET_BLKID(recvBuf)				(ntohs(((UINT16 *)(recvBuf))[1]))
 #define TFTP_GET_ERRCODE(recvBuf)			(ntohs(((UINT16 *)(recvBuf))[1]))
 #define TFTP_GET_ERRMSG(recvBuf)			(((UINT8 *)(recvBuf)) + __TFTP_ERRMSG_SHIFT_)
 

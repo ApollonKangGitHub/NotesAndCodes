@@ -16,7 +16,10 @@ EXTERN VOID md5_algroithm(CHAR CONST * file, UINT8 * result)
 	UINT8 plaintext[64] = {0}; 
 
 	FILE * fp = fopen(file, "r");/* 打开文件 */
-	assert(fp != NULL);
+	if (NULL == fp) {
+		tftp_print("\r\n%s open fail", file);
+		return;
+	}
 	
 	/* 定义结构体变量，结构体保存散列值和文件长度 */
 	MD5STR md5;

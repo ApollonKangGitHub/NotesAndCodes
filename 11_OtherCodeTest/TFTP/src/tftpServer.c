@@ -301,6 +301,7 @@ LOCAL tftpReturnValue_t tftp_server_rrq_file_init(tftpTaskPool_t * pClient)
 	INT32 fd = 0;
 		
 	/* 获取文件全路径 */
+	memset(pClient->_filePath, 0, sizeof(pClient->_filePath));
 	memcpy(pClient->_filePath, gServerPath, strlen(gServerPath));
 	strcat(pClient->_filePath, pClient->_cliInfo._reqInfo._fileName);
 
@@ -358,7 +359,7 @@ LOCAL tftpReturnValue_t tftp_server_client_rrq_hanle
 	tftpSocketInfo_t * pCliInfo = &pClient->_cliInfo;
 	struct sockaddr_in * pCliAddr = &pClient->_cliInfo._cliAddr;
 	INT32 blksize = pClient->_cliInfo._reqInfo._blkSize;
-	
+
 	/* 根据blksize申请内存 */
 	sendBuf = malloc(blksize + __TFTP_DATA_SHIFT_);
 	if (NULL == sendBuf) {
@@ -429,6 +430,7 @@ LOCAL tftpReturnValue_t tftp_server_client_rrq_hanle
 				if (readLen < blksize) {
 					goto tftp_rrq_ok_ret;
 				}
+
 				break;
 			case __TFTP_OPCODE_ERR_:
 				TFTP_LOGERR("Get client error code(%d) message(%s)", TFTP_GET_ERRCODE(recvBuf), TFTP_GET_ERRMSG(recvBuf));
@@ -440,11 +442,12 @@ LOCAL tftpReturnValue_t tftp_server_client_rrq_hanle
 tftp_rrq_ok_ret:
 	TFTP_LOGNOR("client %s download file <%s> success!", pCliInfo->_cliIpAddr, pReqInfo->_fileName);
 	return tftp_ret_Ok;
-	
 tftp_rrq_err_send_ret:
 	/* 出错发送ERROR code */
 	(VOID)tftp_socket_send(sockFd, sendBuf, sendLen, pCliAddr);
+	TFTP_LOGERR("%s", sendBuf - __TFTP_DATA_SHIFT_);
 tftp_rrq_err_ret:
+	TFTP_LOGERR("%s", "operator error!");
 	return tftp_ret_Error;
 }
 
@@ -550,7 +553,6 @@ VOID * tftp_server_client_connect_handle(VOID * arg)
 			(VOID)tftp_socket_send(pClient->_sockfd, errBuf, sendLen, &(pClient->_cliInfo._cliAddr));
 			goto tftp_child_task_over;
 		}
-		
 		/* 处理读请求 */
 		if (__TFTP_OPCODE_RRQ_ == pClient->_cliInfo._reqInfo._opcode) {
 			tftpRet = tftp_server_client_rrq_hanle(pClient);
