@@ -80,5 +80,6 @@ EXTERN tftpReturnValue_t tftp_shell_cmd_register
 	tftpCmdAbil_t ability,
 	CHAR * cmd_str
 );
+EXTERN INT32 tftp_shell_wait_for_string(CHAR * str, INT32 strLen);
 
 #endif /* __TFTP_SHELL_H_ */

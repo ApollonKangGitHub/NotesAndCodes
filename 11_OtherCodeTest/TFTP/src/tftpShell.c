@@ -63,7 +63,7 @@ VOID ttp_shell_normal_menu(VOID)
  * Notes:
  *     
  */
-LOCAL INT32 tftp_shell_wait_for_string(CHAR * str, INT32 strLen)
+EXTERN INT32 tftp_shell_wait_for_string(CHAR * str, INT32 strLen)
 {
 	CHAR * read = 0;
 	ssize_t len = (ssize_t)strLen;

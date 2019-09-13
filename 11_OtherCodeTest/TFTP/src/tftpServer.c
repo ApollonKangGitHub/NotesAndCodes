@@ -331,7 +331,6 @@ LOCAL tftpReturnValue_t tftp_server_rrq_file_init(tftpTaskPool_t * pClient)
 	return tftp_ret_Ok;
 }
 
-
 /*
  * FunctionName:
  *     tftp_server_client_rrq_hanle
@@ -452,6 +451,43 @@ tftp_rrq_err_ret:
 
 /*
  * FunctionName:
+ *     tftp_server_wrq_file_exist_check
+ * Description:
+ *     文件请求，文件存在判断与处理
+ * Notes:
+ *     
+ */
+LOCAL tftpReturnValue_t tftp_server_wrq_file_exist_check(tftpTaskPool_t * pClient)
+{
+	CHAR * fileName = NULL;
+
+	if (!pClient) {
+		return tftp_ret_Null;
+	}
+
+	fileName = pClient->_cliInfo._reqInfo._fileName;
+	memset(pClient->_filePath, 0, sizeof(pClient->_filePath));
+	memcpy(pClient->_filePath, gServerPath, strlen(gServerPath));
+	strncat(pClient->_filePath, fileName, strlen(fileName));
+
+	/* 存在判断是否需要覆盖 */
+	if (isfileExist((CONST CHAR *)(pClient->_filePath))) {
+		return tftp_ret_Exist;
+	}
+
+	/* 文件不存在，则以如下打开文件 */
+	pClient->_fileFd = tftp_open(pClient->_filePath, O_RDWR | O_CREAT | O_TRUNC, 0666);
+	if (pClient->_fileFd < 0) {
+		TFTP_LOGERR("open file %s fail, errno=%d", fileName, errno);
+		tftp_perror("open file fail reason is");
+		return tftp_ret_Error;
+	}
+
+	return tftp_ret_Ok;
+}
+
+/*
+ * FunctionName:
  *     tftp_server_client_wrq_hanle
  * Description:
  *     写请求（上传）处理
@@ -463,7 +499,52 @@ LOCAL tftpReturnValue_t tftp_server_client_wrq_hanle
 	tftpTaskPool_t * pClient
 )
 {
+	INT32 recvLen = 0;
+	INT32 sendLen = 0;
+	INT32 writeLen = 0;
+	UINT32 saveLen = 0;
+	UINT16 ack = 0;
+	UINT16 blkid = 0;
+	UINT8 * recvBuf = NULL;
+	UINT8 sendBuf[__TFTP_REQ_PACK_BUF_LEN_] = {0};
+	CHAR errMsg[__TFTP_ERR_PACK_MAX_LEN_] = {0};
+	tftpReturnValue_t tftpRet = tftp_ret_Ok;
+	INT32 sockfd = pClient->_sockfd;
+	struct sockaddr_in * pCliAddr = &pClient->_cliInfo._cliAddr;
+	tftpPacktReq_t * PecvInfo = &pClient->_cliInfo._reqInfo;
+	UINT16 blksize = PecvInfo->_blkSize;
+
+	/* 文件存在与覆盖检查 */
+	tftpRet =  tftp_server_wrq_file_exist_check(pClient);
+	if (TFTP_FAILURE(tftpRet)) {
+		if (tftp_ret_Exist == tftpRet) {
+			sendLen = (INT32)tftp_pack_error(errMsg, tftp_Pack_ErrCode_FileExist, __TFTP_ERR_FILEXIST_);
+			(VOID)tftp_socket_send(pClient->_sockfd, errMsg, sendLen, pCliAddr);
+		}
+		else {
+			sendLen = (INT32)tftp_pack_error(errMsg, tftp_Pack_ErrCode_NotDefined, __TFTP_ERR_NOTDEFINE_);
+			(VOID)tftp_socket_send(pClient->_sockfd, errMsg, sendLen, pCliAddr);	
+		}
+		goto tftp_rrq_wrq_send_ret;
+	}	
+	
+	/* 根据blksize申请内存 */
+	recvBuf = malloc(blksize + __TFTP_DATA_SHIFT_);
+	if (NULL == recvBuf) {
+		TFTP_LOGERR("For client %s malloc send memry size:%d fail!", pClient->_cliInfo._cliIpAddr, blksize);
+		return tftp_ret_Null;
+	}
+	
+	/* 回复OACK */
+	sendLen = tftp_pack_oack(sendBuf, PecvInfo);
+	tftp_socket_send(sockfd, sendBuf, sendLen, pCliAddr);
+
+	while (TRUE) {
+
+	}
 	return tftp_ret_Ok;
+tftp_rrq_wrq_send_ret:
+	return tftp_ret_Error;
 }
 
 /*
@@ -554,6 +635,7 @@ VOID * tftp_server_client_connect_handle(VOID * arg)
 			(VOID)tftp_socket_send(pClient->_sockfd, errBuf, sendLen, &(pClient->_cliInfo._cliAddr));
 			goto tftp_child_task_over;
 		}
+		
 		/* 处理读请求 */
 		if (__TFTP_OPCODE_RRQ_ == pClient->_cliInfo._reqInfo._opcode) {
 			tftpRet = tftp_server_client_rrq_hanle(pClient);

@@ -64,7 +64,8 @@ LOCAL tftpReturnValue_t tftp_client_oack_check
 	}
 
 	/* 选项检查 */
-	if (pRecvInfo->_options._opt_blksize) {
+	if (pRecvInfo->_options._opt_blksize) 
+{
 		if (pRecvInfo->_blkSize > __TFTP_BLKSIZE_8192_BYTES_
 			|| pRecvInfo->_blkSize  < __TFTP_BLKSIZE_128_BYTES_) {
 			tftp_sprint(errMsgTemp, "%s<%d>", __TFTP_ERR_NOTDEFINE_BLKSIZE_INVALID_, pRecvInfo->_blkSize);
@@ -168,14 +169,6 @@ LOCAL tftpReturnValue_t tftp_client_pack_deal_download()
 	/* 回复ACK */
 	sendLen = tftp_pack_ack(gSendBuf, ack);
 	(VOID)tftp_socket_send(sockfd, gSendBuf, sendLen, pSerAddr);
-
-	/* 打开文件 */
-	gCliTranInfo._fileFd = tftp_open(gCliTranInfo._filePath, O_RDWR | O_CREAT | O_TRUNC, 0666);
-	if (gCliTranInfo._fileFd < 0) {
-		TFTP_LOGERR("open file %s fail, errno=%d", gCliTranInfo._filePath, errno);
-		tftp_perror("open file fail reason is");
-		return tftp_ret_Error;
-	}
 
 	while (TRUE) {
 		(VOID)memset(gRecvBuf, 0, __TFTP_RECV_BUF_LEN_);
@@ -375,6 +368,52 @@ tftp_upload_err_ret:
 
 /*
  * FunctionName:
+ *     tftp_client_download_file_exist_check
+ * Description:
+ *     文件下载存在判断与处理
+ * Notes:
+ *     
+ */
+LOCAL tftpReturnValue_t tftp_client_download_file_exist_check(BOOL exist)
+{
+	CHAR * filePath = gCliTranInfo._filePath;
+	CHAR * fileName = gCliTranInfo._reqPack._fileName;
+	CHAR choose[4] = {0};
+	
+	/* 存在判断是否需要覆盖 */
+	if (exist) {
+		while (TRUE) {
+			tftp_print("\r\nfile %s already exist.\r\nPlease choose cover it(Yes/No)?", filePath);
+			if (tftp_shell_wait_for_string(choose, sizeof(choose)) < 0) {
+				tftp_print("\r\nInvalid input!");
+				continue;
+			}
+			if ((0 == strcmp(choose, "Yes")) || (0 == strcmp(choose, "Y"))) {
+				break;
+			}
+			else if ((0 == strcmp(choose, "No")) || (0 == strcmp(choose, "N"))) {
+				return tftp_ret_Exist;
+			}
+			else {
+				tftp_print("\r\nInvalid input(%s)!", choose);
+				continue;
+			}
+		}
+	}
+
+	/* 文件不存在，或者存在需要覆盖则以如下打开文件 */
+	gCliTranInfo._fileFd = tftp_open(filePath, O_RDWR | O_CREAT | O_TRUNC, 0666);
+	if (gCliTranInfo._fileFd < 0) {
+		TFTP_LOGERR("open file %s fail, errno=%d", filePath, errno);
+		tftp_perror("open file fail reason is");
+		return tftp_ret_Error;
+	}
+
+	return tftp_ret_Ok;
+}
+
+/*
+ * FunctionName:
  *     tftp_client_oper_valid
  * Description:
  *     操作有效性判断
@@ -385,7 +424,7 @@ LOCAL tftpReturnValue_t tftp_client_oper_valid(CONST char * fileName)
 {
 	BOOL exist = FALSE;
 	INT32 len = 0;
-	tftpReturnValue_t ret = tftp_ret_Ok;
+	tftpReturnValue_t tftpRet = tftp_ret_Ok;
 
 	/* 记录文件名，补全文件名绝对路径 */
 	len = strlen(fileName);
@@ -401,17 +440,21 @@ LOCAL tftpReturnValue_t tftp_client_oper_valid(CONST char * fileName)
 	exist = isfileExist((CONST CHAR * )gCliTranInfo._filePath);
 	
 	/* 根据操作决定返回值 */
+
 	if (exist && (tftp_Pack_OperCode_Rrq == gCliTranInfo._reqPack._opcode)) {
-		ret = tftp_ret_Exist;
+		/* 文件存在与覆盖检查 */
+		tftpRet =  tftp_client_download_file_exist_check(exist);
 	}
 	else if (!exist && (tftp_Pack_OperCode_Wrq == gCliTranInfo._reqPack._opcode)) {
-		ret =  tftp_ret_NotFound;
+		/* 文件不存在不支持上传 */
+		tftp_print("\r\nFile %s is not exist, can't do this operator!", gCliTranInfo._filePath);
+		tftpRet =  tftp_ret_NotFound;
 	}
 	else {
-		ret =  tftp_ret_Ok;
+		tftpRet =  tftp_ret_Ok;
 	}
 	
-	return ret;
+	return tftpRet;
 }
 
 LOCAL UINT32 tftp_cilent_get_file_size(CONST char * filePath)
@@ -508,6 +551,71 @@ LOCAL UINT16 tftp_client_get_bpid(CONST CHAR * filename)
 	return bpid;
 }
 
+/*
+ * FunctionName:
+ *     tftp_client_info_reset
+ * Description:
+ *     数据结构清空
+ *     
+ * Notes:
+ *     
+ */
+LOCAL VOID tftp_client_info_reset(BOOL md5sum)
+{
+	UINT8 md5Result[64] = {0};
+	time_t timeStampStart = 0;
+	time_t timeStampEnd = 0;
+	time_t useTime = 0;
+	
+	if (gCliTranInfo._fileFd > 0) {
+		tftp_close(gCliTranInfo._fileFd);
+		gCliTranInfo._fileFd = -1;
+	}
+	if (gCliTranInfo._socketFd > 0) {
+		tftp_close(gCliTranInfo._socketFd);
+		gCliTranInfo._socketFd = -1;
+	}
+	
+	/* 计算文件md5值 */
+	tftp_print("\r\nfile %s md5sum is calcing...",  gCliTranInfo._filePath);
+	tftp_fflush(__TFTP_STDOUT_);
+
+	/* 获取MD5计算开始时间戳 */
+	(VOID)time (&timeStampStart);
+
+	/* 开始计算 */
+	if (md5sum) {
+		(VOID)md5_algroithm(gCliTranInfo._filePath, md5Result);
+		tftp_print("\r\nfile %s md5sum calc success hash result is %s",  gCliTranInfo._filePath, md5Result);
+	}
+
+	/* 获取结束时间戳 */
+	(VOID)time (&timeStampEnd);
+
+	/* 计算MD5计算耗时 */
+	useTime = timeStampEnd - timeStampStart;
+	tftp_print("\r\nMD5 calc use time:%lus", useTime);
+	
+	memset(&gCliTranInfo._cliAddr, 0, sizeof(gCliTranInfo._cliAddr));
+	memset(&gCliTranInfo._serAddr, 0, sizeof(gCliTranInfo._serAddr));
+	memset(gCliTranInfo._filePath, 0, sizeof(gCliTranInfo._filePath));
+	memset(&gCliTranInfo._reqPack, 0, sizeof(gCliTranInfo._reqPack));
+	
+	memset(gSendBuf, 0, sizeof(gSendBuf));
+	memset(gRecvBuf, 0, sizeof(gRecvBuf));
+
+	return;
+}
+
+/*
+ * FunctionName:
+ *     tftp_client_tranfer_info_init
+ * Description:
+ *     初始化基本数据结构、命令行参数识别、文件有效性判断等
+ *     
+ * Notes:
+ *     
+ */
 LOCAL tftpReturnValue_t tftp_client_tranfer_info_init(INT32 argc, CHAR * argv[])
 {
 	tftpReturnValue_t tftpRet = tftp_ret_Ok;
@@ -524,6 +632,9 @@ LOCAL tftpReturnValue_t tftp_client_tranfer_info_init(INT32 argc, CHAR * argv[])
 	TFTP_LOGDBG(tftp_dbgSwitch_client, \
 		"operator:%s, ipaddr:%s, filename:%s, blksize:%d, timeout:%d", \
 			pOperator, pIpaddr, pFilename, pBlksize, pTimeout);
+	
+	/* 0、结构变量初始化 */
+	tftp_client_info_reset(FALSE);
 
 	/* 1、操作类型获取 */
 	gCliTranInfo._reqPack._opcode = tftp_pack_oper_para_get(pOperator);
@@ -541,7 +652,6 @@ LOCAL tftpReturnValue_t tftp_client_tranfer_info_init(INT32 argc, CHAR * argv[])
 	/* 3、文件名获取与操作有效判断 */
 	tftpRet = tftp_client_oper_valid(pFilename);
 	if (tftp_ret_Ok != tftpRet) {
-		TFTP_LOGERR("file %s %s, Can't do this operator!", pFilename, tftp_err_msg(tftpRet));
 		return tftpRet;
 	}
 
@@ -564,60 +674,18 @@ LOCAL tftpReturnValue_t tftp_client_tranfer_info_init(INT32 argc, CHAR * argv[])
 	return tftp_ret_Ok;
 }
 
-LOCAL tftpReturnValue_t tftp_client_config_init(VOID)
-{
-	memcpy(gCliTranInfo._clientPath, "/home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/client/", __TFTP_FILE_PATH_LEN_);
-}
-
 /*
  * FunctionName:
- *     tftp_client_info_reset
+ *     tftp_client_config_init
  * Description:
- *     数据结构清空
+ *     配置初始化
  *     
  * Notes:
  *     
  */
-LOCAL VOID tftp_client_info_reset(VOID)
+LOCAL tftpReturnValue_t tftp_client_config_init(VOID)
 {
-	UINT8 md5Result[64] = {0};
-	time_t timeStampStart = 0;
-	time_t timeStampEnd = 0;
-	time_t useTime = 0;
-	
-	if (gCliTranInfo._fileFd > 0) {
-		tftp_close(gCliTranInfo._fileFd);
-		gCliTranInfo._fileFd = -1;
-	}
-	if (gCliTranInfo._socketFd > 0) {
-		tftp_close(gCliTranInfo._socketFd);
-		gCliTranInfo._socketFd = -1;
-	}
-	
-	/* 计算文件md5值 */
-	PRINT_GREEN("\r\nfile %s md5sum is calcing...",  gCliTranInfo._filePath);
-	tftp_fflush(__TFTP_STDOUT_);
-
-	/* 获取MD5计算开始时间戳 */
-	(VOID)time (&timeStampStart);
-
-	/* 开始计算 */
-	(VOID)md5_algroithm(gCliTranInfo._filePath, md5Result);
-	PRINT_GREEN("\r\nfile %s md5sum calc success hash result is %s",  gCliTranInfo._filePath, md5Result);
-
-	/* 获取结束时间戳 */
-	(VOID)time (&timeStampEnd);
-
-	/* 计算MD5计算耗时 */
-	useTime = timeStampEnd - timeStampStart;
-	PRINT_GREEN("\r\nMD5 calc use time:%lus", useTime);
-	
-	memset(&gCliTranInfo._cliAddr, 0, sizeof(gCliTranInfo._cliAddr));
-	memset(&gCliTranInfo._serAddr, 0, sizeof(gCliTranInfo._serAddr));
-	memset(gCliTranInfo._filePath, 0, sizeof(gCliTranInfo._filePath));
-	memset(&gCliTranInfo._reqPack, 0, sizeof(gCliTranInfo._reqPack));
-
-	return;
+	memcpy(gCliTranInfo._clientPath, "/home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/client/", __TFTP_FILE_PATH_LEN_);
 }
 
 /*
@@ -682,10 +750,10 @@ LOCAL VOID tftp_client_cmd_handle(INT32 argc, CHAR * argv[])
 	/* 计算耗时和速率 */
 	useTime = timeStampEnd - timeStampStart;
 	speed = (float)gCliTranInfo._reqPack._tSize /  __MB_CELL_;
-	PRINT_GREEN("\r\nfile transfer use time:%lus, speed:%.2fMB/s", useTime, useTime ? (speed / useTime) : speed);
+	tftp_print("\r\nfile transfer use time:%lus, speed:%.2fMB/s", useTime, useTime ? (speed / useTime) : speed);
 	
 	/* 5、传输完毕重新初始化相关传输资源 */
-	tftp_client_info_reset();
+	tftp_client_info_reset(TRUE);
 }
 
 /*
