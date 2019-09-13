@@ -119,7 +119,7 @@ LOCAL VOID md5_calcHashValue(MD5STR * md5, UINT8 * data)
 	UINT32 m[16] = {0};
 	
 	/* 根据输入的512bit进行Mj的自分组计算 */
-	md5_calcM(m, data);
+	MD5_CALC_M(m, data);
 
 	/* 初始化a、b、c、d（前一组的散列值输出，或最初始的ABCD） */
 	UINT32 a = md5->state[0];
@@ -225,16 +225,4 @@ LOCAL VOID md5_calcHashValue(MD5STR * md5, UINT8 * data)
 	md5->state[2] += c;
 	md5->state[3] += d;
 }
-LOCAL VOID md5_calcM(UINT32 * m, UINT8 * data)
-{
-	int i = 0; 
-	int j = 0;
-	for(i = 0; i < 16; i++){
-		/* 低位->低位 */
-		m[i] = data[j + 0] 
-			| (data[j + 1] << 8) 
-			| (data[j + 2] << 16) 
-			| (data[j + 3] << 24);
-		j += 4;
-	}
-}
+

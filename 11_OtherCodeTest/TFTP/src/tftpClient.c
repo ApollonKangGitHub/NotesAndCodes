@@ -132,7 +132,7 @@ LOCAL tftpReturnValue_t tftp_client_pack_deal_download()
 	INT32 sockfd = gCliTranInfo._socketFd;
 	CHAR errMsg[__TFTP_ERR_PACK_MAX_LEN_] = {0};
 	struct sockaddr_in * pSerAddr = &gCliTranInfo._serAddr;
-	tftpPacktReq_t recvInfo = gCliTranInfo._reqPack;
+	tftpPacktReq_t * PecvInfo = &gCliTranInfo._reqPack;
 
 	/* 接收服务器OACK/ERROR报文 */
 	recvLen = tftp_socket_recv(sockfd, gRecvBuf, __TFTP_RECV_BUF_LEN_, pSerAddr);
@@ -148,13 +148,14 @@ LOCAL tftpReturnValue_t tftp_client_pack_deal_download()
 	}
 
 	/* 对于OACK解析 */
-	tftpRet = tftp_unpack_oack(gRecvBuf, recvLen, &recvInfo);
+	tftpRet = tftp_unpack_oack(gRecvBuf, recvLen, PecvInfo);
 	if (TFTP_FAILURE(tftpRet)) {
 		TFTP_IF_ERROR(tftpRet);
 		goto tftp_downlad_err_ret;
 	}
+	
 	/* OACK有效性检查 */
-	tftpRet = tftp_client_oack_check(&recvInfo, errMsg);
+	tftpRet = tftp_client_oack_check(PecvInfo, errMsg);
 	if (TFTP_FAILURE(tftpRet)) {
 		if (tftp_ret_Error == tftpRet) {
 			goto tftp_downlad_err_send_ret;
@@ -203,14 +204,14 @@ LOCAL tftpReturnValue_t tftp_client_pack_deal_download()
 				writeLen = tftp_write(gCliTranInfo._fileFd, gRecvBuf + __TFTP_DATA_SHIFT_, saveLen);
 				if (writeLen != saveLen) {
 					tftp_sprint(errMsg, "%s[%s, recvLen:%d, writeLen:%d, errno:%d]", \
-						__TFTP_ERR_NOTDEFINE_FILE_WRITE_FAIL_, recvInfo._fileName, saveLen, writeLen, errno);
+						__TFTP_ERR_NOTDEFINE_FILE_WRITE_FAIL_, PecvInfo->_fileName, saveLen, writeLen, errno);
 					sendLen = (INT32)tftp_pack_error(gSendBuf, tftp_Pack_ErrCode_AccViolate, errMsg);
 					goto tftp_downlad_err_send_ret;
 				}		
 				
 				/* 进度条 */
 				curSize += writeLen;
-				progressBar(recvInfo._tSize, curSize, progressBarFirst);
+				progressBar(PecvInfo->_tSize, curSize, progressBarFirst);
 				progressBarFirst = FALSE;
 
 				/* 回复ACK */
@@ -218,7 +219,7 @@ LOCAL tftpReturnValue_t tftp_client_pack_deal_download()
 				(VOID)tftp_socket_send(sockfd, gSendBuf, sendLen, pSerAddr);
 
 				/* 最后一个报文 */
-				if (recvLen < recvInfo._blkSize + __TFTP_DATA_SHIFT_) {
+				if (recvLen < PecvInfo->_blkSize + __TFTP_DATA_SHIFT_) {
 					goto tftp_download_ok_ret;
 				}
 				break;
@@ -226,7 +227,7 @@ LOCAL tftpReturnValue_t tftp_client_pack_deal_download()
 				TFTP_LOGERR("recv error code(%d), error message:%s", TFTP_GET_ERRCODE(gRecvBuf), TFTP_GET_ERRMSG(gRecvBuf));
 				goto tftp_downlad_err_ret;
 			default:
-				tftp_sprint(errMsg, "%s(%d), not have recv data, waiting...", __TFTP_ERR_NOTDEFINE_OPCODE_INVALID_, recvInfo._opcode);
+				tftp_sprint(errMsg, "%s(%d), not have recv data, waiting...", __TFTP_ERR_NOTDEFINE_OPCODE_INVALID_, PecvInfo->_opcode);
 				sendLen = (INT32)tftp_pack_error(gSendBuf, tftp_Pack_ErrCode_AccViolate, errMsg);
 				goto tftp_downlad_err_send_ret;			
 		}
@@ -662,12 +663,14 @@ LOCAL VOID tftp_client_cmd_handle(INT32 argc, CHAR * argv[])
 	(VOID)time (&timeStampStart);
 
 	/* 4、处理服务器响应 */
+	tftp_print("\r\nclient file request deal...");
 	if (tftp_Pack_OperCode_Rrq == gCliTranInfo._reqPack._opcode) {
 		tftpRet = tftp_client_pack_deal_download();
 	} 
 	else if (tftp_Pack_OperCode_Wrq == gCliTranInfo._reqPack._opcode) {
 		tftpRet = tftp_client_pack_deal_upload();
 	}
+	tftp_print("\r\nclient file request end!");
 
 	if (TFTP_FAILURE(tftpRet)) {
 		return;
@@ -678,7 +681,7 @@ LOCAL VOID tftp_client_cmd_handle(INT32 argc, CHAR * argv[])
 
 	/* 计算耗时和速率 */
 	useTime = timeStampEnd - timeStampStart;
-	speed = (float)gCliTranInfo._reqPack._tSize / __MB_CELL_;
+	speed = (float)gCliTranInfo._reqPack._tSize /  __MB_CELL_;
 	PRINT_GREEN("\r\nfile transfer use time:%lus, speed:%.2fMB/s", useTime, useTime ? (speed / useTime) : speed);
 	
 	/* 5、传输完毕重新初始化相关传输资源 */

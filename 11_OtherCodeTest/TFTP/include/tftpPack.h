@@ -32,7 +32,7 @@
 #define __TFTP_BLKID_MAX_				(0xFFFF)
 #define __TFTP_BLKID_MIN_				(0x1)
 
-#define __TFTP_TSIZE_MAX_				(0x4FFFFFFF)
+#define __TFTP_TSIZE_MAX_				(0x8FFFFFFF)
 #define __TFTP_TSIZE_MIN_				(0x1)
 
 #define __TFTP_OPTION_MAX_LEN_ 			(64)
@@ -100,13 +100,13 @@ typedef enum tftpPackErroCode_e
 	tftp_Pack_ErrCode_Invalid		= 8		/* last invalid error code, please. */
 }tftpPackErrCode_t;
 
-#define __TFTP_ERR_NOTDEFINE_					"Unknown error."
-#define __TFTP_ERR_NOTDEFINE_FILE_TOO_LARGE_	"Unknown error:file is to large."
-#define __TFTP_ERR_NOTDEFINE_FILE_READ_FAIL_	"Unknown error:file read fail."
-#define __TFTP_ERR_NOTDEFINE_FILE_WRITE_FAIL_	"Unknown error:file write fail."
-#define __TFTP_ERR_NOTDEFINE_OPCODE_INVALID_	"Unknown error:invalid opcode"
-#define __TFTP_ERR_NOTDEFINE_BLKSIZE_INVALID_	"Unknown error:invalid blksize"
-#define __TFTP_ERR_NOTDEFINE_BPID_INVALID_		"Unknown error:invalid bpid"
+#define __TFTP_ERR_NOTDEFINE_						"Unknown error."
+#define __TFTP_ERR_NOTDEFINE_FILE_TOO_LARGE_		"Unknown error:file is to large."
+#define __TFTP_ERR_NOTDEFINE_FILE_READ_FAIL_		"Unknown error:file read fail."
+#define __TFTP_ERR_NOTDEFINE_FILE_WRITE_FAIL_		"Unknown error:file write fail."
+#define __TFTP_ERR_NOTDEFINE_OPCODE_INVALID_		"Unknown error:invalid opcode"
+#define __TFTP_ERR_NOTDEFINE_BLKSIZE_INVALID_		"Unknown error:invalid blksize"
+#define __TFTP_ERR_NOTDEFINE_BPID_INVALID_			"Unknown error:invalid bpid"
 #define __TFTP_ERR_NOTDEFINE_TIMEOUT_INVALID_		"Unknown error:invalid timout"
 #define __TFTP_ERR_NOTDEFINE_TMFREQ_INVALID_		"Unknown error:invalid tmfreq"
 #define __TFTP_ERR_NOTDEFINE_PACK_LEN_ERR_			"Unknown error:not match packet length"

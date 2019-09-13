@@ -320,7 +320,7 @@ EXTERN tftpReturnValue_t tftp_unpack_oack
 			recvPack->_options._opt_bpid = 1;
 		}
 
-		index += (strLen + strVlaueLen + 2);
+		index += (strLen + strVlaueLen);
 	}
 	return tftp_ret_Ok;
 }

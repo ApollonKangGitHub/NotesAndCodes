@@ -530,3 +530,27 @@ file test.txt NOT FOUND, Can't do this operator![0m
 [1;31m2019-09-12 01:55:16(UTC)[Thursday]%% TFTP-ERROR :(648)tftp operator failure, return ALREADY EXIST(6)[0m
 [1;31m2019-09-12 01:56:35(UTC)[Thursday]%% TFTP-ERROR :(540)file aaaa.txt ALREADY EXIST, Can't do this operator![0m
 [1;31m2019-09-12 01:56:35(UTC)[Thursday]%% TFTP-ERROR :(648)tftp operator failure, return ALREADY EXIST(6)[0m
+[1;31m2019-09-12 02:14:38(UTC)[Thursday]%% TFTP-ERROR :(147)Error opcde:2 when wait for oack[0m
+[1;31m2019-09-12 02:14:38(UTC)[Thursday]%% TFTP-ERROR :(448)[0m
+[1;31m2019-09-12 02:14:38(UTC)[Thursday]%% TFTP-ERROR :(450)operator error![0m
+[1;31m2019-09-12 02:15:30(UTC)[Thursday]%% TFTP-ERROR :(147)Error opcde:2 when wait for oack[0m
+[1;31m2019-09-12 02:15:30(UTC)[Thursday]%% TFTP-ERROR :(448)[0m
+[1;31m2019-09-12 02:15:30(UTC)[Thursday]%% TFTP-ERROR :(450)operator error![0m
+[1;31m2019-09-12 02:21:48(UTC)[Thursday]%% TFTP-ERROR :(544)file dddd ALREADY EXIST, Can't do this operator![0m
+[1;31m2019-09-12 02:21:48(UTC)[Thursday]%% TFTP-ERROR :(652)tftp operator failure, return ALREADY EXIST(6)[0m
+[1;31m2019-09-12 02:22:47(UTC)[Thursday]%% TFTP-ERROR :(544)file aaaa.txt ALREADY EXIST, Can't do this operator![0m
+[1;31m2019-09-12 02:22:47(UTC)[Thursday]%% TFTP-ERROR :(652)tftp operator failure, return ALREADY EXIST(6)[0m
+[1;31m2019-09-12 02:23:08(UTC)[Thursday]%% TFTP-ERROR :(147)Error opcde:2 when wait for oack[0m
+[1;31m2019-09-13 16:00:05(UTC)[Friday]%% TFTP-ERROR :(448)Unknown error:file is to large.<1390542848>[0m
+[1;31m2019-09-13 17:14:35(UTC)[Friday]%% TFTP-ERROR :(544)file qwert ALREADY EXIST, Can't do this operator![0m
+[1;31m2019-09-13 17:14:35(UTC)[Friday]%% TFTP-ERROR :(652)tftp operator failure, return ALREADY EXIST(6)[0m
+[1;31m2019-09-13 17:21:16(UTC)[Friday]%% TFTP-ERROR :(544)file qwert ALREADY EXIST, Can't do this operator![0m
+[1;31m2019-09-13 17:21:16(UTC)[Friday]%% TFTP-ERROR :(652)tftp operator failure, return ALREADY EXIST(6)[0m
+[1;31m2019-09-13 17:22:21(UTC)[Friday]%% TFTP-ERROR :(544)file qwert ALREADY EXIST, Can't do this operator![0m
+[1;31m2019-09-13 17:22:21(UTC)[Friday]%% TFTP-ERROR :(652)tftp operator failure, return ALREADY EXIST(6)[0m
+[1;31m2019-09-13 17:34:14(UTC)[Friday]%% TFTP-ERROR :(76)Get stdin input is error, read=(nil)[0m
+[1;31m2019-09-13 17:34:14(UTC)[Friday]%% TFTP-ERROR :(76)Get stdin input is error, read=(nil)[0m
+[1;31m2019-09-13 17:34:14(UTC)[Friday]%% TFTP-ERROR :(76)Get stdin input is error, read=(nil)[0m
+[1;31m2019-09-13 17:34:14(UTC)[Friday]%% TFTP-ERROR :(76)Get stdin input is error, read=(nil)[0m
+[1;31m2019-09-13 17:34:14(UTC)[Friday]%% TFTP-ERROR :(76)Get stdin input is error, read=(nil)[0m
+[1;31m2019-09-13 17:34:14(UTC)[Friday]%% TFTP-ERROR :(76)Get stdin input is error, read=(nil)[0m

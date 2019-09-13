@@ -445,9 +445,8 @@ tftp_rrq_ok_ret:
 tftp_rrq_err_send_ret:
 	/* 出错发送ERROR code */
 	(VOID)tftp_socket_send(sockFd, sendBuf, sendLen, pCliAddr);
-	TFTP_LOGERR("%s", sendBuf - __TFTP_DATA_SHIFT_);
+	TFTP_LOGERR("%s", errMsg);
 tftp_rrq_err_ret:
-	TFTP_LOGERR("%s", "operator error!");
 	return tftp_ret_Error;
 }
 
@@ -475,7 +474,7 @@ LOCAL tftpReturnValue_t tftp_server_client_wrq_hanle
  * Notes:
  *     
  */
-LOCAL VOID tftp_server_client_resource_reset(tftpTaskPool_t * pClient)
+LOCAL VOID tftp_server_client_resource_reset(tftpTaskPool_t * pClient, BOOL calcMd5)
 {
 	UINT8 md5Result[64] = {0};
 	
@@ -487,9 +486,10 @@ LOCAL VOID tftp_server_client_resource_reset(tftpTaskPool_t * pClient)
 		tftp_close(pClient->_fileFd);
 		pClient->_fileFd = -1;
 	}
-	
-	(VOID)md5_algroithm(pClient->_filePath, md5Result);
-	TFTP_LOGNOTE("file %s md5sum is %s",  pClient->_cliInfo._reqInfo._fileName, md5Result);	
+	if (calcMd5) {
+		(VOID)md5_algroithm(pClient->_filePath, md5Result);
+		TFTP_LOGNOTE("file %s md5sum is %s",  pClient->_cliInfo._reqInfo._fileName, md5Result);	
+	}
 
 	memset(&pClient->_cliInfo, 0, sizeof(pClient->_cliInfo));
 
@@ -514,6 +514,7 @@ VOID * tftp_server_client_connect_handle(VOID * arg)
 	UINT8 errBuf[128] = {0};
 	INT32 sendLen = 0;
 	INT32 ret = 0;
+	BOOL calcMd5 = FALSE;
 	
 	while (initSucces && gServerRun) {
 		tid = tftp_task_get_tid();
@@ -567,12 +568,13 @@ VOID * tftp_server_client_connect_handle(VOID * arg)
 				goto tftp_child_task_over;
 			}
 		}
-		
+
+		/* 文件正常传输完成才计算MD5值 */
 		TFTP_LOGNOR("client %s req deal success!", pClient->_cliInfo._cliIpAddr);
-		
+		calcMd5 = TRUE;
 tftp_child_task_over:
 		/* 释放资源 */
-		tftp_server_client_resource_reset(pClient);
+		tftp_server_client_resource_reset(pClient, calcMd5);
 		
 		/* 线程忙状态修改 */
 		pClient->_busy = FALSE;

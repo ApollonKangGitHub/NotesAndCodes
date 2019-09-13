@@ -4,7 +4,8 @@
 #include <tftpPublic.h>
 
 UINT8 gDbgSwitchFlg[TFTP_DBG_SWITCH_NUMBER_MAX];
-
+BOOL gTaskNameLog = FALSE;
+	
 /* tm_wday, Day of the week (0-6, Sunday = 0) */
 LOCAL CHAR * gWeekStr[] = {
 	"Sunday",
@@ -116,22 +117,39 @@ EXTERN INT32 tftp_log_level_print
 	tftpLogLevel_t level = tftp_logLevel_Shell;
 	BOOL fileFlg = FALSE;
 	BOOL shellFlg = FALSE;
+	tftpTaskStruct_t structId;
 	va_list argList;
 
 	CHAR * pStart = colorStr;
 	CHAR * pFormat = format;
 	CHAR * pEnd = __COLOR_NORMAL_;
 	CHAR pDateTime[64] = {0};
+	CHAR pTaskName[16] = {0};
 	CHAR pFormatAll[__TFTP_FORMAT_BUF_MAX_] = {'\r', '\n', '\0'};
 
 	/* 获取当前时间 */
 	(VOID)tftp_log_time_get(pDateTime);
 
-	/* 格式化 */
-	(VOID)strncat(pFormatAll, pStart, strlen(pStart));			/* 格式化输出颜色指定 */
-	(VOID)strncat(pFormatAll, pDateTime, strlen(pDateTime));	/* 格式化输出日期时间获取 */
-	(VOID)strncat(pFormatAll, pFormat, strlen(pFormat));		/* 格式化输出level + 原始format */
-	(VOID)strncat(pFormatAll, pEnd, strlen(pEnd));				/* 格式化输出颜色reset */
+	/* 格式化输出颜色指定 */
+	(VOID)strncat(pFormatAll, pStart, strlen(pStart));
+
+	/* 格式化输出日期时间获取 */
+	(VOID)strncat(pFormatAll, pDateTime, strlen(pDateTime));
+
+	/* 格式化任务名 */
+	if (gTaskNameLog) {
+		structId = tftp_task_get_structId();
+		tftp_task_get_name(structId, pTaskName, sizeof(pTaskName));
+		(VOID)strncat(pFormatAll, " (", strlen(" ("));
+		(VOID)strncat(pFormatAll, pTaskName, strlen(pTaskName));
+		(VOID)strncat(pFormatAll, ") ", strlen(") "));
+	}
+
+	/* 格式化输出level + 原始format */
+	(VOID)strncat(pFormatAll, pFormat, strlen(pFormat));
+
+	/* 格式化输出颜色reset */
+	(VOID)strncat(pFormatAll, pEnd, strlen(pEnd));				
 
 	for (level = tftp_logLevel_Shell; level < tftp_logLevel_Max; level++) {
 		if (_TEST_TRUE(&ability, level)) {			
@@ -278,7 +296,7 @@ LOCAL VOID tftp_log_cmd_debug_switch(INT32 argc, CHAR * argv[])
  * Notes:
  *     
  */
-LOCAL VOID tftp_log_cmd_display_switch(INT32 argc, CHAR * argv[])
+VOID tftp_log_cmd_display_switch(INT32 argc, CHAR * argv[])
 {
 	tftpLogLevel_t level = atoi(argv[2]);
 	CHAR logFile[128] = {0};
@@ -290,6 +308,36 @@ LOCAL VOID tftp_log_cmd_display_switch(INT32 argc, CHAR * argv[])
 	else {
 		tftp_sprint(logFile, "cat %s", gLogFilePath[level]);
 		system(logFile);
+	}
+}
+
+/*
+ * FunctionName:
+ *     tftp_log_task_name_switch
+ * Description:
+ *     任务名打印开关
+ * Notes:
+ *     
+ */
+VOID tftp_log_task_name_switch(INT32 argc, CHAR * argv[])
+{
+	CHAR *pSw = argv[2];
+	BOOL open = FALSE;
+	BOOL close = FALSE;
+
+	open = (0 == strcmp(pSw, "open")) ? TRUE : FALSE;
+	close = (0 == strcmp(pSw, "close")) ? TRUE : FALSE;
+
+	if (open) {
+		gTaskNameLog = TRUE;
+		tftp_print("\r\nopen task name logging switch");
+	}
+	else if (close) {
+		gTaskNameLog = FALSE;
+		tftp_print("\r\nclose task name logging switch");
+	}
+	else {
+		tftp_print("invalid operator:%s", argv[2]);
 	}
 }
 
@@ -329,6 +377,12 @@ LOCAL VOID tftp_log_command_init(VOID)
 						"\n\t\t\t\t\t->(3)note log"
 						"\n\t\t\t\t\t->(4)warning log"
 						"\n\t\t\t\t\t->(5)error log}");
+
+	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_log_task_name_switch, 
+		__TFTP_CMD_NORMAL_ | __TFTP_CMD_DYN_,
+			"tftplog{tftp log}"
+				"taskname{task name for logging display}"
+					"__STRING__{open/close}");
 }
 
 /*

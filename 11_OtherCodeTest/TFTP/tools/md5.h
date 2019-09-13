@@ -13,7 +13,20 @@ LOCAL VOID md5_showHashValue(MD5STR *, UINT8 *);
 LOCAL VOID md5_init(MD5STR *, UINT32);
 LOCAL VOID md5_padding(MD5STR *, UINT8 *, UINT32);
 LOCAL VOID md5_calcHashValue(MD5STR *, UINT8 *);
-LOCAL VOID md5_calcM(UINT32 *, UINT8 *);
+
+#define MD5_CALC_M(m, data) \
+do { \
+	int i = 0; \
+	int j = 0; \
+	for(i = 0; i < 16; i++){ \
+		/* 低位->低位 */ \
+		m[i] = data[j + 0] \
+			| (data[j + 1] << 8) \
+			| (data[j + 2] << 16) \
+			| (data[j + 3] << 24); \
+		j += 4; \
+	} \
+}while(0)
 
 #define MD5_FIRST_ROUND(a, b, c, d, mj, s, ti) \
 	do { \

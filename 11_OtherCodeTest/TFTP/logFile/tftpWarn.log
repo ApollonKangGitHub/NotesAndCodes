@@ -128,3 +128,4 @@ Too many command, numner:64, max cmmand number:64[0m
  Client connect:ip:192.168.10.100, port:1322, file:asdfg, mode:octet, blksize:1428, timeout:60, tmfreq:5, bpid:0[0m
 [1;33m2019-09-12 02:04:12(UTC)[Thursday]%% TFTP-WARN  :(285)client tftp request invalid
  Client connect:ip:192.168.10.100, port:1323, file:asdfg, mode:octet, blksize:1428, timeout:60, tmfreq:5, bpid:0[0m
+[1;33m2019-09-12 02:23:08(UTC)[Thursday]%% TFTP-WARN  :(312)client:192.168.10.99 download file /home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/server/bbbb.txt is not exist[0m

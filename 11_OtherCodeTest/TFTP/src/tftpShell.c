@@ -570,6 +570,7 @@ LOCAL tftpReturnValue_t tftp_shell_cmd_display(INT32 argc, CHAR * argv[])
 	tftpShellList_t * pTemp = gShellHead;
 	INT32 argcReg = 0;
 	INT32 index = 0;
+	BOOL findFlg = FALSE;
 	CHAR * pcmd = argv[2];
 	CHAR cmdLine[100] = {'-'};
 	CHAR cmdStr[32] = {0};
@@ -577,6 +578,7 @@ LOCAL tftpReturnValue_t tftp_shell_cmd_display(INT32 argc, CHAR * argv[])
 	INT32 start = 0;
 	INT32 cmdLen = sizeof(cmdLine);
 	cmdLine[cmdLen -1] = '\0';
+	
 	TFTP_LOGDBG(tftp_dbgSwitch_shell, "tftp shell cmd display, argc=%d", argc);
 	
 	tftp_print("\r\ncommand list detail information:");
@@ -610,16 +612,14 @@ LOCAL tftpReturnValue_t tftp_shell_cmd_display(INT32 argc, CHAR * argv[])
 			/* 打印结束行 */
 			memset(cmdLine, '-', cmdLen -1);
 			tftp_print("\r\n\t%s\r\n", cmdLine);
-		}
 
-		/* 找到后直接结束 */
-		if (0 == strcasecmp(pcmd, pTemp->_cmdArgv._info[0]._cmdStr)) {
-			break;
+			findFlg = TRUE;
 		}
+		
 		pTemp = pTemp->_next;
 	}
 
-	if ((!pTemp) && strcasecmp(pcmd, "all")) {
+	if (!findFlg && strcasecmp(pcmd, "all")) {
 		tftp_print("\r\nnot found '%s' this command, please check it", pcmd);
 	}
 	
