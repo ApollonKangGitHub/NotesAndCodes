@@ -1,0 +1,78 @@
+
+[0m2019-09-14 17:23:10(UTC)[Saturday]%% TFTP-NORMAL:(1110)TFTP server is start![0m
+[0m2019-09-14 17:23:10(UTC)[Saturday]%% TFTP-NORMAL:(772)get free task:tftpCliTask0, tid=107087[0m
+[0m2019-09-14 17:23:19(UTC)[Saturday]%% TFTP-NORMAL:(772)get free task:tftpCliTask1, tid=107088[0m
+[0m2019-09-14 17:23:19(UTC)[Saturday]%% TFTP-NORMAL:(680)client 192.168.10.100 req deal start![0m
+[0m2019-09-14 17:24:59(UTC)[Saturday]%% TFTP-NORMAL:(707)client 192.168.10.100 req deal success![0m
+[0m2019-09-14 17:31:03(UTC)[Saturday]%% TFTP-NORMAL:(772)get free task:tftpCliTask0, tid=107087[0m
+[0m2019-09-14 17:31:03(UTC)[Saturday]%% TFTP-NORMAL:(680)client 192.168.10.100 req deal start![0m
+[0m2019-09-14 17:32:29(UTC)[Saturday]%% TFTP-NORMAL:(442)client 192.168.10.100 download file <test> success![0m
+[0m2019-09-14 17:32:29(UTC)[Saturday]%% TFTP-NORMAL:(707)client 192.168.10.100 req deal success![0m
+[0m2019-09-14 17:33:58(UTC)[Saturday]%% TFTP-NORMAL:(1115)TFTP server is start![0m
+[0m2019-09-14 17:33:58(UTC)[Saturday]%% TFTP-NORMAL:(777)get free task:tftpCliTask0, tid=107251[0m
+[0m2019-09-14 17:34:02(UTC)[Saturday]%% TFTP-NORMAL:(777)get free task:tftpCliTask1, tid=107252[0m
+[0m2019-09-14 17:34:02(UTC)[Saturday]%% TFTP-NORMAL:(685)client 192.168.10.100 req deal start![0m
+[0m2019-09-14 17:34:45(UTC)[Saturday]%% TFTP-NORMAL:(777)get free task:tftpCliTask0, tid=107251[0m
+[0m2019-09-14 17:34:45(UTC)[Saturday]%% TFTP-NORMAL:(685)client 192.168.10.100 req deal start![0m
+[0m2019-09-14 17:34:47(UTC)[Saturday]%% TFTP-NORMAL:(777)get free task:tftpCliTask1, tid=107252[0m
+[0m2019-09-14 17:34:47(UTC)[Saturday]%% TFTP-NORMAL:(685)client 192.168.10.100 req deal start![0m
+[0m2019-09-14 17:34:54(UTC)[Saturday]%% TFTP-NORMAL:(777)get free task:tftpCliTask0, tid=107251[0m
+[0m2019-09-14 17:34:54(UTC)[Saturday]%% TFTP-NORMAL:(685)client 192.168.10.100 req deal start![0m
+[0m2019-09-14 17:39:32(UTC)[Saturday]%% TFTP-NORMAL:(1114)TFTP server is start![0m
+[0m2019-09-14 17:39:32(UTC)[Saturday]%% TFTP-NORMAL:(776)get free task:tftpCliTask0, tid=107403[0m
+[0m2019-09-14 17:39:35(UTC)[Saturday]%% TFTP-NORMAL:(776)get free task:tftpCliTask1, tid=107404[0m
+[0m2019-09-14 17:39:35(UTC)[Saturday]%% TFTP-NORMAL:(684)client 192.168.10.100 req deal start![0m
+[0m2019-09-14 17:40:55(UTC)[Saturday]%% TFTP-NORMAL:(776)get free task:tftpCliTask0, tid=107403[0m
+[0m2019-09-14 17:40:55(UTC)[Saturday]%% TFTP-NORMAL:(684)client 192.168.10.100 req deal start![0m
+[0m2019-09-14 17:42:41(UTC)[Saturday]%% TFTP-NORMAL:(1113)TFTP server is start![0m
+[0m2019-09-14 17:42:41(UTC)[Saturday]%% TFTP-NORMAL:(775)get free task:tftpCliTask0, tid=107541[0m
+[0m2019-09-14 17:42:44(UTC)[Saturday]%% TFTP-NORMAL:(775)get free task:tftpCliTask1, tid=107542[0m
+[0m2019-09-14 17:42:44(UTC)[Saturday]%% TFTP-NORMAL:(683)client 192.168.10.100 req deal start![0m
+[0m2019-09-14 17:43:04(UTC)[Saturday]%% TFTP-NORMAL:(775)get free task:tftpCliTask0, tid=107541[0m
+[0m2019-09-14 17:43:04(UTC)[Saturday]%% TFTP-NORMAL:(683)client 192.168.10.100 req deal start![0m
+[0m2019-09-14 17:43:54(UTC)[Saturday]%% TFTP-NORMAL:(775)get free task:tftpCliTask1, tid=107542[0m
+[0m2019-09-14 17:43:54(UTC)[Saturday]%% TFTP-NORMAL:(683)client 192.168.10.100 req deal start![0m
+[0m2019-09-14 17:45:18(UTC)[Saturday]%% TFTP-NORMAL:(775)get free task:tftpCliTask0, tid=107541[0m
+[0m2019-09-14 17:45:18(UTC)[Saturday]%% TFTP-NORMAL:(683)client 192.168.10.100 req deal start![0m
+[0m2019-09-14 17:45:30(UTC)[Saturday]%% TFTP-NORMAL:(775)get free task:tftpCliTask1, tid=107542[0m
+[0m2019-09-14 17:45:30(UTC)[Saturday]%% TFTP-NORMAL:(683)client 192.168.10.100 req deal start![0m
+[0m2019-09-14 17:46:35(UTC)[Saturday]%% TFTP-NORMAL:(775)get free task:tftpCliTask0, tid=107541[0m
+[0m2019-09-14 17:46:35(UTC)[Saturday]%% TFTP-NORMAL:(683)client 192.168.10.100 req deal start![0m
+[0m2019-09-14 17:49:44(UTC)[Saturday]%% TFTP-NORMAL:(1113)TFTP server is start![0m
+[0m2019-09-14 17:49:44(UTC)[Saturday]%% TFTP-NORMAL:(775)get free task:tftpCliTask0, tid=107697[0m
+[0m2019-09-14 17:49:51(UTC)[Saturday]%% TFTP-NORMAL:(775)get free task:tftpCliTask1, tid=107698[0m
+[0m2019-09-14 17:49:51(UTC)[Saturday]%% TFTP-NORMAL:(683)client 192.168.10.100 req deal start![0m
+[0m2019-09-14 17:53:00(UTC)[Saturday]%% TFTP-NORMAL:(1113)TFTP server is start![0m
+[0m2019-09-14 17:53:00(UTC)[Saturday]%% TFTP-NORMAL:(775)get free task:tftpCliTask0, tid=107835[0m
+[0m2019-09-14 17:53:06(UTC)[Saturday]%% TFTP-NORMAL:(775)get free task:tftpCliTask1, tid=107836[0m
+[0m2019-09-14 17:53:06(UTC)[Saturday]%% TFTP-NORMAL:(683)client 192.168.10.100 req deal start![0m
+[0m2019-09-14 17:54:55(UTC)[Saturday]%% TFTP-NORMAL:(1113)TFTP server is start![0m
+[0m2019-09-14 17:54:55(UTC)[Saturday]%% TFTP-NORMAL:(775)get free task:tftpCliTask0, tid=107970[0m
+[0m2019-09-14 17:55:00(UTC)[Saturday]%% TFTP-NORMAL:(775)get free task:tftpCliTask1, tid=107971[0m
+[0m2019-09-14 17:55:00(UTC)[Saturday]%% TFTP-NORMAL:(683)client 192.168.10.100 req deal start![0m
+[0m2019-09-14 17:56:34(UTC)[Saturday]%% TFTP-NORMAL:(775)get free task:tftpCliTask0, tid=107970[0m
+[0m2019-09-14 17:56:34(UTC)[Saturday]%% TFTP-NORMAL:(683)client 192.168.10.100 req deal start![0m
+[0m2019-09-14 17:57:50(UTC)[Saturday]%% TFTP-NORMAL:(1113)TFTP server is start![0m
+[0m2019-09-14 17:57:50(UTC)[Saturday]%% TFTP-NORMAL:(775)get free task:tftpCliTask0, tid=108111[0m
+[0m2019-09-14 17:57:54(UTC)[Saturday]%% TFTP-NORMAL:(775)get free task:tftpCliTask1, tid=108112[0m
+[0m2019-09-14 17:57:54(UTC)[Saturday]%% TFTP-NORMAL:(683)client 192.168.10.100 req deal start![0m
+[0m2019-09-14 17:58:16(UTC)[Saturday]%% TFTP-NORMAL:(775)get free task:tftpCliTask0, tid=108111[0m
+[0m2019-09-14 17:58:16(UTC)[Saturday]%% TFTP-NORMAL:(683)client 192.168.10.100 req deal start![0m
+[0m2019-09-14 17:59:59(UTC)[Saturday]%% TFTP-NORMAL:(710)client 192.168.10.100 req deal success![0m
+[0m2019-09-14 18:02:32(UTC)[Saturday]%% TFTP-NORMAL:(1115)TFTP server is start![0m
+[0m2019-09-14 18:02:32(UTC)[Saturday]%% TFTP-NORMAL:(777)get free task:tftpCliTask0, tid=108254[0m
+[0m2019-09-14 18:02:38(UTC)[Saturday]%% TFTP-NORMAL:(777)get free task:tftpCliTask1, tid=108255[0m
+[0m2019-09-14 18:02:38(UTC)[Saturday]%% TFTP-NORMAL:(685)client 192.168.10.100 req deal start![0m
+[0m2019-09-14 18:02:40(UTC)[Saturday]%% TFTP-NORMAL:(777)get free task:tftpCliTask0, tid=108254[0m
+[0m2019-09-14 18:02:40(UTC)[Saturday]%% TFTP-NORMAL:(685)client 192.168.10.100 req deal start![0m
+[0m2019-09-14 18:02:44(UTC)[Saturday]%% TFTP-NORMAL:(777)get free task:tftpCliTask1, tid=108255[0m
+[0m2019-09-14 18:02:44(UTC)[Saturday]%% TFTP-NORMAL:(685)client 192.168.10.100 req deal start![0m
+[0m2019-09-14 18:04:20(UTC)[Saturday]%% TFTP-NORMAL:(712)client 192.168.10.100 req deal success![0m
+[0m2019-09-14 18:05:27(UTC)[Saturday]%% TFTP-NORMAL:(1115)TFTP server is start![0m
+[0m2019-09-14 18:05:27(UTC)[Saturday]%% TFTP-NORMAL:(777)get free task:tftpCliTask0, tid=108282[0m
+[0m2019-09-14 18:05:50(UTC)[Saturday]%% TFTP-NORMAL:(777)get free task:tftpCliTask1, tid=108283[0m
+[0m2019-09-14 18:05:50(UTC)[Saturday]%% TFTP-NORMAL:(685)client 192.168.10.100 req deal start![0m
+[0m2019-09-14 18:06:50(UTC)[Saturday]%% TFTP-NORMAL:(442)client 192.168.10.100 download file <testaaa> success![0m
+[0m2019-09-14 18:06:50(UTC)[Saturday]%% TFTP-NORMAL:(712)client 192.168.10.100 req deal success![0m
+[0m2019-09-14 18:09:49(UTC)[Saturday]%% TFTP-NORMAL:(1115)TFTP server is start![0m
+[0m2019-09-14 18:10:55(UTC)[Saturday]%% TFTP-NORMAL:(442)client 192.168.10.100 download file <testaaa> success![0m

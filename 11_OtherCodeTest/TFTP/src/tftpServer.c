@@ -518,16 +518,14 @@ LOCAL tftpReturnValue_t tftp_server_client_wrq_hanle
 	tftpRet =  tftp_server_wrq_file_exist_check(pClient);
 	if (TFTP_FAILURE(tftpRet)) {
 		if (tftp_ret_Exist == tftpRet) {
-			sendLen = (INT32)tftp_pack_error(errMsg, tftp_Pack_ErrCode_FileExist, __TFTP_ERR_FILEXIST_);
-			(VOID)tftp_socket_send(pClient->_sockfd, errMsg, sendLen, pCliAddr);
+			sendLen = (INT32)tftp_pack_error(sendBuf, tftp_Pack_ErrCode_FileExist, __TFTP_ERR_FILEXIST_);
 		}
 		else {
-			sendLen = (INT32)tftp_pack_error(errMsg, tftp_Pack_ErrCode_NotDefined, __TFTP_ERR_NOTDEFINE_);
-			(VOID)tftp_socket_send(pClient->_sockfd, errMsg, sendLen, pCliAddr);	
+			sendLen = (INT32)tftp_pack_error(sendBuf, tftp_Pack_ErrCode_NotDefined, __TFTP_ERR_NOTDEFINE_);	
 		}
-		goto tftp_rrq_wrq_send_ret;
+		goto tftp_wrq_err_send_ret;
 	}	
-	
+
 	/* 根据blksize申请内存 */
 	recvBuf = malloc(blksize + __TFTP_DATA_SHIFT_);
 	if (NULL == recvBuf) {
@@ -540,10 +538,62 @@ LOCAL tftpReturnValue_t tftp_server_client_wrq_hanle
 	tftp_socket_send(sockfd, sendBuf, sendLen, pCliAddr);
 
 	while (TRUE) {
+		(VOID)memset(sendBuf, 0, __TFTP_REQ_PACK_BUF_LEN_);
+		(VOID)memset(recvBuf, 0, blksize + __TFTP_DATA_SHIFT_);
+	
+		/* 等待数据报文/错误报文 */
+		recvLen = tftp_socket_recv(sockfd, recvBuf, blksize + __TFTP_DATA_SHIFT_, pCliAddr);
+		if (recvLen < 0) {
+			TFTP_LOGERR("Recv client information error, errno=%d!", errno);
+			tftp_perror("recv fail reason is");
+			goto tftp_wrq_send_ret;
+		}
+		saveLen = (UINT32)(recvLen - __TFTP_DATA_SHIFT_);
+	
+		switch (TFTP_GET_OPCODE(recvBuf)) {
+			case __TFTP_OPCODE_DATA_:
+				/* 检查块号 */
+				blkid = TFTP_GET_BLKID(recvBuf);
+				if (blkid != ++ack) {
+					tftp_sprint(errMsg, "%s<cur ack tid:%d, recv blkid:%d>", __TFTP_ERR_UNKNOWNTD_, ack, blkid);
+					sendLen = (INT32)tftp_pack_error(sendBuf, tftp_Pack_ErrCode_UnknownId, errMsg); 				
+					goto tftp_wrq_err_send_ret;
+				}
 
+				/* 写入文件 */
+				writeLen = tftp_write(pClient->_fileFd, recvBuf + __TFTP_DATA_SHIFT_, saveLen);
+				if (writeLen != saveLen) {
+					tftp_sprint(errMsg, "%s[%s, recvLen:%d, writeLen:%d, errno:%d]", \
+						__TFTP_ERR_NOTDEFINE_FILE_WRITE_FAIL_, PecvInfo->_fileName, saveLen, writeLen, errno);
+					sendLen = (INT32)tftp_pack_error(sendBuf, tftp_Pack_ErrCode_AccViolate, errMsg);
+					goto tftp_wrq_err_send_ret;
+				}		
+
+				/* 回复ACK */
+				sendLen = tftp_pack_ack(sendBuf, ack);
+				(VOID)tftp_socket_send(sockfd, sendBuf, sendLen, pCliAddr);
+
+				/* 最后一个报文 */
+				if (recvLen < PecvInfo->_blkSize + __TFTP_DATA_SHIFT_) {
+					goto tftp_wrq_ok_ret;
+				}
+				break;
+			case __TFTP_OPCODE_ERR_:
+				TFTP_LOGERR("recv error code(%d), error message:%s", TFTP_GET_ERRCODE(recvBuf), TFTP_GET_ERRMSG(recvBuf));
+				goto tftp_wrq_send_ret;
+			default:
+				tftp_sprint(errMsg, "%s(%d), not have recv data, waiting...", __TFTP_ERR_NOTDEFINE_OPCODE_INVALID_, PecvInfo->_opcode);
+				sendLen = (INT32)tftp_pack_error(sendBuf, tftp_Pack_ErrCode_AccViolate, errMsg);
+				goto tftp_wrq_err_send_ret;			
+		}	
 	}
+tftp_wrq_ok_ret:	
 	return tftp_ret_Ok;
-tftp_rrq_wrq_send_ret:
+tftp_wrq_err_send_ret:
+	/* 出错发送ERROR code */
+	(VOID)tftp_socket_send(sockfd, sendBuf, sendLen, pCliAddr);
+	TFTP_LOGERR("%02x%02x%02x%02x%s", sendBuf[0], sendBuf[1], sendBuf[2], sendBuf[3], sendBuf + __TFTP_DATA_SHIFT_);
+tftp_wrq_send_ret:
 	return tftp_ret_Error;
 }
 
@@ -568,8 +618,14 @@ LOCAL VOID tftp_server_client_resource_reset(tftpTaskPool_t * pClient, BOOL calc
 		pClient->_fileFd = -1;
 	}
 	if (calcMd5) {
+		/* 计算文件md5值 */
+		tftp_print("\r\nfile %s md5sum is calcing...",  pClient->_filePath);
+		tftp_fflush(__TFTP_STDOUT_);
+	
 		(VOID)md5_algroithm(pClient->_filePath, md5Result);
-		TFTP_LOGNOTE("file %s md5sum is %s",  pClient->_cliInfo._reqInfo._fileName, md5Result);	
+		
+		tftp_print("file %s md5sum is %s",  pClient->_cliInfo._reqInfo._fileName, md5Result);	
+		tftp_fflush(__TFTP_STDOUT_);
 	}
 
 	memset(&pClient->_cliInfo, 0, sizeof(pClient->_cliInfo));
@@ -598,6 +654,7 @@ VOID * tftp_server_client_connect_handle(VOID * arg)
 	BOOL calcMd5 = FALSE;
 	
 	while (initSucces && gServerRun) {
+		calcMd5 = FALSE;
 		tid = tftp_task_get_tid();
 
 		/* 获取信号量 */
@@ -625,7 +682,7 @@ VOID * tftp_server_client_connect_handle(VOID * arg)
 			goto tftp_child_task_over;
 		}
 
-		TFTP_LOGNOR("client %s req deal start!", pClient->_cliInfo._cliIpAddr);
+		TFTP_LOGDBG(tftp_dbgSwitch_server, "client %s req deal start!", pClient->_cliInfo._cliIpAddr);
 			
 		/* 处理连接请求...,检查请求报文基本格式 */	
 		tftpRet = tftp_server_client_req_check(&pClient->_cliInfo);
@@ -652,7 +709,7 @@ VOID * tftp_server_client_connect_handle(VOID * arg)
 		}
 
 		/* 文件正常传输完成才计算MD5值 */
-		TFTP_LOGNOR("client %s req deal success!", pClient->_cliInfo._cliIpAddr);
+		TFTP_LOGDBG(tftp_dbgSwitch_server, "client %s req deal success!", pClient->_cliInfo._cliIpAddr);
 		calcMd5 = TRUE;
 tftp_child_task_over:
 		/* 释放资源 */
@@ -717,7 +774,7 @@ VOID * tftp_server_task_handle(VOID * argv)
 		if (pFind) {
 			memset(&taskInfo, 0, sizeof(taskInfo));
 			tftp_task_get_info_by_tid(pFind->_tid, &taskInfo);
-			TFTP_LOGNOR("get free task:%s, tid=%d", taskInfo._name, pFind->_tid);
+			TFTP_LOGDBG(tftp_dbgSwitch_server, "get free task:%s, tid=%d", taskInfo._name, pFind->_tid);
 			
 			/* 接收UDP请求信息 */
 			memset(buf, 0, __TFTP_RECV_BUF_LEN_);

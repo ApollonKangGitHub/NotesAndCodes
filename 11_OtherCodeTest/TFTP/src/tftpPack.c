@@ -344,9 +344,9 @@ EXTERN UINT16 tftp_pack_error(UINT8 * buf, tftpPackErrCode_t errCode, UINT8 * er
 	/* 封装opcode */
 	((UINT16 *)p)[0] = htons(__TFTP_OPCODE_ERR_);
 	packLen += __TFTP_OPCODE_LEN_;
-	
+
 	/* 封装错误编码 */
-	((UINT16 *)p)[0] = htons(errCode);
+	((UINT16 *)p)[1] = htons(errCode);
 	packLen += __TFTP_ERRCODE_LEN_;
 #if 1
 	/* 封装错误消息 */

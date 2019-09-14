@@ -3,3 +3,24 @@
 [1;31m2019-09-13 23:57:48(UTC)[Friday]%% TFTP-ERROR :(729)tftp operator failure, return NOT FOUND(3)[0m
 [1;31m2019-09-13 23:57:54(UTC)[Friday]%% TFTP-ERROR :(729)tftp operator failure, return ALREADY EXIST(6)[0m
 [1;31m2019-09-13 23:57:57(UTC)[Friday]%% TFTP-ERROR :(729)tftp operator failure, return ALREADY EXIST(6)[0m
+[1;31m2019-09-14 16:07:09(UTC)[Saturday]%% TFTP-ERROR :(729)tftp operator failure, return ALREADY EXIST(6)[0m
+[1;31m2019-09-14 17:39:35(UTC)[Saturday]%% TFTP-ERROR :(516)#######tftp_server_client_wrq_hanle-516[0m
+[1;31m2019-09-14 17:39:35(UTC)[Saturday]%% TFTP-ERROR :(521)#######tftp_server_client_wrq_hanle-521[0m
+[1;31m2019-09-14 17:40:55(UTC)[Saturday]%% TFTP-ERROR :(516)#######tftp_server_client_wrq_hanle-516[0m
+[1;31m2019-09-14 17:40:55(UTC)[Saturday]%% TFTP-ERROR :(521)#######tftp_server_client_wrq_hanle-521[0m
+[1;31m2019-09-14 17:42:44(UTC)[Saturday]%% TFTP-ERROR :(595)File already exists.[0m
+[1;31m2019-09-14 17:43:04(UTC)[Saturday]%% TFTP-ERROR :(595)File already exists.[0m
+[1;31m2019-09-14 17:43:54(UTC)[Saturday]%% TFTP-ERROR :(595)File already exists.[0m
+[1;31m2019-09-14 17:45:18(UTC)[Saturday]%% TFTP-ERROR :(595)File already exists.[0m
+[1;31m2019-09-14 17:45:30(UTC)[Saturday]%% TFTP-ERROR :(595)File already exists.[0m
+[1;31m2019-09-14 17:46:35(UTC)[Saturday]%% TFTP-ERROR :(595)File already exists.[0m
+[1;31m2019-09-14 17:49:51(UTC)[Saturday]%% TFTP-ERROR :(595)00060000File already exists.[0m
+[1;31m2019-09-14 17:53:06(UTC)[Saturday]%% TFTP-ERROR :(347)1280[0m
+[1;31m2019-09-14 17:53:06(UTC)[Saturday]%% TFTP-ERROR :(595)00060000File already exists.[0m
+[1;31m2019-09-14 17:55:00(UTC)[Saturday]%% TFTP-ERROR :(347)5-1280[0m
+[1;31m2019-09-14 17:55:00(UTC)[Saturday]%% TFTP-ERROR :(595)00060000File already exists.[0m
+[1;31m2019-09-14 17:56:34(UTC)[Saturday]%% TFTP-ERROR :(347)5-1280[0m
+[1;31m2019-09-14 17:56:34(UTC)[Saturday]%% TFTP-ERROR :(595)00060000File already exists.[0m
+[1;31m2019-09-14 17:57:54(UTC)[Saturday]%% TFTP-ERROR :(595)00050006File already exists.[0m
+[1;31m2019-09-14 18:02:38(UTC)[Saturday]%% TFTP-ERROR :(595)00050006File already exists.[0m
+[1;31m2019-09-14 18:02:40(UTC)[Saturday]%% TFTP-ERROR :(595)00050006File already exists.[0m

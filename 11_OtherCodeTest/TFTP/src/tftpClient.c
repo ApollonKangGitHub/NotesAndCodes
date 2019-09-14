@@ -480,7 +480,7 @@ LOCAL UINT16 tftp_client_get_timeout(CONST CHAR * pTimeout)
 	}
 
 	/* Valid values range between "1" and "255" seconds,inclusive */
-	if (timeout > 255 || timeout < 1) {
+	if (timeout > __TFTP_TIMEOUT_MAX_ || timeout < __TFTP_TIMEOUT_MIN_) {
 		TFTP_LOGWARN("invalid timeout:%d(s), set default:%d(s)", timeout, __TFTP_TIMEOUT_DEFAULT_);
 		timeout = __TFTP_TIMEOUT_DEFAULT_;
 	}

@@ -8,8 +8,6 @@
 #include <tftpPublic.h>
 #include <tftpType.h>
 
-UINT8 gMd5Result[33] = {0};
-
 EXTERN VOID md5_algroithm(CHAR CONST * file, UINT8 * result)
 {
 	/* 用来接收文件中读取的一个512bit的分组 */
