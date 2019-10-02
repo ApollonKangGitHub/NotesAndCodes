@@ -353,7 +353,7 @@ LOCAL VOID tftp_log_command_init(VOID)
 {	
 	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_log_cmd_debug_switch, 
 		__TFTP_CMD_NORMAL_ | __TFTP_CMD_DYN_,
-			"tftplog{tftp log}"
+			"tftplogDbg{tftp log debug switch}"
 				"debug{debug switch open or close}"
 					"__UINT32__{switch choose[eg:"
 						"\n\t\t\t\t\t->(0)task"
@@ -369,7 +369,7 @@ LOCAL VOID tftp_log_command_init(VOID)
 	
 	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_log_cmd_display_switch, 
 		__TFTP_CMD_NORMAL_ | __TFTP_CMD_DYN_,
-			"tftplog{tftp log}"
+			"tftplogInfo{tftp log information file show}"
 				"display{display logging file}"
 					"__UINT32__{log level choose eg:"
 						"\n\t\t\t\t\t->(1)normal log"
@@ -380,7 +380,7 @@ LOCAL VOID tftp_log_command_init(VOID)
 
 	tftp_shell_cmd_register((tftp_cmd_deal_fun)tftp_log_task_name_switch, 
 		__TFTP_CMD_NORMAL_ | __TFTP_CMD_DYN_,
-			"tftplog{tftp log}"
+			"tftplogTask{tftp log task name optional}"
 				"taskname{task name for logging display}"
 					"__STRING__{open/close}");
 }

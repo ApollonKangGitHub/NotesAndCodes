@@ -65,7 +65,7 @@ LOCAL tftpReturnValue_t tftp_client_oack_check
 
 	/* 选项检查 */
 	if (pRecvInfo->_options._opt_blksize) 
-{
+	{
 		if (pRecvInfo->_blkSize > __TFTP_BLKSIZE_8192_BYTES_
 			|| pRecvInfo->_blkSize  < __TFTP_BLKSIZE_128_BYTES_) {
 			tftp_sprint(errMsgTemp, "%s<%d>", __TFTP_ERR_NOTDEFINE_BLKSIZE_INVALID_, pRecvInfo->_blkSize);
@@ -119,7 +119,7 @@ ack_check_ret:
  * Notes:
  *     
  */
-LOCAL tftpReturnValue_t tftp_client_pack_deal_download()
+LOCAL tftpReturnValue_t tftp_client_pack_deal_download(VOID)
 {
 	INT32 recvLen = 0;
 	INT32 sendLen = 0;
@@ -254,7 +254,7 @@ tftp_downlad_err_ret:
  * Notes:
  *     
  */
-LOCAL tftpReturnValue_t tftp_client_pack_deal_upload()
+LOCAL tftpReturnValue_t tftp_client_pack_deal_upload(VOID)
 {
 	INT32 recvLen = 0;
 	INT32 sendLen = 0;

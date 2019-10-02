@@ -33,3 +33,6 @@
 [1;31m2019-10-02 12:38:09(UTC)[Wednesday]%% TFTP-ERROR :(155)send data to sockfd wait recv timeout, sockfd = 8, times = 2, timeout = 3, times_alreay = 3[0m
 [1;31m2019-10-02 12:38:55(UTC)[Wednesday]%% TFTP-ERROR :(155)send data to sockfd wait recv timeout, sockfd = 8, times = 2, timeout = 3, times_alreay = 3[0m
 [1;31m2019-10-02 12:40:31(UTC)[Wednesday]%% TFTP-ERROR :(155)send data to sockfd wait recv timeout, sockfd = 8, times = 2, timeout = 3, times_alreay = 3[0m
+[1;31m2019-10-02 21:33:41(UTC)[Wednesday] (tftpShellTask) %% TFTP-ERROR :(65)bind socket fd fail, sockfd = 8, port = 69, errno = 99[0m
+[1;31m2019-10-02 21:33:41(UTC)[Wednesday] (tftpShellTask) %% TFTP-ERROR :(846)create server socket fail![0m
+[1;31m2019-10-02 21:33:41(UTC)[Wednesday] (tftpShellTask) %% TFTP-ERROR :(1107)tftp operator failure, return ERROR (1)[0m

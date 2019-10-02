@@ -162,7 +162,7 @@ typedef struct tftpDbgFileInfo_s{
 	} while(0)
 			
 
-#define TFTP_DBG_SWITCH_NUMBER_MAX (tftp_dbgSwitch_max / 8) 
+#define TFTP_DBG_SWITCH_NUMBER_MAX ((tftp_dbgSwitch_max + 7) / 8) 
 EXTERN UINT8 gDbgSwitchFlg[TFTP_DBG_SWITCH_NUMBER_MAX];
 
 /* 指示log打印目标文件，可一个可多个 */

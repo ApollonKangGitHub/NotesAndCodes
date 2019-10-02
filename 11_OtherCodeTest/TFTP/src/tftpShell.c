@@ -531,7 +531,7 @@ LOCAL VOID tftp_shell_cmd_dyn_deal
 	}
 	
 	while (pTemp) {
-		if ((0 == strcasecmp(cmdName, pTemp->_cmdArgv._info[0]._cmdStr)) || enableAll
+		if (((0 == strcasecmp(cmdName, pTemp->_cmdArgv._info[0]._cmdStr)) || enableAll)
 			&& (strcasecmp("dynamic", pTemp->_cmdArgv._info[0]._cmdStr))) {
 			
 			if (enable && !(pTemp->_status & __TFTP_CMD_DYN_)) {
