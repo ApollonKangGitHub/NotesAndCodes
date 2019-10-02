@@ -154,7 +154,14 @@ typedef struct tftpDbgFileInfo_s{
 #define TFTP_IF_ERROR(ret) \
 			TFTP_LOGERR("tftp operator failure, return %s(%d)", tftp_err_msg(ret), ret)
 
-	
+#define TFTP_IF_ERR_RET(ret) \
+	do { \
+		if (TFTP_FAILURE(ret)) { \
+			return ret;\
+		} \
+	} while(0)
+			
+
 #define TFTP_DBG_SWITCH_NUMBER_MAX (tftp_dbgSwitch_max / 8) 
 EXTERN UINT8 gDbgSwitchFlg[TFTP_DBG_SWITCH_NUMBER_MAX];
 

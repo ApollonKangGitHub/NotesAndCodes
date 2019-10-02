@@ -349,6 +349,8 @@ LOCAL tftpReturnValue_t tftp_server_client_rrq_hanle
 	INT32 readLen = 0;
 	UINT16 ack = 0;
 	UINT16 blkid = 0;
+	INT32 tmreq = 0;
+	INT32 timeout = 0;
 	CHAR errMsg[__TFTP_ERR_PACK_MAX_LEN_] = {0};
 	UINT8 * sendBuf = NULL;
 	INT32 sockFd = pClient->_sockfd;
@@ -387,9 +389,13 @@ LOCAL tftpReturnValue_t tftp_server_client_rrq_hanle
 		goto tftp_rrq_err_send_ret;
 	}
 
+	tmreq = pReqInfo->_tmfreq;
+	timeout = pReqInfo->_timeout;
+
 	/* 回复OACK */
 	sendLen = tftp_pack_oack(sendBuf, pReqInfo);
-	tftp_socket_send(sockFd, sendBuf, sendLen, pCliAddr);
+	tftpRet = tftp_socket_send(sockFd, sendBuf, sendLen, pCliAddr, tmreq, timeout, TRUE);
+	TFTP_IF_ERR_RET(tftpRet);
 
 	/* 等待ACK/ERR和发送DATA */
 	while (TRUE) {
@@ -425,7 +431,8 @@ LOCAL tftpReturnValue_t tftp_server_client_rrq_hanle
 				sendLen = readLen + (INT32)tftp_pack_data(sendBuf, blkid);
 				
 				/* 发送数据,并根据发送的报文大小小于blksize判断结束 */
-				tftp_socket_send(sockFd, sendBuf, sendLen, pCliAddr);
+				tftpRet = tftp_socket_send(sockFd, sendBuf, sendLen, pCliAddr, tmreq, timeout, TRUE);
+				TFTP_IF_ERR_RET(tftpRet);
 				if (readLen < blksize) {
 					goto tftp_rrq_ok_ret;
 				}
@@ -443,7 +450,7 @@ tftp_rrq_ok_ret:
 	return tftp_ret_Ok;
 tftp_rrq_err_send_ret:
 	/* 出错发送ERROR code */
-	(VOID)tftp_socket_send(sockFd, sendBuf, sendLen, pCliAddr);
+	(VOID)tftp_socket_send(sockFd, sendBuf, sendLen, pCliAddr, tmreq, timeout, FALSE);
 	TFTP_LOGERR("%s", errMsg);
 tftp_rrq_err_ret:
 	return tftp_ret_Error;
@@ -505,6 +512,8 @@ LOCAL tftpReturnValue_t tftp_server_client_wrq_hanle
 	UINT32 saveLen = 0;
 	UINT16 ack = 0;
 	UINT16 blkid = 0;
+	INT32 tmreq = 0;
+	INT32 timeout = 0;
 	UINT8 * recvBuf = NULL;
 	UINT8 sendBuf[__TFTP_REQ_PACK_BUF_LEN_] = {0};
 	CHAR errMsg[__TFTP_ERR_PACK_MAX_LEN_] = {0};
@@ -532,10 +541,14 @@ LOCAL tftpReturnValue_t tftp_server_client_wrq_hanle
 		TFTP_LOGERR("For client %s malloc send memry size:%d fail!", pClient->_cliInfo._cliIpAddr, blksize);
 		return tftp_ret_Null;
 	}
+
+	tmreq = PecvInfo->_tmfreq;
+	timeout = PecvInfo->_timeout;
 	
 	/* 回复OACK */
 	sendLen = tftp_pack_oack(sendBuf, PecvInfo);
-	tftp_socket_send(sockfd, sendBuf, sendLen, pCliAddr);
+	tftpRet = tftp_socket_send(sockfd, sendBuf, sendLen, pCliAddr, tmreq, timeout, TRUE);
+	TFTP_IF_ERR_RET(tftpRet);
 
 	while (TRUE) {
 		(VOID)memset(sendBuf, 0, __TFTP_REQ_PACK_BUF_LEN_);
@@ -571,11 +584,15 @@ LOCAL tftpReturnValue_t tftp_server_client_wrq_hanle
 
 				/* 回复ACK */
 				sendLen = tftp_pack_ack(sendBuf, ack);
-				(VOID)tftp_socket_send(sockfd, sendBuf, sendLen, pCliAddr);
-
-				/* 最后一个报文 */
+				
+				/* 最后一个报文,对应的ACK不重传 */
 				if (recvLen < PecvInfo->_blkSize + __TFTP_DATA_SHIFT_) {
+					(VOID)tftp_socket_send(sockfd, sendBuf, sendLen, pCliAddr, tmreq, timeout, FALSE);
 					goto tftp_wrq_ok_ret;
+				}
+				else {
+					tftpRet = tftp_socket_send(sockfd, sendBuf, sendLen, pCliAddr, tmreq, timeout, TRUE);
+					TFTP_IF_ERR_RET(tftpRet);
 				}
 				break;
 			case __TFTP_OPCODE_ERR_:
@@ -591,7 +608,7 @@ tftp_wrq_ok_ret:
 	return tftp_ret_Ok;
 tftp_wrq_err_send_ret:
 	/* 出错发送ERROR code */
-	(VOID)tftp_socket_send(sockfd, sendBuf, sendLen, pCliAddr);
+	(VOID)tftp_socket_send(sockfd, sendBuf, sendLen, pCliAddr, tmreq, timeout, FALSE);
 	TFTP_LOGERR("%02x%02x%02x%02x%s", sendBuf[0], sendBuf[1], sendBuf[2], sendBuf[3], sendBuf + __TFTP_DATA_SHIFT_);
 tftp_wrq_send_ret:
 	return tftp_ret_Error;
@@ -689,7 +706,7 @@ VOID * tftp_server_client_connect_handle(VOID * arg)
 		if (TFTP_FAILURE(tftpRet)) {
 			/* 请求参数有错误参数，发送错误报文给客户端，错误类型为操作无效 */
 			sendLen = (INT32)tftp_pack_error(errBuf, tftp_Pack_ErrCode_AccViolate, __TFTP_ERR_ILLEGALOPER_);
-			(VOID)tftp_socket_send(pClient->_sockfd, errBuf, sendLen, &(pClient->_cliInfo._cliAddr));
+			(VOID)tftp_socket_send(pClient->_sockfd, errBuf, sendLen, &(pClient->_cliInfo._cliAddr), 0, 0, FALSE);
 			goto tftp_child_task_over;
 		}
 		

@@ -84,7 +84,7 @@ LOCAL CHAR * tftp_log_time_get(OUT CHAR * date)
     (VOID)time (&timeStamp);					/* 获取时间戳 */
     (VOID)localtime_r (&timeStamp, &tmStruct);	/* 时间戳转换为时间结构 */
 
-	/* 1970-01-01 00:00:00 +0000 (UTC). */
+	/* 1900-01-01 00:00:00 +0000 (UTC). */
 	tftp_sprint(date, "%04d-%02d-%02d %02d:%02d:%02d(UTC)[%s]",
 		tmStruct.tm_year + 1900, 
 		tmStruct.tm_mon + 1, 
@@ -188,7 +188,7 @@ EXTERN INT32 tftp_log_level_print
  */
 LOCAL INT32 tftp_log_to_file_init(VOID)
 {
-	INT32 i = 0;
+	INT32 index = 0;
 	FILE * fp = NULL;
 
 	/* shell直接赋值stdin */
@@ -197,16 +197,16 @@ LOCAL INT32 tftp_log_to_file_init(VOID)
 		gLogFilePath[tftp_logLevel_Shell], strlen(gLogFilePath[tftp_logLevel_Shell]));
 
 	/* 依次打开其他文件 */
-	for (i = tftp_logLevel_Normal; i < tftp_logLevel_Max; i++) {
-		memcpy(gLogFile[i]._filePath, gLogFilePath[i], strlen(gLogFilePath[i]));
-		fp = fopen(gLogFile[i]._filePath, "ab+");
+	for (index = tftp_logLevel_Normal; index < tftp_logLevel_Max; index++) {
+		memcpy(gLogFile[index]._filePath, gLogFilePath[index], strlen(gLogFilePath[index]));
+		fp = fopen(gLogFile[index]._filePath, "ab+");
 		if (NULL == fp) {
-			tftp_print("\r\nError to open file:%s(%d)!", gLogFile[i]._filePath, i);
+			tftp_print("\r\nError to open file:%s(%d)!", gLogFile[index]._filePath, index);
 			tftp_perror("open fail reason is");
 			exit(EXIT_FAILURE);
 		}
 
-		gLogFile[i]._fileFp = fp;
+		gLogFile[index]._fileFp = fp;
 	}
 
 	return tftp_ret_Ok;

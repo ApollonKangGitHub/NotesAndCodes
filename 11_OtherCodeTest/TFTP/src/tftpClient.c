@@ -125,6 +125,8 @@ LOCAL tftpReturnValue_t tftp_client_pack_deal_download()
 	INT32 sendLen = 0;
 	INT32 writeLen = 0;
 	UINT32 saveLen = 0;
+	INT32 tmreq = 0;
+	INT32 timeout = 0;
 	UINT16 ack = 0;
 	UINT16 blkid = 0;
 	UINT32 curSize = 0;
@@ -166,9 +168,13 @@ LOCAL tftpReturnValue_t tftp_client_pack_deal_download()
 		}
 	}
 
+	tmreq = gCliTranInfo._reqPack._tmfreq;
+	timeout = gCliTranInfo._reqPack._timeout;
+
 	/* 回复ACK */
 	sendLen = tftp_pack_ack(gSendBuf, ack);
-	(VOID)tftp_socket_send(sockfd, gSendBuf, sendLen, pSerAddr);
+	tftpRet = tftp_socket_send(sockfd, gSendBuf, sendLen, pSerAddr, tmreq, timeout, TRUE);
+	TFTP_IF_ERR_RET(tftpRet);
 
 	while (TRUE) {
 		(VOID)memset(gRecvBuf, 0, __TFTP_RECV_BUF_LEN_);
@@ -209,11 +215,15 @@ LOCAL tftpReturnValue_t tftp_client_pack_deal_download()
 
 				/* 回复ACK */
 				sendLen = tftp_pack_ack(gSendBuf, ack);
-				(VOID)tftp_socket_send(sockfd, gSendBuf, sendLen, pSerAddr);
 
 				/* 最后一个报文 */
 				if (recvLen < PecvInfo->_blkSize + __TFTP_DATA_SHIFT_) {
+					(VOID)tftp_socket_send(sockfd, gSendBuf, sendLen, pSerAddr, tmreq, timeout, FALSE);
 					goto tftp_download_ok_ret;
+				}
+				else {
+					tftpRet = tftp_socket_send(sockfd, gSendBuf, sendLen, pSerAddr, tmreq, timeout, TRUE);
+					TFTP_IF_ERR_RET(tftpRet);
 				}
 				break;
 			case __TFTP_OPCODE_ERR_:
@@ -231,7 +241,7 @@ tftp_download_ok_ret:
 
 tftp_downlad_err_send_ret:
 		/* 出错发送ERROR code */
-	(VOID)tftp_socket_send(sockfd, gSendBuf, sendLen, pSerAddr);
+	(VOID)tftp_socket_send(sockfd, gSendBuf, sendLen, pSerAddr, tmreq, timeout, FALSE);
 tftp_downlad_err_ret:
 	return tftp_ret_Error;
 }
@@ -251,6 +261,8 @@ LOCAL tftpReturnValue_t tftp_client_pack_deal_upload()
 	INT32 readLen = 0;
 	UINT16 ack = 0;
 	UINT16 blkid = 0;
+	INT32 tmreq = 0;
+	INT32 timeout = 0;
 	UINT32 curSize = 0;
 	BOOL progressBarFirst = TRUE;
 	tftpReturnValue_t tftpRet = tftp_ret_Ok;
@@ -299,6 +311,8 @@ LOCAL tftpReturnValue_t tftp_client_pack_deal_upload()
 	}
 
 	blkid = 1;
+	tmreq = recvInfo._tmfreq;
+	timeout = recvInfo._timeout;
 	while (TRUE) {
 		(VOID)memset(gRecvBuf, 0, __TFTP_RECV_BUF_LEN_);
 		(VOID)memset(gSendBuf, 0, __TFTP_SEND_BUF_LEN_);
@@ -319,7 +333,8 @@ LOCAL tftpReturnValue_t tftp_client_pack_deal_upload()
 		sendLen = readLen + (INT32)tftp_pack_data(gSendBuf, blkid);
 		
 		/* 发送数据 */
-		tftp_socket_send(sockfd, gSendBuf, sendLen, pSerAddr);
+		tftpRet = tftp_socket_send(sockfd, gSendBuf, sendLen, pSerAddr, tmreq, timeout, TRUE);
+		TFTP_IF_ERR_RET(tftpRet);
 
 		/* 接收ACK/ERROR数据 */
 		recvLen = tftp_socket_recv(sockfd, gRecvBuf, __TFTP_RECV_BUF_LEN_, pSerAddr);
@@ -360,7 +375,7 @@ tftp_upload_ok_ret:
 
 tftp_upload_err_send_ret:
 	/* 出错发送ERROR code */
-	(VOID)tftp_socket_send(sockfd, gSendBuf, sendLen, pSerAddr);
+	(VOID)tftp_socket_send(sockfd, gSendBuf, sendLen, pSerAddr, tmreq, timeout, FALSE);
 
 tftp_upload_err_ret:
 	return tftp_ret_Error;
@@ -734,7 +749,10 @@ LOCAL VOID tftp_client_cmd_handle(INT32 argc, CHAR * argv[])
 	sendLen = tftp_pack_req(gSendBuf, &gCliTranInfo._reqPack);
 
 	/* 3、发送请求到服务器 */
-	ret = tftp_socket_send(gCliTranInfo._socketFd, gSendBuf, sendLen, &gCliTranInfo._serAddr);
+	tftpRet = tftp_socket_send(gCliTranInfo._socketFd, gSendBuf, sendLen, &gCliTranInfo._serAddr, 0, 0, FALSE);
+	if (tftpRet != tftp_ret_Ok) {
+		return;
+	}
 
 	/* 获取传输前时间戳 */
 	(VOID)time (&timeStampStart);

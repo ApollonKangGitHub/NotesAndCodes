@@ -24,3 +24,12 @@
 [1;31m2019-09-14 17:57:54(UTC)[Saturday]%% TFTP-ERROR :(595)00050006File already exists.[0m
 [1;31m2019-09-14 18:02:38(UTC)[Saturday]%% TFTP-ERROR :(595)00050006File already exists.[0m
 [1;31m2019-09-14 18:02:40(UTC)[Saturday]%% TFTP-ERROR :(595)00050006File already exists.[0m
+[1;31m2019-10-02 12:26:28(UTC)[Wednesday]%% TFTP-ERROR :(155)send data to sockfd wait recv timeout, sockfd = 8, times = 0, timeout = 0, times_alreay = 1[0m
+[1;31m2019-10-02 12:29:51(UTC)[Wednesday]%% TFTP-ERROR :(155)send data to sockfd wait recv timeout, sockfd = 8, times = 2, timeout = 3, times_alreay = 3[0m
+[1;31m2019-10-02 12:31:15(UTC)[Wednesday]%% TFTP-ERROR :(155)send data to sockfd wait recv timeout, sockfd = 8, times = 2, timeout = 3, times_alreay = 3[0m
+[1;31m2019-10-02 12:34:27(UTC)[Wednesday]%% TFTP-ERROR :(155)send data to sockfd wait recv timeout, sockfd = 8, times = 2, timeout = 3, times_alreay = 3[0m
+[1;31m2019-10-02 12:36:30(UTC)[Wednesday]%% TFTP-ERROR :(155)send data to sockfd wait recv timeout, sockfd = 8, times = 2, timeout = 3, times_alreay = 3[0m
+[1;31m2019-10-02 12:37:23(UTC)[Wednesday]%% TFTP-ERROR :(155)send data to sockfd wait recv timeout, sockfd = 8, times = 2, timeout = 3, times_alreay = 3[0m
+[1;31m2019-10-02 12:38:09(UTC)[Wednesday]%% TFTP-ERROR :(155)send data to sockfd wait recv timeout, sockfd = 8, times = 2, timeout = 3, times_alreay = 3[0m
+[1;31m2019-10-02 12:38:55(UTC)[Wednesday]%% TFTP-ERROR :(155)send data to sockfd wait recv timeout, sockfd = 8, times = 2, timeout = 3, times_alreay = 3[0m
+[1;31m2019-10-02 12:40:31(UTC)[Wednesday]%% TFTP-ERROR :(155)send data to sockfd wait recv timeout, sockfd = 8, times = 2, timeout = 3, times_alreay = 3[0m

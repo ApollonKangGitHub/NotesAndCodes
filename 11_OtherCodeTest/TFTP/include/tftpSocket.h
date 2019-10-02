@@ -26,11 +26,15 @@ EXTERN INT32 tftp_socket_recv
 	struct sockaddr_in * client
 );
 
-EXTERN INT32 tftp_socket_send
+EXTERN tftpReturnValue_t tftp_socket_send
 (
 	INT32 sockfd, 
 	CHAR * buf, 
 	INT32 sendLen, 
-	struct sockaddr_in * peerAddr
+	struct sockaddr_in * peerAddr,
+	INT32 times,			/* 超时次数 */
+	INT32 timeout,			/* 超时重传时间 */
+	BOOL reTrans
 );
+
 #endif

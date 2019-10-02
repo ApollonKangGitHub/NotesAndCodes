@@ -112,27 +112,73 @@ EXTERN INT32 tftp_socket_recv
  * Notes:
  *     
  */
-EXTERN INT32 tftp_socket_send
+EXTERN tftpReturnValue_t tftp_socket_send
 (
 	INT32 sockfd, 
 	CHAR * buf, 
 	INT32 sendLen, 
-	struct sockaddr_in * peerAddr
+	struct sockaddr_in * peerAddr,
+	INT32 times,			/* 超时次数 */
+	INT32 timeout,			/* 超时重传时间 */
+	BOOL reTrans			/* 是否重传，FALSE为不重传 */
 ) 
 {
 	socklen_t addrLen = 0;
+	INT32 times_alreay = 0;
 	INT32 ret = 0;
+	fd_set rdfds;
+	struct timeval tv;
+
 	if (NULL == buf || NULL == peerAddr) {
 		return -1;
 	}
+	
+timeout_send:
 	addrLen = sizeof(struct sockaddr_in);
 	ret = sendto(sockfd, buf, sendLen, 0, (struct sockaddr *)peerAddr, addrLen);
 	if (ret < 0) {
-	TFTP_LOGERR("send data to sockfd fail, sockfd = %d, errno = %d", sockfd, errno);
+		TFTP_LOGERR("send data to sockfd fail, sockfd = %d, errno = %d", sockfd, errno);
 		tftp_perror("\r\nsend fail reason is");
-		return -1;
+		return tftp_ret_Error;
 	}
-	return ret;
+
+	if (!reTrans) {
+		return tftp_ret_Ok;
+	}
+	
+	times_alreay++;
+
+	/* 超超时重传次数大于最大值，则结束传输 */
+	if (times_alreay > times) {
+		TFTP_LOGERR("send data to sockfd wait recv timeout, sockfd = %d, times = %d, timeout = %d, times_alreay = %d", \
+			sockfd, times, timeout, times_alreay);
+		return tftp_ret_Error;
+	}
+	else {
+		/* 设置监听描述符集，为指定socket fd */
+		FD_ZERO(&rdfds);
+		FD_SET(sockfd, &rdfds);
+
+		/* 设置超时时间 */
+		tv.tv_sec = timeout;
+		tv.tv_usec = 0;
+
+		/* 超时等待 */
+		ret = select(sockfd + 1, &rdfds, NULL, NULL, &tv);
+		if (ret < 0) {
+			TFTP_LOGERR("select for sockfd fail, sockfd = %d, errno = %d", sockfd, errno);
+			tftp_perror("\r\nselect fail reason is");
+			return tftp_ret_Error;
+		}
+		else if (0 == ret) {
+			goto timeout_send;
+		}
+		else if (FD_ISSET(sockfd, &rdfds)){
+			return tftp_ret_Ok;
+		}
+	}
+	
+	return tftp_ret_Ok;
 }
 
 #define __TFTP_SOCKET_UDP_ 	(1)
