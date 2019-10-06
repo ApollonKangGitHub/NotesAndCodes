@@ -36,3 +36,865 @@
 [1;31m2019-10-02 21:33:41(UTC)[Wednesday] (tftpShellTask) %% TFTP-ERROR :(65)bind socket fd fail, sockfd = 8, port = 69, errno = 99[0m
 [1;31m2019-10-02 21:33:41(UTC)[Wednesday] (tftpShellTask) %% TFTP-ERROR :(846)create server socket fail![0m
 [1;31m2019-10-02 21:33:41(UTC)[Wednesday] (tftpShellTask) %% TFTP-ERROR :(1107)tftp operator failure, return ERROR (1)[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:43(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(191)tftp_client_pack_deal_download-191[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(196)tftp_client_pack_deal_download-196[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(203)tftp_client_pack_deal_download-203[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:25:44(UTC)[Thursday]%% TFTP-ERROR :(217)tftp_client_pack_deal_download-217[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:30(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:28:32(UTC)[Thursday]%% TFTP-ERROR :(211)tftp_client_pack_deal_download-211[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:30:03(UTC)[Thursday]%% TFTP-ERROR :(201)tftp_client_pack_deal_download-201[0m
+[1;31m2019-10-03 09:30:07(UTC)[Thursday]%% TFTP-ERROR :(204)tftp_client_pack_deal_download-204, _fileFd:0[0m
+[1;31m2019-10-03 09:30:07(UTC)[Thursday]%% TFTP-ERROR :(212)tftp_client_pack_deal_download-212[0m
+[1;31m2019-10-03 09:36:13(UTC)[Thursday]%% TFTP-ERROR :(418)
+----/home/Krj/NoteAndCodes/11_OtherCodeTest/TFTP/client/tftpd32.chm[0m
+[1;31m2019-10-03 09:36:13(UTC)[Thursday]%% TFTP-ERROR :(426)
+----9[0m

@@ -1,3 +1,20 @@
+/*
+ * File: tftpSocket.c
+ * Function: 
+ *     tftp客户端、服务器公共基础模块部分
+ *     用于处理服务器、客户端socket创建、数据传输等功能
+ * Time: 2019-10-6 11:09:20
+ * Statement: 
+ *     本程序仅可作学习交流之用，可在学习为目的的基础上任意传播
+ *     未经授权不可以任何形式商用，凡是有通过非免费手段获取到该代码
+ *     均可邮件联系，已达到净化学习交流环境的目的
+ * Author: Kangruojin
+ * Mail: mailbox_krj@163.com
+ * CSDN: Apollon_krj
+ * GITHUB: ApollonKangGitHub
+ *
+ */
+
 #include <tftpSocket.h>
 #include <tftpType.h>
 #include <tftpLog.h>

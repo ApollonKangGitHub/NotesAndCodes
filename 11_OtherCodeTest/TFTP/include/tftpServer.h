@@ -1,3 +1,21 @@
+/*
+ * File: tftpServer.h
+ * Function: 
+ *     tftp服务器相关代码
+ *     用于创建服务器主线程（解析客户端请求并交给子线程处理）
+ *     创建管理服务器子线程池（处理客户端的上传、下载请求）
+ * Time: 2019-10-6 11:09:20
+ * Statement: 
+ *     本程序仅可作学习交流之用，可在学习为目的的基础上任意传播
+ *     未经授权不可以任何形式商用，凡是有通过非免费手段获取到该代码
+ *     均可邮件联系，已达到净化学习交流环境的目的
+ * Author: Kangruojin
+ * Mail: mailbox_krj@163.com
+ * CSDN: Apollon_krj
+ * GITHUB: ApollonKangGitHub
+ *
+ */
+
 #ifndef __TFTP_SERVER_H__
 #define __TFTP_SERVER_H__
 

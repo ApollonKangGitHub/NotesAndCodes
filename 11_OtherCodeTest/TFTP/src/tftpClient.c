@@ -1,3 +1,21 @@
+/*
+ * File: tftpClient.c
+ * Function: 
+ *     tftp客户端相关代码
+ *     用于注册、处理客户端上传、下载的命令行输入
+ *     进行文件的上传和下载
+ * Time: 2019-10-6 11:09:20
+ * Statement: 
+ *     本程序仅可作学习交流之用，可在学习为目的的基础上任意传播
+ *     未经授权不可以任何形式商用，凡是有通过非免费手段获取到该代码
+ *     均可邮件联系，已达到净化学习交流环境的目的
+ * Author: Kangruojin
+ * Mail: mailbox_krj@163.com
+ * CSDN: Apollon_krj
+ * GITHUB: ApollonKangGitHub
+ *
+ */
+
 #include <tftpClient.h>
 #include <tftpType.h>
 #include <tftpSem.h>
@@ -207,7 +225,7 @@ LOCAL tftpReturnValue_t tftp_client_pack_deal_download(VOID)
 					sendLen = (INT32)tftp_pack_error(gSendBuf, tftp_Pack_ErrCode_AccViolate, errMsg);
 					goto tftp_downlad_err_send_ret;
 				}		
-				
+
 				/* 进度条 */
 				curSize += writeLen;
 				progressBar(PecvInfo->_tSize, curSize, progressBarFirst);
@@ -456,7 +474,7 @@ LOCAL tftpReturnValue_t tftp_client_oper_valid(CONST char * fileName)
 	
 	/* 根据操作决定返回值 */
 
-	if (exist && (tftp_Pack_OperCode_Rrq == gCliTranInfo._reqPack._opcode)) {
+	if (tftp_Pack_OperCode_Rrq == gCliTranInfo._reqPack._opcode) {
 		/* 文件存在与覆盖检查 */
 		tftpRet =  tftp_client_download_file_exist_check(exist);
 	}
@@ -468,7 +486,7 @@ LOCAL tftpReturnValue_t tftp_client_oper_valid(CONST char * fileName)
 	else {
 		tftpRet =  tftp_ret_Ok;
 	}
-	
+
 	return tftpRet;
 }
 

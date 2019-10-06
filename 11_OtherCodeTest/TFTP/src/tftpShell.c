@@ -1,3 +1,20 @@
+/*
+ * File: tftpShell.c
+ * Function: 
+ *     tftp服务器、客户端、基础模块相关命令注册与解析
+ *     命令行获取、执行的任务模块
+ * Time: 2019-10-6 11:09:20
+ * Statement: 
+ *     本程序仅可作学习交流之用，可在学习为目的的基础上任意传播
+ *     未经授权不可以任何形式商用，凡是有通过非免费手段获取到该代码
+ *     均可邮件联系，已达到净化学习交流环境的目的
+ * Author: Kangruojin
+ * Mail: mailbox_krj@163.com
+ * CSDN: Apollon_krj
+ * GITHUB: ApollonKangGitHub
+ *
+ */
+
 #include <tftpShell.h>
 #include <tftpType.h>
 #include <tftpLog.h>
@@ -461,7 +478,7 @@ EXTERN tftpReturnValue_t tftp_shell_cmd_register
 	while (*pMove) {
 
 		/* 解析注册信息并填充节点 */
-		pCmdSaveStr = strtok_r(NULL, "{", &pMove);	/* 命令 */
+		pCmdSaveStr = strtok_r(NULL, "{", &pMove);		/* 命令 */
 		pDesSaveStr = strtok_r(NULL, "}", &pMove);		/* 描述 */
 
 		/* 找到的两个字符串进行内存申请与内容填充 */
