@@ -483,6 +483,11 @@ EXTERN tftpReturnValue_t tftp_shell_cmd_register
 
 		/* 找到的两个字符串进行内存申请与内容填充 */
 		lenCmd = strlen(pCmdSaveStr) + 1;
+		if (lenCmd >= __TFTP_SHELL_CMD_MAX_LEN_) {
+			TFTP_LOGERR("tftp shell command register, lenCmd=%p", lenCmd);
+			exit(EXIT_FAILURE);
+		}
+		
 		lenDes = strlen(pDesSaveStr) + 1;
 		pCmdBuf = malloc(lenCmd);
 		pDesBuf = malloc(lenDes);
